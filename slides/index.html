@@ -4,10 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Être crédible dès la première visite — extrait PowerPoint</title>
-    <meta name="description" content="Extrait de présentation professionnelle pour indépendants et TPE. Cinq slides, prêtes à pitcher." />
+    <meta
+      name="description"
+      content="Extrait de présentation professionnelle pour indépendants et TPE. Dix slides : public, constat, formats, déroulement, livrable."
+    />
+    <link rel="canonical" href="https://marco-ops-code.github.io/slides/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Quantico:wght@700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quantico:wght@700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
         --blue: #1d4ed8;
@@ -24,73 +31,234 @@
       .bar a { color: #93c5fd; font-weight: 700; text-decoration: none; }
       .deck { max-width: 1100px; margin: 0 auto; padding: 18px 16px 48px; }
       .slide {
+        position: relative;
         aspect-ratio: 16 / 9;
         border-radius: 18px;
-        padding: clamp(28px, 5vw, 56px);
+        padding: clamp(24px, 4.4vw, 52px);
         margin: 0 0 18px;
         background: var(--paper);
         color: var(--ink);
         display: flex; flex-direction: column; justify-content: center;
         box-shadow: 0 18px 48px rgba(0,0,0,.35);
+        overflow: hidden;
       }
       .slide.dark { background: linear-gradient(160deg, #1e3a8a, #1d4ed8 55%, #0f172a); color: #fff; }
+      .num {
+        position: absolute; top: 18px; right: 22px;
+        font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+        color: #94a3b8;
+      }
+      .slide.dark .num { color: rgba(255,255,255,.55); }
       .kicker { letter-spacing: .12em; text-transform: uppercase; font-size: .78rem; font-weight: 700; color: var(--blue); margin: 0 0 10px; }
       .slide.dark .kicker { color: #bfdbfe; }
       h1, h2 { font-family: Quantico, sans-serif; line-height: 1.15; margin: 0 0 14px; }
-      h1 { font-size: clamp(1.7rem, 4vw, 2.8rem); }
-      h2 { font-size: clamp(1.4rem, 3vw, 2.1rem); }
-      p { margin: 0; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.5; color: var(--muted); max-width: 38rem; }
+      h1 { font-size: clamp(1.55rem, 3.6vw, 2.7rem); }
+      h2 { font-size: clamp(1.28rem, 2.6vw, 2rem); }
+      p { margin: 0; font-size: clamp(0.98rem, 1.7vw, 1.16rem); line-height: 1.5; color: var(--muted); max-width: 42rem; }
       .slide.dark p { color: #e2e8f0; }
-      ul { margin: 0; padding-left: 1.1rem; font-size: 1.08rem; line-height: 1.7; }
-      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
-      .card { background: #fff; border: 1px solid #dbe4f0; border-radius: 14px; padding: 16px; }
-      .card strong { display: block; color: var(--blue); margin-bottom: 6px; }
+      ul { margin: 0; padding-left: 1.1rem; font-size: clamp(0.98rem, 1.6vw, 1.08rem); line-height: 1.65; }
+      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+      .grid-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+      .card { background: #fff; border: 1px solid #dbe4f0; border-radius: 14px; padding: 14px 16px; }
+      .card strong { display: block; color: var(--blue); margin-bottom: 6px; font-size: 0.98rem; }
+      .card span { display: block; color: var(--muted); font-size: 0.95rem; line-height: 1.45; }
       .slide.dark .card { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.18); color: #fff; }
-      @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+      .slide.dark .card span { color: #e2e8f0; }
+      .lead { margin-bottom: 4px; }
+      @media (max-width: 720px) {
+        .slide { aspect-ratio: auto; min-height: 0; padding: 28px 20px 32px; }
+        .grid, .grid-2, .grid-4 { grid-template-columns: 1fr; }
+        .num { top: 12px; right: 14px; }
+      }
     </style>
   </head>
   <body>
     <div class="bar">
-      <span>Extrait PowerPoint — 5 slides</span>
+      <span>Extrait PowerPoint — 10 slides</span>
       <a href="../#contact">Demander le fichier PowerPoint</a>
     </div>
     <div class="deck">
       <article class="slide dark">
+        <span class="num">01 / 10</span>
         <p class="kicker">Indépendants &amp; TPE</p>
         <h1>Être crédible dès la première visite.</h1>
-        <p>Une présentation courte pour poser le problème, la promesse, et le prochain pas — sans jargon.</p>
+        <p>
+          Un visiteur, un client ou un jury décide en quelques secondes. Cette présentation
+          montre comment on pose le problème, la promesse, ce que tu reçois, et le prochain pas —
+          sans jargon.
+        </p>
       </article>
+
       <article class="slide">
+        <span class="num">02 / 10</span>
+        <p class="kicker">À qui c’est destiné</p>
+        <h2>Pour qui envoie un lien et n’est pas derrière pour l’expliquer.</h2>
+        <div class="grid-2">
+          <div class="card">
+            <strong>Indépendant</strong>
+            <span>Salon, artisan, consultant : tu as besoin d’une page ou d’un deck que tu peux transmettre tel quel.</span>
+          </div>
+          <div class="card">
+            <strong>TPE / petite équipe</strong>
+            <span>Une offre claire, un contact visible, un support que l’équipe peut réutiliser en rendez-vous.</span>
+          </div>
+          <div class="card">
+            <strong>Cours, jury, pitch</strong>
+            <span>Une présentation PowerPoint qui tient debout à l’oral : un fil, des slides lisibles, un appel à décider.</span>
+          </div>
+          <div class="card">
+            <strong>Outil métier</strong>
+            <span>Quand le site ne suffit plus : une appli mobile pour générer, suivre ou exporter un document.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide">
+        <span class="num">03 / 10</span>
         <p class="kicker">Le constat</p>
-        <h2>Le site actuel n’aide pas à décider.</h2>
+        <h2>Le support actuel n’aide pas à décider.</h2>
+        <p class="lead">Pas parce que le métier est mauvais. Parce que le premier écran ne fait pas son travail.</p>
         <ul>
-          <li>Le visiteur ne comprend pas l’offre en 5 secondes.</li>
-          <li>Le contact est caché ou trop long.</li>
-          <li>Le téléphone et WhatsApp ne sont pas au même endroit.</li>
+          <li>Le visiteur ne comprend pas l’offre en 5 secondes : trop de texte, trop de services, aucun message.</li>
+          <li>Le contact est caché, trop long, ou éparpillé entre e-mail, téléphone et WhatsApp.</li>
+          <li>Les preuves (photos, avis, livrables) sont absentes ou trop loin du bouton d’action.</li>
+          <li>Sur téléphone, la page casse : on scroll, on doute, on part.</li>
         </ul>
       </article>
+
       <article class="slide">
+        <span class="num">04 / 10</span>
+        <p class="kicker">Ce que ça coûte</p>
+        <h2>Chaque visite floue renvoie la même impression.</h2>
+        <div class="grid">
+          <div class="card">
+            <strong>Moins de réponses</strong>
+            <span>Le prospect ne sait pas si tu es fait pour lui. Il n’écrit pas « pour voir ».</span>
+          </div>
+          <div class="card">
+            <strong>Plus d’explications</strong>
+            <span>Tu dois rattraper le site au téléphone. Le support ne porte pas le message tout seul.</span>
+          </div>
+          <div class="card">
+            <strong>Moins cher, trop tôt</strong>
+            <span>Sans cadre, le devis se discute au prix. La première visite n’a pas posé la valeur.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide">
+        <span class="num">05 / 10</span>
         <p class="kicker">La promesse</p>
         <h2>Un support que tu peux envoyer sans t’expliquer.</h2>
         <div class="grid">
-          <div class="card"><strong>Clair</strong>Un message, un public, un appel à l’action.</div>
-          <div class="card"><strong>Soigné</strong>Hiérarchie, images, rythme — prêt à pitcher.</div>
-          <div class="card"><strong>Utile</strong>Le lecteur sait quoi faire ensuite.</div>
+          <div class="card">
+            <strong>Clair</strong>
+            <span>Un public, un message, un appel à l’action. On sait pour qui c’est, et quoi faire ensuite.</span>
+          </div>
+          <div class="card">
+            <strong>Soigné</strong>
+            <span>Hiérarchie, rythme, images. Ça se lit vite à l’écran et ça se présente à l’oral.</span>
+          </div>
+          <div class="card">
+            <strong>Utile</strong>
+            <span>Le lecteur repart avec un prochain pas : WhatsApp, e-mail, créneau, ou décision.</span>
+          </div>
         </div>
       </article>
+
       <article class="slide">
+        <span class="num">06 / 10</span>
+        <p class="kicker">Quatre formats</p>
+        <h2>Le même niveau d’exigence, le support qui va avec le besoin.</h2>
+        <div class="grid-4">
+          <div class="card">
+            <strong>Site vitrine</strong>
+            <span>Plusieurs pages pour présenter l’activité : accueil, offre, à propos, contact.</span>
+          </div>
+          <div class="card">
+            <strong>Landing page</strong>
+            <span>Une page unique, focalisée conversion : message, preuve, bouton.</span>
+          </div>
+          <div class="card">
+            <strong>Application mobile</strong>
+            <span>Un outil sur téléphone, en C# / .NET : parcours, génération, export.</span>
+          </div>
+          <div class="card">
+            <strong>Présentation PowerPoint</strong>
+            <span>Pitch, cours ou rapport : 5 à 12 slides, fichier modifiable + PDF.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide">
+        <span class="num">07 / 10</span>
+        <p class="kicker">Comment ça se passe</p>
+        <h2>Quatre étapes, un devis sous 48&nbsp;h après le brief.</h2>
+        <div class="grid-4">
+          <div class="card">
+            <strong>1. 30 minutes</strong>
+            <span>WhatsApp ou e-mail. On cadre le public, le message, et ce qui doit se passer après la visite.</span>
+          </div>
+          <div class="card">
+            <strong>2. Devis</strong>
+            <span>Sous 48&nbsp;h : format, périmètre, délai. Rien ne démarre sans accord.</span>
+          </div>
+          <div class="card">
+            <strong>3. Production</strong>
+            <span>Structure d’abord, puis design et contenu. Tu vois une version à commenter, pas une surprise finale.</span>
+          </div>
+          <div class="card">
+            <strong>4. Livraison</strong>
+            <span>Mise en ligne ou fichier PowerPoint + PDF. Recette ensemble, puis passation.</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide">
+        <span class="num">08 / 10</span>
         <p class="kicker">Ce que tu reçois</p>
-        <h2>Cinq à douze slides, livrées et répétables.</h2>
+        <h2>Un livrable utilisable tout de suite, pas une maquette à refaire.</h2>
         <ul>
-          <li>Structure : problème → offre → preuve → décision.</li>
-          <li>Fichier PowerPoint modifiable + version PDF.</li>
-          <li>Ton adapté au public : clients, jury, équipe, cours.</li>
+          <li>Un fil clair : problème → offre → preuve → décision.</li>
+          <li>Pour un site ou une landing : pages, version mobile, formulaire ou bouton WhatsApp / e-mail.</li>
+          <li>Pour une appli : parcours réel (accueil, génération, export) et passation.</li>
+          <li>Pour un PowerPoint : fichier modifiable, version PDF, ton adapté au public (clients, jury, équipe, cours).</li>
         </ul>
       </article>
+
+      <article class="slide">
+        <span class="num">09 / 10</span>
+        <p class="kicker">Preuve</p>
+        <h2>Déjà livré, ouvrable, du même niveau.</h2>
+        <div class="grid-2">
+          <div class="card">
+            <strong>LK Studio</strong>
+            <span>Site vitrine pour un salon : services, galerie, avis, réservation en quelques clics.</span>
+          </div>
+          <div class="card">
+            <strong>Angela Volcimus Louis</strong>
+            <span>Site d’artiste : œuvres, parcours, contact — une vitrine à envoyer sans commentaire.</span>
+          </div>
+          <div class="card">
+            <strong>Task Engine &amp; MultiTask</strong>
+            <span>Deux applications : un outil métier et un générateur d’apprentissage, pensés pour un usage réel.</span>
+          </div>
+          <div class="card">
+            <strong>Cet extrait</strong>
+            <span>Le même rythme que le fichier PowerPoint livré : lisible à l’écran, présentable à l’oral.</span>
+          </div>
+        </div>
+      </article>
+
       <article class="slide dark">
+        <span class="num">10 / 10</span>
         <p class="kicker">Prochaine étape</p>
         <h1>30 minutes pour cadrer le sujet.</h1>
-        <p>Tu repars avec le plan des slides. Le devis suit sous 48&nbsp;h.</p>
+        <p>
+          Tu repars avec le format recommandé et le plan des slides ou des pages.
+          Le devis suit sous 48&nbsp;h. WhatsApp suffit pour réserver le créneau.
+        </p>
       </article>
     </div>
   </body>
