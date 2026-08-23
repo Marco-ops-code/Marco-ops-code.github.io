@@ -3372,6 +3372,23 @@ html.js .reveal:not(.visible) {
     display: block;
   }
 
+  #process.is-walking .spider-svg--hang {
+    display: block;
+  }
+
+  #process.is-walking .spider-svg--walk {
+    display: none;
+  }
+
+  #process.is-walking .work-steps__spider {
+    width: 20px;
+    height: 28px;
+  }
+
+  #process.is-dropping .process-web {
+    height: 40px;
+  }
+
   .contact-form-grid {
     grid-template-columns: 1fr;
   }

@@ -714,8 +714,14 @@ function initProcessSpider() {
       return false;
     }
     const box = process.getBoundingClientRect();
-    const letterBox = letter.getBoundingClientRect();
     const first = bubblePoint(items[0]);
+    if (isVertical()) {
+      process.style.setProperty("--web-x", `${first.x}px`);
+      process.style.setProperty("--web-top", `${first.y - 40}px`);
+      process.style.setProperty("--web-h", `40px`);
+      return true;
+    }
+    const letterBox = letter.getBoundingClientRect();
     const webX = letterBox.left + letterBox.width / 2 - box.left;
     const webTop = letterBox.bottom - box.top - 2;
     process.style.setProperty("--web-x", `${webX}px`);
@@ -728,9 +734,7 @@ function initProcessSpider() {
     spider.style.left = `${point.x}px`;
     spider.style.top = `${point.y}px`;
     spider.style.transform = walking
-      ? isVertical()
-        ? "translate(-50%, calc(-100% + 3px)) rotate(90deg)"
-        : "translate(-50%, calc(-100% + 3px))"
+      ? "translate(-50%, calc(-100% + 3px))"
       : "translate(-50%, 0)";
   }
 
@@ -759,8 +763,8 @@ function initProcessSpider() {
 
   function startWalk() {
     stopWalk();
-    const pauseMs = 1600;
-    const moveMs = 5400;
+    const pauseMs = isVertical() ? 700 : 1600;
+    const moveMs = isVertical() ? 900 : 5400;
     setSpiderAt(items.map(bubblePoint)[0], true);
     process.classList.toggle("is-vertical", isVertical());
     process.classList.remove("is-dropping");
