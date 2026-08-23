@@ -688,16 +688,24 @@ function initProcessSpider() {
   const letter = process?.querySelector(".process-c");
   const spider = process?.querySelector(".work-steps__spider");
   const steps = process?.querySelector(".work-steps");
-  const progress = process?.querySelector(".work-steps__progress");
   if (!process || !letter || !spider || !steps || reduceMotionGlobal) {
     return;
   }
 
   const items = Array.from(steps.querySelectorAll(":scope > li"));
-  const isVertical = () => window.matchMedia("(max-width: 760px)").matches;
+  const isPhone = () => window.matchMedia("(max-width: 760px)").matches;
   let loopTimer = 0;
-  let walkFrame = 0;
+  let moveFrame = 0;
   let started = false;
+
+  function letterPoint() {
+    const box = process.getBoundingClientRect();
+    const letterBox = letter.getBoundingClientRect();
+    return {
+      x: letterBox.left + letterBox.width / 2 - box.left,
+      y: letterBox.bottom - box.top - 2,
+    };
+  }
 
   function bubblePoint(item) {
     const box = process.getBoundingClientRect();
@@ -708,42 +716,27 @@ function initProcessSpider() {
     };
   }
 
-  function layoutDrop() {
-    process.classList.toggle("is-vertical", isVertical());
-    if (items.length < 4) {
-      return false;
-    }
-    const box = process.getBoundingClientRect();
-    const first = bubblePoint(items[0]);
-    if (isVertical()) {
-      process.style.setProperty("--web-x", `${first.x}px`);
-      process.style.setProperty("--web-top", `${first.y - 40}px`);
-      process.style.setProperty("--web-h", `40px`);
-      return true;
-    }
-    const letterBox = letter.getBoundingClientRect();
-    const webX = letterBox.left + letterBox.width / 2 - box.left;
-    const webTop = letterBox.bottom - box.top - 2;
-    process.style.setProperty("--web-x", `${webX}px`);
-    process.style.setProperty("--web-top", `${webTop}px`);
-    process.style.setProperty("--web-h", `${Math.max(28, first.y - webTop)}px`);
-    return true;
-  }
-
-  function setSpiderAt(point, walking) {
-    spider.style.left = `${point.x}px`;
-    spider.style.top = `${point.y}px`;
-    spider.style.transform = walking
-      ? "translate(-50%, calc(-100% + 3px))"
-      : "translate(-50%, 0)";
-  }
-
-  function setProgress(ratio) {
-    if (!progress) {
+  function setSilk(from, to, visible) {
+    if (!visible || !from || !to) {
+      process.classList.remove("is-webbing");
+      process.style.setProperty("--web-h", "0px");
       return;
     }
-    const value = Math.max(0, Math.min(1, ratio));
-    progress.style.transform = isVertical() ? `scaleY(${value})` : `scaleX(${value})`;
+    const dx = to.x - from.x;
+    const dy = to.y - from.y;
+    process.style.setProperty("--web-x", `${from.x}px`);
+    process.style.setProperty("--web-top", `${from.y}px`);
+    process.style.setProperty("--web-h", `${Math.hypot(dx, dy)}px`);
+    process.style.setProperty("--web-a", `${Math.atan2(dx, dy) * (180 / Math.PI)}deg`);
+    process.classList.add("is-webbing");
+  }
+
+  function setSpiderAt(point, hanging) {
+    spider.style.left = `${point.x}px`;
+    spider.style.top = `${point.y}px`;
+    spider.style.transform = hanging
+      ? "translate(-50%, 0)"
+      : "translate(-50%, calc(-100% + 3px))";
   }
 
   function fillUpTo(index) {
@@ -756,125 +749,86 @@ function initProcessSpider() {
     return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
   }
 
-  function stopWalk() {
-    window.cancelAnimationFrame(walkFrame);
-    walkFrame = 0;
+  function stopMove() {
+    window.cancelAnimationFrame(moveFrame);
+    moveFrame = 0;
   }
 
-  function startWalk() {
-    stopWalk();
-    const pauseMs = isVertical() ? 700 : 1600;
-    const moveMs = isVertical() ? 900 : 5400;
-    setSpiderAt(items.map(bubblePoint)[0], true);
-    process.classList.toggle("is-vertical", isVertical());
-    process.classList.remove("is-dropping");
-    process.classList.add("is-walking");
-    fillUpTo(0);
-    setProgress(0.02);
-
-    let segment = 0;
-    let phaseStart = performance.now();
-
-    function tick(now) {
-      const points = items.map(bubblePoint);
-      const elapsed = now - phaseStart;
-      const moving = segment < points.length - 1;
-      const duration = moving ? (elapsed < pauseMs ? pauseMs : moveMs) : pauseMs + 2800;
-
-      if (!moving) {
-        fillUpTo(points.length - 1);
-        setProgress(1);
-        setSpiderAt(points[points.length - 1], true);
-        if (elapsed >= duration) {
-          loopTimer = window.setTimeout(startDrop, 400);
-          return;
-        }
-        walkFrame = window.requestAnimationFrame(tick);
-        return;
-      }
-
-      if (elapsed < pauseMs) {
-        fillUpTo(segment);
-        setProgress(segment / (points.length - 1));
-        setSpiderAt(points[segment], true);
-        walkFrame = window.requestAnimationFrame(tick);
-        return;
-      }
-
-      const moveElapsed = elapsed - pauseMs;
-      if (moveElapsed >= moveMs) {
-        segment += 1;
-        fillUpTo(segment);
-        setProgress(segment / (points.length - 1));
-        setSpiderAt(points[segment], true);
-        phaseStart = now;
-        walkFrame = window.requestAnimationFrame(tick);
-        return;
-      }
-
-      const from = points[segment];
-      const to = points[segment + 1];
-      const p = easeInOut(moveElapsed / moveMs);
-      setSpiderAt(
-        {
+  function animateTo(from, to, duration, { silk, hanging }) {
+    return new Promise((resolve) => {
+      const start = performance.now();
+      function tick(now) {
+        const p = easeInOut(Math.min(1, (now - start) / duration));
+        const point = {
           x: from.x + (to.x - from.x) * p,
           y: from.y + (to.y - from.y) * p,
-        },
-        true
-      );
-      setProgress((segment + p) / (points.length - 1));
-      walkFrame = window.requestAnimationFrame(tick);
-    }
-
-    walkFrame = window.requestAnimationFrame(tick);
+        };
+        setSpiderAt(point, hanging);
+        setSilk(from, point, silk);
+        if (p < 1) {
+          moveFrame = window.requestAnimationFrame(tick);
+          return;
+        }
+        resolve();
+      }
+      moveFrame = window.requestAnimationFrame(tick);
+    });
   }
 
-  function startDrop() {
+  function wait(ms) {
+    return new Promise((resolve) => {
+      loopTimer = window.setTimeout(resolve, ms);
+    });
+  }
+
+  async function playLoop() {
+    if (items.length < 4) {
+      return;
+    }
     window.clearTimeout(loopTimer);
-    stopWalk();
-    if (!layoutDrop()) {
-      return;
-    }
+    stopMove();
+    process.classList.add("is-live", "is-dropping");
+    process.classList.remove("is-walking");
     items.forEach((item) => item.classList.remove("is-filled"));
-    setProgress(0);
-    spider.style.left = "";
-    spider.style.top = "";
-    spider.style.transform = "";
-    process.classList.remove("is-dropping", "is-walking");
-    void process.offsetWidth;
-    process.classList.add("is-dropping");
-  }
+    setSilk(null, null, false);
 
-  spider.addEventListener("animationend", (event) => {
-    if (event.target !== spider) {
-      return;
+    const dropMs = isPhone() ? 1100 : 1600;
+    const pauseMs = isPhone() ? 700 : 1200;
+    const backMs = isPhone() ? 450 : 650;
+
+    for (let i = 0; i < items.length; i += 1) {
+      const origin = letterPoint();
+      const target = bubblePoint(items[i]);
+      setSpiderAt(origin, true);
+      await animateTo(origin, target, dropMs, { silk: true, hanging: true });
+      setSilk(null, null, false);
+      setSpiderAt(target, false);
+      fillUpTo(i);
+      await wait(pauseMs);
+      if (i < items.length - 1) {
+        await animateTo(target, letterPoint(), backMs, {
+          silk: false,
+          hanging: true,
+        });
+      }
     }
-    if (event.animationName === "spiderDescend") {
-      startWalk();
-    }
-  });
+
+    await wait(900);
+    playLoop();
+  }
 
   const view = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && !started) {
           started = true;
-          startDrop();
+          playLoop();
         }
       });
     },
     { threshold: 0.28 }
   );
   view.observe(process);
-
-  window.addEventListener("resize", () => {
-    if (process.classList.contains("is-dropping")) {
-      layoutDrop();
-    }
-    if (process.classList.contains("is-walking")) {
-      process.classList.toggle("is-vertical", isVertical());
-    }
-  });
 }
 
 const sectionTitleFocusElements = document.querySelectorAll("main .section");
