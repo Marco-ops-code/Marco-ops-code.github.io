@@ -55,7 +55,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=20260813-s19" />
+    <link rel="stylesheet" href="style.css?v=20260813-s30" />
   </head>
   <body>
     <a class="skip-link" href="#main">Aller au contenu</a>
@@ -129,35 +129,50 @@
     </header>
 
     <main id="main" tabindex="-1">
-      <section id="home" class="hero reveal">
-        <div class="container">
-          <div class="hero-grid">
-            <div class="hero-copy">
-              <p class="badge">Disponible pour 1 à 2 missions</p>
-              <p class="hero-kicker">Développeur full stack freelance</p>
-              <h1>Sites vitrines, landing pages et applications mobiles pour indépendants et TPE.</h1>
-              <p class="hero-lead">
-                Rapides, soignés, pensés pour convaincre dès la première visite — site ou appli.
-                Preuve à l’appui : deux applications déjà livrées.
-              </p>
-              <div class="hero-actions">
-                <a href="#contact" class="btn">Réserver 30 min</a>
-                <a href="#projects" class="btn btn-outline">Voir mes travaux</a>
-              </div>
-            </div>
-            <aside class="hero-brand" aria-label="Portrait">
-              <img
-                src="assets/portrait.jpg"
-                alt="Portrait de Marc-Onel Volcimus"
-                width="220"
-                height="220"
-                fetchpriority="high"
-                decoding="async"
-              />
-            </aside>
+      <div class="hero-wrap">
+        <section id="home" class="hero reveal">
+          <div class="hero-desk" aria-hidden="true">
+            <img
+              src="assets/hero-desk.jpg"
+              alt=""
+              width="576"
+              height="1024"
+              decoding="async"
+            />
           </div>
-        </div>
-      </section>
+          <div class="container">
+            <div class="hero-grid">
+              <div class="hero-copy">
+                <p class="badge">Disponible pour 1 à 2 missions</p>
+                <p class="hero-kicker">Développeur full stack freelance</p>
+                <h1>Sites vitrines, landing pages et applications mobiles pour indépendants et TPE.</h1>
+                <p class="hero-lead">
+                  Rapides, soignés, pensés pour convaincre dès la première visite — site ou appli.
+                  Preuve à l’appui : deux sites vitrines et deux applications déjà livrés.
+                </p>
+              </div>
+              <aside class="hero-brand" aria-label="Portrait">
+                <img
+                  src="assets/portrait.jpg"
+                  alt="Portrait de Marc-Onel Volcimus"
+                  width="220"
+                  height="220"
+                  fetchpriority="high"
+                  decoding="async"
+                />
+              </aside>
+            </div>
+          </div>
+          <nav class="hero-dock" aria-label="Actions">
+            <a href="#contact" class="hero-dock__book">
+              <span class="hero-dock__pulse" aria-hidden="true"></span>
+              <span class="hero-dock__kicker">Offert</span>
+              Réserver 30 min
+            </a>
+            <a href="#projects" class="hero-dock__work">Voir mes travaux</a>
+          </nav>
+        </section>
+      </div>
 
       <section id="about" class="section container reveal">
         <h2>À propos</h2>
@@ -166,7 +181,8 @@
             <p>
               Je suis Marc-Onel Volcimus, développeur full stack. J’aide les indépendants et les petites
               entreprises à avoir un site qu’ils peuvent envoyer sans s’expliquer — et je livre
-              aussi des outils métier, du Windows au mobile.
+              aussi des outils métier, du Windows au mobile. Je fais aussi des projets et des
+              présentations PowerPoint professionnelles, pour tout type de sujet et de public.
             </p>
             <ul class="about-facts" aria-label="Faits clés">
               <li>
@@ -182,6 +198,17 @@
                 <span>Réponse sous 24&nbsp;h, en français</span>
               </li>
             </ul>
+            <div class="office-suite">
+              <p class="office-suite__label">Microsoft</p>
+              <ul>
+                <li>Word</li>
+                <li>Excel</li>
+                <li>PowerPoint</li>
+                <li>Project</li>
+                <li>Access</li>
+                <li>Publisher</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -189,7 +216,7 @@
       <section id="services" class="section container reveal">
         <h2>Offre</h2>
         <p class="section-intro">
-          Trois formats, un même niveau d’exigence : un produit qui te fait paraître plus
+          Quatre formats, un même niveau d’exigence : un produit qui te fait paraître plus
           sérieux dès la première visite.
         </p>
         <div class="services-grid services-grid--offers">
@@ -204,6 +231,10 @@
           <article class="service-offer">
             <h3>Application mobile</h3>
             <p>Un outil sur téléphone, en C# / .NET, pensé pour un usage réel : parcours clair, génération, export.</p>
+          </article>
+          <article class="service-offer">
+            <h3>Présentation PowerPoint</h3>
+            <p>Supports pro pour tout type de sujet : pitch, cours, rapport — clairs, visuels, prêts à présenter.</p>
           </article>
         </div>
       </section>
@@ -423,9 +454,83 @@
       <section id="projects" class="section container reveal">
         <h2>Travaux</h2>
         <p class="section-intro">
-          Deux produits livrés, pas des maquettes. Même exigence que pour un site client.
+          Quatre produits livrés, pas des maquettes. Même exigence que pour un site client.
         </p>
         <div class="projects-grid projects-grid--cases">
+          <article class="project project-case">
+            <a
+              href="assets/projects/web-lk.jpg?v=2"
+              class="project-shot"
+              aria-label="Agrandir la capture de LK Studio"
+            >
+              <img
+                src="assets/projects/web-lk.jpg?v=2"
+                alt="Accueil du site LK Studio : salon sombre, titre Precision Style Confidence et boutons de réservation"
+                width="1024"
+                height="575"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <p class="project-kicker">Web · React / Vite · Salon &amp; barbershop</p>
+            <h3>LK Studio</h3>
+            <p>
+              Site vitrine pour un salon : services, galerie, avis, et une réservation en quelques
+              secondes — plus un accès WhatsApp.
+            </p>
+            <ul class="project-points">
+              <li>Contexte : paraître crédible en ligne et prendre rendez-vous sans échange interminable</li>
+              <li>Rôle : pages, formulaire de réservation, galerie, espace admin</li>
+              <li>Résultat : un site prêt à envoyer, avec prise de créneau et contact direct</li>
+            </ul>
+            <div class="project-actions">
+              <a href="#contact">Un site vitrine similaire&nbsp;?</a>
+              <a
+                class="project-repo"
+                id="repoStudioLk"
+                href="https://github.com/Marco-ops-code/studio-lk"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Code GitHub</a>
+            </div>
+          </article>
+          <article class="project project-case">
+            <a
+              href="assets/projects/web-angela.jpg"
+              class="project-shot"
+              aria-label="Agrandir la capture du site Angela Volcimus Louis"
+            >
+              <img
+                src="assets/projects/web-angela.jpg"
+                alt="Accueil du site d’Angela Volcimus Louis, artiste vocale : R&amp;B, classique, gospel"
+                width="1024"
+                height="566"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <p class="project-kicker">Web · PHP · Artiste vocale</p>
+            <h3>Angela Volcimus Louis</h3>
+            <p>
+              Site d’artiste : univers, musique, dates et galerie — pour écouter, suivre la scène
+              et réserver, sans chercher partout.
+            </p>
+            <ul class="project-points">
+              <li>Contexte : une présence en ligne à la hauteur de la voix, R&amp;B, classique et gospel</li>
+              <li>Rôle : accueil, musique, concerts, galerie, contact et espace admin</li>
+              <li>Résultat : un site sombre, lisible, avec écoute et prochaines dates dès l’arrivée</li>
+            </ul>
+            <div class="project-actions">
+              <a href="#contact">Un site d’artiste similaire&nbsp;?</a>
+              <a
+                class="project-repo"
+                id="repoAngela"
+                href="https://github.com/Marco-ops-code/PortfolioMAngie"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Code GitHub</a>
+            </div>
+          </article>
           <article class="project project-case">
             <a
               href="assets/projects/windows.jpg"
@@ -620,7 +725,7 @@
       <section id="pricing" class="section container reveal pricing-section">
         <h2>Tarifs</h2>
         <p class="section-intro pricing-intro">
-          Trois formats, devis sous 48&nbsp;h. Consultation de 30 minutes offerte.
+          Quatre formats, devis sous 48&nbsp;h. Consultation de 30 minutes offerte.
           <strong class="pricing-trust">2 missions ouvertes ce trimestre.</strong>
         </p>
         <div class="pricing-split">
@@ -741,6 +846,6 @@
       <img class="shot-lightbox__img" alt="" />
     </dialog>
 
-    <script src="script.js?v=20260813-s19" defer></script>
+    <script src="script.js?v=20260813-s21" defer></script>
   </body>
 </html>
