@@ -1950,9 +1950,9 @@ body.dark .skill-code-shell {
 
 .contact-links-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
-  max-width: 720px;
+  max-width: 920px;
   margin: 8px auto 0;
   width: 100%;
 }
@@ -1978,6 +1978,21 @@ body.dark .skill-code-shell {
 .contact-link-card:hover {
   transform: translateY(-2px);
   border-color: color-mix(in srgb, var(--section-color, var(--c-rose)) 45%, #ffffff);
+}
+
+.contact-link-card--whatsapp {
+  border-color: color-mix(in srgb, #16a34a 42%, rgba(255, 255, 255, 0.7));
+  background: color-mix(in srgb, #16a34a 12%, #ffffff);
+}
+
+.contact-link-card--whatsapp:hover {
+  border-color: #16a34a;
+}
+
+html.theme-dark .contact-link-card--whatsapp,
+body.dark .contact-link-card--whatsapp {
+  background: color-mix(in srgb, #16a34a 22%, var(--bg));
+  border-color: color-mix(in srgb, #22c55e 40%, transparent);
 }
 
 .contact-link-card__icon {
