@@ -467,12 +467,14 @@ function initContactForm() {
 
     const formData = new FormData(form);
     const subjectInput = form.querySelector('[name="subject"]');
+    const projectInput = form.querySelector('[name="project"]');
     const hiddenSubject = form.querySelector("#contactFormSubject");
     if (subjectInput instanceof HTMLInputElement && hiddenSubject instanceof HTMLInputElement) {
       const subjectValue = subjectInput.value.trim();
-      hiddenSubject.value = subjectValue
-        ? `[Portfolio] ${subjectValue}`
-        : "Nouveau message portfolio";
+      const projectValue =
+        projectInput instanceof HTMLSelectElement ? projectInput.value.trim() : "";
+      const parts = ["[Portfolio]", projectValue, subjectValue].filter(Boolean);
+      hiddenSubject.value = parts.length > 1 ? parts.join(" ") : "Nouveau message portfolio";
       formData.set("_subject", hiddenSubject.value);
     }
 

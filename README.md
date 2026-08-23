@@ -1,6 +1,6 @@
 # Marc-Onel Volcimus — Portfolio
 
-Site vitrine d’un développeur full stack freelance : sites vitrines, landing pages et applications mobiles pour indépendants et TPE.
+Site vitrine d’un développeur full stack freelance : site vitrine, landing page, application mobile et présentation PowerPoint pour indépendants et TPE.
 
 **En ligne :** [marco-ops-code.github.io](https://marco-ops-code.github.io/)
 
