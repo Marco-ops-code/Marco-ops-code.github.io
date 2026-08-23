@@ -3358,6 +3358,7 @@ html.js .reveal:not(.visible) {
 
   #process.is-webbing .process-web {
     opacity: 1;
+    transition: opacity 0.35s ease;
   }
 
   #process.is-live .work-steps__spider,

@@ -780,7 +780,7 @@ function initProcessSpider() {
     setSilk(null, null, false);
   }
 
-  function animateTo(from, to, duration, { silk, hanging }) {
+  function animateTo(from, to, duration, { silk, hanging, keepSilk }) {
     return new Promise((resolve) => {
       const start = performance.now();
       function tick(now) {
@@ -794,7 +794,11 @@ function initProcessSpider() {
           y: from.y + (to.y - from.y) * p,
         };
         setSpiderAt(point, hanging);
-        setSilk(from, point, silk);
+        if (silk) {
+          setSilk(from, point, true);
+        } else if (!keepSilk) {
+          setSilk(null, null, false);
+        }
         if (p < 1) {
           moveFrame = window.requestAnimationFrame(tick);
           return;
@@ -827,30 +831,36 @@ function initProcessSpider() {
       }
       const origin = letterPoint();
       const target = bubblePoint(items[i]);
+      const isLast = i === items.length - 1;
       setSpiderAt(origin, true);
-      await animateTo(origin, target, 1100, { silk: true, hanging: true });
+      await animateTo(origin, target, 1100, {
+        silk: i === 0,
+        hanging: true,
+        keepSilk: i > 0,
+      });
       if (!mobileActive) {
         return;
       }
-      setSilk(null, null, false);
       setSpiderAt(target, false);
       fillUpTo(i);
+      if (isLast) {
+        setSilk(null, null, false);
+        await wait(900);
+        break;
+      }
+      setSilk(origin, target, true);
       await wait(700);
       if (!mobileActive) {
         return;
       }
-      if (i < items.length - 1) {
-        await animateTo(target, letterPoint(), 450, {
-          silk: false,
-          hanging: true,
-        });
-      }
+      await animateTo(target, letterPoint(), 450, {
+        silk: false,
+        hanging: true,
+        keepSilk: true,
+      });
+      setSilk(letterPoint(), target, true);
     }
 
-    if (!mobileActive) {
-      return;
-    }
-    await wait(900);
     if (mobileActive) {
       playMobileLoop();
     }
