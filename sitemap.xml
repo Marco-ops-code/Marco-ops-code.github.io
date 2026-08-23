@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://marco-ops-code.github.io/Marco-ops-code-portfolio.github.io/</loc>
+    <loc>https://marco-ops-code.github.io/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://marco-ops-code.github.io/Marco-ops-code-portfolio.github.io/mentions.html</loc>
+    <loc>https://marco-ops-code.github.io/mentions.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

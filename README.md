@@ -2,7 +2,7 @@
 
 Site vitrine d’un développeur full stack freelance : sites vitrines, landing pages et applications mobiles pour indépendants et TPE.
 
-**En ligne :** [marco-ops-code.github.io/Marco-ops-code-portfolio.github.io](https://marco-ops-code.github.io/Marco-ops-code-portfolio.github.io/)
+**En ligne :** [marco-ops-code.github.io](https://marco-ops-code.github.io/)
 
 ## Contenu
 
