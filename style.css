@@ -2126,11 +2126,24 @@ body.dark .skill-code-shell {
 }
 
 .work-steps::before {
-  display: none;
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  height: 1px;
+  background: color-mix(in srgb, var(--section-color) 32%, transparent);
+  pointer-events: none;
 }
 
 .work-steps__track {
-  display: none;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  height: 0;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .work-steps__progress {
@@ -2168,14 +2181,19 @@ body.dark .skill-code-shell {
   top: var(--web-top, 0);
   width: 1px;
   height: var(--web-h, 0px);
-  transform: rotate(var(--web-a, 0deg));
+  transform: scaleY(0);
   transform-origin: top center;
   opacity: 0;
   background: color-mix(in srgb, var(--section-color, var(--c-green)) 55%, #cbd5e1);
 }
 
-#process.is-webbing .process-web {
+#process.is-dropping .process-web {
   opacity: 1;
+  animation: webDrop 4.8s ease-out forwards;
+}
+
+#process.is-walking .process-web {
+  animation: webVanish 0.55s ease-in forwards;
 }
 
 .work-steps__spider {
@@ -2207,18 +2225,9 @@ body.dark .skill-code-shell {
   display: block;
 }
 
-#process.is-live .work-steps__spider,
 #process.is-dropping .work-steps__spider {
   opacity: 1;
-  animation: none;
-}
-
-#process.is-live .spider-svg--hang {
-  display: block;
-}
-
-#process.is-live .spider-svg--walk {
-  display: none;
+  animation: spiderDescend 5.2s cubic-bezier(0.45, 0.05, 0.55, 1) forwards;
 }
 
 #process.is-walking .work-steps__spider {
@@ -3337,17 +3346,36 @@ html.js .reveal:not(.visible) {
     display: block;
   }
 
+  .process-web {
+    transform: rotate(var(--web-a, 0deg));
+    animation: none;
+  }
+
+  #process.is-dropping .process-web,
+  #process.is-walking .process-web {
+    animation: none;
+  }
+
+  #process.is-webbing .process-web {
+    opacity: 1;
+  }
+
+  #process.is-live .work-steps__spider,
+  #process.is-dropping .work-steps__spider {
+    opacity: 1;
+    animation: none;
+    width: 20px;
+    height: 28px;
+  }
+
+  #process.is-live .spider-svg--hang,
   #process.is-walking .spider-svg--hang {
     display: block;
   }
 
+  #process.is-live .spider-svg--walk,
   #process.is-walking .spider-svg--walk {
     display: none;
-  }
-
-  #process.is-walking .work-steps__spider {
-    width: 20px;
-    height: 28px;
   }
 
   .contact-form-grid {

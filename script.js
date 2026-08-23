@@ -688,6 +688,7 @@ function initProcessSpider() {
   const letter = process?.querySelector(".process-c");
   const spider = process?.querySelector(".work-steps__spider");
   const steps = process?.querySelector(".work-steps");
+  const progress = process?.querySelector(".work-steps__progress");
   if (!process || !letter || !spider || !steps || reduceMotionGlobal) {
     return;
   }
@@ -695,8 +696,11 @@ function initProcessSpider() {
   const items = Array.from(steps.querySelectorAll(":scope > li"));
   const isPhone = () => window.matchMedia("(max-width: 760px)").matches;
   let loopTimer = 0;
+  let walkFrame = 0;
   let moveFrame = 0;
   let started = false;
+  let mobileActive = false;
+  let lastPhone = isPhone();
 
   function letterPoint() {
     const box = process.getBoundingClientRect();
@@ -739,6 +743,14 @@ function initProcessSpider() {
       : "translate(-50%, calc(-100% + 3px))";
   }
 
+  function setProgress(ratio) {
+    if (!progress) {
+      return;
+    }
+    const value = Math.max(0, Math.min(1, ratio));
+    progress.style.transform = isPhone() ? `scaleY(${value})` : `scaleX(${value})`;
+  }
+
   function fillUpTo(index) {
     items.forEach((item, i) => {
       item.classList.toggle("is-filled", i <= index);
@@ -749,15 +761,33 @@ function initProcessSpider() {
     return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
   }
 
+  function stopWalk() {
+    window.cancelAnimationFrame(walkFrame);
+    walkFrame = 0;
+  }
+
   function stopMove() {
     window.cancelAnimationFrame(moveFrame);
     moveFrame = 0;
+  }
+
+  function stopAll() {
+    mobileActive = false;
+    window.clearTimeout(loopTimer);
+    stopWalk();
+    stopMove();
+    process.classList.remove("is-dropping", "is-walking", "is-live", "is-webbing", "is-vertical");
+    setSilk(null, null, false);
   }
 
   function animateTo(from, to, duration, { silk, hanging }) {
     return new Promise((resolve) => {
       const start = performance.now();
       function tick(now) {
+        if (!mobileActive) {
+          resolve();
+          return;
+        }
         const p = easeInOut(Math.min(1, (now - start) / duration));
         const point = {
           x: from.x + (to.x - from.x) * p,
@@ -781,54 +811,192 @@ function initProcessSpider() {
     });
   }
 
-  async function playLoop() {
+  async function playMobileLoop() {
     if (items.length < 4) {
       return;
     }
-    window.clearTimeout(loopTimer);
-    stopMove();
+    mobileActive = true;
     process.classList.add("is-live", "is-dropping");
     process.classList.remove("is-walking");
     items.forEach((item) => item.classList.remove("is-filled"));
     setSilk(null, null, false);
 
-    const dropMs = isPhone() ? 1100 : 1600;
-    const pauseMs = isPhone() ? 700 : 1200;
-    const backMs = isPhone() ? 450 : 650;
-
     for (let i = 0; i < items.length; i += 1) {
+      if (!mobileActive) {
+        return;
+      }
       const origin = letterPoint();
       const target = bubblePoint(items[i]);
       setSpiderAt(origin, true);
-      await animateTo(origin, target, dropMs, { silk: true, hanging: true });
+      await animateTo(origin, target, 1100, { silk: true, hanging: true });
+      if (!mobileActive) {
+        return;
+      }
       setSilk(null, null, false);
       setSpiderAt(target, false);
       fillUpTo(i);
-      await wait(pauseMs);
+      await wait(700);
+      if (!mobileActive) {
+        return;
+      }
       if (i < items.length - 1) {
-        await animateTo(target, letterPoint(), backMs, {
+        await animateTo(target, letterPoint(), 450, {
           silk: false,
           hanging: true,
         });
       }
     }
 
+    if (!mobileActive) {
+      return;
+    }
     await wait(900);
-    playLoop();
+    if (mobileActive) {
+      playMobileLoop();
+    }
   }
+
+  function layoutDrop() {
+    process.classList.remove("is-vertical");
+    if (items.length < 4) {
+      return false;
+    }
+    const origin = letterPoint();
+    const first = bubblePoint(items[0]);
+    process.style.setProperty("--web-x", `${origin.x}px`);
+    process.style.setProperty("--web-top", `${origin.y}px`);
+    process.style.setProperty("--web-h", `${Math.max(28, first.y - origin.y)}px`);
+    process.style.setProperty("--web-a", "0deg");
+    return true;
+  }
+
+  function startWalk() {
+    stopWalk();
+    const pauseMs = 1600;
+    const moveMs = 5400;
+    setSpiderAt(items.map(bubblePoint)[0], false);
+    process.classList.remove("is-dropping", "is-live", "is-webbing");
+    process.classList.add("is-walking");
+    fillUpTo(0);
+    setProgress(0.02);
+
+    let segment = 0;
+    let phaseStart = performance.now();
+
+    function tick(now) {
+      const points = items.map(bubblePoint);
+      const elapsed = now - phaseStart;
+      const moving = segment < points.length - 1;
+      const duration = moving ? (elapsed < pauseMs ? pauseMs : moveMs) : pauseMs + 2800;
+
+      if (!moving) {
+        fillUpTo(points.length - 1);
+        setProgress(1);
+        setSpiderAt(points[points.length - 1], false);
+        if (elapsed >= duration) {
+          loopTimer = window.setTimeout(startDrop, 400);
+          return;
+        }
+        walkFrame = window.requestAnimationFrame(tick);
+        return;
+      }
+
+      if (elapsed < pauseMs) {
+        fillUpTo(segment);
+        setProgress(segment / (points.length - 1));
+        setSpiderAt(points[segment], false);
+        walkFrame = window.requestAnimationFrame(tick);
+        return;
+      }
+
+      const moveElapsed = elapsed - pauseMs;
+      if (moveElapsed >= moveMs) {
+        segment += 1;
+        fillUpTo(segment);
+        setProgress(segment / (points.length - 1));
+        setSpiderAt(points[segment], false);
+        phaseStart = now;
+        walkFrame = window.requestAnimationFrame(tick);
+        return;
+      }
+
+      const from = points[segment];
+      const to = points[segment + 1];
+      const p = easeInOut(moveElapsed / moveMs);
+      setSpiderAt(
+        {
+          x: from.x + (to.x - from.x) * p,
+          y: from.y + (to.y - from.y) * p,
+        },
+        false
+      );
+      setProgress((segment + p) / (points.length - 1));
+      walkFrame = window.requestAnimationFrame(tick);
+    }
+
+    walkFrame = window.requestAnimationFrame(tick);
+  }
+
+  function startDrop() {
+    window.clearTimeout(loopTimer);
+    stopWalk();
+    if (!layoutDrop()) {
+      return;
+    }
+    items.forEach((item) => item.classList.remove("is-filled"));
+    setProgress(0);
+    spider.style.left = "";
+    spider.style.top = "";
+    spider.style.transform = "";
+    process.classList.remove("is-dropping", "is-walking", "is-live", "is-webbing");
+    void process.offsetWidth;
+    process.classList.add("is-dropping");
+  }
+
+  function startScene() {
+    stopAll();
+    if (isPhone()) {
+      playMobileLoop();
+      return;
+    }
+    startDrop();
+  }
+
+  spider.addEventListener("animationend", (event) => {
+    if (event.target !== spider || isPhone()) {
+      return;
+    }
+    if (event.animationName === "spiderDescend") {
+      startWalk();
+    }
+  });
 
   const view = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && !started) {
           started = true;
-          playLoop();
+          startScene();
         }
       });
     },
     { threshold: 0.28 }
   );
   view.observe(process);
+
+  window.addEventListener("resize", () => {
+    const phone = isPhone();
+    if (phone !== lastPhone) {
+      lastPhone = phone;
+      if (started) {
+        startScene();
+      }
+      return;
+    }
+    if (!phone && process.classList.contains("is-dropping")) {
+      layoutDrop();
+    }
+  });
 }
 
 const sectionTitleFocusElements = document.querySelectorAll("main .section");
