@@ -3342,40 +3342,9 @@ html.js .reveal:not(.visible) {
     display: none;
   }
 
-  .process-cast {
-    display: block;
-  }
-
-  .process-web {
-    transform: rotate(var(--web-a, 0deg));
-    animation: none;
-  }
-
-  #process.is-dropping .process-web,
-  #process.is-walking .process-web {
-    animation: none;
-  }
-
-  #process.is-webbing .process-web {
-    opacity: 1;
-    transition: opacity 0.35s ease;
-  }
-
-  #process.is-live .work-steps__spider,
-  #process.is-dropping .work-steps__spider {
-    opacity: 1;
-    animation: none;
-    width: 20px;
-    height: 28px;
-  }
-
-  #process.is-live .spider-svg--hang,
-  #process.is-walking .spider-svg--hang {
-    display: block;
-  }
-
-  #process.is-live .spider-svg--walk,
-  #process.is-walking .spider-svg--walk {
+  .process-cast,
+  .process-web,
+  .work-steps__spider {
     display: none;
   }
 

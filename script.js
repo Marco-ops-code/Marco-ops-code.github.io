@@ -966,7 +966,6 @@ function initProcessSpider() {
   function startScene() {
     stopAll();
     if (isPhone()) {
-      playMobileLoop();
       return;
     }
     startDrop();
