@@ -3072,37 +3072,112 @@ html.js .reveal:not(.visible) {
   }
 
   #home.hero {
-    padding-top: 72px;
-    padding-bottom: 64px;
+    padding-top: 56px;
+    padding-bottom: 24px;
+    overflow: hidden;
+    background:
+      linear-gradient(
+        165deg,
+        color-mix(in srgb, var(--section-color) 10%, rgba(255, 255, 255, 0.74)) 0%,
+        rgba(255, 255, 255, 0.82) 100%
+      );
+  }
+
+  html.theme-dark #home.hero,
+  body.dark #home.hero {
+    background:
+      linear-gradient(
+        165deg,
+        color-mix(in srgb, var(--section-color) 18%, rgba(17, 17, 17, 0.72)) 0%,
+        rgba(17, 17, 17, 0.8) 100%
+      );
+  }
+
+  #home h1 {
+    font-size: 1.55rem;
   }
 
   .hero-grid {
     grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .hero-lead {
+    margin-inline: auto;
+  }
+
+  .hero-wrap {
+    padding-bottom: 8px;
+  }
+
+  .hero-wrap::before,
+  .hero-wrap::after {
+    opacity: 0.12;
+  }
+
+  .hero-desk::after {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.82) 0%,
+      rgba(255, 255, 255, 0.62) 100%
+    );
+  }
+
+  html.theme-dark .hero-desk::after,
+  body.dark .hero-desk::after {
+    background: linear-gradient(
+      180deg,
+      rgba(17, 17, 17, 0.78) 0%,
+      rgba(17, 17, 17, 0.58) 100%
+    );
   }
 
   .hero-dock {
-    width: calc(100% - 28px);
-    max-width: 420px;
-    flex-wrap: wrap;
-    justify-content: center;
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    z-index: 4;
+    width: 100%;
+    max-width: none;
+    margin-top: 22px;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 22px;
   }
 
   .hero-dock a {
     justify-content: center;
-    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .hero-dock__work {
+    background: #ffffff;
+    border: 2px solid var(--c-blue);
+    color: var(--c-blue);
+  }
+
+  html.theme-dark .hero-dock__work,
+  body.dark .hero-dock__work {
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
   }
 
   .hero-brand,
   #home .hero-brand {
-    width: 200px;
-    max-width: 200px;
+    width: min(188px, 58vw);
+    height: auto;
+    max-width: 188px;
+    max-height: none;
     margin: 0 auto;
     justify-self: center;
   }
 
   #home .hero-brand img {
-    width: 180px;
-    height: 180px;
+    width: 100%;
+    height: auto;
   }
 
   .about-layout {

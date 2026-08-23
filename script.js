@@ -258,8 +258,14 @@ function initSkillsWheel(onActivateCard) {
   let activeCard = null;
   let wheelBusy = false;
   const hint = document.getElementById("skillsWheelHint");
-  const hintIdle = hint?.textContent ?? "";
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const hintIdle = canHover
+    ? "Survole pour arrêter la roue — clique pour le détail"
+    : (hint?.textContent ?? "Touche une icône pour voir le détail");
   const hintOpen = "Reclique l’icône, ou Échap, pour la ranger";
+  if (hint && canHover) {
+    hint.textContent = hintIdle;
+  }
 
   cards.forEach((card) => wrapSkillCardForFlip(card));
   cards.forEach((card) => {
