@@ -29,7 +29,7 @@ jobs:
           mkdir -p _site
           cp index.html style.css script.js contact.php sitemap.xml robots.txt mentions.html _site/
           cp -r assets slides _site/
-          rm -f _site/assets/portrait.png _site/assets/logoMarcportfolio.png
+          rm -f _site/assets/logoMarcportfolio.png
           rm -f _site/assets/projects/windows.png _site/assets/projects/mobile.png
           touch _site/.nojekyll
 
