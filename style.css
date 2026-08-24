@@ -543,6 +543,8 @@ body.nav-open .nav-backdrop {
 
 .badge {
   display: inline-block;
+  width: fit-content;
+  align-self: flex-start;
   background: var(--primary);
   border: 2px solid var(--primary);
   color: #ffffff;
@@ -550,6 +552,7 @@ body.nav-open .nav-backdrop {
   border-radius: 999px;
   font-weight: 600;
   margin-bottom: 18px;
+  white-space: nowrap;
 }
 
 h1 {
@@ -3245,6 +3248,11 @@ html.js .reveal:not(.visible) {
 
   .hero-copy {
     display: block;
+  }
+
+  .badge {
+    align-self: center;
+    margin-inline: auto;
   }
 
   .hero-lead {
