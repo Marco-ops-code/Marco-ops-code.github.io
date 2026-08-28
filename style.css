@@ -25,6 +25,8 @@
   --c-violet: #6d28d9;
   --c-magenta: #a21caf;
   --c-pink: #db2777;
+  --wa: #25d366;
+  --wa-deep: #128c7e;
 }
 
 html.theme-dark,
@@ -49,6 +51,8 @@ body.dark {
   --c-violet: #a78bfa;
   --c-magenta: #e879f9;
   --c-pink: #f472b6;
+  --wa: #25d366;
+  --wa-deep: #34d399;
 }
 
 * {
@@ -2234,7 +2238,7 @@ body.dark .skill-code-shell {
 .contact-title-primary {
   display: inline-block;
   margin-bottom: 0.42em;
-  color: var(--section-color, var(--c-orange));
+  color: var(--wa-deep);
 }
 
 .contact-title-primary::after {
@@ -2261,6 +2265,18 @@ body.dark .skill-code-shell {
 .contact-title-secondary strong {
   color: var(--text);
   font-weight: 700;
+}
+
+.contact-wa {
+  color: var(--wa-deep);
+  font-weight: 700;
+}
+
+html.theme-dark .contact-title-primary,
+html.theme-dark .contact-wa,
+body.dark .contact-title-primary,
+body.dark .contact-wa {
+  color: var(--wa);
 }
 
 .contact-links-grid {
@@ -2296,18 +2312,60 @@ body.dark .skill-code-shell {
 }
 
 .contact-link-card--whatsapp {
-  border-color: color-mix(in srgb, #16a34a 42%, rgba(255, 255, 255, 0.7));
-  background: color-mix(in srgb, #16a34a 12%, #ffffff);
+  border-color: color-mix(in srgb, var(--wa) 48%, rgba(255, 255, 255, 0.55));
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--wa) 28%, transparent) 0%, transparent 62%),
+    color-mix(in srgb, var(--wa) 10%, #ffffff);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 10px 24px color-mix(in srgb, var(--wa-deep) 12%, transparent);
 }
 
 .contact-link-card--whatsapp:hover {
-  border-color: #16a34a;
+  border-color: var(--wa-deep);
+  transform: translateY(-3px);
+}
+
+.contact-link-card--whatsapp .contact-link-card__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #ffffff;
+  background: linear-gradient(165deg, #4ade80 0%, var(--wa) 48%, var(--wa-deep) 100%);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--wa) 42%, transparent);
+}
+
+.contact-link-card--whatsapp .contact-link-card__icon .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.contact-link-card--whatsapp .contact-link-card__label {
+  color: var(--wa-deep);
+}
+
+.contact-link-card--whatsapp .contact-link-card__value,
+.contact-link-card--whatsapp:hover .contact-link-card__value {
+  color: var(--wa-deep);
 }
 
 html.theme-dark .contact-link-card--whatsapp,
 body.dark .contact-link-card--whatsapp {
-  background: color-mix(in srgb, #16a34a 22%, var(--bg));
-  border-color: color-mix(in srgb, #22c55e 40%, transparent);
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--wa) 26%, transparent) 0%, transparent 64%),
+    color-mix(in srgb, var(--wa) 14%, var(--bg));
+  border-color: color-mix(in srgb, var(--wa) 42%, transparent);
+}
+
+html.theme-dark .contact-link-card--whatsapp .contact-link-card__label,
+html.theme-dark .contact-link-card--whatsapp .contact-link-card__value,
+html.theme-dark .contact-link-card--whatsapp:hover .contact-link-card__value,
+body.dark .contact-link-card--whatsapp .contact-link-card__label,
+body.dark .contact-link-card--whatsapp .contact-link-card__value,
+body.dark .contact-link-card--whatsapp:hover .contact-link-card__value {
+  color: color-mix(in srgb, var(--wa) 70%, #ffffff);
 }
 
 .contact-link-card__icon {
@@ -3897,6 +3955,11 @@ html.js .reveal:not(.visible) {
   .contact-form-grid {
     grid-template-columns: 1fr;
   }
+
+  .contact-form {
+    padding: 22px 16px 18px;
+    border-radius: 18px;
+  }
 }
 
 /* --- Roue de cartes : competences --- */
@@ -4498,19 +4561,60 @@ body.dark .skills-wheel__face {
 /* --- Formulaire contact (Formspree) --- */
 .contact-form {
   max-width: 720px;
-  margin: 32px auto 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  backdrop-filter: none;
-  box-shadow: none;
+  margin: 40px auto 0;
+  padding: 28px 28px 24px;
+  border-radius: 22px;
+  border: 1px solid color-mix(in srgb, var(--section-color, var(--c-rose)) 16%, rgba(255, 255, 255, 0.7));
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--section-color, var(--c-rose)) 7%, rgba(255, 255, 255, 0.62)) 0%,
+      rgba(255, 255, 255, 0.38) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.86),
+    0 18px 36px rgba(15, 23, 42, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+html.theme-dark .contact-form,
+body.dark .contact-form {
+  border-color: color-mix(in srgb, var(--section-color, var(--c-rose)) 28%, rgba(255, 255, 255, 0.08));
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--section-color, var(--c-rose)) 12%, rgba(17, 17, 17, 0.55)) 0%,
+      rgba(17, 17, 17, 0.28) 100%
+    );
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .contact-form-intro {
-  margin: 0 0 18px;
-  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding: 0 8px 20px;
   text-align: center;
+  border-bottom: 1px solid color-mix(in srgb, var(--section-color, var(--c-rose)) 18%, transparent);
+}
+
+.contact-form-intro__lead {
+  font-family: "Quantico", Arial, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+.contact-form-intro__note {
+  max-width: 28rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  font-weight: 500;
 }
 
 .contact-form-grid {
