@@ -423,6 +423,11 @@ function initWorkCabinet() {
     panels.forEach((panel) => {
       panel.hidden = panel.id !== panelId;
     });
+    const scroller = tab.closest(".work-cabinet__tabs");
+    if (scroller && scroller.scrollWidth > scroller.clientWidth + 4) {
+      const left = tab.offsetLeft - (scroller.clientWidth - tab.offsetWidth) / 2;
+      scroller.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+    }
   };
 
   tabs.forEach((tab, index) => {
