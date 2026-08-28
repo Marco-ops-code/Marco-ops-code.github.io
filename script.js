@@ -253,8 +253,8 @@ function initSkillsWheel(onActivateCard) {
   const cards = Array.from(cardRoot.querySelectorAll(".skills-wheel__card"));
   const reduceMotionWheel = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const FLIP_MS = reduceMotionWheel ? 80 : 720;
-  const FOLD_MS = reduceMotionWheel ? 80 : 650;
-  const LAND_MS = reduceMotionWheel ? 80 : 500;
+  const SLIDE_MS = reduceMotionWheel ? 80 : 620;
+  const LAND_MS = reduceMotionWheel ? 80 : 580;
   let activeCard = null;
   let wheelBusy = false;
   const hint = document.getElementById("skillsWheelHint");
@@ -320,18 +320,18 @@ function initSkillsWheel(onActivateCard) {
 
     wheelBusy = true;
     card.classList.remove("is-flipped");
-    card.classList.add("is-returning");
-    stage.classList.add("is-folding");
 
     window.setTimeout(() => {
+      card.classList.add("is-returning");
+      stage.classList.add("is-folding");
       stage.classList.remove("has-selection");
       setHint(false);
-    }, Math.round(FLIP_MS * 0.72));
+    }, FLIP_MS);
 
     window.setTimeout(() => {
       finishReturn(card, { land: true });
       wheelBusy = false;
-    }, FLIP_MS + FOLD_MS);
+    }, FLIP_MS + SLIDE_MS);
   };
 
   const extractCard = (card) => {
@@ -356,7 +356,7 @@ function initSkillsWheel(onActivateCard) {
     setHint(true);
     onActivateCard?.(activeCard);
 
-    const flipDelay = reduceMotionWheel ? 0 : 380;
+    const flipDelay = reduceMotionWheel ? 0 : Math.round(SLIDE_MS * 0.78);
     window.setTimeout(() => {
       card.classList.add("is-flipped");
     }, flipDelay);
