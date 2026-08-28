@@ -27,6 +27,10 @@
   --c-pink: #db2777;
   --wa: #25d366;
   --wa-deep: #128c7e;
+  --mail: #ea4335;
+  --mail-deep: #c5221f;
+  --phone: #007aff;
+  --phone-deep: #0055d4;
 }
 
 html.theme-dark,
@@ -53,6 +57,10 @@ body.dark {
   --c-pink: #f472b6;
   --wa: #25d366;
   --wa-deep: #34d399;
+  --mail: #f87171;
+  --mail-deep: #fb7185;
+  --phone: #60a5fa;
+  --phone-deep: #3b82f6;
 }
 
 * {
@@ -2366,6 +2374,120 @@ body.dark .contact-link-card--whatsapp .contact-link-card__label,
 body.dark .contact-link-card--whatsapp .contact-link-card__value,
 body.dark .contact-link-card--whatsapp:hover .contact-link-card__value {
   color: color-mix(in srgb, var(--wa) 70%, #ffffff);
+}
+
+.contact-link-card--mail {
+  border-color: color-mix(in srgb, var(--mail) 46%, rgba(255, 255, 255, 0.55));
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--mail) 26%, transparent) 0%, transparent 62%),
+    color-mix(in srgb, var(--mail) 9%, #ffffff);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 10px 24px color-mix(in srgb, var(--mail-deep) 12%, transparent);
+}
+
+.contact-link-card--mail:hover {
+  border-color: var(--mail-deep);
+  transform: translateY(-3px);
+}
+
+.contact-link-card--mail .contact-link-card__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  color: #ffffff;
+  background: linear-gradient(165deg, #f87171 0%, var(--mail) 48%, var(--mail-deep) 100%);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--mail) 42%, transparent);
+}
+
+.contact-link-card--mail .contact-link-card__icon .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.contact-link-card--mail .contact-link-card__label {
+  color: var(--mail-deep);
+}
+
+.contact-link-card--mail .contact-link-card__value,
+.contact-link-card--mail:hover .contact-link-card__value {
+  color: var(--mail-deep);
+}
+
+html.theme-dark .contact-link-card--mail,
+body.dark .contact-link-card--mail {
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--mail) 24%, transparent) 0%, transparent 64%),
+    color-mix(in srgb, var(--mail) 14%, var(--bg));
+  border-color: color-mix(in srgb, var(--mail) 42%, transparent);
+}
+
+html.theme-dark .contact-link-card--mail .contact-link-card__label,
+html.theme-dark .contact-link-card--mail .contact-link-card__value,
+html.theme-dark .contact-link-card--mail:hover .contact-link-card__value,
+body.dark .contact-link-card--mail .contact-link-card__label,
+body.dark .contact-link-card--mail .contact-link-card__value,
+body.dark .contact-link-card--mail:hover .contact-link-card__value {
+  color: color-mix(in srgb, var(--mail) 72%, #ffffff);
+}
+
+.contact-link-card--phone {
+  border-color: color-mix(in srgb, var(--phone) 46%, rgba(255, 255, 255, 0.55));
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--phone) 26%, transparent) 0%, transparent 62%),
+    color-mix(in srgb, var(--phone) 9%, #ffffff);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 10px 24px color-mix(in srgb, var(--phone-deep) 12%, transparent);
+}
+
+.contact-link-card--phone:hover {
+  border-color: var(--phone-deep);
+  transform: translateY(-3px);
+}
+
+.contact-link-card--phone .contact-link-card__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  color: #ffffff;
+  background: linear-gradient(165deg, #60a5fa 0%, var(--phone) 48%, var(--phone-deep) 100%);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--phone) 42%, transparent);
+}
+
+.contact-link-card--phone .contact-link-card__icon .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.contact-link-card--phone .contact-link-card__label {
+  color: var(--phone-deep);
+}
+
+.contact-link-card--phone .contact-link-card__value,
+.contact-link-card--phone:hover .contact-link-card__value {
+  color: var(--phone-deep);
+}
+
+html.theme-dark .contact-link-card--phone,
+body.dark .contact-link-card--phone {
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--phone) 24%, transparent) 0%, transparent 64%),
+    color-mix(in srgb, var(--phone) 14%, var(--bg));
+  border-color: color-mix(in srgb, var(--phone) 42%, transparent);
+}
+
+html.theme-dark .contact-link-card--phone .contact-link-card__label,
+html.theme-dark .contact-link-card--phone .contact-link-card__value,
+html.theme-dark .contact-link-card--phone:hover .contact-link-card__value,
+body.dark .contact-link-card--phone .contact-link-card__label,
+body.dark .contact-link-card--phone .contact-link-card__value,
+body.dark .contact-link-card--phone:hover .contact-link-card__value {
+  color: color-mix(in srgb, var(--phone) 72%, #ffffff);
 }
 
 .contact-link-card__icon {
