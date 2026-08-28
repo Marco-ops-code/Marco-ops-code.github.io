@@ -1172,6 +1172,165 @@ body.dark #home h1 {
   gap: 28px 24px;
 }
 
+.work-folders {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px 16px;
+  margin-top: 36px;
+  align-items: start;
+}
+
+.work-folder {
+  position: relative;
+  min-width: 0;
+}
+
+.work-folder[open] {
+  grid-column: 1 / -1;
+}
+
+.work-folder__tab {
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 176px;
+  margin: 16px 0 0;
+  padding: 20px 16px 16px;
+  border: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 24%, #c4a574);
+  border-radius: 0 16px 16px 16px;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--section-color, var(--c-indigo)) 12%, #f7e9c8) 0%,
+      #efe1b8 52%,
+      #e6d3a2 100%
+    );
+  box-shadow:
+    0 12px 26px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.work-folder__tab:focus-visible {
+  outline: 2px solid var(--section-color, var(--c-indigo));
+  outline-offset: 3px;
+}
+
+.work-folder__tab::-webkit-details-marker {
+  display: none;
+}
+
+.work-folder__tab::marker {
+  content: "";
+}
+
+.work-folder__tab::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: -16px;
+  width: min(48%, 124px);
+  height: 18px;
+  border: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 24%, #c4a574);
+  border-bottom: 0;
+  border-radius: 11px 16px 0 0;
+  background: color-mix(in srgb, var(--section-color, var(--c-indigo)) 12%, #f7e9c8);
+}
+
+.work-folder:not([open]) .work-folder__tab:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 16px 32px rgba(15, 23, 42, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.work-folder[open] .work-folder__tab {
+  min-height: 0;
+  border-radius: 0 16px 0 0;
+  transform: none;
+}
+
+.work-folder__kicker {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--section-color, var(--c-indigo));
+}
+
+.work-folder__tab h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.work-folder__tab > p {
+  margin: 0;
+  color: #5c5346;
+  font-size: 0.9rem;
+  line-height: 1.42;
+}
+
+.work-folder__hint {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--section-color, var(--c-indigo));
+}
+
+.work-folder[open] .work-folder__hint-open,
+.work-folder:not([open]) .work-folder__hint-close {
+  display: none;
+}
+
+.work-folder__files {
+  display: grid;
+  gap: 12px;
+  padding: 18px 18px 20px;
+  border: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 24%, #c4a574);
+  border-top: 0;
+  border-radius: 0 0 16px 16px;
+  background: color-mix(in srgb, #ffffff 90%, #f7e9c8);
+}
+
+.work-folder__files > p {
+  margin: 0;
+  color: var(--muted);
+}
+
+html.theme-dark .work-folder__tab,
+body.dark .work-folder__tab {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--section-color, var(--c-indigo)) 22%, #2a2418) 0%,
+      #231e16 100%
+    );
+  border-color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 32%, rgba(255, 255, 255, 0.12));
+}
+
+html.theme-dark .work-folder__tab::before,
+body.dark .work-folder__tab::before {
+  background: color-mix(in srgb, var(--section-color, var(--c-indigo)) 22%, #2a2418);
+  border-color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 32%, rgba(255, 255, 255, 0.12));
+}
+
+html.theme-dark .work-folder__tab > p,
+body.dark .work-folder__tab > p {
+  color: #d6cbb8;
+}
+
+html.theme-dark .work-folder__files,
+body.dark .work-folder__files {
+  background: color-mix(in srgb, #111827 82%, #2a2418);
+  border-color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 32%, rgba(255, 255, 255, 0.12));
+}
+
 .project-case {
   display: flex;
   flex-direction: column;
@@ -3166,7 +3325,8 @@ html.js .reveal:not(.visible) {
     font-size: 0.82rem;
   }
 
-  .projects-grid--cases {
+  .projects-grid--cases,
+  .work-folders {
     grid-template-columns: 1fr;
   }
 }
@@ -3348,7 +3508,8 @@ html.js .reveal:not(.visible) {
   }
 
   .services-grid--offers,
-  .projects-grid--cases {
+  .projects-grid--cases,
+  .work-folders {
     grid-template-columns: 1fr;
   }
 

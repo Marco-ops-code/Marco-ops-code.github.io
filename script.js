@@ -404,6 +404,22 @@ function initProjectShots() {
   });
 }
 
+function initWorkFolders() {
+  const folders = document.querySelectorAll("#projects .work-folder");
+  folders.forEach((folder) => {
+    folder.addEventListener("toggle", () => {
+      if (!folder.open) {
+        return;
+      }
+      folders.forEach((other) => {
+        if (other !== folder) {
+          other.open = false;
+        }
+      });
+    });
+  });
+}
+
 function initShotLightbox() {
   const dialog = document.getElementById("shotLightbox");
   const dialogImg = dialog?.querySelector(".shot-lightbox__img");
@@ -413,13 +429,16 @@ function initShotLightbox() {
 
   document.querySelectorAll("a.project-shot[href]").forEach((link) => {
     link.addEventListener("click", (event) => {
-      if (link.classList.contains("is-empty")) {
-        event.preventDefault();
+      const href = link.getAttribute("href") ?? "";
+      if (link.classList.contains("is-empty") || !/\.(jpe?g|png|webp|gif)(\?|$)/i.test(href)) {
+        if (link.classList.contains("is-empty")) {
+          event.preventDefault();
+        }
         return;
       }
       event.preventDefault();
       const shot = link.querySelector("img");
-      dialogImg.src = link.getAttribute("href") ?? "";
+      dialogImg.src = href;
       dialogImg.alt = shot?.alt ?? "";
       if (typeof dialog.showModal === "function") {
         dialog.showModal();
@@ -682,6 +701,7 @@ initMobileNav();
 initNavActiveSection();
 initProjectShots();
 initShotLightbox();
+initWorkFolders();
 initContactForm();
 initProcessSpider();
 
