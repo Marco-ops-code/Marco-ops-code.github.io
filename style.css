@@ -3778,6 +3778,14 @@ html.js .reveal:not(.visible) {
     min-height: 0;
   }
 
+  .skills-wheel-detail > .skills-wheel__card.is-extracting {
+    animation-name: skillSlideInMobile;
+  }
+
+  .skills-wheel-detail > .skills-wheel__card.is-returning {
+    animation-name: skillSlideOutMobile;
+  }
+
   .skills-wheel .skills-wheel__card .skills-wheel__face--front .skill-logo {
     padding: 8px;
   }
@@ -4197,6 +4205,28 @@ body.dark .skills-wheel__face {
   }
   to {
     transform: translate3d(-130px, 14px, 0) scale(0.36) rotate(-12deg);
+    opacity: 0;
+  }
+}
+
+@keyframes skillSlideInMobile {
+  from {
+    transform: translate3d(0, -72px, 0) scale(0.46);
+    opacity: 0.35;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes skillSlideOutMobile {
+  from {
+    transform: none;
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(0, -84px, 0) scale(0.4);
     opacity: 0;
   }
 }
