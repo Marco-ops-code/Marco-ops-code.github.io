@@ -1179,54 +1179,118 @@ body.dark #home h1 {
 .work-cabinet__tabs {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 6px;
+  gap: 0;
   align-items: stretch;
-  padding: 0 6px;
+  padding: 0 10px;
+  isolation: isolate;
 }
 
 .work-cabinet__tab {
+  --folder-paper: #efe8d8;
   appearance: none;
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
   min-width: 0;
-  margin: 0;
-  padding: 12px 12px 16px;
+  margin: 0 0 0 -10px;
+  padding: 14px 14px 18px 16px;
   text-align: left;
   cursor: pointer;
-  color: var(--text);
+  color: color-mix(in srgb, var(--text) 78%, #6b6254);
   font: inherit;
-  border: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 22%, rgba(255, 255, 255, 0.55));
+  border: 1px solid color-mix(in srgb, var(--folder-paper) 55%, #b9a888);
   border-bottom: 0;
-  border-radius: 16px 16px 0 0;
-  background: color-mix(in srgb, var(--section-color, var(--c-indigo)) 7%, rgba(255, 255, 255, 0.38));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
-  transform: translateY(8px);
-  transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+  border-radius: 14px 18px 0 0;
+  background:
+    radial-gradient(circle at 12px 9px, #c4b496 1.15px, transparent 1.35px),
+    radial-gradient(circle at 20px 9px, #c4b496 1.15px, transparent 1.35px),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 11px,
+      rgba(120, 96, 58, 0.035) 12px
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--folder-paper) 88%, #ffffff) 0%,
+      var(--folder-paper) 42%,
+      color-mix(in srgb, var(--folder-paper) 82%, #cbb892) 100%
+    );
+  box-shadow:
+    4px 0 0 -2px color-mix(in srgb, var(--folder-paper) 70%, #c4ad82),
+    8px 6px 0 -5px color-mix(in srgb, var(--folder-paper) 55%, #b89a6c),
+    inset 0 1px 0 rgba(255, 255, 255, 0.62),
+    inset 0 -10px 16px rgba(90, 70, 30, 0.06);
+  clip-path: polygon(12px 0, calc(100% - 18px) 0, 100% 16px, 100% 100%, 0 100%, 0 10px);
+  transform: translateY(14px);
+  opacity: 0.72;
+  filter: saturate(0.82);
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.22s ease,
+    filter 0.22s ease,
+    box-shadow 0.22s ease,
+    color 0.22s ease,
+    z-index 0s linear 0.01s;
 }
 
+.work-cabinet__tab:first-child {
+  margin-left: 0;
+}
+
+.work-cabinet__tab:nth-child(1) { --folder-paper: #f1e6c8; z-index: 1; }
+.work-cabinet__tab:nth-child(2) { --folder-paper: #e7dcc4; z-index: 2; }
+.work-cabinet__tab:nth-child(3) { --folder-paper: #ddd4e6; z-index: 3; }
+.work-cabinet__tab:nth-child(4) { --folder-paper: #d7e4dc; z-index: 4; }
+.work-cabinet__tab:nth-child(5) { --folder-paper: #ead6cc; z-index: 5; }
+
 .work-cabinet__tab:hover {
-  transform: translateY(4px);
+  transform: translateY(8px);
+  opacity: 0.9;
+  filter: saturate(0.95);
 }
 
 .work-cabinet__tab[aria-selected="true"] {
-  z-index: 2;
+  z-index: 8;
+  opacity: 1;
+  filter: none;
+  color: var(--text);
   transform: translateY(0);
+  border-color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 42%, #d7c39a);
   background:
+    radial-gradient(circle at 12px 9px, color-mix(in srgb, var(--section-color, var(--c-indigo)) 55%, #c4b496) 1.15px, transparent 1.35px),
+    radial-gradient(circle at 20px 9px, color-mix(in srgb, var(--section-color, var(--c-indigo)) 55%, #c4b496) 1.15px, transparent 1.35px),
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--section-color, var(--c-indigo)) 16%, rgba(255, 255, 255, 0.78)) 0%,
-      rgba(255, 255, 255, 0.82) 100%
+      color-mix(in srgb, var(--section-color, var(--c-indigo)) 18%, #fff8ea) 0%,
+      rgba(255, 255, 255, 0.94) 58%,
+      rgba(255, 255, 255, 0.94) 100%
     );
   box-shadow:
-    0 -8px 22px color-mix(in srgb, var(--section-color, var(--c-indigo)) 12%, transparent),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    0 -10px 24px color-mix(in srgb, var(--section-color, var(--c-indigo)) 18%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--section-color, var(--c-indigo)) 16%, transparent),
+    inset 0 2px 0 color-mix(in srgb, var(--section-color, var(--c-indigo)) 70%, #ffffff),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.work-cabinet__tab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  bottom: -3px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  pointer-events: none;
 }
 
 .work-cabinet__tab:focus-visible {
   outline: 2px solid var(--section-color, var(--c-indigo));
   outline-offset: 3px;
+  z-index: 9;
 }
 
 .work-cabinet__kicker {
@@ -1234,6 +1298,10 @@ body.dark #home h1 {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 55%, #7a6a4e);
+}
+
+.work-cabinet__tab[aria-selected="true"] .work-cabinet__kicker {
   color: var(--section-color, var(--c-indigo));
 }
 
@@ -1260,17 +1328,21 @@ body.dark #home h1 {
   line-height: 1.35;
 }
 
+.work-cabinet__tab[aria-selected="true"] .work-cabinet__blurb {
+  color: color-mix(in srgb, var(--text) 72%, var(--muted));
+}
+
 .work-cabinet__drawer {
   position: relative;
-  z-index: 1;
+  z-index: 7;
   padding: 22px;
-  border: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 24%, rgba(255, 255, 255, 0.65));
+  border: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 28%, rgba(255, 255, 255, 0.65));
   border-radius: 0 18px 22px 22px;
   background:
     linear-gradient(
       165deg,
-      color-mix(in srgb, var(--section-color, var(--c-indigo)) 10%, rgba(255, 255, 255, 0.72)) 0%,
-      rgba(255, 255, 255, 0.86) 100%
+      color-mix(in srgb, var(--section-color, var(--c-indigo)) 10%, rgba(255, 255, 255, 0.78)) 0%,
+      rgba(255, 255, 255, 0.94) 100%
     );
   box-shadow:
     0 16px 36px rgba(15, 23, 42, 0.08),
@@ -1304,19 +1376,42 @@ body.dark #home h1 {
 
 html.theme-dark .work-cabinet__tab,
 body.dark .work-cabinet__tab {
-  background: color-mix(in srgb, var(--section-color, var(--c-indigo)) 14%, rgba(17, 17, 17, 0.42));
-  border-color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 32%, rgba(255, 255, 255, 0.1));
-  box-shadow: none;
+  color: color-mix(in srgb, var(--text) 82%, #c4b496);
+  border-color: color-mix(in srgb, var(--folder-paper) 28%, rgba(255, 255, 255, 0.12));
+  background:
+    radial-gradient(circle at 12px 9px, #8a7a5c 1.15px, transparent 1.35px),
+    radial-gradient(circle at 20px 9px, #8a7a5c 1.15px, transparent 1.35px),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--folder-paper) 28%, #2a241c) 0%,
+      color-mix(in srgb, var(--folder-paper) 16%, #1b1712) 100%
+    );
+  box-shadow:
+    4px 0 0 -2px color-mix(in srgb, var(--folder-paper) 22%, #1a1612),
+    8px 6px 0 -5px color-mix(in srgb, var(--folder-paper) 14%, #12100e),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 html.theme-dark .work-cabinet__tab[aria-selected="true"],
 body.dark .work-cabinet__tab[aria-selected="true"] {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 48%, rgba(255, 255, 255, 0.16));
   background:
+    radial-gradient(circle at 12px 9px, color-mix(in srgb, var(--section-color, var(--c-indigo)) 70%, #8a7a5c) 1.15px, transparent 1.35px),
+    radial-gradient(circle at 20px 9px, color-mix(in srgb, var(--section-color, var(--c-indigo)) 70%, #8a7a5c) 1.15px, transparent 1.35px),
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--section-color, var(--c-indigo)) 28%, rgba(17, 17, 17, 0.72)) 0%,
-      rgba(17, 17, 17, 0.78) 100%
+      color-mix(in srgb, var(--section-color, var(--c-indigo)) 32%, #2c2418) 0%,
+      rgba(17, 17, 17, 0.9) 100%
     );
+  box-shadow:
+    0 -10px 24px color-mix(in srgb, var(--section-color, var(--c-indigo)) 22%, transparent),
+    inset 0 2px 0 color-mix(in srgb, var(--section-color, var(--c-indigo)) 75%, #ffffff);
+}
+
+html.theme-dark .work-cabinet__tab[aria-selected="true"]::after,
+body.dark .work-cabinet__tab[aria-selected="true"]::after {
+  background: rgba(17, 17, 17, 0.9);
 }
 
 html.theme-dark .work-cabinet__drawer,
@@ -3420,23 +3515,25 @@ html.js .reveal:not(.visible) {
 
   .work-cabinet__tabs {
     display: flex;
-    gap: 8px;
+    gap: 0;
     overflow-x: auto;
-    padding: 0 0 10px;
+    padding: 4px 4px 12px;
     scrollbar-width: thin;
   }
 
   .work-cabinet__tab {
     flex: 0 0 auto;
     width: min(168px, 72vw);
-    transform: none;
-    border: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 22%, rgba(255, 255, 255, 0.55));
-    border-radius: 14px;
-    padding-bottom: 12px;
+    margin-left: -8px;
+    padding-bottom: 14px;
   }
 
-  .work-cabinet__tab[aria-selected="true"] {
-    transform: none;
+  .work-cabinet__tab:first-child {
+    margin-left: 0;
+  }
+
+  .work-cabinet__tab[aria-selected="true"]::after {
+    display: none;
   }
 
   .work-cabinet__blurb {
