@@ -404,18 +404,40 @@ function initProjectShots() {
   });
 }
 
-function initWorkFolders() {
-  const folders = document.querySelectorAll("#projects .work-folder");
-  folders.forEach((folder) => {
-    folder.addEventListener("toggle", () => {
-      if (!folder.open) {
+function initWorkCabinet() {
+  const root = document.querySelector("#projects .work-cabinet");
+  if (!root) {
+    return;
+  }
+
+  const tabs = [...root.querySelectorAll('[role="tab"]')];
+  const panels = [...root.querySelectorAll('[role="tabpanel"]')];
+
+  const selectTab = (tab) => {
+    tabs.forEach((item) => {
+      const on = item === tab;
+      item.setAttribute("aria-selected", on ? "true" : "false");
+      item.tabIndex = on ? 0 : -1;
+    });
+    const panelId = tab.getAttribute("aria-controls");
+    panels.forEach((panel) => {
+      panel.hidden = panel.id !== panelId;
+    });
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => selectTab(tab));
+    tab.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
         return;
       }
-      folders.forEach((other) => {
-        if (other !== folder) {
-          other.open = false;
-        }
-      });
+      event.preventDefault();
+      const next =
+        event.key === "ArrowRight"
+          ? tabs[(index + 1) % tabs.length]
+          : tabs[(index - 1 + tabs.length) % tabs.length];
+      next.focus();
+      selectTab(next);
     });
   });
 }
@@ -701,7 +723,7 @@ initMobileNav();
 initNavActiveSection();
 initProjectShots();
 initShotLightbox();
-initWorkFolders();
+initWorkCabinet();
 initContactForm();
 initProcessSpider();
 
