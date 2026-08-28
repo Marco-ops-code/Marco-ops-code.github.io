@@ -259,12 +259,10 @@ function initSkillsWheel(onActivateCard) {
   let wheelBusy = false;
   const hint = document.getElementById("skillsWheelHint");
   const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  const hintIdle = canHover
-    ? "Survole pour arrêter la roue — clique pour le détail"
-    : (hint?.textContent ?? "Touche une icône pour voir le détail");
-  const hintOpen = "Reclique l’icône, ou Échap, pour la ranger";
+  const hintIdleKey = canHover ? "skills_hint_hover" : "skills_hint";
+  const hintOpenKey = "skills_hint_open";
   if (hint && canHover) {
-    hint.textContent = hintIdle;
+    hint.textContent = t(hintIdleKey);
   }
 
   cards.forEach((card) => wrapSkillCardForFlip(card));
@@ -278,7 +276,7 @@ function initSkillsWheel(onActivateCard) {
 
   const setHint = (open) => {
     if (hint) {
-      hint.textContent = open ? hintOpen : hintIdle;
+      hint.textContent = open ? t(hintOpenKey) : t(hintIdleKey);
     }
   };
 
@@ -381,6 +379,16 @@ function initSkillsWheel(onActivateCard) {
       }
       event.preventDefault();
       extractCard(card);
+    });
+  });
+
+  window.addEventListener("portfolio:lang", () => {
+    setHint(Boolean(activeCard));
+    cards.forEach((card) => {
+      const title = card.querySelector(".skill-title-anim");
+      if (title) {
+        card.setAttribute("aria-label", title.textContent.trim());
+      }
     });
   });
 }
@@ -508,7 +516,7 @@ function initContactForm() {
     }
 
     submitBtn?.setAttribute("disabled", "true");
-    statusEl.textContent = "Envoi en cours...";
+    statusEl.textContent = t("form_sending");
     statusEl.dataset.state = "pending";
 
     const formData = new FormData(form);
@@ -535,8 +543,7 @@ function initContactForm() {
 
       if (response.ok) {
         form.reset();
-        statusEl.textContent =
-          "Message recu par Formspree. Verifie ta boite mail (et les spams). Si rien n'arrive, confirme le formulaire dans ton dashboard Formspree.";
+        statusEl.textContent = t("form_ok");
         statusEl.dataset.state = "success";
       } else {
         const apiError =
@@ -550,13 +557,11 @@ function initContactForm() {
           response.status === 404 ||
           payload.errors?.some((entry) => entry.code === "FORM_NOT_FOUND");
 
-        statusEl.textContent = isFormNotFound
-          ? "Formulaire introuvable : verifie l'ID Formspree (meewlnrz) et recharge la page (Ctrl+F5). Ouvre le site via http://localhost, pas en fichier local."
-          : apiError;
+        statusEl.textContent = isFormNotFound ? t("form_missing") : apiError;
         statusEl.dataset.state = "error";
       }
     } catch {
-      statusEl.textContent = "Connexion impossible. Reessaie ou utilise l'email direct.";
+      statusEl.textContent = t("form_err");
       statusEl.dataset.state = "error";
     } finally {
       submitBtn?.removeAttribute("disabled");
@@ -592,7 +597,7 @@ function updateThemeToggleUi() {
   themeToggle?.setAttribute("aria-pressed", String(isDark));
   themeToggle?.setAttribute(
     "aria-label",
-    isDark ? "Activer le thème clair" : "Activer le thème sombre"
+    isDark ? t("theme_light") : t("theme_dark")
   );
 }
 
@@ -615,7 +620,7 @@ function initMobileNav() {
   const setNavOpen = (open) => {
     document.body.classList.toggle("nav-open", open);
     burger.setAttribute("aria-expanded", String(open));
-    burger.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+    burger.setAttribute("aria-label", open ? t("menu_close") : t("menu_open"));
     mobileNav.toggleAttribute("aria-hidden", !open);
   };
 
@@ -625,6 +630,11 @@ function initMobileNav() {
 
   backdrop?.addEventListener("click", () => {
     setNavOpen(false);
+  });
+
+  window.addEventListener("portfolio:lang", () => {
+    burger.setAttribute("aria-label", isOpen() ? t("menu_close") : t("menu_open"));
+    updateThemeToggleUi();
   });
 
   navLinks.forEach((link) => {
@@ -725,6 +735,7 @@ function initNavActiveSection() {
 initAnchorScroll();
 initHeaderScroll();
 initMobileNav();
+initLanguageSwitch();
 initNavActiveSection();
 initProjectShots();
 initShotLightbox();

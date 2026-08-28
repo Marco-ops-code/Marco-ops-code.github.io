@@ -221,6 +221,45 @@ body.dark .header--scrolled {
   z-index: 2;
 }
 
+.nav-lang {
+  display: inline-flex;
+  align-items: stretch;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), var(--bg-soft));
+}
+
+body.dark .nav-lang,
+html.theme-dark .nav-lang {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(15, 23, 42, 0.32));
+}
+
+.nav-lang__btn {
+  min-width: 36px;
+  margin: 0;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.nav-lang__btn.is-active {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.nav-lang__btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
 .nav-theme-btn {
   width: 42px;
   height: 42px;

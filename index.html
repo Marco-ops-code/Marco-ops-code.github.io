@@ -45,6 +45,9 @@
         if (localStorage.getItem("theme") === "dark") {
           document.documentElement.classList.add("theme-dark");
         }
+        if (localStorage.getItem("portfolio-lang") === "en") {
+          document.documentElement.lang = "en";
+        }
       } catch (error) {
         /* storage blocked */
       }
@@ -55,10 +58,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=20260813-s56" />
+    <link rel="stylesheet" href="style.css?v=20260813-s57" />
   </head>
-  <body>
-    <a class="skip-link" href="#main">Aller au contenu</a>
+  <body data-page="home">
+    <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
     <div class="background-glow" aria-hidden="true"></div>
 
     <header class="header" id="siteHeader">
@@ -74,17 +77,21 @@
           />
           <span class="logo-text">Marc-Onel VOLCIMUS<span>.</span></span>
         </a>
-        <nav class="site-nav site-nav--desktop" aria-label="Navigation principale">
+        <nav class="site-nav site-nav--desktop" data-i18n-aria="nav_main" aria-label="Navigation principale">
           <ul class="nav-links" id="navLinksSource">
-            <li><a href="#about" data-nav="about">À propos</a></li>
-            <li><a href="#projects" data-nav="projects">Travaux</a></li>
-            <li><a href="#services" data-nav="services">Offre</a></li>
+            <li><a href="#about" data-nav="about" data-i18n="nav_about">À propos</a></li>
+            <li><a href="#projects" data-nav="projects" data-i18n="nav_work">Travaux</a></li>
+            <li><a href="#services" data-nav="services" data-i18n="nav_offer">Offre</a></li>
             <li>
-              <a href="#contact" class="nav-link--cta" data-nav="contact">Contact</a>
+              <a href="#contact" class="nav-link--cta" data-nav="contact" data-i18n="nav_contact">Contact</a>
             </li>
           </ul>
         </nav>
         <div class="nav-toolbar">
+          <div class="nav-lang" role="group" data-i18n-aria="nav_lang" aria-label="Langue">
+            <button type="button" class="nav-lang__btn is-active" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+            <button type="button" class="nav-lang__btn" data-lang="en" lang="en" aria-pressed="false">EN</button>
+          </div>
           <button
             class="nav-theme-btn"
             id="themeToggle"
@@ -111,7 +118,7 @@
       </div>
       <div class="site-nav site-nav--mobile" id="siteNavMobile" aria-hidden="true">
         <div class="nav-mobile-head">
-          <p class="nav-mobile-title">Menu</p>
+          <p class="nav-mobile-title" data-i18n="nav_menu">Menu</p>
           <p class="nav-mobile-subtitle">Marc-Onel Volcimus</p>
         </div>
         <nav aria-label="Navigation mobile">
@@ -143,10 +150,10 @@
           <div class="container">
             <div class="hero-grid">
               <div class="hero-copy">
-                <p class="badge">Disponible pour 1 à 2 missions</p>
-                <p class="hero-kicker">Développeur full stack freelance</p>
-                <h1>Site vitrine, landing page, appli mobile ou PowerPoint — pour indépendants et TPE.</h1>
-                <p class="hero-lead">
+                <p class="badge" data-i18n="badge">Disponible pour 1 à 2 missions</p>
+                <p class="hero-kicker" data-i18n="hero_kicker">Développeur full stack freelance</p>
+                <h1 data-i18n="hero_h1">Site vitrine, landing page, appli mobile ou PowerPoint — pour indépendants et TPE.</h1>
+                <p class="hero-lead" data-i18n="hero_lead">
                   Quatre formats, un même niveau d’exigence : convaincre dès la première visite.
                   Preuve à l’appui : deux sites, deux applications, plus un extrait PowerPoint.
                 </p>
@@ -155,6 +162,7 @@
                 <img
                   src="assets/portrait.png?v=3"
                   alt="Portrait de Marc-Onel Volcimus"
+                  data-i18n-alt="portrait_alt"
                   width="768"
                   height="1024"
                   fetchpriority="high"
@@ -163,48 +171,49 @@
               </aside>
             </div>
           </div>
-          <nav class="hero-dock" aria-label="Actions">
+          <nav class="hero-dock" data-i18n-aria="dock_actions" aria-label="Actions">
             <a
               href="https://wa.me/79965064486?text=Bonjour%20Marc-Onel%2C%20je%20voudrais%20r%C3%A9server%2030%20minutes%20pour%20parler%20d%E2%80%99un%20projet."
               class="hero-dock__book"
+              data-wa-book
               target="_blank"
               rel="noopener noreferrer"
             >
               <span class="hero-dock__pulse" aria-hidden="true"></span>
-              <span class="hero-dock__kicker">Offert</span>
-              Réserver 30 min
+              <span class="hero-dock__kicker" data-i18n="dock_free">Offert</span>
+              <span data-i18n="dock_book">Réserver 30 min</span>
             </a>
-            <a href="#projects" class="hero-dock__work">Voir mes travaux</a>
+            <a href="#projects" class="hero-dock__work" data-i18n="dock_work">Voir mes travaux</a>
           </nav>
         </section>
       </div>
 
       <section id="about" class="section container reveal">
-        <h2>À propos</h2>
+        <h2 data-i18n="about_h2">À propos</h2>
         <div class="about-layout about-layout--text">
           <div class="about-content">
-            <p>
+            <p data-i18n="about_p">
               Je suis Marc-Onel Volcimus, développeur full stack. J’aide les indépendants et les TPE
               à envoyer un support sans s’expliquer : site vitrine, landing page, application mobile
               ou présentation PowerPoint. Je travaille à distance, en français et en anglais : WhatsApp et e-mail
               suffisent, le fuseau n’est pas un obstacle.
             </p>
-            <ul class="about-facts" aria-label="Faits clés">
+            <ul class="about-facts" data-i18n-aria="facts" aria-label="Faits clés">
               <li>
-                <strong>Clients</strong>
-                <span>Indépendants et TPE qui veulent une vitrine crédible</span>
+                <strong data-i18n="fact_clients">Clients</strong>
+                <span data-i18n="fact_clients_v">Indépendants et TPE qui veulent une vitrine crédible</span>
               </li>
               <li>
-                <strong>Full stack</strong>
+                <strong data-i18n="fact_stack">Full stack</strong>
                 <span>HTML, CSS, JavaScript, PHP, MySQL, C# / .NET, Python</span>
               </li>
               <li>
-                <strong>Délai</strong>
-                <span>Réponse sous 24&nbsp;h, en français ou en anglais</span>
+                <strong data-i18n="fact_delay">Délai</strong>
+                <span data-i18n="fact_delay_v">Réponse sous 24&nbsp;h, en français ou en anglais</span>
               </li>
               <li>
-                <strong>Lieu</strong>
-                <span>À distance — e-mail, téléphone ou WhatsApp</span>
+                <strong data-i18n="fact_place">Lieu</strong>
+                <span data-i18n="fact_place_v">À distance — e-mail, téléphone ou WhatsApp</span>
               </li>
             </ul>
             <div class="office-suite">
@@ -223,38 +232,38 @@
       </section>
 
       <section id="services" class="section container reveal">
-        <h2>Offre</h2>
-        <p class="section-intro">
+        <h2 data-i18n="offer_h2">Offre</h2>
+        <p class="section-intro" data-i18n="offer_intro">
           Quatre formats, un même niveau d’exigence : un produit qui te fait paraître plus
           sérieux dès la première visite.
         </p>
         <div class="services-grid services-grid--offers">
           <article class="service-offer">
-            <h3>Site vitrine</h3>
-            <p>Pages claires, rapides et soignées pour présenter ton activité et inspirer confiance.</p>
+            <h3 data-i18n="offer_vitrine_h">Site vitrine</h3>
+            <p data-i18n="offer_vitrine_p">Pages claires, rapides et soignées pour présenter ton activité et inspirer confiance.</p>
           </article>
           <article class="service-offer">
-            <h3>Landing page</h3>
-            <p>Une page unique, focalisée conversion, avec un message net et un appel à l’action évident.</p>
+            <h3 data-i18n="offer_landing_h">Landing page</h3>
+            <p data-i18n="offer_landing_p">Une page unique, focalisée conversion, avec un message net et un appel à l’action évident.</p>
           </article>
           <article class="service-offer">
-            <h3>Application mobile</h3>
-            <p>Un outil sur téléphone, en C# / .NET, pensé pour un usage réel : parcours clair, génération, export.</p>
+            <h3 data-i18n="offer_app_h">Application mobile</h3>
+            <p data-i18n="offer_app_p">Un outil sur téléphone, en C# / .NET, pensé pour un usage réel : parcours clair, génération, export.</p>
           </article>
           <article class="service-offer">
-            <h3>Présentation PowerPoint</h3>
-            <p>Supports pro pour tout type de sujet : pitch, cours, rapport — clairs, visuels, prêts à présenter.</p>
+            <h3 data-i18n="offer_ppt_h">Présentation PowerPoint</h3>
+            <p data-i18n="offer_ppt_p">Supports pro pour tout type de sujet : pitch, cours, rapport — clairs, visuels, prêts à présenter.</p>
           </article>
         </div>
       </section>
 
       <section id="skills" class="section container reveal">
-        <h2>Compétences</h2>
-        <p class="section-intro">
+        <h2 data-i18n="skills_h2">Compétences</h2>
+        <p class="section-intro" data-i18n="skills_intro">
           Les outils avec lesquels je conçois et livre. Une icône ouvre le détail.
         </p>
         <div class="skills-wheel-stage">
-            <div class="skills-wheel" role="list" aria-label="Roue des compétences">
+            <div class="skills-wheel" role="list" data-i18n-aria="skills_wheel" aria-label="Roue des compétences">
             <div class="skills-wheel__hub" aria-hidden="true"><span>M</span></div>
           <article class="card skill-card skills-wheel__card" data-skill="html" data-wheel-index="0" role="listitem" tabindex="0">
             <div class="skill-card-head">
@@ -267,12 +276,12 @@
                 loading="lazy"
                 decoding="async"
               />
-              <h3 class="skill-title-anim">HTML5 sémantique et SEO</h3>
+              <h3 class="skill-title-anim" data-i18n="skill_html_h">HTML5 sémantique et SEO</h3>
             </div>
             <div class="skill-code-shell" aria-hidden="true">
               <div class="skill-code-demo"></div>
             </div>
-            <p>Structure propre, balises accessibles et contenu optimisé pour la visibilité.</p>
+            <p data-i18n="skill_html_p">Structure propre, balises accessibles et contenu optimisé pour la visibilité.</p>
           </article>
           <article class="card skill-card skills-wheel__card" data-skill="css" data-wheel-index="1" role="listitem" tabindex="0">
             <div class="skill-card-head">
@@ -285,12 +294,12 @@
                 loading="lazy"
                 decoding="async"
               />
-              <h3 class="skill-title-anim">CSS3 moderne et responsive design</h3>
+              <h3 class="skill-title-anim" data-i18n="skill_css_h">CSS3 moderne et responsive design</h3>
             </div>
             <div class="skill-code-shell" aria-hidden="true">
               <div class="skill-code-demo"></div>
             </div>
-            <p>Interfaces fluides, animations soignées et adaptation parfaite mobile/desktop.</p>
+            <p data-i18n="skill_css_p">Interfaces fluides, animations soignées et adaptation parfaite mobile/desktop.</p>
           </article>
           <article class="card skill-card skills-wheel__card" data-skill="javascript" data-wheel-index="2" role="listitem" tabindex="0">
             <div class="skill-card-head">
@@ -303,12 +312,12 @@
                 loading="lazy"
                 decoding="async"
               />
-              <h3 class="skill-title-anim">JavaScript interactif et animations</h3>
+              <h3 class="skill-title-anim" data-i18n="skill_js_h">JavaScript interactif et animations</h3>
             </div>
             <div class="skill-code-shell" aria-hidden="true">
               <div class="skill-code-demo"></div>
             </div>
-            <p>Expériences dynamiques et micro-interactions qui donnent vie aux interfaces.</p>
+            <p data-i18n="skill_js_p">Expériences dynamiques et micro-interactions qui donnent vie aux interfaces.</p>
           </article>
           <article class="card skill-card skills-wheel__card" data-skill="php" data-wheel-index="3" role="listitem" tabindex="0">
             <div class="skill-card-head">
@@ -321,12 +330,12 @@
                 loading="lazy"
                 decoding="async"
               />
-              <h3 class="skill-title-anim">PHP backend pour formulaires/API</h3>
+              <h3 class="skill-title-anim" data-i18n="skill_php_h">PHP backend pour formulaires/API</h3>
             </div>
             <div class="skill-code-shell" aria-hidden="true">
               <div class="skill-code-demo"></div>
             </div>
-            <p>Logique serveur fiable pour traitement de données et endpoints simples.</p>
+            <p data-i18n="skill_php_p">Logique serveur fiable pour traitement de données et endpoints simples.</p>
           </article>
           <article class="card skill-card skills-wheel__card" data-skill="performance" data-wheel-index="4" role="listitem" tabindex="0">
             <div class="skill-card-head">
@@ -344,7 +353,7 @@
             <div class="skill-code-shell" aria-hidden="true">
               <div class="skill-code-demo"></div>
             </div>
-            <p>Bundling, split des assets et pages plus rapides — la perf, pas le décor.</p>
+            <p data-i18n="skill_webpack_p">Bundling, split des assets et pages plus rapides — la perf, pas le décor.</p>
           </article>
           <article class="card skill-card skills-wheel__card" data-skill="ux" data-wheel-index="5" role="listitem" tabindex="0">
             <div class="skill-card-head">
@@ -357,12 +366,12 @@
                 loading="lazy"
                 decoding="async"
               />
-              <h3 class="skill-title-anim">UI/UX orientée conversion</h3>
+              <h3 class="skill-title-anim" data-i18n="skill_ux_h">UI/UX orientée conversion</h3>
             </div>
             <div class="skill-code-shell" aria-hidden="true">
               <div class="skill-code-demo"></div>
             </div>
-            <p>Parcours utilisateur clair, design premium et décisions guidées par l’objectif.</p>
+            <p data-i18n="skill_ux_p">Parcours utilisateur clair, design premium et décisions guidées par l’objectif.</p>
           </article>
           <article class="card skill-card skills-wheel__card" data-skill="csharp" data-wheel-index="6" role="listitem" tabindex="0">
             <div class="skill-card-head">
@@ -380,7 +389,7 @@
             <div class="skill-code-shell" aria-hidden="true">
               <div class="skill-code-demo"></div>
             </div>
-            <p>Applications orientées objet, performances et écosystème .NET pour du backend robuste.</p>
+            <p data-i18n="skill_cs_p">Applications orientées objet, performances et écosystème .NET pour du backend robuste.</p>
           </article>
           <article class="card skill-card skills-wheel__card" data-skill="python" data-wheel-index="7" role="listitem" tabindex="0">
             <div class="skill-card-head">
@@ -398,7 +407,7 @@
             <div class="skill-code-shell" aria-hidden="true">
               <div class="skill-code-demo"></div>
             </div>
-            <p>Scripts, APIs et traitement de données avec une syntaxe claire et des librairies puissantes.</p>
+            <p data-i18n="skill_py_p">Scripts, APIs et traitement de données avec une syntaxe claire et des librairies puissantes.</p>
           </article>
           <article class="card skill-card skills-wheel__card" data-skill="mysql" data-wheel-index="8" role="listitem" tabindex="0">
             <div class="skill-card-head">
@@ -411,12 +420,12 @@
                 loading="lazy"
                 decoding="async"
               />
-              <h3 class="skill-title-anim">MySQL base de données</h3>
+              <h3 class="skill-title-anim" data-i18n="skill_mysql_h">MySQL base de données</h3>
             </div>
             <div class="skill-code-shell" aria-hidden="true">
               <div class="skill-code-demo"></div>
             </div>
-            <p>Conception de schémas, requêtes SQL optimisées et gestion fiable des données applicatives.</p>
+            <p data-i18n="skill_mysql_p">Conception de schémas, requêtes SQL optimisées et gestion fiable des données applicatives.</p>
           </article>
           <article class="card skill-card skills-wheel__card" data-skill="gimp" data-wheel-index="9" role="listitem" tabindex="0">
             <div class="skill-card-head">
@@ -434,7 +443,7 @@
             <div class="skill-code-shell" aria-hidden="true">
               <div class="skill-code-demo"></div>
             </div>
-            <p>Retouche, recadrage et export d’images pour le web — visuels nets, légers, prêts à publier.</p>
+            <p data-i18n="skill_gimp_p">Retouche, recadrage et export d’images pour le web — visuels nets, légers, prêts à publier.</p>
           </article>
           <article class="card skill-card skills-wheel__card" data-skill="msproject" data-wheel-index="10" role="listitem" tabindex="0">
             <div class="skill-card-head">
@@ -452,164 +461,164 @@
             <div class="skill-code-shell" aria-hidden="true">
               <div class="skill-code-demo"></div>
             </div>
-            <p>Planification des missions : jalons, Gantt, charges et délais tenus jusqu’à la livraison.</p>
+            <p data-i18n="skill_msp_p">Planification des missions : jalons, Gantt, charges et délais tenus jusqu’à la livraison.</p>
           </article>
           </div>
-          <p class="skills-wheel-hint" id="skillsWheelHint">Touche une icône pour voir le détail</p>
+          <p class="skills-wheel-hint" id="skillsWheelHint" data-i18n="skills_hint">Touche une icône pour voir le détail</p>
           <div class="skills-wheel-detail" id="skillsWheelDetail" aria-live="polite"></div>
         </div>
       </section>
 
       <section id="projects" class="section container reveal">
-        <h2>Travaux</h2>
-        <p class="section-intro">
+        <h2 data-i18n="work_h2">Travaux</h2>
+        <p class="section-intro" data-i18n="work_intro">
           Clique un rabat : le dossier s’ouvre dans le tiroir, avec la capture et tout le détail.
         </p>
         <div class="work-cabinet">
-          <div class="work-cabinet__tabs" role="tablist" aria-label="Dossiers de travaux">
+          <div class="work-cabinet__tabs" role="tablist" data-i18n-aria="work_tabs" aria-label="Dossiers de travaux">
             <button type="button" class="work-cabinet__tab" role="tab" id="work-tab-lk" aria-selected="true" aria-controls="work-panel-lk" tabindex="0">
               <span class="work-cabinet__kicker">Web</span>
               <span class="work-cabinet__name">LK Studio</span>
-              <span class="work-cabinet__blurb">Salon : services, galerie, réservation.</span>
+              <span class="work-cabinet__blurb" data-i18n="blurb_lk">Salon : services, galerie, réservation.</span>
             </button>
             <button type="button" class="work-cabinet__tab" role="tab" id="work-tab-angela" aria-selected="false" aria-controls="work-panel-angela" tabindex="-1">
               <span class="work-cabinet__kicker">Web</span>
               <span class="work-cabinet__name">Angela Volcimus Louis</span>
-              <span class="work-cabinet__blurb">Artiste : musique, dates, galerie.</span>
+              <span class="work-cabinet__blurb" data-i18n="blurb_angela">Artiste : musique, dates, galerie.</span>
             </button>
             <button type="button" class="work-cabinet__tab" role="tab" id="work-tab-task" aria-selected="false" aria-controls="work-panel-task" tabindex="-1">
               <span class="work-cabinet__kicker">Windows</span>
               <span class="work-cabinet__name">Task Engine</span>
-              <span class="work-cabinet__blurb">Matrices et équations, export Word.</span>
+              <span class="work-cabinet__blurb" data-i18n="blurb_task">Matrices et équations, export Word.</span>
             </button>
             <button type="button" class="work-cabinet__tab" role="tab" id="work-tab-multi" aria-selected="false" aria-controls="work-panel-multi" tabindex="-1">
               <span class="work-cabinet__kicker">Mobile</span>
               <span class="work-cabinet__name">MultiTask</span>
-              <span class="work-cabinet__blurb">Examens PDF / Word, selon le public.</span>
+              <span class="work-cabinet__blurb" data-i18n="blurb_multi">Examens PDF / Word, selon le public.</span>
             </button>
             <button type="button" class="work-cabinet__tab" role="tab" id="work-tab-ppt" aria-selected="false" aria-controls="work-panel-ppt" tabindex="-1">
               <span class="work-cabinet__kicker">PowerPoint</span>
-              <span class="work-cabinet__name">Extrait TPE</span>
-              <span class="work-cabinet__blurb">Dix slides pour pitcher une offre.</span>
+              <span class="work-cabinet__name" data-i18n="ppt_name">Extrait TPE</span>
+              <span class="work-cabinet__blurb" data-i18n="blurb_ppt">Dix slides pour pitcher une offre.</span>
             </button>
           </div>
           <div class="work-cabinet__drawer">
             <article class="work-panel" id="work-panel-lk" role="tabpanel" aria-labelledby="work-tab-lk">
               <div class="work-panel__media">
-                <a href="assets/projects/web-lk.jpg?v=2" class="project-shot" aria-label="Agrandir la capture de LK Studio">
-                  <img src="assets/projects/web-lk.jpg?v=2" alt="Accueil du site LK Studio : salon sombre, titre Precision Style Confidence et boutons de réservation" width="1024" height="575" loading="lazy" decoding="async" />
+                <a href="assets/projects/web-lk.jpg?v=2" class="project-shot" data-i18n-aria="zoom_lk" aria-label="Agrandir la capture de LK Studio">
+                  <img src="assets/projects/web-lk.jpg?v=2" alt="Accueil du site LK Studio : salon sombre, titre Precision Style Confidence et boutons de réservation" data-i18n-alt="alt_lk" width="1024" height="575" loading="lazy" decoding="async" />
                 </a>
               </div>
               <div class="work-panel__copy">
-                <p class="project-kicker">Web · React / Vite · Salon &amp; barbershop</p>
+                <p class="project-kicker" data-i18n="kicker_lk">Web · React / Vite · Salon &amp; barbershop</p>
                 <h3>LK Studio</h3>
-                <p>Site vitrine pour un salon : services, galerie, avis, et une réservation en quelques secondes — plus un accès WhatsApp.</p>
+                <p data-i18n="lk_p">Site vitrine pour un salon : services, galerie, avis, et une réservation en quelques secondes — plus un accès WhatsApp.</p>
                 <ul class="project-points">
-                  <li>Contexte : paraître crédible en ligne et prendre rendez-vous sans échange interminable</li>
-                  <li>Rôle : pages, formulaire de réservation, galerie, espace admin</li>
-                  <li>Résultat : un site prêt à envoyer, avec prise de créneau et contact direct</li>
+                  <li data-i18n="lk_li1">Contexte : paraître crédible en ligne et prendre rendez-vous sans échange interminable</li>
+                  <li data-i18n="lk_li2">Rôle : pages, formulaire de réservation, galerie, espace admin</li>
+                  <li data-i18n="lk_li3">Résultat : un site prêt à envoyer, avec prise de créneau et contact direct</li>
                 </ul>
                 <div class="project-actions">
-                  <a href="https://marco-ops-code.github.io/studio-lk/" target="_blank" rel="noopener noreferrer">Voir le site</a>
-                  <a href="#contact">Un site vitrine similaire&nbsp;?</a>
-                  <a class="project-repo" id="repoStudioLk" href="https://github.com/Marco-ops-code/studio-lk" target="_blank" rel="noopener noreferrer">Code GitHub</a>
+                  <a href="https://marco-ops-code.github.io/studio-lk/" target="_blank" rel="noopener noreferrer" data-i18n="see_site">Voir le site</a>
+                  <a href="#contact" data-i18n="similar_vitrine">Un site vitrine similaire&nbsp;?</a>
+                  <a class="project-repo" id="repoStudioLk" href="https://github.com/Marco-ops-code/studio-lk" target="_blank" rel="noopener noreferrer" data-i18n="github_code">Code GitHub</a>
                 </div>
               </div>
             </article>
             <article class="work-panel" id="work-panel-angela" role="tabpanel" aria-labelledby="work-tab-angela" hidden>
               <div class="work-panel__media">
-                <a href="assets/projects/web-angela.jpg" class="project-shot" aria-label="Agrandir la capture du site Angela Volcimus Louis">
-                  <img src="assets/projects/web-angela.jpg" alt="Accueil du site d’Angela Volcimus Louis, artiste vocale : R&amp;B, classique, gospel" width="1024" height="566" loading="lazy" decoding="async" />
+                <a href="assets/projects/web-angela.jpg" class="project-shot" data-i18n-aria="zoom_angela" aria-label="Agrandir la capture du site Angela Volcimus Louis">
+                  <img src="assets/projects/web-angela.jpg" alt="Accueil du site d’Angela Volcimus Louis, artiste vocale : R&amp;B, classique, gospel" data-i18n-alt="alt_angela" width="1024" height="566" loading="lazy" decoding="async" />
                 </a>
               </div>
               <div class="work-panel__copy">
-                <p class="project-kicker">Web · PHP · Artiste vocale</p>
+                <p class="project-kicker" data-i18n="kicker_angela">Web · PHP · Artiste vocale</p>
                 <h3>Angela Volcimus Louis</h3>
-                <p>Site d’artiste : univers, musique, dates et galerie — pour écouter, suivre la scène et réserver, sans chercher partout.</p>
+                <p data-i18n="angela_p">Site d’artiste : univers, musique, dates et galerie — pour écouter, suivre la scène et réserver, sans chercher partout.</p>
                 <ul class="project-points">
-                  <li>Contexte : une présence en ligne à la hauteur de la voix, R&amp;B, classique et gospel</li>
-                  <li>Rôle : accueil, musique, concerts, galerie, contact et espace admin</li>
-                  <li>Résultat : un site sombre, lisible, avec écoute et prochaines dates dès l’arrivée</li>
+                  <li data-i18n="angela_li1">Contexte : une présence en ligne à la hauteur de la voix, R&amp;B, classique et gospel</li>
+                  <li data-i18n="angela_li2">Rôle : accueil, musique, concerts, galerie, contact et espace admin</li>
+                  <li data-i18n="angela_li3">Résultat : un site sombre, lisible, avec écoute et prochaines dates dès l’arrivée</li>
                 </ul>
                 <div class="project-actions">
-                  <a href="https://marco-ops-code.github.io/PortfolioMAngie/" target="_blank" rel="noopener noreferrer">Voir le site</a>
-                  <a href="#contact">Un site d’artiste similaire&nbsp;?</a>
-                  <a class="project-repo" id="repoAngela" href="https://github.com/Marco-ops-code/PortfolioMAngie" target="_blank" rel="noopener noreferrer">Code GitHub</a>
+                  <a href="https://marco-ops-code.github.io/PortfolioMAngie/" target="_blank" rel="noopener noreferrer" data-i18n="see_site">Voir le site</a>
+                  <a href="#contact" data-i18n="similar_artist">Un site d’artiste similaire&nbsp;?</a>
+                  <a class="project-repo" id="repoAngela" href="https://github.com/Marco-ops-code/PortfolioMAngie" target="_blank" rel="noopener noreferrer" data-i18n="github_code">Code GitHub</a>
                 </div>
               </div>
             </article>
             <article class="work-panel" id="work-panel-task" role="tabpanel" aria-labelledby="work-tab-task" hidden>
               <div class="work-panel__media">
-                <a href="assets/projects/windows.jpg" class="project-shot" aria-label="Agrandir la capture de Task Engine">
-                  <img src="assets/projects/windows.jpg" alt="Écran d’accueil de Task Engine, générateur de matrices et d’équations linéaires" width="1024" height="575" loading="lazy" decoding="async" />
+                <a href="assets/projects/windows.jpg" class="project-shot" data-i18n-aria="zoom_task" aria-label="Agrandir la capture de Task Engine">
+                  <img src="assets/projects/windows.jpg" alt="Écran d’accueil de Task Engine, générateur de matrices et d’équations linéaires" data-i18n-alt="alt_task" width="1024" height="575" loading="lazy" decoding="async" />
                 </a>
               </div>
               <div class="work-panel__copy">
-                <p class="project-kicker">Windows · C# / .NET</p>
+                <p class="project-kicker" data-i18n="kicker_task">Windows · C# / .NET</p>
                 <h3>Task Engine</h3>
-                <p>Générateur de matrices et d’équations linéaires : l’enseignant choisit le type de devoir, règle les paramètres, puis exporte des énoncés individuels en fichier Word (.docx).</p>
+                <p data-i18n="task_p">Générateur de matrices et d’équations linéaires : l’enseignant choisit le type de devoir, règle les paramètres, puis exporte des énoncés individuels en fichier Word (.docx).</p>
                 <ul class="project-points">
-                  <li>Contexte : produire des exercices de théorie des matrices et de systèmes linéaires, sans tout recréer à la main</li>
-                  <li>Rôle : interface Windows, génération des tâches, export document, thème de l’application</li>
-                  <li>Résultat : un assistant en trois étapes (accueil, choix, document) prêt à l’emploi</li>
+                  <li data-i18n="task_li1">Contexte : produire des exercices de théorie des matrices et de systèmes linéaires, sans tout recréer à la main</li>
+                  <li data-i18n="task_li2">Rôle : interface Windows, génération des tâches, export document, thème de l’application</li>
+                  <li data-i18n="task_li3">Résultat : un assistant en trois étapes (accueil, choix, document) prêt à l’emploi</li>
                 </ul>
                 <div class="project-actions">
-                  <a href="#contact">Un outil métier similaire&nbsp;?</a>
-                  <a class="project-repo" id="repoTaskEngine" href="https://github.com/Marco-ops-code/TaskGenerator" target="_blank" rel="noopener noreferrer">Code GitHub</a>
+                  <a href="#contact" data-i18n="similar_tool">Un outil métier similaire&nbsp;?</a>
+                  <a class="project-repo" id="repoTaskEngine" href="https://github.com/Marco-ops-code/TaskGenerator" target="_blank" rel="noopener noreferrer" data-i18n="github_code">Code GitHub</a>
                 </div>
               </div>
             </article>
             <article class="work-panel" id="work-panel-multi" role="tabpanel" aria-labelledby="work-tab-multi" hidden>
               <div class="work-panel__media">
                 <div class="project-phones">
-                  <a href="assets/projects/mobile-accueil.jpg" class="project-shot project-shot--phone" aria-label="Agrandir l’écran d’accueil de MultiTask">
-                    <img src="assets/projects/mobile-accueil.jpg" alt="Accueil MultiTask : objectif du jour et bouton Générer" width="488" height="1024" loading="lazy" decoding="async" />
+                  <a href="assets/projects/mobile-accueil.jpg" class="project-shot project-shot--phone" data-i18n-aria="zoom_multi_home" aria-label="Agrandir l’écran d’accueil de MultiTask">
+                    <img src="assets/projects/mobile-accueil.jpg" alt="Accueil MultiTask : objectif du jour et bouton Générer" data-i18n-alt="alt_multi_home" width="488" height="1024" loading="lazy" decoding="async" />
                   </a>
-                  <a href="assets/projects/mobile-generer.jpg" class="project-shot project-shot--phone" aria-label="Agrandir l’écran de génération de MultiTask">
-                    <img src="assets/projects/mobile-generer.jpg" alt="Générer : choix des matières pour un examen personnalisé" width="490" height="1024" loading="lazy" decoding="async" />
+                  <a href="assets/projects/mobile-generer.jpg" class="project-shot project-shot--phone" data-i18n-aria="zoom_multi_gen" aria-label="Agrandir l’écran de génération de MultiTask">
+                    <img src="assets/projects/mobile-generer.jpg" alt="Générer : choix des matières pour un examen personnalisé" data-i18n-alt="alt_multi_gen" width="490" height="1024" loading="lazy" decoding="async" />
                   </a>
-                  <a href="assets/projects/mobile-profil.jpg" class="project-shot project-shot--phone" aria-label="Agrandir l’écran profil de MultiTask">
-                    <img src="assets/projects/mobile-profil.jpg" alt="Profil élève : niveau, XP et statistiques de sessions" width="488" height="1024" loading="lazy" decoding="async" />
+                  <a href="assets/projects/mobile-profil.jpg" class="project-shot project-shot--phone" data-i18n-aria="zoom_multi_profile" aria-label="Agrandir l’écran profil de MultiTask">
+                    <img src="assets/projects/mobile-profil.jpg" alt="Profil élève : niveau, XP et statistiques de sessions" data-i18n-alt="alt_multi_profile" width="488" height="1024" loading="lazy" decoding="async" />
                   </a>
                 </div>
               </div>
               <div class="work-panel__copy">
-                <p class="project-kicker">Mobile · C# / .NET 10 · Élèves, étudiants, professeurs</p>
+                <p class="project-kicker" data-i18n="kicker_multi">Mobile · C# / .NET 10 · Élèves, étudiants, professeurs</p>
                 <h3>MultiTask</h3>
-                <p>Génère différents types d’examens en PDF et Word, selon le besoin : entraînement élève, session étudiant, ou sujet préparé par un professeur.</p>
+                <p data-i18n="multi_p">Génère différents types d’examens en PDF et Word, selon le besoin : entraînement élève, session étudiant, ou sujet préparé par un professeur.</p>
                 <ul class="project-points">
-                  <li>Contexte : s’entraîner ou produire un sujet sans tout composer à la main</li>
-                  <li>Rôle : parcours mobile, objectif du jour, génération d’examen personnalisé, export PDF / Word</li>
-                  <li>Résultat : un tableau de bord clair et un bouton « Générer » pour lancer une épreuve adaptée</li>
+                  <li data-i18n="multi_li1">Contexte : s’entraîner ou produire un sujet sans tout composer à la main</li>
+                  <li data-i18n="multi_li2">Rôle : parcours mobile, objectif du jour, génération d’examen personnalisé, export PDF / Word</li>
+                  <li data-i18n="multi_li3">Résultat : un tableau de bord clair et un bouton « Générer » pour lancer une épreuve adaptée</li>
                 </ul>
                 <div class="project-actions">
-                  <a href="#contact">Un outil d’apprentissage similaire&nbsp;?</a>
-                  <a class="project-repo" id="repoMultiTask" href="https://github.com/Marco-ops-code/GeneratorMultiTask" target="_blank" rel="noopener noreferrer">Code GitHub</a>
+                  <a href="#contact" data-i18n="similar_learn">Un outil d’apprentissage similaire&nbsp;?</a>
+                  <a class="project-repo" id="repoMultiTask" href="https://github.com/Marco-ops-code/GeneratorMultiTask" target="_blank" rel="noopener noreferrer" data-i18n="github_code">Code GitHub</a>
                 </div>
               </div>
             </article>
             <article class="work-panel" id="work-panel-ppt" role="tabpanel" aria-labelledby="work-tab-ppt" hidden>
               <div class="work-panel__media">
-                <a href="slides/" class="project-shot project-shot--deck" aria-label="Ouvrir l’extrait PowerPoint">
+                <a href="slides/" class="project-shot project-shot--deck" data-i18n-aria="open_ppt" aria-label="Ouvrir l’extrait PowerPoint">
                   <span class="deck-preview">
                     <span class="deck-preview__kicker">PowerPoint</span>
-                    <span class="deck-preview__title">Être crédible dès la première visite</span>
-                    <span class="deck-preview__meta">10 slides · extrait livrable</span>
+                    <span class="deck-preview__title" data-i18n="deck_title">Être crédible dès la première visite</span>
+                    <span class="deck-preview__meta" data-i18n="deck_meta">10 slides · extrait livrable</span>
                   </span>
                 </a>
               </div>
               <div class="work-panel__copy">
-                <p class="project-kicker">Présentation · PowerPoint</p>
-                <h3>Extrait TPE</h3>
-                <p>Dix slides pour pitcher une offre : public, constat, formats, déroulement, livrable, prochain pas. Le même niveau d’exigence que pour un site.</p>
+                <p class="project-kicker" data-i18n="kicker_ppt">Présentation · PowerPoint</p>
+                <h3 data-i18n="ppt_name">Extrait TPE</h3>
+                <p data-i18n="ppt_p">Dix slides pour pitcher une offre : public, constat, formats, déroulement, livrable, prochain pas. Le même niveau d’exigence que pour un site.</p>
                 <ul class="project-points">
-                  <li>Contexte : un indépendant qui doit convaincre sans s’expliquer</li>
-                  <li>Rôle : structure, hiérarchie, ton, rythme de lecture</li>
-                  <li>Résultat : un extrait ouvrable en ligne, prêt à servir de base au fichier PowerPoint</li>
+                  <li data-i18n="ppt_li1">Contexte : un indépendant qui doit convaincre sans s’expliquer</li>
+                  <li data-i18n="ppt_li2">Rôle : structure, hiérarchie, ton, rythme de lecture</li>
+                  <li data-i18n="ppt_li3">Résultat : un extrait ouvrable en ligne, prêt à servir de base au fichier PowerPoint</li>
                 </ul>
                 <div class="project-actions">
-                  <a href="slides/">Voir les slides</a>
-                  <a href="#contact">Une présentation similaire&nbsp;?</a>
+                  <a href="slides/" data-i18n="see_slides">Voir les slides</a>
+                  <a href="#contact" data-i18n="similar_ppt">Une présentation similaire&nbsp;?</a>
                 </div>
               </div>
             </article>
@@ -618,8 +627,8 @@
       </section>
 
       <section id="process" class="section container reveal">
-        <h2><span class="process-c">C</span>omment on travaille&nbsp;?</h2>
-        <p class="section-intro">
+        <h2 data-i18n="process_title" data-i18n-html><span class="process-c">C</span>omment on travaille&nbsp;?</h2>
+        <p class="section-intro" data-i18n="process_intro">
           Quatre étapes, un interlocuteur, un devis sous 48&nbsp;h après le brief.
         </p>
         <div class="work-steps-stage">
@@ -628,20 +637,20 @@
           </div>
           <ol class="work-steps">
           <li>
-            <strong>Brief</strong>
-            <span>30 minutes pour cadrer l’objectif, le public et la contrainte.</span>
+            <strong data-i18n="step_brief">Brief</strong>
+            <span data-i18n="step_brief_p">30 minutes pour cadrer l’objectif, le public et la contrainte.</span>
           </li>
           <li>
-            <strong>Proposition</strong>
-            <span>Périmètre, délais et devis — tu valides avant que j’écrive une ligne.</span>
+            <strong data-i18n="step_prop">Proposition</strong>
+            <span data-i18n="step_prop_p">Périmètre, délais et devis — tu valides avant que j’écrive une ligne.</span>
           </li>
           <li>
-            <strong>Conception &amp; build</strong>
-            <span>Maquettes, pages, formulaires : tu vois avancer, tu corriges tôt.</span>
+            <strong data-i18n="step_build" data-i18n-html>Conception &amp; build</strong>
+            <span data-i18n="step_build_p">Maquettes, pages, formulaires : tu vois avancer, tu corriges tôt.</span>
           </li>
           <li>
-            <strong>Livraison</strong>
-            <span>Mise en ligne, passation, et un point pour que tu saches le faire vivre.</span>
+            <strong data-i18n="step_ship">Livraison</strong>
+            <span data-i18n="step_ship_p">Mise en ligne, passation, et un point pour que tu saches le faire vivre.</span>
           </li>
         </ol>
         </div>
@@ -701,60 +710,62 @@
       </section>
 
       <section id="pricing" class="section container reveal pricing-section">
-        <h2>Tarifs</h2>
+        <h2 data-i18n="pricing_h2">Tarifs</h2>
         <p class="section-intro pricing-intro">
-          Quatre formats, devis sous 48&nbsp;h. Consultation de 30 minutes offerte.
-          <strong class="pricing-trust">2 missions ouvertes ce trimestre.</strong>
+          <span data-i18n="pricing_intro">Quatre formats, devis sous 48&nbsp;h. Consultation de 30 minutes offerte.</span>
+          <strong class="pricing-trust" data-i18n="pricing_trust">2 missions ouvertes ce trimestre.</strong>
         </p>
         <div class="pricing-split">
           <article class="pricing-offer">
-            <p class="pricing-kicker">À partir de — sur devis</p>
-            <h3 class="pricing-panel__title">Site vitrine</h3>
-            <p>Plusieurs pages pour présenter l’activité et inspirer confiance.</p>
+            <p class="pricing-kicker" data-i18n="pricing_from">À partir de — sur devis</p>
+            <h3 class="pricing-panel__title" data-i18n="offer_vitrine_h">Site vitrine</h3>
+            <p data-i18n="price_vitrine_p">Plusieurs pages pour présenter l’activité et inspirer confiance.</p>
             <ul class="pricing-services">
-              <li>Accueil, offre, à propos, contact</li>
-              <li>Parcours clair, performances et bases SEO</li>
-              <li>Formulaire, délais et passation</li>
+              <li data-i18n="price_vitrine_1">Accueil, offre, à propos, contact</li>
+              <li data-i18n="price_vitrine_2">Parcours clair, performances et bases SEO</li>
+              <li data-i18n="price_vitrine_3">Formulaire, délais et passation</li>
             </ul>
           </article>
           <article class="pricing-offer">
-            <p class="pricing-kicker">À partir de — sur devis</p>
-            <h3 class="pricing-panel__title">Landing page</h3>
-            <p>Une page unique pour convertir : message, preuve, appel à l’action.</p>
+            <p class="pricing-kicker" data-i18n="pricing_from">À partir de — sur devis</p>
+            <h3 class="pricing-panel__title" data-i18n="offer_landing_h">Landing page</h3>
+            <p data-i18n="price_landing_p">Une page unique pour convertir : message, preuve, appel à l’action.</p>
             <ul class="pricing-services">
-              <li>Structure, textes d’interface et version mobile</li>
-              <li>Formulaire ou bouton vers WhatsApp / e-mail</li>
-              <li>Mise en ligne et recette ensemble</li>
+              <li data-i18n="price_landing_1">Structure, textes d’interface et version mobile</li>
+              <li data-i18n="price_landing_2">Formulaire ou bouton vers WhatsApp / e-mail</li>
+              <li data-i18n="price_landing_3">Mise en ligne et recette ensemble</li>
             </ul>
           </article>
           <article class="pricing-offer">
-            <p class="pricing-kicker">À partir de — sur devis</p>
-            <h3 class="pricing-panel__title">Application mobile</h3>
-            <p>Un outil sur téléphone, en C# / .NET, pensé pour un usage réel.</p>
+            <p class="pricing-kicker" data-i18n="pricing_from">À partir de — sur devis</p>
+            <h3 class="pricing-panel__title" data-i18n="offer_app_h">Application mobile</h3>
+            <p data-i18n="price_app_p">Un outil sur téléphone, en C# / .NET, pensé pour un usage réel.</p>
             <ul class="pricing-services">
-              <li>Parcours mobile : accueil, génération, profil</li>
-              <li>Export PDF / Word et logique métier</li>
-              <li>Recette ensemble et passation</li>
+              <li data-i18n="price_app_1">Parcours mobile : accueil, génération, profil</li>
+              <li data-i18n="price_app_2">Export PDF / Word et logique métier</li>
+              <li data-i18n="price_app_3">Recette ensemble et passation</li>
             </ul>
           </article>
           <article class="pricing-offer">
-            <p class="pricing-kicker">À partir de — sur devis</p>
-            <h3 class="pricing-panel__title">Présentation PowerPoint</h3>
-            <p>Un support à pitcher : pitch, cours ou rapport, prêt à présenter.</p>
+            <p class="pricing-kicker" data-i18n="pricing_from">À partir de — sur devis</p>
+            <h3 class="pricing-panel__title" data-i18n="offer_ppt_h">Présentation PowerPoint</h3>
+            <p data-i18n="price_ppt_p">Un support à pitcher : pitch, cours ou rapport, prêt à présenter.</p>
             <ul class="pricing-services">
-              <li>Structure problème → offre → preuve → décision</li>
-              <li>Fichier PowerPoint modifiable + version PDF</li>
-              <li>Extrait en ligne pour voir le niveau</li>
+              <li data-i18n="price_ppt_1">Structure problème → offre → preuve → décision</li>
+              <li data-i18n="price_ppt_2">Fichier PowerPoint modifiable + version PDF</li>
+              <li data-i18n="price_ppt_3">Extrait en ligne pour voir le niveau</li>
             </ul>
-            <p><a href="slides/">Voir l’extrait</a></p>
+            <p><a href="slides/" data-i18n="see_excerpt">Voir l’extrait</a></p>
           </article>
         </div>
         <p class="pricing-cta">
           <a
             href="https://wa.me/79965064486?text=Bonjour%20Marc-Onel%2C%20je%20voudrais%20r%C3%A9server%2030%20minutes%20pour%20parler%20d%E2%80%99un%20projet."
+            data-wa-book
             class="btn"
             target="_blank"
             rel="noopener noreferrer"
+            data-i18n="dock_book"
           >Réserver 30 min</a>
         </p>
       </section>
@@ -762,8 +773,8 @@
       <section id="contact" class="section container reveal contact-section">
         <header class="contact-hero">
           <h2 class="contact-title">
-            <span class="contact-title-primary">Réserver 30 minutes</span>
-            <span class="contact-title-secondary"
+            <span class="contact-title-primary" data-i18n="contact_h2">Réserver 30 minutes</span>
+            <span class="contact-title-secondary" data-i18n="contact_sub" data-i18n-html
               ><strong class="contact-wa">WhatsApp</strong> pour le créneau. Ou un message ici — réponse sous 24&nbsp;h, en français ou en anglais. Devis sous 48&nbsp;h après le brief.</span
             >
           </h2>
@@ -772,13 +783,14 @@
           <a
             class="contact-link-card contact-link-card--whatsapp"
             id="book"
+            data-wa-book
             href="https://wa.me/79965064486?text=Bonjour%20Marc-Onel%2C%20je%20voudrais%20r%C3%A9server%2030%20minutes%20pour%20parler%20d%E2%80%99un%20projet."
             target="_blank"
             rel="noopener noreferrer"
           >
             <span class="contact-link-card__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 16 16" width="18" height="18" focusable="false"><path fill="currentColor" d="M13.6 2.4A7.85 7.85 0 0 0 8 .1 7.9 7.9 0 0 0 .1 8c0 1.4.36 2.76 1.05 3.96L0 16l4.15-1.09A7.9 7.9 0 0 0 8 15.9 7.9 7.9 0 0 0 15.9 8 7.85 7.85 0 0 0 13.6 2.4M8 14.55a6.54 6.54 0 0 1-3.34-.91l-.24-.14-2.46.64.66-2.4-.16-.25A6.54 6.54 0 0 1 1.45 8 6.55 6.55 0 0 1 8 1.45 6.55 6.55 0 0 1 14.55 8 6.55 6.55 0 0 1 8 14.55m3.59-4.9c-.2-.1-1.17-.58-1.35-.64s-.31-.1-.44.1-.51.64-.62.77-.23.15-.43.05a5.3 5.3 0 0 1-1.56-.96 5.84 5.84 0 0 1-1.08-1.34c-.11-.2 0-.3.09-.4s.2-.23.3-.34.13-.2.2-.33a.37.37 0 0 0 0-.35c0-.1-.44-1.07-.61-1.46s-.32-.33-.44-.34h-.38a.73.73 0 0 0-.53.25 2.22 2.22 0 0 0-.7 1.65 3.86 3.86 0 0 0 .8 2.05 8.85 8.85 0 0 0 3.4 3 12.3 12.3 0 0 0 1.22.45 2.94 2.94 0 0 0 1.35.08 2.2 2.2 0 0 0 1.45-1.02 1.8 1.8 0 0 0 .12-1.02c-.05-.08-.18-.13-.38-.23"/></svg></span>
             <span class="contact-link-card__label">WhatsApp</span>
-            <span class="contact-link-card__value">Réserver 30 min</span>
+            <span class="contact-link-card__value" data-i18n="dock_book">Réserver 30 min</span>
           </a>
           <a class="contact-link-card contact-link-card--mail" href="mailto:marconelvolcimus079@gmail.com">
             <span class="contact-link-card__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 16 16" width="18" height="18" focusable="false"><path fill="currentColor" d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.026A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.025L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg></span>
@@ -787,7 +799,7 @@
           </a>
           <a class="contact-link-card contact-link-card--phone" href="tel:+79965064486">
             <span class="contact-link-card__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 16 16" width="18" height="18" focusable="false"><path fill="currentColor" d="M1.885.511a1.745 1.745 0 0 1 2.612.163L6.29 4.26c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l3.586 1.794c.84.42 1.068 1.45.548 2.179a17.4 17.4 0 0 1-3.257 3.489c-1.47 1.185-3.225.715-4.873-.226-1.544-.88-2.88-2.12-4.27-3.51S2.312 8.73 1.432 7.186c-.94-1.648-1.41-3.402-.226-4.873A17.4 17.4 0 0 1 1.885.51z"/></svg></span>
-            <span class="contact-link-card__label">Téléphone</span>
+            <span class="contact-link-card__label" data-i18n="phone_label">Téléphone</span>
             <span class="contact-link-card__value">+7996 506 44 86</span>
           </a>
         </div>
@@ -799,12 +811,12 @@
           novalidate
         >
           <p class="contact-form-intro">
-            <span class="contact-form-intro__lead">Préfères écrire ?</span>
-            <span class="contact-form-intro__note">Envoie le brief ici — même délai : réponse sous 24&nbsp;h, en français ou en anglais.</span>
+            <span class="contact-form-intro__lead" data-i18n="form_lead">Préfères écrire ?</span>
+            <span class="contact-form-intro__note" data-i18n="form_note">Envoie le brief ici — même délai : réponse sous 24&nbsp;h, en français ou en anglais.</span>
           </p>
           <div class="contact-form-grid">
             <div class="form-field">
-              <label for="contactName">Nom</label>
+              <label for="contactName" data-i18n="label_name">Nom</label>
               <input type="text" id="contactName" name="name" autocomplete="name" required />
             </div>
             <div class="form-field">
@@ -812,32 +824,32 @@
               <input type="email" id="contactEmail" name="email" autocomplete="email" required />
             </div>
             <div class="form-field">
-              <label for="contactProject">Type de projet</label>
+              <label for="contactProject" data-i18n="label_project">Type de projet</label>
               <select id="contactProject" name="project" required>
-                <option value="" selected disabled>Choisir un format</option>
-                <option value="Site vitrine">Site vitrine</option>
-                <option value="Landing page">Landing page</option>
-                <option value="Application mobile">Application mobile</option>
-                <option value="Présentation PowerPoint">Présentation PowerPoint</option>
-                <option value="Autre">Autre / à préciser</option>
+                <option value="" selected disabled data-i18n="opt_choose">Choisir un format</option>
+                <option value="Site vitrine" data-i18n="opt_vitrine">Site vitrine</option>
+                <option value="Landing page" data-i18n="opt_landing">Landing page</option>
+                <option value="Application mobile" data-i18n="opt_app">Application mobile</option>
+                <option value="Présentation PowerPoint" data-i18n="opt_ppt">Présentation PowerPoint</option>
+                <option value="Autre" data-i18n="opt_other">Autre / à préciser</option>
               </select>
             </div>
             <div class="form-field">
-              <label for="contactSubject">Sujet</label>
+              <label for="contactSubject" data-i18n="label_subject">Sujet</label>
               <input type="text" id="contactSubject" name="subject" required />
             </div>
             <div class="form-field form-field--full">
-              <label for="contactMessage">Message</label>
+              <label for="contactMessage" data-i18n="label_message">Message</label>
               <textarea id="contactMessage" name="message" rows="5" required></textarea>
             </div>
           </div>
           <input type="hidden" name="_subject" id="contactFormSubject" value="Nouveau message portfolio" />
           <p class="form-honeypot" aria-hidden="true">
-            <label for="contactGotcha">Ne pas remplir</label>
+            <label for="contactGotcha" data-i18n="honeypot">Ne pas remplir</label>
             <input type="text" id="contactGotcha" name="_gotcha" tabindex="-1" autocomplete="off" />
           </p>
           <div class="contact-form-actions">
-            <button type="submit" class="btn" id="contactSubmit">Envoyer le message</button>
+            <button type="submit" class="btn" id="contactSubmit" data-i18n="form_send">Envoyer le message</button>
             <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
           </div>
         </form>
@@ -853,18 +865,19 @@
           <span class="footer-sep" aria-hidden="true">·</span>
           <a href="https://wa.me/79965064486" target="_blank" rel="noopener noreferrer">WhatsApp</a>
           <span class="footer-sep" aria-hidden="true">·</span>
-          <a href="mentions.html">Mentions légales</a>
+          <a href="mentions.html" data-i18n="legal">Mentions légales</a>
         </p>
       </div>
     </footer>
 
-    <dialog id="shotLightbox" class="shot-lightbox" aria-label="Agrandissement de la capture">
+    <dialog id="shotLightbox" class="shot-lightbox" data-i18n-aria="lightbox" aria-label="Agrandissement de la capture">
       <form method="dialog">
-        <button type="submit" class="shot-lightbox__close" aria-label="Fermer">Fermer</button>
+        <button type="submit" class="shot-lightbox__close" data-i18n="close" data-i18n-aria="close" aria-label="Fermer">Fermer</button>
       </form>
       <img class="shot-lightbox__img" alt="" />
     </dialog>
 
-    <script src="script.js?v=20260813-s32" defer></script>
+    <script src="i18n.js?v=20260813-s1" defer></script>
+    <script src="script.js?v=20260813-s33" defer></script>
   </body>
 </html>
