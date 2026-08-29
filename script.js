@@ -578,6 +578,44 @@ function initNavMenus() {
   mobile.innerHTML = source.innerHTML;
 }
 
+function initPortraitGlint() {
+  const brand = document.querySelector("#home .hero-brand");
+  const glint = brand?.querySelector(".hero-brand__glint");
+  if (!brand || !glint) {
+    return;
+  }
+
+  const phone = window.matchMedia("(max-width: 760px)");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const update = (event) => {
+    if (!phone.matches || reduceMotion.matches) {
+      return;
+    }
+    const point = event.touches ? event.touches[0] : null;
+    if (!point) {
+      return;
+    }
+    const rect = brand.getBoundingClientRect();
+    const x = Math.min(Math.max(point.clientX - rect.left, 0), rect.width);
+    const y = Math.min(Math.max(point.clientY - rect.top, 0), rect.height);
+    glint.style.setProperty("--glint-x", `${(x / rect.width) * 100}%`);
+    glint.style.setProperty("--glint-y", `${(y / rect.height) * 100}%`);
+    const angle = Math.atan2(y - rect.height / 2, x - rect.width / 2) * (180 / Math.PI) + 90;
+    glint.style.setProperty("--glint-angle", `${angle}deg`);
+    brand.classList.add("is-gliding");
+  };
+
+  const end = () => {
+    brand.classList.remove("is-gliding");
+  };
+
+  brand.addEventListener("touchstart", update, { passive: true });
+  brand.addEventListener("touchmove", update, { passive: true });
+  brand.addEventListener("touchend", end);
+  brand.addEventListener("touchcancel", end);
+}
+
 function initHeaderScroll() {
   const header = document.getElementById("siteHeader");
   if (!header) {
@@ -736,6 +774,7 @@ initAnchorScroll();
 initHeaderScroll();
 initMobileNav();
 initLanguageSwitch();
+initPortraitGlint();
 initNavActiveSection();
 initProjectShots();
 initShotLightbox();

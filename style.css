@@ -3792,6 +3792,10 @@ html.js .reveal:not(.visible) {
   .hero-dock__pulse {
     animation: none;
   }
+
+  .hero-brand.is-gliding .hero-brand__glint {
+    opacity: 0;
+  }
 }
 
 @media (min-width: 1025px) {
@@ -4201,11 +4205,64 @@ html.js .reveal:not(.visible) {
     margin: 0 auto;
     justify-self: center;
     align-self: auto;
+    touch-action: none;
   }
 
   #home .hero-brand img {
     width: 100%;
     height: 100%;
+  }
+
+  .hero-brand__glint {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0;
+    --glint-x: 50%;
+    --glint-y: 38%;
+    --glint-angle: 0deg;
+    transition: opacity 0.38s ease;
+  }
+
+  .hero-brand.is-gliding .hero-brand__glint {
+    opacity: 1;
+    transition-duration: 0.08s;
+  }
+
+  .hero-brand__glint::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      130px circle at var(--glint-x) var(--glint-y),
+      rgba(255, 255, 255, 0.72) 0%,
+      rgba(219, 234, 254, 0.28) 22%,
+      transparent 58%
+    );
+    mix-blend-mode: soft-light;
+  }
+
+  .hero-brand__glint::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 3px;
+    background: conic-gradient(
+      from var(--glint-angle),
+      transparent 0 76%,
+      rgba(255, 255, 255, 0.2) 84%,
+      #ffffff 91%,
+      color-mix(in srgb, var(--c-blue) 70%, #ffffff) 96%,
+      transparent 100%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
   }
 
   .about-layout {
