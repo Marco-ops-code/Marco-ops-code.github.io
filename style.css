@@ -650,96 +650,6 @@ h1 {
   color: var(--muted);
 }
 
-.hero-actions {
-  display: none;
-}
-
-.hero-dock {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 16px 8px 8px;
-  transform: translate(-50%, 50%);
-  border-radius: 999px;
-  text-decoration: none;
-  color: #ffffff;
-  background: linear-gradient(165deg, #4ade80 0%, var(--wa) 46%, var(--wa-deep) 100%);
-  border: 1px solid color-mix(in srgb, var(--wa) 40%, #ffffff);
-  box-shadow:
-    0 14px 32px color-mix(in srgb, var(--wa-deep) 28%, transparent),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  transition: transform 0.28s ease, box-shadow 0.28s ease, filter 0.28s ease;
-}
-
-.hero-dock:hover {
-  transform: translate(-50%, calc(50% - 3px));
-  filter: brightness(1.04);
-  box-shadow:
-    0 18px 40px color-mix(in srgb, var(--wa) 36%, transparent),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45);
-}
-
-.hero-dock:focus-visible {
-  outline: 2px solid var(--wa);
-  outline-offset: 4px;
-}
-
-.hero-dock__icon {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  color: var(--wa-deep);
-  background: #ffffff;
-  box-shadow: 0 6px 14px color-mix(in srgb, var(--wa-deep) 22%, transparent);
-}
-
-.hero-dock__copy {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  min-width: 0;
-}
-
-.hero-dock__kicker {
-  font-size: 0.64rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.hero-dock__label {
-  font-weight: 700;
-  font-size: 0.98rem;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-}
-
-.hero-dock__pulse {
-  width: 8px;
-  height: 8px;
-  margin-left: 4px;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
-  animation: dockPulse 1.8s ease-out infinite;
-}
-
-html.theme-dark .hero-dock,
-body.dark .hero-dock {
-  border-color: color-mix(in srgb, var(--wa) 50%, rgba(255, 255, 255, 0.12));
-  box-shadow:
-    0 16px 36px rgba(0, 0, 0, 0.38),
-    0 0 0 1px color-mix(in srgb, var(--wa) 28%, transparent),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-}
-
 @property --edge-angle {
   syntax: "<angle>";
   inherits: false;
@@ -752,18 +662,6 @@ body.dark .hero-dock {
   }
 }
 
-@keyframes dockPulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-  }
-}
-
 .hero-wrap {
   --section-color: var(--c-blue);
   position: relative;
@@ -771,7 +669,6 @@ body.dark .hero-dock {
   display: flex;
   justify-content: center;
   isolation: isolate;
-  padding-bottom: 28px;
 }
 
 .hero-wrap::before,
@@ -3789,10 +3686,6 @@ html.js .reveal:not(.visible) {
     transform: none;
   }
 
-  .hero-dock__pulse {
-    animation: none;
-  }
-
   .hero-brand.is-gliding .hero-brand__glint {
     opacity: 0;
   }
@@ -4154,10 +4047,6 @@ html.js .reveal:not(.visible) {
     margin-inline: auto;
   }
 
-  .hero-wrap {
-    padding-bottom: 8px;
-  }
-
   .hero-wrap::before,
   .hero-wrap::after {
     opacity: 0.12;
@@ -4178,21 +4067,6 @@ html.js .reveal:not(.visible) {
       rgba(17, 17, 17, 0.78) 0%,
       rgba(17, 17, 17, 0.58) 100%
     );
-  }
-
-  .hero-dock {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    transform: none;
-    z-index: 4;
-    width: min(100%, 320px);
-    margin: 22px auto 0;
-    justify-content: center;
-  }
-
-  .hero-dock:hover {
-    transform: translateY(-3px);
   }
 
   .hero-brand,
