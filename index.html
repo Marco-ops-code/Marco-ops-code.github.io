@@ -58,7 +58,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=20260813-s61" />
+    <link rel="stylesheet" href="style.css?v=20260813-s62" />
   </head>
   <body data-page="home">
     <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
@@ -486,34 +486,57 @@
       <section id="projects" class="section container reveal">
         <h2 data-i18n="work_h2">Travaux</h2>
         <p class="section-intro" data-i18n="work_intro">
-          Clique un rabat : le dossier s’ouvre dans le tiroir, avec la capture et tout le détail.
+          Touche une capture : la fiche s’ouvre en dessous, avec le détail et les liens.
         </p>
         <div class="work-cabinet">
-          <div class="work-cabinet__tabs" role="tablist" data-i18n-aria="work_tabs" aria-label="Dossiers de travaux">
+          <div class="work-cabinet__tabs" role="tablist" data-i18n-aria="work_tabs" aria-label="Projets">
             <button type="button" class="work-cabinet__tab" role="tab" id="work-tab-lk" aria-selected="true" aria-controls="work-panel-lk" tabindex="0">
-              <span class="work-cabinet__kicker">Web</span>
-              <span class="work-cabinet__name">LK Studio</span>
-              <span class="work-cabinet__blurb" data-i18n="blurb_lk">Salon : services, galerie, réservation.</span>
+              <span class="work-cabinet__shot">
+                <img src="assets/projects/web-lk.jpg?v=2" alt="" width="320" height="180" loading="lazy" decoding="async" />
+              </span>
+              <span class="work-cabinet__meta">
+                <span class="work-cabinet__kicker">Web</span>
+                <span class="work-cabinet__name">LK Studio</span>
+              </span>
             </button>
             <button type="button" class="work-cabinet__tab" role="tab" id="work-tab-angela" aria-selected="false" aria-controls="work-panel-angela" tabindex="-1">
-              <span class="work-cabinet__kicker">Web</span>
-              <span class="work-cabinet__name">Angela Volcimus Louis</span>
-              <span class="work-cabinet__blurb" data-i18n="blurb_angela">Artiste : musique, dates, galerie.</span>
+              <span class="work-cabinet__shot">
+                <img src="assets/projects/web-angela.jpg" alt="" width="320" height="180" loading="lazy" decoding="async" />
+              </span>
+              <span class="work-cabinet__meta">
+                <span class="work-cabinet__kicker">Web</span>
+                <span class="work-cabinet__name">Angela Volcimus Louis</span>
+              </span>
             </button>
             <button type="button" class="work-cabinet__tab" role="tab" id="work-tab-task" aria-selected="false" aria-controls="work-panel-task" tabindex="-1">
-              <span class="work-cabinet__kicker">Windows</span>
-              <span class="work-cabinet__name">Task Engine</span>
-              <span class="work-cabinet__blurb" data-i18n="blurb_task">Matrices et équations, export Word.</span>
+              <span class="work-cabinet__shot">
+                <img src="assets/projects/windows.jpg" alt="" width="320" height="180" loading="lazy" decoding="async" />
+              </span>
+              <span class="work-cabinet__meta">
+                <span class="work-cabinet__kicker">Windows</span>
+                <span class="work-cabinet__name">Task Engine</span>
+              </span>
             </button>
             <button type="button" class="work-cabinet__tab" role="tab" id="work-tab-multi" aria-selected="false" aria-controls="work-panel-multi" tabindex="-1">
-              <span class="work-cabinet__kicker">Mobile</span>
-              <span class="work-cabinet__name">MultiTask</span>
-              <span class="work-cabinet__blurb" data-i18n="blurb_multi">Examens PDF / Word, selon le public.</span>
+              <span class="work-cabinet__shot work-cabinet__shot--phone">
+                <img src="assets/projects/mobile-accueil.jpg" alt="" width="180" height="380" loading="lazy" decoding="async" />
+              </span>
+              <span class="work-cabinet__meta">
+                <span class="work-cabinet__kicker">Mobile</span>
+                <span class="work-cabinet__name">MultiTask</span>
+              </span>
             </button>
             <button type="button" class="work-cabinet__tab" role="tab" id="work-tab-ppt" aria-selected="false" aria-controls="work-panel-ppt" tabindex="-1">
-              <span class="work-cabinet__kicker">PowerPoint</span>
-              <span class="work-cabinet__name" data-i18n="ppt_name">Extrait TPE</span>
-              <span class="work-cabinet__blurb" data-i18n="blurb_ppt">Dix slides pour pitcher une offre.</span>
+              <span class="work-cabinet__shot work-cabinet__shot--deck" aria-hidden="true">
+                <span class="work-cabinet__deck">
+                  <span class="work-cabinet__deck-kicker">PowerPoint</span>
+                  <span class="work-cabinet__deck-title">10 slides</span>
+                </span>
+              </span>
+              <span class="work-cabinet__meta">
+                <span class="work-cabinet__kicker">PowerPoint</span>
+                <span class="work-cabinet__name" data-i18n="ppt_name">Extrait TPE</span>
+              </span>
             </button>
           </div>
           <div class="work-cabinet__drawer">
@@ -891,7 +914,7 @@
       <img class="shot-lightbox__img" alt="" />
     </dialog>
 
-    <script src="i18n.js?v=20260813-s1" defer></script>
+    <script src="i18n.js?v=20260813-s2" defer></script>
     <script src="script.js?v=20260813-s34" defer></script>
   </body>
 </html>

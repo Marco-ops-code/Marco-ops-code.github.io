@@ -1179,118 +1179,130 @@ body.dark #home h1 {
 .work-cabinet__tabs {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 0;
+  gap: 12px;
   align-items: stretch;
-  padding: 0 10px;
-  isolation: isolate;
 }
 
 .work-cabinet__tab {
-  --folder-paper: #efe8d8;
   appearance: none;
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
+  align-items: stretch;
+  gap: 10px;
   min-width: 0;
-  margin: 0 0 0 -10px;
-  padding: 14px 14px 18px 16px;
+  margin: 0;
+  padding: 8px 8px 12px;
   text-align: left;
   cursor: pointer;
-  color: color-mix(in srgb, var(--text) 78%, #6b6254);
+  color: var(--text);
   font: inherit;
-  border: 1px solid color-mix(in srgb, var(--folder-paper) 55%, #b9a888);
-  border-bottom: 0;
-  border-radius: 14px 18px 0 0;
+  border: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 18%, rgba(255, 255, 255, 0.7));
+  border-radius: 18px;
   background:
-    radial-gradient(circle at 12px 9px, #c4b496 1.15px, transparent 1.35px),
-    radial-gradient(circle at 20px 9px, #c4b496 1.15px, transparent 1.35px),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 11px,
-      rgba(120, 96, 58, 0.035) 12px
-    ),
     linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--folder-paper) 88%, #ffffff) 0%,
-      var(--folder-paper) 42%,
-      color-mix(in srgb, var(--folder-paper) 82%, #cbb892) 100%
+      165deg,
+      color-mix(in srgb, var(--section-color, var(--c-indigo)) 8%, rgba(255, 255, 255, 0.7)) 0%,
+      rgba(255, 255, 255, 0.42) 100%
     );
-  box-shadow:
-    4px 0 0 -2px color-mix(in srgb, var(--folder-paper) 70%, #c4ad82),
-    8px 6px 0 -5px color-mix(in srgb, var(--folder-paper) 55%, #b89a6c),
-    inset 0 1px 0 rgba(255, 255, 255, 0.62),
-    inset 0 -10px 16px rgba(90, 70, 30, 0.06);
-  clip-path: polygon(12px 0, calc(100% - 18px) 0, 100% 16px, 100% 100%, 0 100%, 0 10px);
-  transform: translateY(14px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
   opacity: 0.72;
-  filter: saturate(0.82);
+  filter: saturate(0.86);
   transition:
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.28s ease,
     opacity 0.22s ease,
     filter 0.22s ease,
-    box-shadow 0.22s ease,
-    color 0.22s ease,
-    z-index 0s linear 0.01s;
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
 }
-
-.work-cabinet__tab:first-child {
-  margin-left: 0;
-}
-
-.work-cabinet__tab:nth-child(1) { --folder-paper: #f1e6c8; z-index: 1; }
-.work-cabinet__tab:nth-child(2) { --folder-paper: #e7dcc4; z-index: 2; }
-.work-cabinet__tab:nth-child(3) { --folder-paper: #ddd4e6; z-index: 3; }
-.work-cabinet__tab:nth-child(4) { --folder-paper: #d7e4dc; z-index: 4; }
-.work-cabinet__tab:nth-child(5) { --folder-paper: #ead6cc; z-index: 5; }
 
 .work-cabinet__tab:hover {
-  transform: translateY(8px);
-  opacity: 0.9;
-  filter: saturate(0.95);
+  opacity: 0.92;
+  filter: saturate(0.96);
+  transform: translateY(-3px);
 }
 
 .work-cabinet__tab[aria-selected="true"] {
-  z-index: 8;
   opacity: 1;
   filter: none;
-  color: var(--text);
-  transform: translateY(0);
-  border-color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 42%, #d7c39a);
-  background:
-    radial-gradient(circle at 12px 9px, color-mix(in srgb, var(--section-color, var(--c-indigo)) 55%, #c4b496) 1.15px, transparent 1.35px),
-    radial-gradient(circle at 20px 9px, color-mix(in srgb, var(--section-color, var(--c-indigo)) 55%, #c4b496) 1.15px, transparent 1.35px),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--section-color, var(--c-indigo)) 18%, #fff8ea) 0%,
-      rgba(255, 255, 255, 0.94) 58%,
-      rgba(255, 255, 255, 0.94) 100%
-    );
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 48%, #ffffff);
   box-shadow:
-    0 -10px 24px color-mix(in srgb, var(--section-color, var(--c-indigo)) 18%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--section-color, var(--c-indigo)) 16%, transparent),
-    inset 0 2px 0 color-mix(in srgb, var(--section-color, var(--c-indigo)) 70%, #ffffff),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-.work-cabinet__tab[aria-selected="true"]::after {
-  content: "";
-  position: absolute;
-  left: 1px;
-  right: 1px;
-  bottom: -3px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.94);
-  pointer-events: none;
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 14px 28px color-mix(in srgb, var(--section-color, var(--c-indigo)) 16%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--section-color, var(--c-indigo)) 22%, transparent);
 }
 
 .work-cabinet__tab:focus-visible {
   outline: 2px solid var(--section-color, var(--c-indigo));
   outline-offset: 3px;
-  z-index: 9;
+}
+
+.work-cabinet__shot {
+  display: block;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--section-color, var(--c-indigo)) 16%, #0f172a);
+}
+
+.work-cabinet__shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.work-cabinet__shot--phone {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--c-teal) 28%, transparent), transparent 62%),
+    color-mix(in srgb, var(--c-teal) 18%, #0f172a);
+}
+
+.work-cabinet__shot--phone img {
+  width: auto;
+  height: 100%;
+  aspect-ratio: 9 / 19;
+  border-radius: 9px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.28);
+}
+
+.work-cabinet__shot--deck {
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  background: linear-gradient(160deg, #1e3a8a, #1d4ed8 55%, #0f172a);
+}
+
+.work-cabinet__deck {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #ffffff;
+}
+
+.work-cabinet__deck-kicker {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #bfdbfe;
+}
+
+.work-cabinet__deck-title {
+  font-family: "Quantico", Arial, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.15;
+}
+
+.work-cabinet__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 0 4px;
 }
 
 .work-cabinet__kicker {
@@ -1298,7 +1310,7 @@ body.dark #home h1 {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 55%, #7a6a4e);
+  color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 62%, var(--muted));
 }
 
 .work-cabinet__tab[aria-selected="true"] .work-cabinet__kicker {
@@ -1317,27 +1329,13 @@ body.dark #home h1 {
   text-overflow: ellipsis;
 }
 
-.work-cabinet__blurb {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  line-clamp: 2;
-  overflow: hidden;
-  color: var(--muted);
-  font-size: 0.78rem;
-  line-height: 1.35;
-}
-
-.work-cabinet__tab[aria-selected="true"] .work-cabinet__blurb {
-  color: color-mix(in srgb, var(--text) 72%, var(--muted));
-}
-
 .work-cabinet__drawer {
   position: relative;
-  z-index: 7;
+  z-index: 1;
+  margin-top: 14px;
   padding: 22px;
   border: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 28%, rgba(255, 255, 255, 0.65));
-  border-radius: 0 18px 22px 22px;
+  border-radius: 22px;
   background:
     linear-gradient(
       165deg,
@@ -1376,42 +1374,23 @@ body.dark #home h1 {
 
 html.theme-dark .work-cabinet__tab,
 body.dark .work-cabinet__tab {
-  color: color-mix(in srgb, var(--text) 82%, #c4b496);
-  border-color: color-mix(in srgb, var(--folder-paper) 28%, rgba(255, 255, 255, 0.12));
+  border-color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 28%, rgba(255, 255, 255, 0.08));
   background:
-    radial-gradient(circle at 12px 9px, #8a7a5c 1.15px, transparent 1.35px),
-    radial-gradient(circle at 20px 9px, #8a7a5c 1.15px, transparent 1.35px),
     linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--folder-paper) 28%, #2a241c) 0%,
-      color-mix(in srgb, var(--folder-paper) 16%, #1b1712) 100%
+      165deg,
+      color-mix(in srgb, var(--section-color, var(--c-indigo)) 16%, rgba(17, 17, 17, 0.52)) 0%,
+      rgba(17, 17, 17, 0.42) 100%
     );
-  box-shadow:
-    4px 0 0 -2px color-mix(in srgb, var(--folder-paper) 22%, #1a1612),
-    8px 6px 0 -5px color-mix(in srgb, var(--folder-paper) 14%, #12100e),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 html.theme-dark .work-cabinet__tab[aria-selected="true"],
 body.dark .work-cabinet__tab[aria-selected="true"] {
-  color: var(--text);
   border-color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 48%, rgba(255, 255, 255, 0.16));
-  background:
-    radial-gradient(circle at 12px 9px, color-mix(in srgb, var(--section-color, var(--c-indigo)) 70%, #8a7a5c) 1.15px, transparent 1.35px),
-    radial-gradient(circle at 20px 9px, color-mix(in srgb, var(--section-color, var(--c-indigo)) 70%, #8a7a5c) 1.15px, transparent 1.35px),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--section-color, var(--c-indigo)) 32%, #2c2418) 0%,
-      rgba(17, 17, 17, 0.9) 100%
-    );
   box-shadow:
-    0 -10px 24px color-mix(in srgb, var(--section-color, var(--c-indigo)) 22%, transparent),
-    inset 0 2px 0 color-mix(in srgb, var(--section-color, var(--c-indigo)) 75%, #ffffff);
-}
-
-html.theme-dark .work-cabinet__tab[aria-selected="true"]::after,
-body.dark .work-cabinet__tab[aria-selected="true"]::after {
-  background: rgba(17, 17, 17, 0.9);
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 14px 28px rgba(0, 0, 0, 0.28),
+    0 0 0 1px color-mix(in srgb, var(--section-color, var(--c-indigo)) 28%, transparent);
 }
 
 html.theme-dark .work-cabinet__drawer,
@@ -3718,8 +3697,30 @@ html.js .reveal:not(.visible) {
 }
 
 @media (max-width: 1100px) {
-  .work-cabinet__blurb {
+  .work-cabinet__tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 4px 20px 8px 0;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 24px), transparent 100%);
+    mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 24px), transparent 100%);
+  }
+
+  .work-cabinet__tabs::-webkit-scrollbar {
     display: none;
+  }
+
+  .work-cabinet__tab {
+    flex: 0 0 min(210px, 42vw);
+    width: min(210px, 42vw);
+    scroll-snap-align: start;
   }
 
   .work-panel {
@@ -3961,8 +3962,8 @@ html.js .reveal:not(.visible) {
   .work-cabinet__tabs {
     display: flex;
     flex-wrap: nowrap;
-    align-items: flex-end;
-    gap: 0;
+    align-items: stretch;
+    gap: 10px;
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
@@ -3971,9 +3972,9 @@ html.js .reveal:not(.visible) {
     overflow-y: hidden;
     overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x proximity;
+    scroll-snap-type: x mandatory;
     touch-action: pan-x;
-    padding: 16px 28px 8px 2px;
+    padding: 4px 28px 8px 0;
     scrollbar-width: none;
     -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 28px), transparent 100%);
     mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 28px), transparent 100%);
@@ -3985,30 +3986,19 @@ html.js .reveal:not(.visible) {
 
   .work-cabinet__tab {
     box-sizing: border-box;
-    flex: 0 0 auto;
-    width: min(148px, 44vw);
-    min-width: 118px;
-    max-width: 148px;
-    margin-left: -16px;
-    padding: 11px 10px 13px 12px;
+    flex: 0 0 min(196px, 64vw);
+    width: min(196px, 64vw);
+    padding: 7px 7px 10px;
     scroll-snap-align: start;
-    clip-path: polygon(8px 0, calc(100% - 14px) 0, 100% 12px, 100% 100%, 0 100%, 0 8px);
   }
 
-  .work-cabinet__tab:first-child {
-    margin-left: 0;
+  .work-cabinet__tab:hover,
+  .work-cabinet__tab[aria-selected="true"] {
+    transform: none;
   }
 
   .work-cabinet__name {
     font-size: 0.82rem;
-  }
-
-  .work-cabinet__tab[aria-selected="true"]::after {
-    display: none;
-  }
-
-  .work-cabinet__blurb {
-    display: none;
   }
 
   .work-cabinet__drawer {
