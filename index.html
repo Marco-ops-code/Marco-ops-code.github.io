@@ -58,7 +58,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=20260813-s57" />
+    <link rel="stylesheet" href="style.css?v=20260813-s58" />
   </head>
   <body data-page="home">
     <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
@@ -237,20 +237,47 @@
           Quatre formats, un même niveau d’exigence : un produit qui te fait paraître plus
           sérieux dès la première visite.
         </p>
-        <div class="services-grid services-grid--offers">
-          <article class="service-offer">
+        <div class="offer-board">
+          <article class="service-offer offer-tile" data-offer="vitrine">
+            <span class="offer-tile__index" aria-hidden="true">01</span>
+            <div class="offer-spec offer-spec--site" aria-hidden="true">
+              <span class="offer-spec__chrome">
+                <i></i><i></i><i></i>
+              </span>
+              <span class="offer-spec__tabs"><i></i><i></i><i></i><i></i></span>
+              <span class="offer-spec__pages"><i></i><i></i><i></i><i></i></span>
+            </div>
             <h3 data-i18n="offer_vitrine_h">Site vitrine</h3>
             <p data-i18n="offer_vitrine_p">Pages claires, rapides et soignées pour présenter ton activité et inspirer confiance.</p>
           </article>
-          <article class="service-offer">
+          <article class="service-offer offer-tile" data-offer="landing">
+            <span class="offer-tile__index" aria-hidden="true">02</span>
+            <div class="offer-spec offer-spec--landing" aria-hidden="true">
+              <span class="offer-spec__sheet">
+                <i class="offer-spec__hero"></i>
+                <i></i><i></i><i></i>
+                <b></b>
+              </span>
+            </div>
             <h3 data-i18n="offer_landing_h">Landing page</h3>
             <p data-i18n="offer_landing_p">Une page unique, focalisée conversion, avec un message net et un appel à l’action évident.</p>
           </article>
-          <article class="service-offer">
+          <article class="service-offer offer-tile" data-offer="app">
+            <span class="offer-tile__index" aria-hidden="true">03</span>
+            <div class="offer-spec offer-spec--phone" aria-hidden="true">
+              <span class="offer-spec__device">
+                <i class="offer-spec__notch"></i>
+                <i></i><i></i><i></i>
+              </span>
+            </div>
             <h3 data-i18n="offer_app_h">Application mobile</h3>
             <p data-i18n="offer_app_p">Un outil sur téléphone, en C# / .NET, pensé pour un usage réel : parcours clair, génération, export.</p>
           </article>
-          <article class="service-offer">
+          <article class="service-offer offer-tile" data-offer="ppt">
+            <span class="offer-tile__index" aria-hidden="true">04</span>
+            <div class="offer-spec offer-spec--deck" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
             <h3 data-i18n="offer_ppt_h">Présentation PowerPoint</h3>
             <p data-i18n="offer_ppt_p">Supports pro pour tout type de sujet : pitch, cours, rapport — clairs, visuels, prêts à présenter.</p>
           </article>
