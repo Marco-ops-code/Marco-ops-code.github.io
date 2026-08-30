@@ -2861,29 +2861,27 @@ body.dark .contact-link-card--phone:hover .contact-link-card__value {
 }
 
 .work-steps::before {
-  content: "";
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  height: 1px;
-  background: color-mix(in srgb, var(--section-color) 32%, transparent);
-  pointer-events: none;
+  display: none;
 }
 
 .work-steps__track {
   position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
+  top: 0;
+  left: 0;
+  width: 0;
   height: 2px;
   z-index: 2;
   pointer-events: none;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--section-color, var(--c-green)) 32%, transparent);
 }
 
 .work-steps__progress {
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
   border-radius: 99px;
   background: linear-gradient(
     90deg,
@@ -2891,8 +2889,6 @@ body.dark .contact-link-card--phone:hover .contact-link-card__value {
     var(--section-color, var(--c-green))
   );
   box-shadow: 0 0 12px color-mix(in srgb, var(--section-color, var(--c-green)) 38%, transparent);
-  transform: scaleX(0);
-  transform-origin: left center;
 }
 
 .work-steps__glow {

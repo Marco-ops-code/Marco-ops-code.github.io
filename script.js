@@ -810,6 +810,7 @@ function initProcessFlow() {
   }
 
   const items = Array.from(steps.querySelectorAll(":scope > li"));
+  const track = process.querySelector(".work-steps__track");
   if (items.length < 2) {
     return;
   }
@@ -833,19 +834,44 @@ function initProcessFlow() {
     };
   }
 
-  function setGlow(point) {
-    if (!glow || !point) {
-      return;
+  function layoutRail() {
+    const first = circlePoint(items[0]);
+    const last = circlePoint(items[items.length - 1]);
+    if (!track) {
+      return { first, last };
     }
-    glow.style.left = `${point.x}px`;
-    glow.style.top = `${point.y}px`;
+    if (isPhone()) {
+      track.style.left = `${first.x}px`;
+      track.style.top = `${first.y}px`;
+      track.style.width = "2px";
+      track.style.height = `${Math.max(0, last.y - first.y)}px`;
+      track.style.right = "auto";
+    } else {
+      track.style.left = `${first.x}px`;
+      track.style.top = `${first.y}px`;
+      track.style.width = `${Math.max(0, last.x - first.x)}px`;
+      track.style.height = "2px";
+      track.style.right = "auto";
+    }
+    return { first, last };
   }
 
-  function setProgress(ratio) {
-    const value = Math.max(0, Math.min(1, ratio));
-    if (progress) {
-      progress.style.transform = isPhone() ? `scaleY(${value})` : `scaleX(${value})`;
+  function setMarker(point) {
+    if (glow && point) {
+      glow.style.left = `${point.x}px`;
+      glow.style.top = `${point.y}px`;
     }
+    if (!progress || !point) {
+      return;
+    }
+    const first = circlePoint(items[0]);
+    if (isPhone()) {
+      progress.style.width = "100%";
+      progress.style.height = `${Math.max(0, point.y - first.y)}px`;
+      return;
+    }
+    progress.style.height = "100%";
+    progress.style.width = `${Math.max(0, point.x - first.x)}px`;
   }
 
   function fillUpTo(index) {
@@ -873,11 +899,10 @@ function initProcessFlow() {
         const p = easeInOut(Math.min(1, (now - startAt) / duration));
         const from = circlePoint(items[fromIndex]);
         const to = circlePoint(items[toIndex]);
-        setGlow({
+        setMarker({
           x: from.x + (to.x - from.x) * p,
           y: from.y + (to.y - from.y) * p,
         });
-        setProgress((fromIndex + p) / (items.length - 1));
         if (p < 1) {
           moveFrame = window.requestAnimationFrame(tick);
           return;
@@ -898,27 +923,28 @@ function initProcessFlow() {
     running = true;
     process.classList.add("is-flowing");
     items.forEach((item) => item.classList.remove("is-filled", "is-current"));
-    setProgress(0);
-    setGlow(circlePoint(items[0]));
+    layoutRail();
+    setMarker(circlePoint(items[0]));
     fillUpTo(0);
-    await wait(720);
+    await wait(1100);
     for (let i = 0; i < items.length - 1; i += 1) {
       if (!running) {
         return;
       }
-      await animateBetween(i, i + 1, 1100);
+      await animateBetween(i, i + 1, 2200);
       if (!running) {
         return;
       }
+      setMarker(circlePoint(items[i + 1]));
       fillUpTo(i + 1);
-      await wait(i === items.length - 2 ? 1600 : 640);
+      await wait(i === items.length - 2 ? 2200 : 1000);
     }
     if (running) {
       loopTimer = window.setTimeout(() => {
         if (running) {
           play();
         }
-      }, 420);
+      }, 800);
     }
   }
 
