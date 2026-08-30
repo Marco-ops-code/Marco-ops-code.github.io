@@ -797,38 +797,35 @@ initProjectShots();
 initShotLightbox();
 initWorkCabinet();
 initContactForm();
-initProcessSpider();
+initProcessFlow();
 
-function initProcessSpider() {
+function initProcessFlow() {
   const process = document.getElementById("process");
-  const letter = process?.querySelector(".process-c");
-  const spider = process?.querySelector(".work-steps__spider");
+  const stage = process?.querySelector(".work-steps-stage");
   const steps = process?.querySelector(".work-steps");
   const progress = process?.querySelector(".work-steps__progress");
-  if (!process || !letter || !spider || !steps || reduceMotionGlobal) {
+  const glow = process?.querySelector(".work-steps__glow");
+  if (!process || !stage || !steps || reduceMotionGlobal) {
     return;
   }
 
   const items = Array.from(steps.querySelectorAll(":scope > li"));
-  const isPhone = () => window.matchMedia("(max-width: 760px)").matches;
-  let loopTimer = 0;
-  let walkFrame = 0;
-  let moveFrame = 0;
-  let started = false;
-  let mobileActive = false;
-  let lastPhone = isPhone();
-
-  function letterPoint() {
-    const box = process.getBoundingClientRect();
-    const letterBox = letter.getBoundingClientRect();
-    return {
-      x: letterBox.left + letterBox.width / 2 - box.left,
-      y: letterBox.bottom - box.top - 2,
-    };
+  if (items.length < 2) {
+    return;
   }
 
-  function bubblePoint(item) {
-    const box = process.getBoundingClientRect();
+  const isPhone = () => window.matchMedia("(max-width: 760px)").matches;
+  let loopTimer = 0;
+  let moveFrame = 0;
+  let started = false;
+  let running = false;
+
+  function easeInOut(t) {
+    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  }
+
+  function circlePoint(item) {
+    const box = stage.getBoundingClientRect();
     const rect = item.getBoundingClientRect();
     return {
       x: rect.left + 15 - box.left,
@@ -836,85 +833,51 @@ function initProcessSpider() {
     };
   }
 
-  function setSilk(from, to, visible) {
-    if (!visible || !from || !to) {
-      process.classList.remove("is-webbing");
-      process.style.setProperty("--web-h", "0px");
+  function setGlow(point) {
+    if (!glow || !point) {
       return;
     }
-    const dx = to.x - from.x;
-    const dy = to.y - from.y;
-    process.style.setProperty("--web-x", `${from.x}px`);
-    process.style.setProperty("--web-top", `${from.y}px`);
-    process.style.setProperty("--web-h", `${Math.hypot(dx, dy)}px`);
-    process.style.setProperty("--web-a", `${Math.atan2(dx, dy) * (180 / Math.PI)}deg`);
-    process.classList.add("is-webbing");
-  }
-
-  function setSpiderAt(point, hanging) {
-    spider.style.left = `${point.x}px`;
-    spider.style.top = `${point.y}px`;
-    spider.style.transform = hanging
-      ? "translate(-50%, 0)"
-      : "translate(-50%, calc(-100% + 3px))";
+    glow.style.left = `${point.x}px`;
+    glow.style.top = `${point.y}px`;
   }
 
   function setProgress(ratio) {
-    if (!progress) {
-      return;
-    }
     const value = Math.max(0, Math.min(1, ratio));
-    progress.style.transform = isPhone() ? `scaleY(${value})` : `scaleX(${value})`;
+    if (progress) {
+      progress.style.transform = isPhone() ? `scaleY(${value})` : `scaleX(${value})`;
+    }
   }
 
   function fillUpTo(index) {
     items.forEach((item, i) => {
       item.classList.toggle("is-filled", i <= index);
+      item.classList.toggle("is-current", i === index);
     });
   }
 
-  function easeInOut(t) {
-    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-  }
-
-  function stopWalk() {
-    window.cancelAnimationFrame(walkFrame);
-    walkFrame = 0;
-  }
-
-  function stopMove() {
+  function stop() {
+    running = false;
+    window.clearTimeout(loopTimer);
     window.cancelAnimationFrame(moveFrame);
     moveFrame = 0;
   }
 
-  function stopAll() {
-    mobileActive = false;
-    window.clearTimeout(loopTimer);
-    stopWalk();
-    stopMove();
-    process.classList.remove("is-dropping", "is-walking", "is-live", "is-webbing", "is-vertical");
-    setSilk(null, null, false);
-  }
-
-  function animateTo(from, to, duration, { silk, hanging, keepSilk }) {
+  function animateBetween(fromIndex, toIndex, duration) {
     return new Promise((resolve) => {
-      const start = performance.now();
+      const startAt = performance.now();
       function tick(now) {
-        if (!mobileActive) {
+        if (!running) {
           resolve();
           return;
         }
-        const p = easeInOut(Math.min(1, (now - start) / duration));
-        const point = {
+        const p = easeInOut(Math.min(1, (now - startAt) / duration));
+        const from = circlePoint(items[fromIndex]);
+        const to = circlePoint(items[toIndex]);
+        setGlow({
           x: from.x + (to.x - from.x) * p,
           y: from.y + (to.y - from.y) * p,
-        };
-        setSpiderAt(point, hanging);
-        if (silk) {
-          setSilk(from, point, true);
-        } else if (!keepSilk) {
-          setSilk(null, null, false);
-        }
+        });
+        setProgress((fromIndex + p) / (items.length - 1));
         if (p < 1) {
           moveFrame = window.requestAnimationFrame(tick);
           return;
@@ -931,198 +894,53 @@ function initProcessSpider() {
     });
   }
 
-  async function playMobileLoop() {
-    if (items.length < 4) {
-      return;
-    }
-    mobileActive = true;
-    process.classList.add("is-live", "is-dropping");
-    process.classList.remove("is-walking");
-    items.forEach((item) => item.classList.remove("is-filled"));
-    setSilk(null, null, false);
-
-    for (let i = 0; i < items.length; i += 1) {
-      if (!mobileActive) {
-        return;
-      }
-      const origin = letterPoint();
-      const target = bubblePoint(items[i]);
-      const isLast = i === items.length - 1;
-      setSpiderAt(origin, true);
-      await animateTo(origin, target, 1100, {
-        silk: i === 0,
-        hanging: true,
-        keepSilk: i > 0,
-      });
-      if (!mobileActive) {
-        return;
-      }
-      setSpiderAt(target, false);
-      fillUpTo(i);
-      if (isLast) {
-        setSilk(null, null, false);
-        await wait(900);
-        break;
-      }
-      setSilk(origin, target, true);
-      await wait(700);
-      if (!mobileActive) {
-        return;
-      }
-      await animateTo(target, letterPoint(), 450, {
-        silk: false,
-        hanging: true,
-        keepSilk: true,
-      });
-      setSilk(letterPoint(), target, true);
-    }
-
-    if (mobileActive) {
-      playMobileLoop();
-    }
-  }
-
-  function layoutDrop() {
-    process.classList.remove("is-vertical");
-    if (items.length < 4) {
-      return false;
-    }
-    const origin = letterPoint();
-    const first = bubblePoint(items[0]);
-    process.style.setProperty("--web-x", `${origin.x}px`);
-    process.style.setProperty("--web-top", `${origin.y}px`);
-    process.style.setProperty("--web-h", `${Math.max(28, first.y - origin.y)}px`);
-    process.style.setProperty("--web-a", "0deg");
-    return true;
-  }
-
-  function startWalk() {
-    stopWalk();
-    const pauseMs = 1600;
-    const moveMs = 5400;
-    setSpiderAt(items.map(bubblePoint)[0], false);
-    process.classList.remove("is-dropping", "is-live", "is-webbing");
-    process.classList.add("is-walking");
-    fillUpTo(0);
-    setProgress(0.02);
-
-    let segment = 0;
-    let phaseStart = performance.now();
-
-    function tick(now) {
-      const points = items.map(bubblePoint);
-      const elapsed = now - phaseStart;
-      const moving = segment < points.length - 1;
-      const duration = moving ? (elapsed < pauseMs ? pauseMs : moveMs) : pauseMs + 2800;
-
-      if (!moving) {
-        fillUpTo(points.length - 1);
-        setProgress(1);
-        setSpiderAt(points[points.length - 1], false);
-        if (elapsed >= duration) {
-          loopTimer = window.setTimeout(startDrop, 400);
-          return;
-        }
-        walkFrame = window.requestAnimationFrame(tick);
-        return;
-      }
-
-      if (elapsed < pauseMs) {
-        fillUpTo(segment);
-        setProgress(segment / (points.length - 1));
-        setSpiderAt(points[segment], false);
-        walkFrame = window.requestAnimationFrame(tick);
-        return;
-      }
-
-      const moveElapsed = elapsed - pauseMs;
-      if (moveElapsed >= moveMs) {
-        segment += 1;
-        fillUpTo(segment);
-        setProgress(segment / (points.length - 1));
-        setSpiderAt(points[segment], false);
-        phaseStart = now;
-        walkFrame = window.requestAnimationFrame(tick);
-        return;
-      }
-
-      const from = points[segment];
-      const to = points[segment + 1];
-      const p = easeInOut(moveElapsed / moveMs);
-      setSpiderAt(
-        {
-          x: from.x + (to.x - from.x) * p,
-          y: from.y + (to.y - from.y) * p,
-        },
-        false
-      );
-      setProgress((segment + p) / (points.length - 1));
-      walkFrame = window.requestAnimationFrame(tick);
-    }
-
-    walkFrame = window.requestAnimationFrame(tick);
-  }
-
-  function startDrop() {
-    window.clearTimeout(loopTimer);
-    stopWalk();
-    if (!layoutDrop()) {
-      return;
-    }
-    items.forEach((item) => item.classList.remove("is-filled"));
+  async function play() {
+    running = true;
+    process.classList.add("is-flowing");
+    items.forEach((item) => item.classList.remove("is-filled", "is-current"));
     setProgress(0);
-    spider.style.left = "";
-    spider.style.top = "";
-    spider.style.transform = "";
-    process.classList.remove("is-dropping", "is-walking", "is-live", "is-webbing");
-    void process.offsetWidth;
-    process.classList.add("is-dropping");
+    setGlow(circlePoint(items[0]));
+    fillUpTo(0);
+    await wait(720);
+    for (let i = 0; i < items.length - 1; i += 1) {
+      if (!running) {
+        return;
+      }
+      await animateBetween(i, i + 1, 1100);
+      if (!running) {
+        return;
+      }
+      fillUpTo(i + 1);
+      await wait(i === items.length - 2 ? 1600 : 640);
+    }
+    if (running) {
+      loopTimer = window.setTimeout(() => {
+        if (running) {
+          play();
+        }
+      }, 420);
+    }
   }
 
-  function startScene() {
-    stopAll();
-    if (isPhone()) {
-      return;
-    }
-    startDrop();
+  function start() {
+    stop();
+    play();
   }
-
-  spider.addEventListener("animationend", (event) => {
-    if (event.target !== spider || isPhone()) {
-      return;
-    }
-    if (event.animationName === "spiderDescend") {
-      startWalk();
-    }
-  });
 
   const view = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && !started) {
           started = true;
-          startScene();
+          start();
         }
       });
     },
     { threshold: 0.28 }
   );
   view.observe(process);
-
-  window.addEventListener("resize", () => {
-    const phone = isPhone();
-    if (phone !== lastPhone) {
-      lastPhone = phone;
-      if (started) {
-        startScene();
-      }
-      return;
-    }
-    if (!phone && process.classList.contains("is-dropping")) {
-      layoutDrop();
-    }
-  });
 }
+
 
 const sectionTitleFocusElements = document.querySelectorAll("main .section");
 if (sectionTitleFocusElements.length) {
