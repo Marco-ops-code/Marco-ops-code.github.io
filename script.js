@@ -458,9 +458,25 @@ function initWorkCabinet() {
 function initShotLightbox() {
   const dialog = document.getElementById("shotLightbox");
   const dialogImg = dialog?.querySelector(".shot-lightbox__img");
+  const liveLink = dialog?.querySelector(".shot-lightbox__live");
   if (!dialog || !dialogImg) {
     return;
   }
+
+  const setLiveLink = (url) => {
+    if (!liveLink) {
+      return;
+    }
+    if (url) {
+      liveLink.href = url;
+      liveLink.hidden = false;
+      dialog.classList.add("is-live");
+      return;
+    }
+    liveLink.removeAttribute("href");
+    liveLink.hidden = true;
+    dialog.classList.remove("is-live");
+  };
 
   document.querySelectorAll("a.project-shot[href]").forEach((link) => {
     link.addEventListener("click", (event) => {
@@ -475,6 +491,7 @@ function initShotLightbox() {
       const shot = link.querySelector("img");
       dialogImg.src = href;
       dialogImg.alt = shot?.alt ?? "";
+      setLiveLink(link.getAttribute("data-live"));
       if (typeof dialog.showModal === "function") {
         dialog.showModal();
       }

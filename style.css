@@ -5073,10 +5073,60 @@ body.dark .form-field textarea {
   cursor: pointer;
 }
 
+.shot-lightbox__stage {
+  position: relative;
+}
+
+.shot-lightbox.is-live .shot-lightbox__stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 11, 20, 0.28);
+  pointer-events: none;
+}
+
 .shot-lightbox__img {
   display: block;
   width: 100%;
   height: auto;
   max-height: calc(90vh - 72px);
   object-fit: contain;
+}
+
+.shot-lightbox__live {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: min(280px, 78%);
+  padding: 16px 28px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  text-decoration: none;
+  text-align: center;
+  font-family: "Quantico", Arial, sans-serif;
+  font-size: clamp(1.15rem, 3.4vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #0f172a;
+  background: #ffffff;
+  box-shadow:
+    0 16px 36px rgba(8, 11, 20, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+.shot-lightbox__live:hover {
+  filter: brightness(1.04);
+}
+
+.shot-lightbox__live:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
+}
+
+.shot-lightbox__live[hidden] {
+  display: none;
 }

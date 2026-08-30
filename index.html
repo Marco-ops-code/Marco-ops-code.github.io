@@ -58,7 +58,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=20260813-s62" />
+    <link rel="stylesheet" href="style.css?v=20260813-s63" />
   </head>
   <body data-page="home">
     <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
@@ -542,7 +542,7 @@
           <div class="work-cabinet__drawer">
             <article class="work-panel" id="work-panel-lk" role="tabpanel" aria-labelledby="work-tab-lk">
               <div class="work-panel__media">
-                <a href="assets/projects/web-lk.jpg?v=2" class="project-shot" data-i18n-aria="zoom_lk" aria-label="Agrandir la capture de LK Studio">
+                <a href="assets/projects/web-lk.jpg?v=2" class="project-shot" data-live="https://marco-ops-code.github.io/studio-lk/" data-i18n-aria="zoom_lk" aria-label="Agrandir la capture de LK Studio">
                   <img src="assets/projects/web-lk.jpg?v=2" alt="Accueil du site LK Studio : salon sombre, titre Precision Style Confidence et boutons de réservation" data-i18n-alt="alt_lk" width="1024" height="575" loading="lazy" decoding="async" />
                 </a>
               </div>
@@ -564,7 +564,7 @@
             </article>
             <article class="work-panel" id="work-panel-angela" role="tabpanel" aria-labelledby="work-tab-angela" hidden>
               <div class="work-panel__media">
-                <a href="assets/projects/web-angela.jpg" class="project-shot" data-i18n-aria="zoom_angela" aria-label="Agrandir la capture du site Angela Volcimus Louis">
+                <a href="assets/projects/web-angela.jpg" class="project-shot" data-live="https://marco-ops-code.github.io/PortfolioMAngie/" data-i18n-aria="zoom_angela" aria-label="Agrandir la capture du site Angela Volcimus Louis">
                   <img src="assets/projects/web-angela.jpg" alt="Accueil du site d’Angela Volcimus Louis, artiste vocale : R&amp;B, classique, gospel" data-i18n-alt="alt_angela" width="1024" height="566" loading="lazy" decoding="async" />
                 </a>
               </div>
@@ -911,10 +911,13 @@
       <form method="dialog">
         <button type="submit" class="shot-lightbox__close" data-i18n="close" data-i18n-aria="close" aria-label="Fermer">Fermer</button>
       </form>
-      <img class="shot-lightbox__img" alt="" />
+      <div class="shot-lightbox__stage">
+        <img class="shot-lightbox__img" alt="" />
+        <a class="shot-lightbox__live" hidden target="_blank" rel="noopener noreferrer" data-i18n="see_site">Voir le site</a>
+      </div>
     </dialog>
 
     <script src="i18n.js?v=20260813-s2" defer></script>
-    <script src="script.js?v=20260813-s34" defer></script>
+    <script src="script.js?v=20260813-s35" defer></script>
   </body>
 </html>
