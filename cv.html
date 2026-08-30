@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV — Marc-Onel Volcimus</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="assets/portrait.png?v=3" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Quantico:wght@700&family=Source+Sans+3:wght@400;600;700&display=swap"
+    />
+    <style>
+      :root {
+        --ink: #0f172a;
+        --muted: #475569;
+        --line: #dbe3ee;
+        --blue: #1d4ed8;
+        --paper: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #e8eef6;
+        color: var(--ink);
+        font-family: "Source Sans 3", Arial, sans-serif;
+      }
+
+      .sheet {
+        width: min(210mm, 100%);
+        min-height: 297mm;
+        margin: 24px auto;
+        padding: 16mm 16mm 14mm;
+        background: var(--paper);
+        box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12);
+      }
+
+      .toolbar {
+        width: min(210mm, 100%);
+        margin: 20px auto 0;
+        padding: 0 8px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .toolbar a,
+      .toolbar button {
+        appearance: none;
+        font: inherit;
+        font-weight: 700;
+        font-size: 0.88rem;
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        color: var(--ink);
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      header {
+        display: grid;
+        grid-template-columns: 86px 1fr;
+        gap: 18px;
+        align-items: center;
+        padding-bottom: 14px;
+        border-bottom: 2px solid var(--blue);
+      }
+
+      header img {
+        width: 86px;
+        height: 112px;
+        object-fit: cover;
+        object-position: top center;
+        border-radius: 10px;
+      }
+
+      h1 {
+        margin: 0 0 4px;
+        font-family: "Quantico", Arial, sans-serif;
+        font-size: 1.7rem;
+        letter-spacing: 0.02em;
+      }
+
+      .role {
+        margin: 0 0 8px;
+        color: var(--blue);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-size: 0.82rem;
+      }
+
+      .contacts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 14px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .contacts a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      h2 {
+        margin: 16px 0 8px;
+        font-family: "Quantico", Arial, sans-serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+
+      .lead {
+        margin: 12px 0 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.45;
+      }
+
+      .skills {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px 22px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 0.9rem;
+      }
+
+      .skills strong {
+        display: inline-block;
+        min-width: 7.2rem;
+      }
+
+      .jobs {
+        display: grid;
+        gap: 10px;
+      }
+
+      article {
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      article:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+      }
+
+      article h3 {
+        margin: 0;
+        font-size: 0.98rem;
+      }
+
+      article .meta {
+        margin: 2px 0 4px;
+        color: var(--blue);
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      article p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.4;
+      }
+
+      .langs {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      @media print {
+        html,
+        body {
+          background: #ffffff;
+        }
+
+        .toolbar {
+          display: none;
+        }
+
+        .sheet {
+          width: 210mm;
+          min-height: auto;
+          margin: 0;
+          padding: 12mm 14mm;
+          box-shadow: none;
+        }
+
+        @page {
+          size: A4;
+          margin: 10mm;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toolbar">
+      <a href="index.html">Retour au site</a>
+      <a href="cv-marc-onel-volcimus.pdf" download>Télécharger le PDF</a>
+      <button type="button" onclick="window.print()">Imprimer / PDF</button>
+    </div>
+    <main class="sheet">
+      <header>
+        <img src="assets/portrait.png?v=3" alt="Portrait de Marc-Onel Volcimus" width="172" height="224" />
+        <div>
+          <h1>Marc-Onel Volcimus</h1>
+          <p class="role">Développeur full stack freelance</p>
+          <ul class="contacts">
+            <li><a href="mailto:marconelvolcimus079@gmail.com">marconelvolcimus079@gmail.com</a></li>
+            <li><a href="tel:+79965064486">+7 996 506 44 86</a></li>
+            <li>WhatsApp</li>
+            <li><a href="https://marco-ops-code.github.io/">marco-ops-code.github.io</a></li>
+            <li><a href="https://github.com/Marco-ops-code">github.com/Marco-ops-code</a></li>
+            <li>À distance · FR / EN</li>
+          </ul>
+        </div>
+      </header>
+
+      <p class="lead">
+        J’aide les indépendants et les TPE à envoyer un support qui parle tout seul :
+        site vitrine, landing page, application mobile ou présentation PowerPoint.
+        Un interlocuteur, un devis sous 48&nbsp;h après le brief, réponse sous 24&nbsp;h.
+      </p>
+
+      <h2>Compétences</h2>
+      <ul class="skills">
+        <li><strong>Front</strong> HTML5, CSS3, JavaScript, React / Vite</li>
+        <li><strong>Back</strong> PHP, C# / .NET, Python, MySQL</li>
+        <li><strong>Produit</strong> UI/UX, SEO, responsive, Webpack</li>
+        <li><strong>Outils</strong> Word, Excel, PowerPoint, Project, Access, GIMP</li>
+      </ul>
+
+      <h2>Réalisations</h2>
+      <div class="jobs">
+        <article>
+          <h3>LK Studio</h3>
+          <p class="meta">Web · React / Vite · Site vitrine salon</p>
+          <p>Services, galerie, avis, réservation et WhatsApp. Site livré, prêt à envoyer, avec prise de créneau.</p>
+        </article>
+        <article>
+          <h3>Angela Volcimus Louis</h3>
+          <p class="meta">Web · PHP · Site d’artiste</p>
+          <p>Univers, musique, dates et galerie. Accueil sombre et lisible, écoute et prochains concerts dès l’arrivée.</p>
+        </article>
+        <article>
+          <h3>Task Engine</h3>
+          <p class="meta">Windows · C# / .NET</p>
+          <p>Générateur de matrices et d’équations linéaires, export Word (.docx), parcours en trois étapes.</p>
+        </article>
+        <article>
+          <h3>MultiTask</h3>
+          <p class="meta">Mobile · C# / .NET · Élèves, étudiants, professeurs</p>
+          <p>Examens personnalisés en PDF et Word, objectif du jour, génération et export depuis le téléphone.</p>
+        </article>
+        <article>
+          <h3>Extrait TPE</h3>
+          <p class="meta">PowerPoint · 10 slides</p>
+          <p>Pitch d’offre : public, constat, formats, déroulement, livrable, prochain pas. Même exigence qu’un site.</p>
+        </article>
+      </div>
+
+      <h2>Langues</h2>
+      <p class="langs">Français et anglais — échanges, brief et livrables.</p>
+    </main>
+  </body>
+</html>
