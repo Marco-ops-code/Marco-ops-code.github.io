@@ -816,6 +816,7 @@ function initProcessFlow() {
   }
 
   const isPhone = () => window.matchMedia("(max-width: 760px)").matches;
+  const hole = 18;
   let loopTimer = 0;
   let moveFrame = 0;
   let started = false;
@@ -834,9 +835,27 @@ function initProcessFlow() {
     };
   }
 
+  function railMask(points, first, last) {
+    const phone = isPhone();
+    const span = phone ? last.y - first.y : last.x - first.x;
+    if (span <= 0) {
+      return "";
+    }
+    return points
+      .map((point) => {
+        const t = phone ? (point.y - first.y) / span : (point.x - first.x) / span;
+        const at = phone
+          ? `50% ${(t * 100).toFixed(2)}%`
+          : `${(t * 100).toFixed(2)}% 50%`;
+        return `radial-gradient(circle ${hole}px at ${at}, transparent ${hole - 1}px, #000 ${hole}px)`;
+      })
+      .join(", ");
+  }
+
   function layoutRail() {
-    const first = circlePoint(items[0]);
-    const last = circlePoint(items[items.length - 1]);
+    const points = items.map(circlePoint);
+    const first = points[0];
+    const last = points[points.length - 1];
     if (!track) {
       return { first, last };
     }
@@ -853,13 +872,26 @@ function initProcessFlow() {
       track.style.height = "2px";
       track.style.right = "auto";
     }
+    const mask = railMask(points, first, last);
+    track.style.maskImage = mask;
+    track.style.webkitMaskImage = mask;
+    track.style.maskComposite = "intersect";
+    track.style.webkitMaskComposite = "source-in";
     return { first, last };
+  }
+
+  function overCircle(point) {
+    return items.some((item) => {
+      const center = circlePoint(item);
+      return Math.hypot(point.x - center.x, point.y - center.y) < hole;
+    });
   }
 
   function setMarker(point) {
     if (glow && point) {
       glow.style.left = `${point.x}px`;
       glow.style.top = `${point.y}px`;
+      glow.style.opacity = overCircle(point) ? "0" : "1";
     }
     if (!progress || !point) {
       return;
