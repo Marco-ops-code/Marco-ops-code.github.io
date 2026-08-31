@@ -8,11 +8,8 @@
     <link rel="icon" href="assets/portrait.png?v=3" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Quantico:wght@700&family=Source+Sans+3:wght@400;600;700&subset=cyrillic&display=swap"
-    />
-    <link rel="stylesheet" href="cv.css?v=2" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&subset=cyrillic&display=swap" />
+    <link rel="stylesheet" href="cv.css?v=3" />
   </head>
   <body>
     <div class="toolbar">
@@ -25,72 +22,99 @@
       <button type="button" onclick="window.print()">Печать</button>
     </div>
     <main class="sheet">
-      <header>
-        <img src="assets/portrait.png?v=3" alt="Портрет Marc-Onel Volcimus" width="172" height="224" />
-        <div>
-          <h1>Marc-Onel Volcimus</h1>
-          <p class="role">Full stack-разработчик</p>
-          <ul class="contacts">
-            <li><a href="mailto:marconelvolcimus079@gmail.com">marconelvolcimus079@gmail.com</a></li>
-            <li><a href="tel:+79965064486">+7 996 506 44 86</a></li>
-            <li><a href="https://marco-ops-code.github.io/">marco-ops-code.github.io</a></li>
-            <li><a href="https://github.com/Marco-ops-code">github.com/Marco-ops-code</a></li>
-            <li>Удалённо · FR / EN</li>
-          </ul>
+      <aside class="side">
+        <img class="side__photo" src="assets/portrait.png?v=3" alt="Портрет Marc-Onel Volcimus" width="236" height="236" />
+        <h1><span>Marc-Onel</span> <b>Volcimus</b></h1>
+        <p class="side__role">Full stack-разработчик</p>
+        <h2>Контакты</h2>
+        <ul>
+          <li><a href="tel:+79965064486">+7 996 506 44 86</a></li>
+          <li><a href="mailto:marconelvolcimus079@gmail.com">marconelvolcimus079@gmail.com</a></li>
+          <li>Удалённо · FR / EN</li>
+        </ul>
+        <h2>Ссылки</h2>
+        <ul>
+          <li><a href="https://marco-ops-code.github.io/">marco-ops-code.github.io</a></li>
+          <li><a href="https://github.com/Marco-ops-code">github.com/Marco-ops-code</a></li>
+        </ul>
+        <h2>Языки</h2>
+        <ul>
+          <li>Французский — рабочее владение</li>
+          <li>Английский — рабочее владение</li>
+        </ul>
+        <h2>ПО</h2>
+        <ul>
+          <li><span class="soft">Веб</span> — HTML, CSS, JavaScript, React / Vite, PHP, MySQL</li>
+          <li><span class="soft">.NET</span> — C#, Windows и мобильные приложения</li>
+          <li><span class="soft">Офис</span> — Word, Excel, PowerPoint, Project, Access</li>
+          <li><span class="soft">Графика</span> — GIMP</li>
+        </ul>
+      </aside>
+      <div class="main">
+        <h2>Профиль</h2>
+        <p class="lead">
+          Full stack-разработчик, завершаю бакалавриат. Делаю сайты, приложения для Windows
+          и мобильные инструменты. Ищу работу, где нужно сдавать понятный код, аккуратный интерфейс
+          и функции, которые работают у пользователя.
+        </p>
+        <h2>Проекты</h2>
+        <article class="job">
+          <p class="job__when">Веб<br />React / Vite</p>
+          <div>
+            <h3>LK Studio</h3>
+            <p class="meta">Сайт-витрина</p>
+            <p>Сайт салона: страницы, галерея, отзывы, запись и WhatsApp.</p>
+          </div>
+        </article>
+        <article class="job">
+          <p class="job__when">Веб<br />PHP</p>
+          <div>
+            <h3>Angela Volcimus Louis</h3>
+            <p class="meta">Сайт артиста</p>
+            <p>Главная, музыка, афиша, галерея, контакты и админка.</p>
+          </div>
+        </article>
+        <article class="job">
+          <p class="job__when">Windows<br />C# / .NET</p>
+          <div>
+            <h3>Task Engine</h3>
+            <p class="meta">Десктоп</p>
+            <p>Генерация матриц и уравнений, экспорт в Word, три шага.</p>
+          </div>
+        </article>
+        <article class="job">
+          <p class="job__when">Мобильное<br />C# / .NET</p>
+          <div>
+            <h3>MultiTask</h3>
+            <p class="meta">Мобильное приложение</p>
+            <p>Персональные экзамены, экспорт PDF / Word, кабинет ученика.</p>
+          </div>
+        </article>
+        <article class="job">
+          <p class="job__when">Презентация<br />PowerPoint</p>
+          <div>
+            <h3>Фрагмент презентации</h3>
+            <p class="meta">10 слайдов</p>
+            <p>Структура оффера: задача, форматы, доказательство, следующий шаг.</p>
+          </div>
+        </article>
+        <h2>Образование</h2>
+        <div class="edu-block">
+          <strong>Бакалавриат — прикладная информатика</strong>
+          <p class="meta">ВГСПУ — Волгоградский государственный социально-педагогический университет</p>
+          <p>2022 — 2026</p>
         </div>
-      </header>
-
-      <p class="lead">
-        Full stack-разработчик, завершаю бакалавриат. Делаю сайты, приложения для Windows
-        и мобильные инструменты. Ищу работу, где нужно сдавать понятный код, аккуратный интерфейс
-        и функции, которые работают у пользователя.
-      </p>
-
-      <h2>Образование</h2>
-      <p class="edu">
-        <strong>2022 — 2026</strong> · Бакалавриат · Прикладная информатика<br />
-        ФГБОУ ВО «ВГСПУ» — Волгоградский государственный социально-педагогический университет
-      </p>
-
-      <h2>Навыки</h2>
-      <ul class="skills">
-        <li><strong>Фронтенд</strong> HTML5, CSS3, JavaScript, React / Vite</li>
-        <li><strong>Бэкенд</strong> PHP, C# / .NET, Python, MySQL</li>
-        <li><strong>Продукт</strong> UI/UX, SEO, адаптивная вёрстка, Webpack</li>
-        <li><strong>Инструменты</strong> Word, Excel, PowerPoint, Project, Access, GIMP</li>
-      </ul>
-
-      <h2>Проекты</h2>
-      <div class="jobs">
-        <article>
-          <h3>LK Studio</h3>
-          <p class="meta">Веб · React / Vite</p>
-          <p>Сайт салона: страницы, галерея, отзывы, запись и связь через WhatsApp.</p>
-        </article>
-        <article>
-          <h3>Angela Volcimus Louis</h3>
-          <p class="meta">Веб · PHP</p>
-          <p>Сайт артиста: главная, музыка, афиша, галерея, контакты и админка.</p>
-        </article>
-        <article>
-          <h3>Task Engine</h3>
-          <p class="meta">Windows · C# / .NET</p>
-          <p>Десктоп-приложение: генерация матриц и уравнений, экспорт в Word, три шага.</p>
-        </article>
-        <article>
-          <h3>MultiTask</h3>
-          <p class="meta">Мобильное · C# / .NET</p>
-          <p>Мобильное приложение: персональные экзамены, экспорт PDF / Word, кабинет ученика.</p>
-        </article>
-        <article>
-          <h3>Фрагмент презентации</h3>
-          <p class="meta">Презентация · PowerPoint</p>
-          <p>Десять слайдов: задача, форматы, доказательство, следующий шаг.</p>
-        </article>
+        <h2>Навыки</h2>
+        <div class="bars">
+          <div class="bar" style="--lvl: 92%"><span>HTML / CSS</span><i><em></em></i></div>
+          <div class="bar" style="--lvl: 90%"><span>JavaScript</span><i><em></em></i></div>
+          <div class="bar" style="--lvl: 88%"><span>C# / .NET</span><i><em></em></i></div>
+          <div class="bar" style="--lvl: 86%"><span>PHP / MySQL</span><i><em></em></i></div>
+          <div class="bar" style="--lvl: 82%"><span>UI / UX</span><i><em></em></i></div>
+          <div class="bar" style="--lvl: 78%"><span>Python</span><i><em></em></i></div>
+        </div>
       </div>
-
-      <h2>Языки</h2>
-      <p class="langs">Французский и английский — рабочее владение устно и письменно.</p>
+      <span class="sheet__bar" aria-hidden="true"></span>
     </main>
   </body>
 </html>

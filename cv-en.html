@@ -8,11 +8,8 @@
     <link rel="icon" href="assets/portrait.png?v=3" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Quantico:wght@700&family=Source+Sans+3:wght@400;600;700&display=swap"
-    />
-    <link rel="stylesheet" href="cv.css?v=2" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" />
+    <link rel="stylesheet" href="cv.css?v=3" />
   </head>
   <body>
     <div class="toolbar">
@@ -25,73 +22,99 @@
       <button type="button" onclick="window.print()">Print</button>
     </div>
     <main class="sheet">
-      <header>
-        <img src="assets/portrait.png?v=3" alt="Portrait of Marc-Onel Volcimus" width="172" height="224" />
-        <div>
-          <h1>Marc-Onel Volcimus</h1>
-          <p class="role">Full stack developer</p>
-          <ul class="contacts">
-            <li><a href="mailto:marconelvolcimus079@gmail.com">marconelvolcimus079@gmail.com</a></li>
-            <li><a href="tel:+79965064486">+7 996 506 44 86</a></li>
-            <li><a href="https://marco-ops-code.github.io/">marco-ops-code.github.io</a></li>
-            <li><a href="https://github.com/Marco-ops-code">github.com/Marco-ops-code</a></li>
-            <li>Remote · French / English</li>
-          </ul>
+      <aside class="side">
+        <img class="side__photo" src="assets/portrait.png?v=3" alt="Portrait of Marc-Onel Volcimus" width="236" height="236" />
+        <h1><span>Marc-Onel</span> <b>Volcimus</b></h1>
+        <p class="side__role">Full stack developer</p>
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="tel:+79965064486">+7 996 506 44 86</a></li>
+          <li><a href="mailto:marconelvolcimus079@gmail.com">marconelvolcimus079@gmail.com</a></li>
+          <li>Remote · FR / EN</li>
+        </ul>
+        <h2>Links</h2>
+        <ul>
+          <li><a href="https://marco-ops-code.github.io/">marco-ops-code.github.io</a></li>
+          <li><a href="https://github.com/Marco-ops-code">github.com/Marco-ops-code</a></li>
+        </ul>
+        <h2>Languages</h2>
+        <ul>
+          <li>French — professional use</li>
+          <li>English — professional use</li>
+        </ul>
+        <h2>Software</h2>
+        <ul>
+          <li><span class="soft">Web</span> — HTML, CSS, JavaScript, React / Vite, PHP, MySQL</li>
+          <li><span class="soft">.NET</span> — C#, Windows and mobile apps</li>
+          <li><span class="soft">Office</span> — Word, Excel, PowerPoint, Project, Access</li>
+          <li><span class="soft">Image</span> — GIMP</li>
+        </ul>
+      </aside>
+      <div class="main">
+        <h2>Professional profile</h2>
+        <p class="lead">
+          Full stack developer completing a bachelor’s degree. I design and ship websites,
+          Windows tools and mobile apps. I am looking for a role where I can deliver clean code,
+          clear interfaces and features that hold up in production.
+        </p>
+        <h2>Projects</h2>
+        <article class="job">
+          <p class="job__when">Web<br />React / Vite</p>
+          <div>
+            <h3>LK Studio</h3>
+            <p class="meta">Showcase site</p>
+            <p>Salon site: pages, gallery, reviews, booking form and WhatsApp contact.</p>
+          </div>
+        </article>
+        <article class="job">
+          <p class="job__when">Web<br />PHP</p>
+          <div>
+            <h3>Angela Volcimus Louis</h3>
+            <p class="meta">Artist site</p>
+            <p>Home, music, dates, gallery, contact and an admin area.</p>
+          </div>
+        </article>
+        <article class="job">
+          <p class="job__when">Windows<br />C# / .NET</p>
+          <div>
+            <h3>Task Engine</h3>
+            <p class="meta">Desktop app</p>
+            <p>Matrix and linear-equation generation, Word export, three-step flow.</p>
+          </div>
+        </article>
+        <article class="job">
+          <p class="job__when">Mobile<br />C# / .NET</p>
+          <div>
+            <h3>MultiTask</h3>
+            <p class="meta">Mobile app</p>
+            <p>Custom exams, PDF / Word export, student dashboard.</p>
+          </div>
+        </article>
+        <article class="job">
+          <p class="job__when">Deck<br />PowerPoint</p>
+          <div>
+            <h3>SME deck excerpt</h3>
+            <p class="meta">10 slides</p>
+            <p>Offer structure: problem, formats, proof, next step.</p>
+          </div>
+        </article>
+        <h2>Education</h2>
+        <div class="edu-block">
+          <strong>Bachelor’s (бакалавриат) — Applied Computer Science</strong>
+          <p class="meta">Volgograd State Socio-Pedagogical University (VGSPU)</p>
+          <p>2022 — 2026</p>
         </div>
-      </header>
-
-      <p class="lead">
-        Full stack developer completing a bachelor’s degree. I design and ship websites,
-        Windows tools and mobile apps. I am looking for a role where I can deliver clean code,
-        clear interfaces and features that hold up in production.
-      </p>
-
-      <h2>Education</h2>
-      <p class="edu">
-        <strong>2022 — 2026</strong> · Bachelor’s degree (бакалавриат) · Applied Computer Science<br />
-        Volgograd State Socio-Pedagogical University (VGSPU)<br />
-        <span lang="ru">Волгоградский государственный социально-педагогический университет</span>
-      </p>
-
-      <h2>Skills</h2>
-      <ul class="skills">
-        <li><strong>Front end</strong> HTML5, CSS3, JavaScript, React / Vite</li>
-        <li><strong>Back end</strong> PHP, C# / .NET, Python, MySQL</li>
-        <li><strong>Product</strong> UI/UX, SEO, responsive, Webpack</li>
-        <li><strong>Tools</strong> Word, Excel, PowerPoint, Project, Access, GIMP</li>
-      </ul>
-
-      <h2>Projects</h2>
-      <div class="jobs">
-        <article>
-          <h3>LK Studio</h3>
-          <p class="meta">Web · React / Vite</p>
-          <p>Showcase site for a salon: pages, gallery, reviews, booking form and WhatsApp contact.</p>
-        </article>
-        <article>
-          <h3>Angela Volcimus Louis</h3>
-          <p class="meta">Web · PHP</p>
-          <p>Artist site: home, music, dates, gallery, contact and an admin area.</p>
-        </article>
-        <article>
-          <h3>Task Engine</h3>
-          <p class="meta">Windows · C# / .NET</p>
-          <p>Desktop app: matrix and linear-equation generation, Word export, three-step flow.</p>
-        </article>
-        <article>
-          <h3>MultiTask</h3>
-          <p class="meta">Mobile · C# / .NET</p>
-          <p>Mobile app: custom exams, PDF / Word export, student dashboard.</p>
-        </article>
-        <article>
-          <h3>SME deck excerpt</h3>
-          <p class="meta">Presentation · PowerPoint</p>
-          <p>Ten slides to structure an offer: problem, formats, proof, next step.</p>
-        </article>
+        <h2>Skills</h2>
+        <div class="bars">
+          <div class="bar" style="--lvl: 92%"><span>HTML / CSS</span><i><em></em></i></div>
+          <div class="bar" style="--lvl: 90%"><span>JavaScript</span><i><em></em></i></div>
+          <div class="bar" style="--lvl: 88%"><span>C# / .NET</span><i><em></em></i></div>
+          <div class="bar" style="--lvl: 86%"><span>PHP / MySQL</span><i><em></em></i></div>
+          <div class="bar" style="--lvl: 82%"><span>UI / UX</span><i><em></em></i></div>
+          <div class="bar" style="--lvl: 78%"><span>Python</span><i><em></em></i></div>
+        </div>
       </div>
-
-      <h2>Languages</h2>
-      <p class="langs">French and English — professional use, written and spoken.</p>
+      <span class="sheet__bar" aria-hidden="true"></span>
     </main>
   </body>
 </html>
