@@ -63,16 +63,16 @@ body {
 }
 
 .side {
-  padding: 18px 16px 28px;
+  padding: 12px 13px 18px;
   background: var(--side);
   color: #f4f7fb;
 }
 
 .side__photo {
   display: block;
-  width: 118px;
-  height: 118px;
-  margin: 4px auto 14px;
+  width: 88px;
+  height: 88px;
+  margin: 2px auto 8px;
   object-fit: cover;
   object-position: top center;
   border-radius: 50%;
@@ -80,8 +80,8 @@ body {
 }
 
 .side h1 {
-  margin: 0 0 4px;
-  font-size: 1.55rem;
+  margin: 0 0 2px;
+  font-size: 1.42rem;
   font-weight: 700;
   line-height: 1.1;
   text-align: center;
@@ -99,17 +99,17 @@ body {
 }
 
 .side__role {
-  margin: 0 0 18px;
+  margin: 0 0 8px;
   color: #ffffff;
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-align: center;
 }
 
 .side h2 {
-  margin: 16px 0 8px;
-  padding-bottom: 4px;
+  margin: 9px 0 5px;
+  padding-bottom: 3px;
   border-bottom: 1px solid var(--cyan);
   color: var(--cyan);
   font-size: 0.72rem;
@@ -127,13 +127,14 @@ body {
 .side li,
 .side a {
   color: #edf2f7;
-  font-size: 0.78rem;
-  line-height: 1.45;
+  font-size: 0.7rem;
+  line-height: 1.3;
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
 
 .side li + li {
-  margin-top: 6px;
+  margin-top: 3px;
 }
 
 .side .soft {
