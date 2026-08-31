@@ -33,6 +33,10 @@
       add: "Ajouter",
       saveTheme: "Enregistrer cette palette",
       size: "Taille du texte",
+      photoSize: "Taille du portrait",
+      insert: "Ajouter / coller un texte",
+      insertBtn: "Insérer dans le CV",
+      insertHint: "Cliquez un texte du CV, puis écrivez ou collez ici et insérez. Vous pouvez aussi taper directement sur le CV.",
       design: "Mise en page",
       font: "Police",
       sans: "Sans",
@@ -82,6 +86,10 @@
       add: "Add",
       saveTheme: "Save this palette",
       size: "Text size",
+      photoSize: "Portrait size",
+      insert: "Add / paste text",
+      insertBtn: "Insert into resume",
+      insertHint: "Click a resume field, then type or paste here and insert. You can also type directly on the resume.",
       design: "Layout",
       font: "Typeface",
       sans: "Sans",
@@ -131,6 +139,10 @@
       add: "Добавить",
       saveTheme: "Сохранить палитру",
       size: "Размер текста",
+      photoSize: "Размер фото",
+      insert: "Добавить / вставить текст",
+      insertBtn: "Вставить в резюме",
+      insertHint: "Нажмите поле в резюме, затем введите или вставьте текст сюда. Можно также печатать прямо в резюме.",
       design: "Макет",
       font: "Шрифт",
       sans: "Гротеск",
@@ -165,6 +177,7 @@
     muted: "#5c5c5c",
     bar: "#5b2a6e",
     size: "100",
+    photoSize: "88",
     layout: "classic",
     photo: "round",
     font: "sans",
@@ -197,6 +210,7 @@
     ".side h1 b",
     ".side__role",
     ".side h2",
+    ".side a",
     ".side li",
     ".main h2",
     ".lead",
@@ -213,14 +227,15 @@
   const originalHtml = sheet.innerHTML;
   const originalPhoto = photo.getAttribute("src");
   let saveTimer = 0;
+  let lastEdit = null;
 
   function colorField(name, label) {
     return (
-      "<label class=\"cv-editor__swatch\">" +
+      "<div class=\"cv-editor__swatch\">" +
         "<input type=\"color\" data-color=\"" + name + "\" value=\"" + defaults[name] + "\" />" +
         "<span>" + label + "</span>" +
-        "<input type=\"text\" data-hex=\"" + name + "\" value=\"" + defaults[name] + "\" maxlength=\"7\" spellcheck=\"false\" />" +
-      "</label>"
+        "<input type=\"text\" data-hex=\"" + name + "\" value=\"" + defaults[name] + "\" maxlength=\"7\" spellcheck=\"false\" autocomplete=\"off\" />" +
+      "</div>"
     );
   }
 
@@ -240,6 +255,8 @@
         "<button type=\"button\" data-photo=\"square\">" + t.square + "</button>" +
         "<button type=\"button\" data-photo=\"soft\">" + t.soft + "</button>" +
       "</div>" +
+      "<p style=\"margin:10px 0 6px\">" + t.photoSize + "</p>" +
+      "<input type=\"range\" min=\"64\" max=\"180\" value=\"88\" data-photo-size />" +
     "</div>" +
     "<div class=\"cv-editor__block\">" +
       "<h3>" + t.design + "</h3>" +
@@ -291,6 +308,12 @@
         "<input type=\"color\" data-new-chip value=\"#4f46e5\" />" +
         "<button type=\"button\" class=\"is-primary\" data-act=\"add-chip\">" + t.add + "</button>" +
       "</div>" +
+    "</div>" +
+    "<div class=\"cv-editor__block\">" +
+      "<h3>" + t.insert + "</h3>" +
+      "<textarea data-insert-text rows=\"3\" placeholder=\"" + t.insert + "\"></textarea>" +
+      "<button type=\"button\" class=\"is-primary\" data-act=\"insert-text\" style=\"margin-top:8px\">" + t.insertBtn + "</button>" +
+      "<p class=\"hint\" style=\"margin-top:8px\">" + t.insertHint + "</p>" +
     "</div>" +
     "<div class=\"cv-editor__block\">" +
       "<h3>" + t.size + "</h3>" +
@@ -354,6 +377,7 @@
   function readColors() {
     const colors = {
       size: panel.querySelector("[data-size]").value,
+      photoSize: panel.querySelector("[data-photo-size]").value,
       layout: sheet.getAttribute("data-layout") || defaults.layout,
       photo: sheet.getAttribute("data-photo") || defaults.photo,
       font: sheet.getAttribute("data-font") || defaults.font,
@@ -370,10 +394,12 @@
       if (!value) return;
       input.value = value;
       const hex = panel.querySelector("[data-hex=\"" + input.dataset.color + "\"]");
-      if (hex) hex.value = value;
+      if (hex && document.activeElement !== hex) hex.value = value;
     });
     const range = panel.querySelector("[data-size]");
     if (range && colors.size) range.value = colors.size;
+    const photoRange = panel.querySelector("[data-photo-size]");
+    if (photoRange && colors.photoSize) photoRange.value = colors.photoSize;
   }
 
   function markOn(group, attr, value) {
@@ -393,6 +419,7 @@
     root.style.setProperty("--ink", merged.ink);
     root.style.setProperty("--muted", merged.muted);
     root.style.setProperty("--bar", merged.bar);
+    root.style.setProperty("--photo-size", (merged.photoSize || 88) + "px");
     sheet.style.fontSize = merged.size ? merged.size + "%" : "";
     sheet.setAttribute("data-layout", merged.layout || "classic");
     sheet.setAttribute("data-photo", merged.photo || "round");
@@ -497,7 +524,38 @@
   }
 
   function editableNodes() {
-    return sheet.querySelectorAll(editableSel);
+    const nodes = [];
+    sheet.querySelectorAll(editableSel).forEach(function (el) {
+      if (el.matches(".side li") && el.querySelector("a")) return;
+      nodes.push(el);
+    });
+    return nodes;
+  }
+
+  function insertPlainText(text) {
+    const sel = window.getSelection();
+    if (!sel.rangeCount) return false;
+    const range = sel.getRangeAt(0);
+    range.deleteContents();
+    const node = document.createTextNode(text);
+    range.insertNode(node);
+    range.setStartAfter(node);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    return true;
+  }
+
+  function insertInto(el, text) {
+    if (!el) return;
+    el.focus();
+    const sel = window.getSelection();
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    range.collapse(false);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    insertPlainText(text);
   }
 
   function syncLink(el) {
@@ -516,6 +574,9 @@
   function bindEditable(el) {
     if (el.dataset.cvBound === "1") return;
     el.dataset.cvBound = "1";
+    el.addEventListener("focus", function () {
+      lastEdit = el;
+    });
     el.addEventListener("keydown", function (event) {
       if (event.key === "Enter" && !el.matches("p, li, .lead, .job__when")) {
         event.preventDefault();
@@ -523,14 +584,22 @@
       }
     });
     el.addEventListener("paste", function (event) {
+      const text = ((event.clipboardData || window.clipboardData).getData("text/plain") || "").replace(/\r/g, "");
+      if (!text) return;
       event.preventDefault();
-      const text = (event.clipboardData || window.clipboardData).getData("text/plain");
-      document.execCommand("insertText", false, text);
+      insertPlainText(text);
+      syncLink(el);
+      scheduleSave();
     });
     el.addEventListener("input", function () {
       syncLink(el);
       scheduleSave();
     });
+    if (el.tagName === "A") {
+      el.addEventListener("click", function (event) {
+        event.preventDefault();
+      });
+    }
   }
 
   function setEditing(on) {
@@ -538,14 +607,25 @@
     toggle.classList.toggle("is-on", on);
     toggle.textContent = on ? t.done : t.edit;
     editableNodes().forEach(function (el) {
-      el.contentEditable = on ? "true" : "false";
-      if (on) bindEditable(el);
+      if (on) {
+        try {
+          el.contentEditable = "plaintext-only";
+        } catch (error) {
+          el.contentEditable = "true";
+        }
+        if (el.contentEditable !== "plaintext-only") el.contentEditable = "true";
+        bindEditable(el);
+      } else {
+        el.contentEditable = "false";
+      }
     });
     sheet.removeEventListener("click", guardLinks, true);
+    sheet.removeEventListener("click", guardLinks);
     if (on) {
       attachRemoves();
-      sheet.addEventListener("click", guardLinks, true);
+      sheet.addEventListener("click", guardLinks);
     } else {
+      lastEdit = null;
       sheet.querySelectorAll(".cv-del").forEach(function (btn) {
         btn.remove();
       });
@@ -554,7 +634,8 @@
 
   function guardLinks(event) {
     const link = event.target.closest("a");
-    if (link) event.preventDefault();
+    if (!link || event.target.closest(".cv-del")) return;
+    event.preventDefault();
   }
 
   function attachRemoves() {
@@ -784,6 +865,19 @@
     if (act.dataset.act === "add-job") addJob();
     if (act.dataset.act === "add-skill") addSkill();
     if (act.dataset.act === "add-line") addLine();
+    if (act.dataset.act === "insert-text") {
+      const box = panel.querySelector("[data-insert-text]");
+      const text = box.value;
+      if (!text) return;
+      const target = lastEdit && sheet.contains(lastEdit)
+        ? lastEdit
+        : sheet.querySelector(".lead") || sheet.querySelector(".side li");
+      insertInto(target, text);
+      if (target) {
+        syncLink(target);
+        scheduleSave();
+      }
+    }
     if (act.dataset.act === "save-theme") {
       const saved = readStore(userThemesKey, []);
       saved.push(readColors());
@@ -810,20 +904,27 @@
   });
 
   panel.querySelectorAll("[data-hex]").forEach(function (input) {
-    input.addEventListener("change", function () {
+    function applyHex() {
       const hex = normalizeHex(input.value);
-      if (!hex) {
-        input.value = readColors()[input.dataset.hex];
-        return;
-      }
+      if (!hex) return;
       const next = readColors();
       next[input.dataset.hex] = hex;
       applyColors(next);
       scheduleSave();
+    }
+    input.addEventListener("input", applyHex);
+    input.addEventListener("change", function () {
+      const hex = normalizeHex(input.value);
+      if (!hex) input.value = readColors()[input.dataset.hex];
     });
   });
 
   panel.querySelector("[data-size]").addEventListener("input", function () {
+    applyColors(readColors());
+    scheduleSave();
+  });
+
+  panel.querySelector("[data-photo-size]").addEventListener("input", function () {
     applyColors(readColors());
     scheduleSave();
   });

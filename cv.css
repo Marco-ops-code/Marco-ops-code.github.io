@@ -8,6 +8,7 @@
   --paper: #ffffff;
   --bar: #5b2a6e;
   --side-w: 72mm;
+  --photo-size: 88px;
 }
 
 * {
@@ -78,8 +79,8 @@ body {
 
 .side__photo {
   display: block;
-  width: 88px;
-  height: 88px;
+  width: var(--photo-size);
+  height: var(--photo-size);
   margin: 2px auto 8px;
   object-fit: cover;
   object-position: top center;
@@ -335,11 +336,6 @@ body {
 
 .sheet[data-layout="compact"] {
   --side-w: 56mm;
-}
-
-.sheet[data-layout="airy"] .side__photo {
-  width: 112px;
-  height: 112px;
 }
 
 .sheet[data-layout="airy"] .side {

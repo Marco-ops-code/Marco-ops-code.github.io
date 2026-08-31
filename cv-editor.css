@@ -242,14 +242,35 @@ body.cv-editing .cv-editor {
   accent-color: #3ec6e0;
 }
 
-body.cv-editing [contenteditable="true"] {
+.cv-editor textarea {
+  display: block;
+  width: 100%;
+  min-height: 76px;
+  margin: 0;
+  padding: 8px;
+  border: 1px solid #3a434c;
+  border-radius: 8px;
+  background: #1c1c1c;
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  resize: vertical;
+}
+
+body.cv-editing [contenteditable="true"],
+body.cv-editing [contenteditable="plaintext-only"] {
   outline: 1px dashed transparent;
   border-radius: 3px;
   cursor: text;
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 body.cv-editing [contenteditable="true"]:hover,
-body.cv-editing [contenteditable="true"]:focus {
+body.cv-editing [contenteditable="true"]:focus,
+body.cv-editing [contenteditable="plaintext-only"]:hover,
+body.cv-editing [contenteditable="plaintext-only"]:focus {
   outline-color: #3ec6e0;
   background: rgb(62 198 224 / 8%);
 }
