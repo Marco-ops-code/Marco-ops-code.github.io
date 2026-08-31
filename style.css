@@ -4836,3 +4836,40 @@ body.dark .form-field textarea {
 .shot-lightbox__live[hidden] {
   display: none;
 }
+
+@media (max-width: 760px) {
+  .shot-lightbox {
+    width: calc(100vw - 16px);
+    max-width: calc(100vw - 16px);
+    max-height: 92vh;
+    margin: 0;
+    padding: 12px 10px 10px;
+    border-radius: 12px;
+  }
+
+  .shot-lightbox__close {
+    min-height: 44px;
+    padding: 10px 14px;
+  }
+
+  .shot-lightbox__img {
+    max-height: calc(92vh - 96px);
+  }
+
+  .shot-lightbox__live {
+    min-width: min(220px, 88%);
+    padding: 13px 16px;
+    font-size: 1.05rem;
+  }
+
+  .footer p {
+    justify-content: center;
+    text-align: center;
+    row-gap: 6px;
+  }
+
+  .work-steps__glow {
+    width: 11px;
+    height: 11px;
+  }
+}

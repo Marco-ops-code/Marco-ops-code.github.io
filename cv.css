@@ -192,6 +192,78 @@ article p {
   color: var(--ink);
 }
 
+@media (max-width: 760px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .toolbar {
+    width: 100%;
+    margin: 10px auto 0;
+    padding: 0 12px;
+    justify-content: flex-start;
+  }
+
+  .toolbar a,
+  .toolbar button {
+    font-size: 0.75rem;
+    padding: 8px 11px;
+  }
+
+  .sheet {
+    width: calc(100% - 16px);
+    min-height: 0;
+    margin: 12px auto 28px;
+    padding: 20px 16px 22px;
+    border-radius: 16px;
+  }
+
+  header {
+    grid-template-columns: 68px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+
+  header img {
+    width: 68px;
+    height: 88px;
+  }
+
+  h1 {
+    font-size: 1.28rem;
+    line-height: 1.15;
+  }
+
+  .role {
+    font-size: 0.72rem;
+  }
+
+  .contacts {
+    font-size: 0.82rem;
+  }
+
+  .contacts a {
+    display: inline-block;
+    padding: 3px 0;
+  }
+
+  .lead,
+  .edu,
+  .langs {
+    font-size: 0.9rem;
+  }
+
+  .skills {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .skills strong {
+    min-width: 5.4rem;
+  }
+}
+
 @media print {
   html,
   body {

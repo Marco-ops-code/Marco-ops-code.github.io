@@ -177,6 +177,88 @@ html[lang="ru"] .offer strong {
   text-decoration: none;
 }
 
+@media (max-width: 760px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .toolbar {
+    width: 100%;
+    margin: 10px auto 0;
+    padding: 0 12px;
+    justify-content: flex-start;
+  }
+
+  .toolbar a,
+  .toolbar button {
+    font-size: 0.75rem;
+    padding: 8px 11px;
+  }
+
+  .flyer {
+    width: calc(100% - 16px);
+    min-height: 0;
+    margin: 12px auto 28px;
+    grid-template-columns: 1fr;
+    border-radius: 20px;
+  }
+
+  .flyer__photo {
+    min-height: 0;
+    height: min(38vh, 260px);
+  }
+
+  .flyer__body {
+    padding: 20px 18px 18px;
+  }
+
+  h1 {
+    font-size: 1.42rem;
+  }
+
+  .lead {
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+
+  .offers {
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .offer {
+    padding: 10px;
+  }
+
+  .offer strong {
+    font-size: 0.86rem;
+  }
+
+  .offer p {
+    font-size: 0.76rem;
+  }
+
+  .contact {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.88rem;
+  }
+
+  .contact a {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .offers {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media print {
   html,
   body {
@@ -192,12 +274,28 @@ html[lang="ru"] .offer strong {
     min-height: 148mm;
     height: 148mm;
     margin: 0;
+    grid-template-columns: 38% 1fr;
+    border-radius: 0;
     box-shadow: none;
     page-break-after: avoid;
   }
 
   .flyer__photo {
     min-height: 148mm;
+    height: auto;
+  }
+
+  .flyer__body {
+    padding: 14mm 13mm 11mm;
+  }
+
+  .offers {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact {
+    flex-direction: row;
+    align-items: center;
   }
 
   @page {
