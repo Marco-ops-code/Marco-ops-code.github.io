@@ -5,7 +5,7 @@
   if (!sheet || !toolbar || !photo) return;
 
   const lang = (document.documentElement.lang || "fr").slice(0, 2);
-  const copy = {
+  const i18n = {
     fr: {
       edit: "Éditer",
       done: "Terminer",
@@ -13,14 +13,40 @@
       photo: "Photo",
       choose: "Choisir une photo",
       original: "Photo d’origine",
+      shape: "Forme",
+      round: "Ronde",
+      square: "Carrée",
+      soft: "Arrondie",
       colors: "Couleurs",
       side: "Colonne",
+      sideText: "Texte colonne",
+      name: "Prénom",
       accent: "Accent",
       paper: "Fond",
       ink: "Texte",
+      muted: "Secondaire",
       bar: "Barre",
-      themes: "Thèmes",
+      themes: "Palettes",
+      chips: "Puces",
+      chipTo: "Appliquer la puce à",
+      addColor: "Ajouter une couleur",
+      add: "Ajouter",
+      saveTheme: "Enregistrer cette palette",
       size: "Taille du texte",
+      design: "Mise en page",
+      font: "Police",
+      sans: "Sans",
+      serif: "Serif",
+      tech: "Tech",
+      layouts: {
+        classic: "Classique",
+        right: "Colonne droite",
+        top: "Bandeau haut",
+        outline: "Contour",
+        compact: "Compact",
+        airy: "Aéré",
+        card: "Carte",
+      },
       hint: "Cliquez un texte sur le CV pour le modifier. Les liens se mettent à jour tout seuls.",
       blocks: "Blocs",
       addJob: "+ Expérience",
@@ -36,14 +62,40 @@
       photo: "Photo",
       choose: "Choose a photo",
       original: "Original photo",
+      shape: "Shape",
+      round: "Round",
+      square: "Square",
+      soft: "Rounded",
       colors: "Colors",
       side: "Column",
+      sideText: "Column text",
+      name: "First name",
       accent: "Accent",
       paper: "Paper",
       ink: "Text",
+      muted: "Secondary",
       bar: "Bar",
-      themes: "Themes",
+      themes: "Palettes",
+      chips: "Swatches",
+      chipTo: "Apply swatch to",
+      addColor: "Add a color",
+      add: "Add",
+      saveTheme: "Save this palette",
       size: "Text size",
+      design: "Layout",
+      font: "Typeface",
+      sans: "Sans",
+      serif: "Serif",
+      tech: "Tech",
+      layouts: {
+        classic: "Classic",
+        right: "Right column",
+        top: "Top banner",
+        outline: "Outline",
+        compact: "Compact",
+        airy: "Airy",
+        card: "Card",
+      },
       hint: "Click any text on the resume to edit it. Links update automatically.",
       blocks: "Blocks",
       addJob: "+ Experience",
@@ -59,14 +111,40 @@
       photo: "Фото",
       choose: "Выбрать фото",
       original: "Исходное фото",
+      shape: "Форма",
+      round: "Круг",
+      square: "Квадрат",
+      soft: "Скруглённая",
       colors: "Цвета",
       side: "Колонка",
+      sideText: "Текст колонки",
+      name: "Имя",
       accent: "Акцент",
       paper: "Фон",
       ink: "Текст",
+      muted: "Вторичный",
       bar: "Полоса",
-      themes: "Темы",
+      themes: "Палитры",
+      chips: "Образцы",
+      chipTo: "Куда применить",
+      addColor: "Добавить цвет",
+      add: "Добавить",
+      saveTheme: "Сохранить палитру",
       size: "Размер текста",
+      design: "Макет",
+      font: "Шрифт",
+      sans: "Гротеск",
+      serif: "Антиква",
+      tech: "Техно",
+      layouts: {
+        classic: "Классика",
+        right: "Справа",
+        top: "Сверху",
+        outline: "Контур",
+        compact: "Компакт",
+        airy: "Свободный",
+        card: "Карточка",
+      },
       hint: "Нажмите на текст в резюме, чтобы изменить его. Ссылки обновляются сами.",
       blocks: "Блоки",
       addJob: "+ Опыт",
@@ -75,45 +153,45 @@
       reset: "Сбросить",
       saved: "Сохранено на этом устройстве — Печать для PDF.",
     },
-  }[lang] || null;
-  const t = copy || {
-    edit: "Éditer",
-    done: "Terminer",
-    title: "Éditeur CV",
-    photo: "Photo",
-    choose: "Choisir une photo",
-    original: "Photo d’origine",
-    colors: "Couleurs",
-    side: "Colonne",
-    accent: "Accent",
-    paper: "Fond",
-    ink: "Texte",
-    bar: "Barre",
-    themes: "Thèmes",
-    size: "Taille du texte",
-    hint: "Cliquez un texte sur le CV pour le modifier. Les liens se mettent à jour tout seuls.",
-    blocks: "Blocs",
-    addJob: "+ Expérience",
-    addSkill: "+ Compétence",
-    addLine: "+ Ligne colonne",
-    reset: "Réinitialiser",
-    saved: "Enregistré sur cet appareil — Imprimer pour un PDF.",
   };
-
+  const t = i18n[lang] || i18n.fr;
   const defaults = {
     side: "#111111",
+    sideText: "#edf2f7",
+    name: "#ffffff",
     cyan: "#3ec6e0",
     paper: "#ffffff",
     ink: "#1a1a1a",
+    muted: "#5c5c5c",
     bar: "#5b2a6e",
     size: "100",
+    layout: "classic",
+    photo: "round",
+    font: "sans",
   };
   const themes = [
-    { side: "#111111", cyan: "#3ec6e0", bar: "#5b2a6e", paper: "#ffffff", ink: "#1a1a1a" },
-    { side: "#0f2744", cyan: "#7eb8d4", bar: "#1a365d", paper: "#ffffff", ink: "#132337" },
-    { side: "#14261c", cyan: "#6fbf73", bar: "#2d5a3d", paper: "#ffffff", ink: "#14261c" },
-    { side: "#2a1218", cyan: "#e8b4b8", bar: "#7a1f3d", paper: "#fff8f8", ink: "#2a1218" },
+    { side: "#111111", cyan: "#3ec6e0", bar: "#5b2a6e", paper: "#ffffff", ink: "#1a1a1a", muted: "#5c5c5c", name: "#ffffff", sideText: "#edf2f7" },
+    { side: "#0b1f3a", cyan: "#5b9fd6", bar: "#163a63", paper: "#ffffff", ink: "#12233a", muted: "#4d6480", name: "#ffffff", sideText: "#d7e6f5" },
+    { side: "#14261c", cyan: "#6fbf73", bar: "#2d5a3d", paper: "#ffffff", ink: "#14261c", muted: "#4d6b55", name: "#ffffff", sideText: "#dcefe0" },
+    { side: "#2a1218", cyan: "#e8b4b8", bar: "#7a1f3d", paper: "#fff8f8", ink: "#2a1218", muted: "#7a4a52", name: "#ffffff", sideText: "#f6dde0" },
+    { side: "#1c1410", cyan: "#f0a14a", bar: "#c45c26", paper: "#fffaf5", ink: "#241910", muted: "#7a5a40", name: "#fff4e8", sideText: "#f6e2cc" },
+    { side: "#161410", cyan: "#d4b562", bar: "#8a6d2e", paper: "#fffdf6", ink: "#1c1810", muted: "#6e6348", name: "#fff6d8", sideText: "#f0e6c4" },
+    { side: "#1a1024", cyan: "#c4a0e8", bar: "#5b2d8a", paper: "#fcf9ff", ink: "#1e1228", muted: "#6a5480", name: "#f4e9ff", sideText: "#e6d6f7" },
+    { side: "#0c2424", cyan: "#2ec4b6", bar: "#147a74", paper: "#f4fffd", ink: "#0e2422", muted: "#3d6e68", name: "#e8fffb", sideText: "#c8f4ee" },
+    { side: "#1a0e10", cyan: "#e05a6a", bar: "#8e2034", paper: "#fff7f7", ink: "#2a1014", muted: "#7a4450", name: "#ffe4e8", sideText: "#f5cfd4" },
+    { side: "#3d3428", cyan: "#c4a574", bar: "#8a7349", paper: "#f7f1e6", ink: "#2c2418", muted: "#6e624c", name: "#f7f1e6", sideText: "#f0e6d4" },
+    { side: "#2a3138", cyan: "#8aa4b8", bar: "#44515c", paper: "#f5f7f9", ink: "#1c2228", muted: "#5a6874", name: "#eef3f7", sideText: "#d5e0e8" },
+    { side: "#efe7d6", cyan: "#b08d57", bar: "#8a6a3a", paper: "#fffcf6", ink: "#2a2418", muted: "#6e6450", name: "#2a2418", sideText: "#3a3226" },
+    { side: "#12352c", cyan: "#7dcca0", bar: "#1f6b4f", paper: "#f3fbf6", ink: "#12352c", muted: "#4d7a64", name: "#e8fff2", sideText: "#cdebd9" },
+    { side: "#062a3f", cyan: "#3dbbff", bar: "#0a4e75", paper: "#f3fbff", ink: "#062a3f", muted: "#3d6e88", name: "#e7f6ff", sideText: "#c5e6f7" },
   ];
+  const stockChips = [
+    "#3ec6e0", "#5b9fd6", "#6fbf73", "#e8b4b8", "#f0a14a", "#d4b562",
+    "#c4a0e8", "#2ec4b6", "#e05a6a", "#c4a574", "#8aa4b8", "#b08d57",
+    "#ff6b35", "#00c2a8", "#4f46e5", "#111111", "#ffffff", "#5b2a6e",
+    "#e11d48", "#0ea5e9", "#84cc16", "#f59e0b",
+  ];
+  const layouts = ["classic", "right", "top", "outline", "compact", "airy", "card"];
   const editableSel = [
     ".side h1 span",
     ".side h1 b",
@@ -130,9 +208,21 @@
     ".bar span",
   ].join(",");
   const storageKey = "cv-editor:" + (location.pathname.split("/").pop() || "cv.html");
+  const chipsKey = "cv-editor-chips";
+  const userThemesKey = "cv-editor-user-themes";
   const originalHtml = sheet.innerHTML;
   const originalPhoto = photo.getAttribute("src");
   let saveTimer = 0;
+
+  function colorField(name, label) {
+    return (
+      "<label class=\"cv-editor__swatch\">" +
+        "<input type=\"color\" data-color=\"" + name + "\" value=\"" + defaults[name] + "\" />" +
+        "<span>" + label + "</span>" +
+        "<input type=\"text\" data-hex=\"" + name + "\" value=\"" + defaults[name] + "\" maxlength=\"7\" spellcheck=\"false\" />" +
+      "</label>"
+    );
+  }
 
   const panel = document.createElement("aside");
   panel.className = "cv-editor";
@@ -144,6 +234,26 @@
         "<label class=\"cv-file\">" + t.choose + "<input type=\"file\" accept=\"image/*\" /></label>" +
         "<button type=\"button\" class=\"is-ghost\" data-act=\"photo-reset\">" + t.original + "</button>" +
       "</div>" +
+      "<p style=\"margin:10px 0 6px\">" + t.shape + "</p>" +
+      "<div class=\"cv-editor__photos\">" +
+        "<button type=\"button\" data-photo=\"round\">" + t.round + "</button>" +
+        "<button type=\"button\" data-photo=\"square\">" + t.square + "</button>" +
+        "<button type=\"button\" data-photo=\"soft\">" + t.soft + "</button>" +
+      "</div>" +
+    "</div>" +
+    "<div class=\"cv-editor__block\">" +
+      "<h3>" + t.design + "</h3>" +
+      "<div class=\"cv-editor__designs\">" +
+        layouts.map(function (id) {
+          return "<button type=\"button\" data-layout=\"" + id + "\">" + t.layouts[id] + "</button>";
+        }).join("") +
+      "</div>" +
+      "<p style=\"margin:10px 0 6px\">" + t.font + "</p>" +
+      "<div class=\"cv-editor__fonts\">" +
+        "<button type=\"button\" data-font=\"sans\">" + t.sans + "</button>" +
+        "<button type=\"button\" data-font=\"serif\">" + t.serif + "</button>" +
+        "<button type=\"button\" data-font=\"tech\">" + t.tech + "</button>" +
+      "</div>" +
     "</div>" +
     "<div class=\"cv-editor__block\">" +
       "<h3>" + t.colors + "</h3>" +
@@ -152,14 +262,39 @@
         colorField("cyan", t.accent) +
         colorField("paper", t.paper) +
         colorField("ink", t.ink) +
+        colorField("sideText", t.sideText) +
+        colorField("name", t.name) +
+        colorField("muted", t.muted) +
         colorField("bar", t.bar) +
       "</div>" +
       "<p style=\"margin:10px 0 6px\">" + t.themes + "</p>" +
-      "<div class=\"cv-editor__themes\"></div>" +
+      "<div class=\"cv-editor__themes\" data-stock></div>" +
+      "<div class=\"cv-editor__themes\" data-user></div>" +
+      "<button type=\"button\" data-act=\"save-theme\" style=\"margin-top:8px\">" + t.saveTheme + "</button>" +
+      "<p style=\"margin:10px 0 6px\">" + t.chips + "</p>" +
+      "<label class=\"hint\">" + t.chipTo +
+        "<select data-chip-target>" +
+          "<option value=\"cyan\">" + t.accent + "</option>" +
+          "<option value=\"side\">" + t.side + "</option>" +
+          "<option value=\"bar\">" + t.bar + "</option>" +
+          "<option value=\"paper\">" + t.paper + "</option>" +
+          "<option value=\"ink\">" + t.ink + "</option>" +
+          "<option value=\"sideText\">" + t.sideText + "</option>" +
+          "<option value=\"name\">" + t.name + "</option>" +
+          "<option value=\"muted\">" + t.muted + "</option>" +
+        "</select>" +
+      "</label>" +
+      "<div class=\"cv-editor__chips\" data-stock-chips></div>" +
+      "<div class=\"cv-editor__chips\" data-user-chips style=\"margin-top:6px\"></div>" +
+      "<p style=\"margin:10px 0 6px\">" + t.addColor + "</p>" +
+      "<div class=\"cv-editor__addcolor\">" +
+        "<input type=\"color\" data-new-chip value=\"#4f46e5\" />" +
+        "<button type=\"button\" class=\"is-primary\" data-act=\"add-chip\">" + t.add + "</button>" +
+      "</div>" +
     "</div>" +
     "<div class=\"cv-editor__block\">" +
       "<h3>" + t.size + "</h3>" +
-      "<input type=\"range\" min=\"90\" max=\"112\" value=\"100\" data-size />" +
+      "<input type=\"range\" min=\"88\" max=\"118\" value=\"100\" data-size />" +
     "</div>" +
     "<div class=\"cv-editor__block\">" +
       "<p class=\"hint\">" + t.hint + "</p>" +
@@ -180,65 +315,185 @@
     "</div>";
   document.body.insertBefore(panel, toolbar);
 
-  const themeWrap = panel.querySelector(".cv-editor__themes");
-  themes.forEach(function (theme) {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "cv-editor__theme";
-    btn.style.background = "linear-gradient(135deg, " + theme.side + " 50%, " + theme.cyan + " 50%)";
-    btn.addEventListener("click", function () {
-      applyColors(theme);
-      syncColorInputs(theme);
-      scheduleSave();
-    });
-    themeWrap.appendChild(btn);
-  });
-
   const toggle = document.createElement("button");
   toggle.type = "button";
   toggle.className = "cv-edit-toggle";
   toggle.textContent = t.edit;
   toolbar.appendChild(toggle);
 
-  function colorField(name, label) {
-    return (
-      "<label class=\"cv-editor__swatch\">" +
-        "<input type=\"color\" data-color=\"" + name + "\" value=\"" + defaults[name] + "\" />" +
-        "<span>" + label + "</span>" +
-      "</label>"
-    );
+  function readStore(key, fallback) {
+    try {
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (error) {
+      return fallback;
+    }
+  }
+
+  function writeStore(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      /* quota */
+    }
+  }
+
+  function normalizeHex(value) {
+    const text = String(value || "").trim();
+    if (/^#[0-9a-fA-F]{6}$/.test(text)) return text.toLowerCase();
+    if (/^#[0-9a-fA-F]{3}$/.test(text)) {
+      return ("#" + text[1] + text[1] + text[2] + text[2] + text[3] + text[3]).toLowerCase();
+    }
+    return "";
   }
 
   function currentPhoto() {
     return document.querySelector(".side__photo");
   }
 
-  function applyColors(colors) {
-    const root = document.documentElement;
-    root.style.setProperty("--side", colors.side || defaults.side);
-    root.style.setProperty("--cyan", colors.cyan || defaults.cyan);
-    root.style.setProperty("--paper", colors.paper || defaults.paper);
-    root.style.setProperty("--ink", colors.ink || defaults.ink);
-    root.style.setProperty("--bar", colors.bar || defaults.bar);
-    if (colors.size) {
-      sheet.style.fontSize = colors.size + "%";
-      const range = panel.querySelector("[data-size]");
-      if (range) range.value = colors.size;
-    }
-  }
-
-  function syncColorInputs(colors) {
-    panel.querySelectorAll("[data-color]").forEach(function (input) {
-      if (colors[input.dataset.color]) input.value = colors[input.dataset.color];
-    });
-  }
-
   function readColors() {
-    const colors = { size: panel.querySelector("[data-size]").value };
+    const colors = {
+      size: panel.querySelector("[data-size]").value,
+      layout: sheet.getAttribute("data-layout") || defaults.layout,
+      photo: sheet.getAttribute("data-photo") || defaults.photo,
+      font: sheet.getAttribute("data-font") || defaults.font,
+    };
     panel.querySelectorAll("[data-color]").forEach(function (input) {
       colors[input.dataset.color] = input.value;
     });
     return colors;
+  }
+
+  function syncColorInputs(colors) {
+    panel.querySelectorAll("[data-color]").forEach(function (input) {
+      const value = colors[input.dataset.color];
+      if (!value) return;
+      input.value = value;
+      const hex = panel.querySelector("[data-hex=\"" + input.dataset.color + "\"]");
+      if (hex) hex.value = value;
+    });
+    const range = panel.querySelector("[data-size]");
+    if (range && colors.size) range.value = colors.size;
+  }
+
+  function markOn(group, attr, value) {
+    panel.querySelectorAll("[" + attr + "]").forEach(function (btn) {
+      btn.classList.toggle("is-on", btn.getAttribute(attr) === value);
+    });
+  }
+
+  function applyColors(colors) {
+    const root = document.documentElement;
+    const merged = Object.assign({}, defaults, colors);
+    root.style.setProperty("--side", merged.side);
+    root.style.setProperty("--side-text", merged.sideText);
+    root.style.setProperty("--name", merged.name);
+    root.style.setProperty("--cyan", merged.cyan);
+    root.style.setProperty("--paper", merged.paper);
+    root.style.setProperty("--ink", merged.ink);
+    root.style.setProperty("--muted", merged.muted);
+    root.style.setProperty("--bar", merged.bar);
+    sheet.style.fontSize = merged.size ? merged.size + "%" : "";
+    sheet.setAttribute("data-layout", merged.layout || "classic");
+    sheet.setAttribute("data-photo", merged.photo || "round");
+    sheet.setAttribute("data-font", merged.font || "sans");
+    markOn(panel, "data-layout", merged.layout || "classic");
+    markOn(panel, "data-photo", merged.photo || "round");
+    markOn(panel, "data-font", merged.font || "sans");
+    syncColorInputs(merged);
+  }
+
+  function renderThemes() {
+    const stock = panel.querySelector("[data-stock]");
+    const user = panel.querySelector("[data-user]");
+    stock.innerHTML = "";
+    user.innerHTML = "";
+    themes.forEach(function (theme) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "cv-editor__theme";
+      btn.title = theme.cyan;
+      btn.style.background = "linear-gradient(135deg, " + theme.side + " 50%, " + theme.cyan + " 50%)";
+      btn.addEventListener("click", function () {
+        applyColors(Object.assign(readColors(), theme));
+        scheduleSave();
+      });
+      stock.appendChild(btn);
+    });
+    const saved = readStore(userThemesKey, []);
+    saved.forEach(function (theme, index) {
+      const wrap = document.createElement("span");
+      wrap.style.position = "relative";
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "cv-editor__theme";
+      btn.style.background = "linear-gradient(135deg, " + theme.side + " 50%, " + theme.cyan + " 50%)";
+      btn.addEventListener("click", function () {
+        applyColors(Object.assign(readColors(), theme));
+        scheduleSave();
+      });
+      const x = document.createElement("button");
+      x.type = "button";
+      x.className = "cv-editor__chip-x";
+      x.textContent = "×";
+      x.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        saved.splice(index, 1);
+        writeStore(userThemesKey, saved);
+        renderThemes();
+      });
+      wrap.appendChild(btn);
+      wrap.appendChild(x);
+      user.appendChild(wrap);
+    });
+  }
+
+  function renderChips() {
+    const stock = panel.querySelector("[data-stock-chips]");
+    const user = panel.querySelector("[data-user-chips]");
+    stock.innerHTML = "";
+    user.innerHTML = "";
+    stockChips.forEach(function (hex) {
+      stock.appendChild(chipButton(hex, false));
+    });
+    const extras = readStore(chipsKey, []);
+    extras.forEach(function (hex, index) {
+      user.appendChild(chipButton(hex, true, index));
+    });
+  }
+
+  function chipButton(hex, custom, index) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "cv-editor__chip" + (custom ? " is-custom" : "");
+    btn.style.background = hex;
+    btn.title = hex;
+    btn.addEventListener("click", function () {
+      const target = panel.querySelector("[data-chip-target]").value;
+      const next = readColors();
+      next[target] = hex;
+      applyColors(next);
+      scheduleSave();
+    });
+    if (!custom) return btn;
+    const wrap = document.createElement("span");
+    wrap.style.position = "relative";
+    const x = document.createElement("button");
+    x.type = "button";
+    x.className = "cv-editor__chip-x";
+    x.textContent = "×";
+    x.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const extras = readStore(chipsKey, []);
+      extras.splice(index, 1);
+      writeStore(chipsKey, extras);
+      renderChips();
+    });
+    wrap.appendChild(btn);
+    wrap.appendChild(x);
+    return wrap;
   }
 
   function editableNodes() {
@@ -366,7 +621,10 @@
     } catch (error) {
       return;
     }
-    if (!raw) return;
+    if (!raw) {
+      applyColors(defaults);
+      return;
+    }
     try {
       const data = JSON.parse(raw);
       if (data.html) {
@@ -377,12 +635,9 @@
       }
       const img = currentPhoto();
       if (img && data.photo) img.setAttribute("src", data.photo);
-      if (data.colors) {
-        applyColors(data.colors);
-        syncColorInputs(data.colors);
-      }
+      applyColors(data.colors || defaults);
     } catch (error) {
-      /* ignore broken payload */
+      applyColors(defaults);
     }
   }
 
@@ -396,9 +651,6 @@
     const img = currentPhoto();
     if (img) img.setAttribute("src", originalPhoto);
     applyColors(defaults);
-    syncColorInputs(defaults);
-    panel.querySelector("[data-size]").value = defaults.size;
-    sheet.style.fontSize = "";
     if (document.body.classList.contains("cv-editing")) {
       setEditing(true);
     }
@@ -497,6 +749,30 @@
   });
 
   panel.addEventListener("click", function (event) {
+    const layout = event.target.closest("[data-layout]");
+    if (layout && layout.closest(".cv-editor__designs")) {
+      const next = readColors();
+      next.layout = layout.getAttribute("data-layout");
+      applyColors(next);
+      scheduleSave();
+      return;
+    }
+    const photoBtn = event.target.closest("[data-photo]");
+    if (photoBtn && photoBtn.closest(".cv-editor__photos")) {
+      const next = readColors();
+      next.photo = photoBtn.getAttribute("data-photo");
+      applyColors(next);
+      scheduleSave();
+      return;
+    }
+    const fontBtn = event.target.closest("[data-font]");
+    if (fontBtn && fontBtn.closest(".cv-editor__fonts")) {
+      const next = readColors();
+      next.font = fontBtn.getAttribute("data-font");
+      applyColors(next);
+      scheduleSave();
+      return;
+    }
     const act = event.target.closest("[data-act]");
     if (!act) return;
     if (act.dataset.act === "photo-reset") {
@@ -508,11 +784,41 @@
     if (act.dataset.act === "add-job") addJob();
     if (act.dataset.act === "add-skill") addSkill();
     if (act.dataset.act === "add-line") addLine();
+    if (act.dataset.act === "save-theme") {
+      const saved = readStore(userThemesKey, []);
+      saved.push(readColors());
+      writeStore(userThemesKey, saved);
+      renderThemes();
+    }
+    if (act.dataset.act === "add-chip") {
+      const hex = normalizeHex(panel.querySelector("[data-new-chip]").value);
+      if (!hex) return;
+      const extras = readStore(chipsKey, []);
+      if (extras.indexOf(hex) === -1) extras.push(hex);
+      writeStore(chipsKey, extras);
+      renderChips();
+    }
   });
 
   panel.querySelectorAll("[data-color]").forEach(function (input) {
     input.addEventListener("input", function () {
-      applyColors(readColors());
+      const next = readColors();
+      next[input.dataset.color] = input.value;
+      applyColors(next);
+      scheduleSave();
+    });
+  });
+
+  panel.querySelectorAll("[data-hex]").forEach(function (input) {
+    input.addEventListener("change", function () {
+      const hex = normalizeHex(input.value);
+      if (!hex) {
+        input.value = readColors()[input.dataset.hex];
+        return;
+      }
+      const next = readColors();
+      next[input.dataset.hex] = hex;
+      applyColors(next);
       scheduleSave();
     });
   });
@@ -529,6 +835,8 @@
     }
   });
 
+  renderThemes();
+  renderChips();
   restore();
   if (/[?&]edit=1(?:&|$)/.test(location.search)) {
     setEditing(true);

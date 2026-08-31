@@ -103,17 +103,24 @@ body.cv-editing .cv-editor {
 }
 
 .cv-editor__swatch {
-  display: flex;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  grid-template-rows: auto auto;
   align-items: center;
-  gap: 8px;
+  gap: 4px 8px;
   min-width: 0;
   color: #edf2f7;
   font-size: 0.74rem;
 }
 
+.cv-editor__swatch span {
+  grid-column: 2;
+}
+
 .cv-editor__swatch input[type="color"] {
+  grid-row: 1 / span 2;
   width: 34px;
-  height: 28px;
+  height: 36px;
   padding: 0;
   border: 1px solid #3a434c;
   border-radius: 6px;
@@ -121,19 +128,113 @@ body.cv-editing .cv-editor {
   cursor: pointer;
 }
 
-.cv-editor__themes {
+.cv-editor__swatch input[type="text"] {
+  width: 100%;
+  min-width: 0;
+  padding: 3px 6px;
+  border: 1px solid #3a434c;
+  border-radius: 4px;
+  background: #1c1c1c;
+  color: #edf2f7;
+  font: inherit;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+}
+
+.cv-editor__themes,
+.cv-editor__chips {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-.cv-editor__theme {
+.cv-editor__theme,
+.cv-editor__chip {
+  position: relative;
   width: 28px;
   height: 28px;
   padding: 0;
   border-radius: 999px;
   border: 2px solid #ffffff;
   cursor: pointer;
+}
+
+.cv-editor__chip.is-custom {
+  border-style: dashed;
+}
+
+.cv-editor__chip-x {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: 0;
+  border-radius: 99px;
+  background: #c43b7a;
+  color: #fff;
+  font-size: 10px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cv-editor select,
+.cv-editor__hexadd {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #3a434c;
+  border-radius: 8px;
+  background: #1c1c1c;
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.75rem;
+}
+
+.cv-editor__addcolor {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.cv-editor__addcolor input[type="color"] {
+  width: 36px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #3a434c;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cv-editor__designs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.cv-editor__designs button,
+.cv-editor__fonts button,
+.cv-editor__photos button {
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.72rem;
+  text-align: left;
+}
+
+.cv-editor__designs button.is-on,
+.cv-editor__fonts button.is-on,
+.cv-editor__photos button.is-on {
+  background: #3ec6e0;
+  border-color: #3ec6e0;
+  color: #111111;
+}
+
+.cv-editor__fonts,
+.cv-editor__photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .cv-editor input[type="range"] {
