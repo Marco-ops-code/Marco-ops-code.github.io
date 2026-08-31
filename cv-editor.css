@@ -1,0 +1,237 @@
+.cv-editor {
+  display: none;
+}
+
+body.cv-editing {
+  background: #d7e0e6;
+}
+
+body.cv-editing .cv-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  width: 100%;
+  max-height: 46vh;
+  overflow: auto;
+  padding: 14px 14px 18px;
+  background: #111111;
+  color: #f4f7fb;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.18);
+}
+
+.cv-editor h2 {
+  margin: 0;
+  color: #3ec6e0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cv-editor h3 {
+  margin: 0 0 8px;
+  color: #3ec6e0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cv-editor p,
+.cv-editor .hint {
+  margin: 0;
+  color: #c5d0dc;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.cv-editor__block {
+  padding-top: 10px;
+  border-top: 1px solid #2a3138;
+}
+
+.cv-editor__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cv-editor button,
+.cv-editor label.cv-file {
+  appearance: none;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 7px 11px;
+  border-radius: 999px;
+  border: 1px solid #3a434c;
+  background: #1c1c1c;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.cv-editor button:hover,
+.cv-editor label.cv-file:hover {
+  border-color: #3ec6e0;
+}
+
+.cv-editor button.is-primary {
+  background: #3ec6e0;
+  border-color: #3ec6e0;
+  color: #111111;
+}
+
+.cv-editor button.is-ghost {
+  background: transparent;
+}
+
+.cv-editor input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.cv-editor__swatches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.cv-editor__swatch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: #edf2f7;
+  font-size: 0.74rem;
+}
+
+.cv-editor__swatch input[type="color"] {
+  width: 34px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #3a434c;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cv-editor__themes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cv-editor__theme {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: 999px;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+}
+
+.cv-editor input[type="range"] {
+  width: 100%;
+  accent-color: #3ec6e0;
+}
+
+body.cv-editing [contenteditable="true"] {
+  outline: 1px dashed transparent;
+  border-radius: 3px;
+  cursor: text;
+}
+
+body.cv-editing [contenteditable="true"]:hover,
+body.cv-editing [contenteditable="true"]:focus {
+  outline-color: #3ec6e0;
+  background: rgb(62 198 224 / 8%);
+}
+
+body.cv-editing .side__photo {
+  cursor: pointer;
+  box-shadow: 0 0 0 3px #3ec6e0;
+}
+
+body.cv-editing .job,
+body.cv-editing .bar,
+body.cv-editing .side li {
+  position: relative;
+}
+
+.cv-del {
+  display: none;
+}
+
+body.cv-editing .cv-del {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  z-index: 4;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 99px;
+  background: #c43b7a;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+body.cv-editing .side li .cv-del {
+  top: 0;
+  right: -4px;
+}
+
+.toolbar .cv-edit-toggle.is-on {
+  background: #3ec6e0;
+  border-color: #3ec6e0;
+  color: #111111;
+}
+
+@media (min-width: 1100px) {
+  body.cv-editing {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  body.cv-editing .cv-editor {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    width: 300px;
+    height: 100vh;
+    max-height: none;
+    box-shadow: none;
+  }
+
+  body.cv-editing .toolbar,
+  body.cv-editing .sheet {
+    grid-column: 2;
+    width: min(210mm, 100%);
+    justify-self: center;
+  }
+}
+
+@media print {
+  .cv-editor,
+  .cv-del,
+  .cv-edit-toggle {
+    display: none !important;
+  }
+
+  body.cv-editing {
+    display: block;
+    background: #ffffff;
+  }
+}

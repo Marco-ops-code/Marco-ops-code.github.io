@@ -27,7 +27,7 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp index.html style.css script.js i18n.js contact.php sitemap.xml robots.txt mentions.html cv.css cv.html cv-salarie.html cv-en.html cv-ru.html cv-marc-onel-volcimus.pdf cv-marc-onel-volcimus-salarie.pdf cv-marc-onel-volcimus-en.pdf cv-marc-onel-volcimus-ru.pdf flyer.css flyer-fr.html flyer-en.html flyer-ru.html flyer-marc-onel-volcimus-fr.pdf flyer-marc-onel-volcimus-en.pdf flyer-marc-onel-volcimus-ru.pdf _site/
+          cp index.html style.css script.js i18n.js contact.php sitemap.xml robots.txt mentions.html cv.css cv-editor.css cv-editor.js cv.html cv-salarie.html cv-en.html cv-ru.html cv-marc-onel-volcimus.pdf cv-marc-onel-volcimus-salarie.pdf cv-marc-onel-volcimus-en.pdf cv-marc-onel-volcimus-ru.pdf flyer.css flyer-fr.html flyer-en.html flyer-ru.html flyer-marc-onel-volcimus-fr.pdf flyer-marc-onel-volcimus-en.pdf flyer-marc-onel-volcimus-ru.pdf _site/
           cp -r assets slides _site/
           rm -f _site/assets/logoMarcportfolio.png
           rm -f _site/assets/projects/windows.png _site/assets/projects/mobile.png
