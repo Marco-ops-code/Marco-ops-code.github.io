@@ -3962,8 +3962,34 @@ html.js .reveal:not(.visible) {
   }
 
   .work-steps::before,
-  .work-steps__track {
-    display: none;
+  .work-steps__track,
+  .work-steps__progress,
+  .work-steps__glow {
+    display: none !important;
+  }
+
+  .work-steps li.is-current::before {
+    animation: none;
+  }
+
+  .work-steps li.is-filled::before {
+    color: var(--section-color, var(--primary));
+    background: var(--bg, #ffffff);
+    border-color: var(--section-color, var(--primary));
+    box-shadow: none;
+  }
+
+  .work-steps li.is-filled:not(:last-child)::after {
+    background: color-mix(in srgb, var(--section-color, var(--c-green)) 28%, transparent);
+    box-shadow: none;
+  }
+
+  html.js #process.reveal:not(.visible),
+  #process.reveal,
+  #process.reveal.visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   .work-steps li:not(:last-child)::after {

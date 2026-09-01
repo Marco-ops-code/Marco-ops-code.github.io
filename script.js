@@ -980,8 +980,27 @@ function initProcessFlow() {
     }
   }
 
+  function freezePhone() {
+    stop();
+    process.classList.remove("is-flowing");
+    items.forEach((item) => {
+      item.classList.remove("is-filled", "is-current");
+    });
+    if (glow) {
+      glow.style.opacity = "0";
+    }
+    if (progress) {
+      progress.style.width = "0";
+      progress.style.height = "0";
+    }
+  }
+
   function start() {
     stop();
+    if (isPhone()) {
+      freezePhone();
+      return;
+    }
     play();
   }
 
@@ -997,6 +1016,16 @@ function initProcessFlow() {
     { threshold: 0.28 }
   );
   view.observe(process);
+
+  window.matchMedia("(max-width: 760px)").addEventListener("change", (event) => {
+    if (event.matches) {
+      freezePhone();
+      return;
+    }
+    if (started) {
+      start();
+    }
+  });
 }
 
 
