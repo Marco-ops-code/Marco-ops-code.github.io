@@ -613,7 +613,7 @@ body.nav-open .nav-backdrop {
   height: 100%;
   max-width: 100%;
   object-fit: cover;
-  object-position: center 18%;
+  object-position: center 36%;
   border-radius: 21px;
   background: #ece7df;
   transform: scale(1);
