@@ -280,9 +280,21 @@ body.cv-editing .side__photo {
   box-shadow: 0 0 0 3px #3ec6e0;
 }
 
+body.cv-editing .side h1,
+body.cv-editing .side h2,
+body.cv-editing .main h2,
+body.cv-editing .job h3,
+body.cv-editing .side__role {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  cursor: text;
+  min-height: 1.15em;
+}
+
 body.cv-editing .job,
 body.cv-editing .bar,
-body.cv-editing .side li {
+body.cv-editing .side li,
+body.cv-editing .qualities li {
   position: relative;
 }
 

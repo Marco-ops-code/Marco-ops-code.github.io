@@ -56,6 +56,7 @@
       addJob: "+ Expérience",
       addSkill: "+ Compétence",
       addLine: "+ Ligne colonne",
+      addQual: "+ Qualité",
       reset: "Réinitialiser",
       saved: "Enregistré sur cet appareil — Imprimer pour un PDF.",
     },
@@ -109,6 +110,7 @@
       addJob: "+ Experience",
       addSkill: "+ Skill",
       addLine: "+ Sidebar line",
+      addQual: "+ Quality",
       reset: "Reset",
       saved: "Saved on this device — Print for a PDF.",
     },
@@ -162,6 +164,7 @@
       addJob: "+ Опыт",
       addSkill: "+ Навык",
       addLine: "+ Строка слева",
+      addQual: "+ Качество",
       reset: "Сбросить",
       saved: "Сохранено на этом устройстве — Печать для PDF.",
     },
@@ -220,6 +223,7 @@
     ".edu-block strong",
     ".edu-block p",
     ".bar span",
+    ".qualities li",
   ].join(",");
   const storageKey = "cv-editor:" + (location.pathname.split("/").pop() || "cv.html");
   const chipsKey = "cv-editor-chips";
@@ -328,6 +332,7 @@
         "<button type=\"button\" data-act=\"add-job\">" + t.addJob + "</button>" +
         "<button type=\"button\" data-act=\"add-skill\">" + t.addSkill + "</button>" +
         "<button type=\"button\" data-act=\"add-line\">" + t.addLine + "</button>" +
+        "<button type=\"button\" data-act=\"add-qual\">" + t.addQual + "</button>" +
       "</div>" +
     "</div>" +
     "<div class=\"cv-editor__block\">" +
@@ -578,9 +583,10 @@
       lastEdit = el;
     });
     el.addEventListener("keydown", function (event) {
-      if (event.key === "Enter" && !el.matches("p, li, .lead, .job__when")) {
+      if (event.key === "Enter" && el.matches("h1, h2, h3, .side__role, .bar span, strong")) {
         event.preventDefault();
-        el.blur();
+      } else if (event.key === "Enter" && !el.matches("p, li, .lead, .job__when")) {
+        event.preventDefault();
       }
     });
     el.addEventListener("paste", function (event) {
@@ -642,7 +648,7 @@
     sheet.querySelectorAll(".cv-del").forEach(function (btn) {
       btn.remove();
     });
-    sheet.querySelectorAll(".job, .bar, .side li").forEach(function (node) {
+    sheet.querySelectorAll(".job, .bar, .side li, .qualities li").forEach(function (node) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "cv-del";
@@ -704,6 +710,7 @@
     }
     if (!raw) {
       applyColors(defaults);
+      ensureQualities();
       return;
     }
     try {
@@ -717,8 +724,10 @@
       const img = currentPhoto();
       if (img && data.photo) img.setAttribute("src", data.photo);
       applyColors(data.colors || defaults);
+      ensureQualities();
     } catch (error) {
       applyColors(defaults);
+      ensureQualities();
     }
   }
 
@@ -803,6 +812,39 @@
     scheduleSave();
   }
 
+  function addQual() {
+    ensureQualities();
+    const list = sheet.querySelector(".qualities");
+    if (!list) return;
+    const item = document.createElement("li");
+    item.textContent = lang === "en" ? "New quality" : lang === "ru" ? "Новое качество" : "Nouvelle qualité";
+    list.appendChild(item);
+    setEditing(true);
+    scheduleSave();
+  }
+
+  function ensureQualities() {
+    if (sheet.querySelector(".qualities")) return;
+    const main = sheet.querySelector(".main");
+    if (!main) return;
+    const heading = document.createElement("h2");
+    heading.textContent = lang === "en" ? "Qualities" : lang === "ru" ? "Качества" : "Qualités";
+    const list = document.createElement("ul");
+    list.className = "qualities";
+    const items = lang === "en"
+      ? ["Autonomy", "Rigour", "Teamwork", "Curiosity", "Organisation"]
+      : lang === "ru"
+        ? ["Самостоятельность", "Аккуратность", "Командная работа", "Любознательность", "Организованность"]
+        : ["Autonomie", "Rigueur", "Esprit d’équipe", "Curiosité", "Organisation"];
+    items.forEach(function (label) {
+      const li = document.createElement("li");
+      li.textContent = label;
+      list.appendChild(li);
+    });
+    main.appendChild(heading);
+    main.appendChild(list);
+  }
+
   function addLine() {
     const lists = sheet.querySelectorAll(".side ul");
     const list = lists[0];
@@ -865,6 +907,7 @@
     if (act.dataset.act === "add-job") addJob();
     if (act.dataset.act === "add-skill") addSkill();
     if (act.dataset.act === "add-line") addLine();
+    if (act.dataset.act === "add-qual") addQual();
     if (act.dataset.act === "insert-text") {
       const box = panel.querySelector("[data-insert-text]");
       const text = box.value;
@@ -939,6 +982,7 @@
   renderThemes();
   renderChips();
   restore();
+  ensureQualities();
   if (/[?&]edit=1(?:&|$)/.test(location.search)) {
     setEditing(true);
   }
