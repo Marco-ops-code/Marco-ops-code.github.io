@@ -31,28 +31,6 @@
   --mail-deep: #c5221f;
   --phone: #007aff;
   --phone-deep: #0055d4;
-
-  --glass-sheen: linear-gradient(
-    125deg,
-    rgba(255, 255, 255, 0.52) 0%,
-    rgba(255, 255, 255, 0.1) 26%,
-    transparent 54%
-  );
-  --glass-3d:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.92),
-    inset -1px -1px 0 rgba(15, 23, 42, 0.08),
-    inset 0 -22px 32px rgba(15, 23, 42, 0.045),
-    0 1px 0 rgba(255, 255, 255, 0.7),
-    0 9px 0 -1px color-mix(in srgb, var(--section-color, #64748b) 20%, #e4ebf2),
-    0 10px 0 -1px rgba(15, 23, 42, 0.16),
-    0 24px 48px rgba(15, 23, 42, 0.12);
-  --glass-3d-sm:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
-    inset -1px -1px 0 rgba(15, 23, 42, 0.07),
-    0 1px 0 rgba(255, 255, 255, 0.55),
-    0 5px 0 -1px color-mix(in srgb, var(--section-color, #64748b) 18%, #e6edf3),
-    0 6px 0 -1px rgba(15, 23, 42, 0.14),
-    0 16px 30px rgba(15, 23, 42, 0.1);
 }
 
 html.theme-dark,
@@ -83,26 +61,6 @@ body.dark {
   --mail-deep: #fb7185;
   --phone: #60a5fa;
   --phone-deep: #3b82f6;
-
-  --glass-sheen: linear-gradient(
-    125deg,
-    rgba(255, 255, 255, 0.14) 0%,
-    rgba(255, 255, 255, 0.04) 24%,
-    transparent 52%
-  );
-  --glass-3d:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.14),
-    inset -1px -1px 0 rgba(0, 0, 0, 0.45),
-    inset 0 -22px 32px rgba(0, 0, 0, 0.18),
-    0 9px 0 -1px color-mix(in srgb, var(--section-color, #64748b) 32%, #0a0a0a),
-    0 10px 0 -1px rgba(0, 0, 0, 0.55),
-    0 26px 52px rgba(0, 0, 0, 0.42);
-  --glass-3d-sm:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.12),
-    inset -1px -1px 0 rgba(0, 0, 0, 0.4),
-    0 5px 0 -1px color-mix(in srgb, var(--section-color, #64748b) 28%, #0a0a0a),
-    0 6px 0 -1px rgba(0, 0, 0, 0.5),
-    0 16px 32px rgba(0, 0, 0, 0.36);
 }
 
 * {
@@ -612,7 +570,9 @@ body.nav-open .nav-backdrop {
   background: color-mix(in srgb, #ffffff 62%, transparent);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: var(--glass-3d-sm);
+  box-shadow:
+    0 12px 28px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 #home .hero-brand::after,
@@ -898,27 +858,10 @@ body.dark .hero-desk::after {
     );
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  box-shadow: var(--glass-3d);
+  box-shadow:
+    0 18px 48px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
   overflow: visible;
-}
-
-#home.hero::before,
-.section.container::before,
-.footer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  background: var(--glass-sheen);
-}
-
-#home.hero > *,
-.section.container > *,
-.footer > * {
-  position: relative;
-  z-index: 1;
 }
 
 html.theme-dark #home.hero,
@@ -934,7 +877,9 @@ body.dark .footer {
       rgba(17, 17, 17, 0.62) 100%
     );
   border-color: color-mix(in srgb, var(--section-color) 38%, rgba(255, 255, 255, 0.08));
-  box-shadow: var(--glass-3d);
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 #home.hero {
@@ -950,8 +895,9 @@ body.dark .footer {
       rgba(255, 255, 255, 0.4) 100%
     );
   box-shadow:
-    var(--glass-3d),
-    0 28px 70px color-mix(in srgb, var(--c-blue) 14%, transparent);
+    0 18px 48px rgba(15, 23, 42, 0.07),
+    0 28px 70px color-mix(in srgb, var(--c-blue) 14%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
 }
 
 html.theme-dark #home.hero,
@@ -963,8 +909,9 @@ body.dark #home.hero {
       rgba(17, 17, 17, 0.48) 100%
     );
   box-shadow:
-    var(--glass-3d),
-    0 28px 70px color-mix(in srgb, var(--c-blue) 22%, transparent);
+    0 18px 48px rgba(0, 0, 0, 0.32),
+    0 28px 70px color-mix(in srgb, var(--c-blue) 22%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 #home.hero .container {
@@ -1124,7 +1071,9 @@ body.dark #home h1 {
   border: 1px solid color-mix(in srgb, var(--section-color, var(--c-sky)) 28%, rgba(255, 255, 255, 0.7));
   border-radius: 20px;
   padding: 8px;
-  box-shadow: var(--glass-3d-sm);
+  box-shadow:
+    0 10px 24px rgba(15, 23, 42, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -1255,7 +1204,7 @@ body.dark #home h1 {
       color-mix(in srgb, var(--section-color, var(--c-indigo)) 8%, rgba(255, 255, 255, 0.7)) 0%,
       rgba(255, 255, 255, 0.42) 100%
     );
-  box-shadow: var(--glass-3d-sm);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
   opacity: 0.72;
   filter: saturate(0.86);
   transition:
@@ -1278,8 +1227,9 @@ body.dark #home h1 {
   transform: translateY(-2px);
   border-color: color-mix(in srgb, var(--section-color, var(--c-indigo)) 48%, #ffffff);
   box-shadow:
-    var(--glass-3d-sm),
-    0 14px 28px color-mix(in srgb, var(--section-color, var(--c-indigo)) 16%, transparent);
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 14px 28px color-mix(in srgb, var(--section-color, var(--c-indigo)) 16%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--section-color, var(--c-indigo)) 22%, transparent);
 }
 
 .work-cabinet__tab:focus-visible {
@@ -1392,7 +1342,9 @@ body.dark #home h1 {
       color-mix(in srgb, var(--section-color, var(--c-indigo)) 10%, rgba(255, 255, 255, 0.78)) 0%,
       rgba(255, 255, 255, 0.94) 100%
     );
-  box-shadow: var(--glass-3d-sm);
+  box-shadow:
+    0 16px 36px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .work-panel {
@@ -1643,8 +1595,8 @@ body.dark .work-cabinet__drawer {
       color-mix(in srgb, var(--offer-ink) 12%, rgba(255, 255, 255, 0.72)) 0%,
       rgba(255, 255, 255, 0.42) 100%
     );
-  box-shadow: var(--glass-3d-sm);
-  overflow: visible;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  overflow: hidden;
   transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
 }
 
@@ -1657,7 +1609,7 @@ body.dark .work-cabinet__drawer {
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--offer-ink) 48%, #ffffff);
   box-shadow:
-    var(--glass-3d-sm),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
     0 16px 32px color-mix(in srgb, var(--offer-ink) 14%, transparent);
 }
 
@@ -2535,7 +2487,7 @@ body.dark .contact-wa {
   background: color-mix(in srgb, #ffffff 48%, transparent);
   color: var(--text);
   text-decoration: none;
-  box-shadow: var(--glass-3d-sm);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   transition: transform 0.28s ease, border-color 0.28s ease;
@@ -3067,7 +3019,6 @@ body.dark .contact-link-card--phone:hover .contact-link-card__value {
   text-decoration: none;
   font-size: 1.5rem;
   backdrop-filter: blur(7px);
-  box-shadow: var(--glass-3d-sm);
   transition: transform 0.28s ease, color 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
 }
 
@@ -3622,32 +3573,6 @@ html.js .reveal:not(.visible) {
 }
 
 @media (max-width: 760px) {
-  :root {
-    --glass-3d:
-      inset 1px 1px 0 rgba(255, 255, 255, 0.9),
-      inset -1px -1px 0 rgba(15, 23, 42, 0.08),
-      0 5px 0 -1px color-mix(in srgb, var(--section-color, #64748b) 18%, #e4ebf2),
-      0 6px 0 -1px rgba(15, 23, 42, 0.14),
-      0 16px 32px rgba(15, 23, 42, 0.1);
-    --glass-3d-sm:
-      inset 1px 1px 0 rgba(255, 255, 255, 0.88),
-      0 3px 0 -1px color-mix(in srgb, var(--section-color, #64748b) 16%, #e6edf3),
-      0 10px 20px rgba(15, 23, 42, 0.08);
-  }
-
-  html.theme-dark,
-  body.dark {
-    --glass-3d:
-      inset 1px 1px 0 rgba(255, 255, 255, 0.12),
-      0 5px 0 -1px color-mix(in srgb, var(--section-color, #64748b) 28%, #0a0a0a),
-      0 6px 0 -1px rgba(0, 0, 0, 0.5),
-      0 16px 32px rgba(0, 0, 0, 0.36);
-    --glass-3d-sm:
-      inset 1px 1px 0 rgba(255, 255, 255, 0.1),
-      0 3px 0 -1px color-mix(in srgb, var(--section-color, #64748b) 24%, #0a0a0a),
-      0 10px 20px rgba(0, 0, 0, 0.3);
-  }
-
   html,
   body {
     max-width: 100%;
@@ -4702,7 +4627,9 @@ body.dark .skills-wheel__face {
       color-mix(in srgb, var(--section-color, var(--c-rose)) 7%, rgba(255, 255, 255, 0.62)) 0%,
       rgba(255, 255, 255, 0.38) 100%
     );
-  box-shadow: var(--glass-3d-sm);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.86),
+    0 18px 36px rgba(15, 23, 42, 0.05);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -4716,7 +4643,7 @@ body.dark .contact-form {
       color-mix(in srgb, var(--section-color, var(--c-rose)) 12%, rgba(17, 17, 17, 0.55)) 0%,
       rgba(17, 17, 17, 0.28) 100%
     );
-  box-shadow: var(--glass-3d-sm);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .contact-form-intro {
