@@ -10,8 +10,8 @@
     />
     <meta name="author" content="Marc-Onel Volcimus" />
     <link rel="canonical" href="https://marco-ops-code.github.io/" />
-    <link rel="icon" href="assets/portrait.png?v=3" type="image/png" />
-    <link rel="apple-touch-icon" href="assets/portrait.png?v=3" />
+    <link rel="icon" href="assets/portrait.jpg?v=5" type="image/jpeg" />
+    <link rel="apple-touch-icon" href="assets/portrait.jpg?v=5" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:title" content="Marc-Onel Volcimus — Développeur full stack" />
@@ -25,7 +25,7 @@
     />
     <meta
       property="og:image"
-      content="https://marco-ops-code.github.io/assets/portrait.png?v=3"
+      content="https://marco-ops-code.github.io/assets/portrait.jpg?v=5"
     />
     <meta property="og:image:width" content="768" />
     <meta property="og:image:height" content="1024" />
@@ -37,14 +37,12 @@
     />
     <meta
       name="twitter:image"
-      content="https://marco-ops-code.github.io/assets/portrait.png?v=3"
+      content="https://marco-ops-code.github.io/assets/portrait.jpg?v=5"
     />
     <meta name="theme-color" content="#1d4ed8" />
     <script>
       try {
-        if (localStorage.getItem("theme") === "dark") {
-          document.documentElement.classList.add("theme-dark");
-        }
+        document.documentElement.classList.remove("theme-dark");
         if (localStorage.getItem("portfolio-lang") === "en") {
           document.documentElement.lang = "en";
         }
@@ -56,19 +54,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=20260813-s70" />
+    <link rel="stylesheet" href="style.css?v=20260813-s148" />
   </head>
   <body data-page="home">
     <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
     <div class="background-glow" aria-hidden="true"></div>
 
-    <header class="header" id="siteHeader">
+    <main id="main" tabindex="-1">
+      <div class="hero-wrap">
+    <header class="header header--hero" id="siteHeader">
       <div class="container nav">
         <a href="#home" class="logo">
           <img
-            src="assets/portrait.png?v=3"
+            src="assets/portrait.jpg?v=5"
             alt=""
             class="logo-avatar"
             width="38"
@@ -79,11 +79,37 @@
         </a>
         <nav class="site-nav site-nav--desktop" data-i18n-aria="nav_main" aria-label="Navigation principale">
           <ul class="nav-links" id="navLinksSource">
-            <li><a href="#about" data-nav="about" data-i18n="nav_about">À propos</a></li>
-            <li><a href="#projects" data-nav="projects" data-i18n="nav_work">Travaux</a></li>
-            <li><a href="#services" data-nav="services" data-i18n="nav_offer">Offre</a></li>
             <li>
-              <a href="#contact" class="nav-link--cta" data-nav="contact" data-i18n="nav_contact">Contact</a>
+              <a href="#about" data-nav="about">
+                <span data-i18n="nav_about">À propos</span>
+                <svg class="nav-scribble" viewBox="0 0 140 42" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                  <path pathLength="100" d="M13.2 21.1C11.8 8.4 27.6 4.2 70.4 5c41.2.8 56.8 5.2 56.3 16-.5 11.4-19.4 16.4-56.8 15.9C32.6 36.4 14.6 33.2 13.2 21.1Z" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#projects" data-nav="projects">
+                <span data-i18n="nav_work">Travaux</span>
+                <svg class="nav-scribble" viewBox="0 0 140 42" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                  <path pathLength="100" d="M13.2 21.1C11.8 8.4 27.6 4.2 70.4 5c41.2.8 56.8 5.2 56.3 16-.5 11.4-19.4 16.4-56.8 15.9C32.6 36.4 14.6 33.2 13.2 21.1Z" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#pricing" data-nav="pricing">
+                <span data-i18n="nav_offer">Offre</span>
+                <svg class="nav-scribble" viewBox="0 0 140 42" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                  <path pathLength="100" d="M13.2 21.1C11.8 8.4 27.6 4.2 70.4 5c41.2.8 56.8 5.2 56.3 16-.5 11.4-19.4 16.4-56.8 15.9C32.6 36.4 14.6 33.2 13.2 21.1Z" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#contact" class="nav-link--cta" data-nav="contact">
+                <span data-i18n="nav_contact">Contact</span>
+                <svg class="nav-scribble" viewBox="0 0 140 42" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                  <path pathLength="100" d="M13.2 21.1C11.8 8.4 27.6 4.2 70.4 5c41.2.8 56.8 5.2 56.3 16-.5 11.4-19.4 16.4-56.8 15.9C32.6 36.4 14.6 33.2 13.2 21.1Z" />
+                </svg>
+              </a>
             </li>
           </ul>
         </nav>
@@ -96,6 +122,9 @@
             class="nav-theme-btn"
             id="themeToggle"
             type="button"
+            hidden
+            aria-hidden="true"
+            tabindex="-1"
             aria-label="Activer le thème clair"
             aria-pressed="false"
           >
@@ -134,140 +163,190 @@
         aria-label="Fermer le menu"
       ></button>
     </header>
-
-    <main id="main" tabindex="-1">
-      <div class="hero-wrap">
         <section id="home" class="hero reveal">
-          <div class="hero-desk" aria-hidden="true">
-            <img
-              src="assets/hero-desk.jpg"
-              alt=""
-              width="576"
-              height="1024"
-              decoding="async"
-            />
-          </div>
           <div class="container">
-            <div class="hero-grid">
-              <div class="hero-copy">
-                <p class="badge" data-i18n="badge">Disponible pour 1 à 2 missions</p>
-                <p class="hero-kicker" data-i18n="hero_kicker">Développeur full stack freelance</p>
-                <h1 data-i18n="hero_h1">Site vitrine, landing page, appli mobile ou PowerPoint — pour indépendants et TPE.</h1>
-                <p class="hero-lead" data-i18n="hero_lead">
-                  Quatre formats, un même niveau d’exigence : convaincre dès la première visite.
-                  Preuve à l’appui : deux sites, deux applications, plus un extrait PowerPoint.
-                </p>
-              </div>
-              <aside class="hero-brand" aria-label="Portrait">
+            <div class="hero-scene">
+              <figure class="hero-scene__figure">
                 <img
                   src="assets/hero-portrait.png?v=1"
                   alt="Portrait de Marc-Onel Volcimus"
                   data-i18n-alt="portrait_alt"
-                  width="768"
-                  height="1024"
+                  width="640"
+                  height="800"
                   fetchpriority="high"
                   decoding="async"
                 />
-                <span class="hero-brand__glint" aria-hidden="true"></span>
-              </aside>
+              </figure>
+              <div class="hero-flourish" aria-hidden="true">
+                <svg class="hero-flourish__svg" viewBox="0 0 320 210" width="320" height="210" focusable="false">
+                  <path
+                    class="hero-flourish__stroke"
+                    pathLength="100"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="6.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M78 132C90 170 176 186 250 148C288 124 272 92 176 86C118 82 58 92 74 130C68 82 164 38 268 16C280 12 290 9 300 6"
+                  />
+                  <path
+                    class="hero-flourish__head"
+                    pathLength="100"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="6.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M300 6L260 0M300 6L272 34"
+                  />
+                </svg>
+                <span class="hero-flourish__note" data-i18n="hero_together">Travaillons ensemble</span>
+              </div>
+              <div class="hero-scene__copy">
+                <div class="hero-kicker-row">
+                  <p class="hero-kicker" data-i18n="hero_kicker">Développeur full stack freelance</p>
+                  <span class="hero-verified" data-i18n-aria="hero_verified" aria-label="Profil vérifié" title="Profil vérifié">
+                    <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+                      <circle cx="8" cy="8" r="8" fill="#22c55e" />
+                      <path
+                        fill="#ffffff"
+                        d="M11.6 5.35a.75.75 0 0 1 .05 1.06l-3.6 4a.75.75 0 0 1-1.08.03l-1.9-1.9a.75.75 0 0 1 1.06-1.06l1.34 1.34 3.07-3.42a.75.75 0 0 1 1.06-.05Z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+                <h1 data-i18n="hero_h1">Un support qui parle tout seul.</h1>
+                <p class="hero-lead" data-i18n="hero_lead">
+                  Indépendants et TPE · site, landing, appli, PowerPoint · devis sous 48&nbsp;h.
+                </p>
+                <div class="hero-works" data-i18n-aria="hero_works" aria-label="Travaux">
+                  <a class="hero-works__ring" href="#projects" data-tab="work-tab-lk" title="LK Studio">
+                    <img src="assets/projects/web-lk.jpg?v=2" alt="LK Studio" width="56" height="56" loading="lazy" decoding="async" />
+                  </a>
+                  <a class="hero-works__ring" href="#projects" data-tab="work-tab-angela" title="Angela Volcimus Louis">
+                    <img src="assets/projects/web-angela.jpg" alt="Angela Volcimus Louis" width="56" height="56" loading="lazy" decoding="async" />
+                  </a>
+                  <a class="hero-works__ring" href="#projects" data-tab="work-tab-task" title="Task Engine">
+                    <img src="assets/projects/windows.jpg" alt="Task Engine" width="56" height="56" loading="lazy" decoding="async" />
+                  </a>
+                  <a class="hero-works__ring" href="#projects" data-tab="work-tab-multi" title="MultiTask">
+                    <img src="assets/projects/mobile-accueil.jpg" alt="MultiTask" width="56" height="56" loading="lazy" decoding="async" />
+                  </a>
+                </div>
+                <div class="hero-spotlight-row">
+                  <a
+                    class="hero-spotlight"
+                    href="https://marco-ops-code.github.io/landingPageMarc/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-i18n-aria="hero_landing_aria"
+                    aria-label="Ouvrir la landing personnelle"
+                  >
+                    <div class="hero-spotlight__copy">
+                      <p class="hero-spotlight__title" data-i18n="hero_landing_title" data-i18n-html>Software &amp;<br />cybersécurité</p>
+                      <p class="hero-spotlight__lead" data-i18n="hero_landing_lead">Profil, parcours, lifestyle.</p>
+                      <span class="hero-spotlight__go">GO</span>
+                    </div>
+                    <img
+                      class="hero-spotlight__face"
+                      src="assets/hero-portrait.png?v=1"
+                      alt=""
+                      width="140"
+                      height="180"
+                      decoding="async"
+                    />
+                  </a>
+                </div>
+                <div class="hero-actions">
+                  <a
+                    class="btn hero-cta hero-cta--book"
+                    data-wa-book
+                    href="https://wa.me/79965064486?text=Bonjour%20Marc-Onel%2C%20je%20voudrais%20r%C3%A9server%2030%20minutes%20pour%20parler%20d%E2%80%99un%20projet."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  ><span data-i18n="hero_cta_wa">Réserver 30 min</span>
+                    <svg class="hero-cta__arrow" viewBox="0 0 32 14" width="22" height="12" aria-hidden="true" focusable="false">
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M1.4 8.1c7.4-.9 15.2-1.8 24.8-1.2M20.6 2.6c2.8 1.6 5.4 3.2 8.2 4.6-2.9.7-5.8 2-8.4 3.8"
+                      />
+                    </svg></a>
+                  <a class="btn btn-outline hero-cta" href="#projects" data-i18n="hero_cta_work">Voir les travaux</a>
+                </div>
+              </div>
             </div>
           </div>
         </section>
       </div>
 
       <section id="about" class="section container reveal">
-        <h2 data-i18n="about_h2">À propos</h2>
-        <div class="about-layout about-layout--text">
-          <div class="about-content">
+        <article class="about-board">
+          <div class="about-board__bars" aria-hidden="true">
+            <span class="about-tube">
+              <i class="about-tube__liquid about-tube__liquid--a"></i>
+            </span>
+            <span class="about-tube">
+              <i class="about-tube__liquid about-tube__liquid--b"></i>
+            </span>
+            <span class="about-tube">
+              <i class="about-tube__liquid about-tube__liquid--c"></i>
+            </span>
+          </div>
+          <header class="about-board__head">
+            <h2 data-i18n="about_h2">À propos</h2>
             <p data-i18n="about_p">
               Je suis Marc-Onel Volcimus, développeur full stack. J’aide les indépendants et les TPE
               à envoyer un support sans s’expliquer : site vitrine, landing page, application mobile
               ou présentation PowerPoint. Je travaille à distance, en français et en anglais : WhatsApp et e-mail
               suffisent, le fuseau n’est pas un obstacle.
             </p>
-            <ul class="about-facts" data-i18n-aria="facts" aria-label="Faits clés">
-              <li>
+          </header>
+          <div class="about-board__stage">
+            <div class="about-portrait">
+              <img
+                class="about-portrait__img"
+                src="assets/about-portrait.png?v=5"
+                alt="Portrait de Marc-Onel Volcimus"
+                data-i18n-alt="portrait_alt"
+                width="643"
+                height="871"
+                decoding="async"
+              />
+            </div>
+            <ul class="about-pillars" data-i18n-aria="facts" aria-label="Faits clés">
+              <li class="about-pillar" style="--h: 58%; --tint: 38%">
                 <strong data-i18n="fact_clients">Clients</strong>
-                <span data-i18n="fact_clients_v">Indépendants et TPE qui veulent une vitrine crédible</span>
+                <span class="about-pillar__detail" data-i18n="fact_clients_v">Indépendants et TPE qui veulent une vitrine crédible</span>
               </li>
-              <li>
+              <li class="about-pillar" style="--h: 70%; --tint: 50%">
                 <strong data-i18n="fact_stack">Full stack</strong>
-                <span>HTML, CSS, JavaScript, PHP, MySQL, C# / .NET, Python</span>
+                <span class="about-pillar__detail">HTML, CSS, JavaScript, PHP, MySQL, C# / .NET, Python</span>
               </li>
-              <li>
+              <li class="about-pillar" style="--h: 84%; --tint: 64%">
                 <strong data-i18n="fact_delay">Délai</strong>
-                <span data-i18n="fact_delay_v">Réponse sous 24&nbsp;h, en français ou en anglais</span>
+                <span class="about-pillar__detail" data-i18n="fact_delay_v">Réponse sous 24&nbsp;h, en français ou en anglais</span>
               </li>
-              <li>
+              <li class="about-pillar" style="--h: 100%; --tint: 78%">
                 <strong data-i18n="fact_place">Lieu</strong>
-                <span data-i18n="fact_place_v">À distance — e-mail, téléphone ou WhatsApp</span>
+                <span class="about-pillar__detail" data-i18n="fact_place_v">À distance — e-mail, téléphone ou WhatsApp</span>
               </li>
             </ul>
-            <div class="office-suite">
-              <p class="office-suite__label">Microsoft</p>
-              <ul>
-                <li>Word</li>
-                <li>Excel</li>
-                <li>PowerPoint</li>
-                <li>Project</li>
-                <li>Access</li>
-                <li>Publisher</li>
-              </ul>
-            </div>
           </div>
-        </div>
-      </section>
-
-      <section id="services" class="section container reveal">
-        <h2 data-i18n="offer_h2">Offre</h2>
-        <p class="section-intro" data-i18n="offer_intro">
-          Quatre formats, un même niveau d’exigence : un produit qui te fait paraître plus
-          sérieux dès la première visite.
-        </p>
-        <div class="offer-board">
-          <article class="service-offer offer-tile" data-offer="vitrine">
-            <span class="offer-tile__index" aria-hidden="true">01</span>
-            <div class="offer-spec offer-spec--site" aria-hidden="true">
-              <span class="offer-spec__chrome">
-                <i></i><i></i><i></i>
-              </span>
-              <span class="offer-spec__tabs"><i></i><i></i><i></i><i></i></span>
-              <span class="offer-spec__pages"><i></i><i></i><i></i><i></i></span>
-            </div>
-            <h3 data-i18n="offer_vitrine_h">Site vitrine</h3>
-            <p data-i18n="offer_vitrine_p">Pages claires, rapides et soignées pour présenter ton activité et inspirer confiance.</p>
-          </article>
-          <article class="service-offer offer-tile" data-offer="landing">
-            <span class="offer-tile__index" aria-hidden="true">02</span>
-            <div class="offer-spec offer-spec--landing" aria-hidden="true">
-              <span class="offer-spec__sheet">
-                <i class="offer-spec__hero"></i>
-                <i></i><i></i><i></i>
-                <b></b>
-              </span>
-            </div>
-            <h3 data-i18n="offer_landing_h">Landing page</h3>
-            <p data-i18n="offer_landing_p">Une page unique, focalisée conversion, avec un message net et un appel à l’action évident.</p>
-          </article>
-          <article class="service-offer offer-tile" data-offer="app">
-            <span class="offer-tile__index" aria-hidden="true">03</span>
-            <div class="offer-spec offer-spec--phone" aria-hidden="true">
-              <span class="offer-spec__device">
-                <i class="offer-spec__notch"></i>
-                <i></i><i></i><i></i>
-              </span>
-            </div>
-            <h3 data-i18n="offer_app_h">Application mobile</h3>
-            <p data-i18n="offer_app_p">Un outil sur téléphone, en C# / .NET, pensé pour un usage réel : parcours clair, génération, export.</p>
-          </article>
-          <article class="service-offer offer-tile" data-offer="ppt">
-            <span class="offer-tile__index" aria-hidden="true">04</span>
-            <div class="offer-spec offer-spec--deck" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
-            <h3 data-i18n="offer_ppt_h">Présentation PowerPoint</h3>
-            <p data-i18n="offer_ppt_p">Supports pro pour tout type de sujet : pitch, cours, rapport — clairs, visuels, prêts à présenter.</p>
-          </article>
+        </article>
+        <div class="office-suite">
+          <p class="office-suite__label">Microsoft</p>
+          <ul>
+            <li>Word</li>
+            <li>Excel</li>
+            <li>PowerPoint</li>
+            <li>Project</li>
+            <li>Access</li>
+            <li>Publisher</li>
+          </ul>
         </div>
       </section>
 
@@ -663,104 +742,439 @@
         </div>
       </section>
 
-      <section id="process" class="section container reveal">
-        <h2 data-i18n="process_title" data-i18n-html><span class="process-c">C</span>omment on travaille&nbsp;?</h2>
-        <p class="section-intro" data-i18n="process_intro">
-          Quatre étapes, un interlocuteur, un devis sous 48&nbsp;h après le brief.
-        </p>
-        <div class="work-steps-stage">
-          <div class="work-steps__track" aria-hidden="true">
-            <span class="work-steps__progress"></span>
+      <section id="process" class="trav" data-trav aria-labelledby="trav-titre">
+        <div class="trav-track" data-trav-track>
+          <div class="trav-stage" data-trav-stage>
+            <div class="trav-panel">
+              <header class="trav-head">
+                <h2 class="trav-title" id="trav-titre" data-i18n="process_h2">Comment on travaille ?</h2>
+                <p class="trav-intro" data-i18n="process_intro">
+                  Quatre étapes, un interlocuteur, un devis sous 48&nbsp;h après le brief.
+                </p>
+              </header>
+              <div class="trav-rail" data-trav-rail style="--n: 4;">
+                <div class="trav-rail__line" aria-hidden="true">
+                  <span class="trav-rail__fill" data-trav-fill></span>
+                  <span class="trav-rail__knob" data-trav-knob></span>
+                </div>
+                <ol class="trav-rail__list">
+                  <li class="trav-rail__item">
+                    <button type="button" class="trav-rail__node" data-trav-go="0" data-i18n-aria="trav_go_1" aria-label="Aller à l’étape 1 : Brief"><span>1</span></button>
+                    <span class="trav-rail__label" data-i18n="step_brief">Brief</span>
+                  </li>
+                  <li class="trav-rail__item">
+                    <button type="button" class="trav-rail__node" data-trav-go="1" data-i18n-aria="trav_go_2" aria-label="Aller à l’étape 2 : Proposition"><span>2</span></button>
+                    <span class="trav-rail__label" data-i18n="step_prop">Proposition</span>
+                  </li>
+                  <li class="trav-rail__item">
+                    <button type="button" class="trav-rail__node" data-trav-go="2" data-i18n-aria="trav_go_3" aria-label="Aller à l’étape 3 : Conception &amp; build"><span>3</span></button>
+                    <span class="trav-rail__label" data-i18n="step_build" data-i18n-html>Conception &amp; build</span>
+                  </li>
+                  <li class="trav-rail__item">
+                    <button type="button" class="trav-rail__node" data-trav-go="3" data-i18n-aria="trav_go_4" aria-label="Aller à l’étape 4 : Livraison"><span>4</span></button>
+                    <span class="trav-rail__label" data-i18n="step_ship">Livraison</span>
+                  </li>
+                </ol>
+              </div>
+              <ol class="trav-steps" data-trav-steps>
+                <li class="trav-step" data-trav-step>
+                  <div class="trav-step__text">
+                    <span class="trav-step__num" aria-hidden="true">1</span>
+                    <p class="trav-step__count" aria-hidden="true" data-i18n="trav_count_1">étape 1 sur 4</p>
+                    <h3 class="trav-step__title" data-i18n="step_brief">Brief</h3>
+                    <p class="trav-step__desc" data-i18n="step_brief_p">30 minutes pour cadrer l’objectif, le public et la contrainte.</p>
+                    <p class="trav-step__cta">
+                      <a
+                        class="trav-link"
+                        data-wa-book
+                        href="https://wa.me/79965064486?text=Bonjour%20Marc-Onel%2C%20je%20voudrais%20r%C3%A9server%2030%20minutes%20pour%20parler%20d%E2%80%99un%20projet."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-i18n="trav_cta"
+                      >Réserver les 30 minutes</a>
+                    </p>
+                  </div>
+                  <div class="trav-scene" aria-hidden="true">
+                    <div class="trav-scene__in">
+                      <div class="s1-pad beat" data-b="1">
+                        <p class="s1-pad__title" data-i18n="step_brief">Brief</p>
+                        <ul class="s1-list">
+                          <li class="beat" data-b="2"><span class="s1-box"><svg viewBox="0 0 20 20"><path class="stroke" pathLength="1" d="M3 11 L8 16 L17 4"/></svg></span><span class="s1-word" data-i18n="trav_obj">Objectif</span></li>
+                          <li class="beat" data-b="3"><span class="s1-box"><svg viewBox="0 0 20 20"><path class="stroke" pathLength="1" d="M3 11 L8 16 L17 4"/></svg></span><span class="s1-word" data-i18n="trav_aud">Public</span></li>
+                          <li class="beat" data-b="4"><span class="s1-box"><svg viewBox="0 0 20 20"><path class="stroke" pathLength="1" d="M3 11 L8 16 L17 4"/></svg></span><span class="s1-word" data-i18n="trav_const">Contrainte</span></li>
+                        </ul>
+                      </div>
+                      <div class="s1-timer beat" data-b="1">
+                        <svg viewBox="0 0 100 112" focusable="false">
+                          <rect class="ink" x="40" y="4" width="20" height="9" rx="3"/>
+                          <rect class="ink" x="46" y="12" width="8" height="8"/>
+                          <circle class="paper" cx="50" cy="64" r="42"/>
+                          <path class="s1-arc" pathLength="1" d="M50 30 A34 34 0 1 1 50 98 A34 34 0 1 1 50 30"/>
+                          <path class="tick" d="M50 26 V34 M50 94 V102 M16 64 H24 M76 64 H84"/>
+                        </svg>
+                        <p class="s1-timer__label" data-i18n="trav_30">30 min</p>
+                      </div>
+                      <p class="s1-note beat" data-b="4" data-i18n="trav_s1_note">on cadre tout ça ensemble</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="trav-step" data-trav-step>
+                  <div class="trav-step__text">
+                    <span class="trav-step__num" aria-hidden="true">2</span>
+                    <p class="trav-step__count" aria-hidden="true" data-i18n="trav_count_2">étape 2 sur 4</p>
+                    <h3 class="trav-step__title" data-i18n="step_prop">Proposition</h3>
+                    <p class="trav-step__desc" data-i18n="step_prop_p">Périmètre, délais et devis — tu valides avant que j’écrive une ligne.</p>
+                  </div>
+                  <div class="trav-scene" aria-hidden="true">
+                    <div class="trav-scene__in">
+                      <div class="s2-doc beat" data-b="1">
+                        <p class="s2-doc__title" data-i18n="step_prop">Proposition</p>
+                        <div class="s2-row beat" data-b="2"><span class="s2-label" data-i18n="trav_scope">Périmètre</span><span class="s2-lines"><i></i><i></i><i></i></span></div>
+                        <div class="s2-row beat" data-b="3"><span class="s2-label" data-i18n="trav_time">Délais</span><span class="s2-time"><i></i><i></i><i></i></span></div>
+                        <div class="s2-row beat" data-b="3"><span class="s2-label" data-i18n="trav_quote">Devis</span><span class="s2-devis" data-i18n="trav_48">sous 48 h</span></div>
+                      </div>
+                      <p class="s2-stamp beat" data-b="4" data-i18n="trav_valid">Validé</p>
+                      <p class="s2-note beat" data-b="4"><svg viewBox="0 0 40 30" focusable="false"><path class="stroke" pathLength="1" d="M36 18 C24 26 10 22 4 8"/><path class="stroke" pathLength="1" d="M3 15 L4 6 L12 8"/></svg><span data-i18n="trav_s2_note">avant que j’écrive une ligne</span></p>
+                    </div>
+                  </div>
+                </li>
+                <li class="trav-step" data-trav-step>
+                  <div class="trav-step__text">
+                    <span class="trav-step__num" aria-hidden="true">3</span>
+                    <p class="trav-step__count" aria-hidden="true" data-i18n="trav_count_3">étape 3 sur 4</p>
+                    <h3 class="trav-step__title" data-i18n="step_build" data-i18n-html>Conception &amp; build</h3>
+                    <p class="trav-step__desc" data-i18n="step_build_p">Maquettes, pages, formulaires : tu vois avancer, tu corriges tôt.</p>
+                  </div>
+                  <div class="trav-scene" aria-hidden="true">
+                    <div class="trav-scene__in">
+                      <div class="s3-browser"><svg class="s3-svg" viewBox="0 0 500 334" aria-hidden="true" focusable="false"><g class="beat" data-b="2">
+                          <rect class="fill-g" x="26" y="96" width="196" height="9" rx="3"/>
+                          <rect class="fill-g" x="270" y="84" width="196" height="122" rx="8"/>
+                          <rect class="fill-solid" x="32" y="172" width="90" height="26" rx="13"/></g><g class="beat" data-b="1">
+                          <path class="stroke" pathLength="1" d="M16 6 H484 Q494 6 494 16 V318 Q494 328 484 328 H16 Q6 328 6 318 V16 Q6 6 16 6 Z"/>
+                          <path class="stroke" pathLength="1" d="M6 36 H494"/>
+                          <circle class="ink" cx="22" cy="21" r="3.6"/><circle class="ink" cx="36" cy="21" r="3.6"/><circle class="ink" cx="50" cy="21" r="3.6"/>
+                          <path class="stroke thin" pathLength="1" d="M84 14 H244 Q250 14 250 20 V22 Q250 28 244 28 H84 Q78 28 78 22 V20 Q78 14 84 14 Z"/>
+                          <text class="url" x="94" y="25">ton-site.fr</text>
+                          <path class="stroke" pathLength="1" d="M26 50 H70 V62 H26 Z"/>
+                          <path class="stroke" pathLength="1" d="M330 56 H360"/><path class="stroke" pathLength="1" d="M376 56 H406"/><path class="stroke" pathLength="1" d="M422 56 H452"/>
+                          <path class="stroke" pathLength="1" d="M32 100 H214"/><path class="stroke" pathLength="1" d="M32 120 H170"/>
+                          <path class="stroke" pathLength="1" d="M32 142 H236"/><path class="stroke" pathLength="1" d="M32 154 H204"/>
+                          <path class="stroke" pathLength="1" d="M32 185 Q32 172 45 172 H109 Q122 172 122 185 Q122 198 109 198 H45 Q32 198 32 185 Z"/>
+                          <path class="stroke" pathLength="1" d="M270 92 Q270 84 278 84 H458 Q466 84 466 92 V198 Q466 206 458 206 H278 Q270 206 270 198 Z"/>
+                          <path class="stroke" pathLength="1" d="M282 196 L332 140 L364 176 L390 150 L454 196"/></g><g class="beat" data-b="3">
+                          <path class="stroke" pathLength="1" d="M32 226 H156 Q164 226 164 234 V290 Q164 298 156 298 H32 Q24 298 24 290 V234 Q24 226 32 226 Z"/>
+                          <path class="stroke" pathLength="1" d="M188 226 H312 Q320 226 320 234 V290 Q320 298 312 298 H188 Q180 298 180 290 V234 Q180 226 188 226 Z"/>
+                          <path class="stroke" pathLength="1" d="M344 226 H468 Q476 226 476 234 V290 Q476 298 468 298 H344 Q336 298 336 290 V234 Q336 226 344 226 Z"/>
+                          <path class="stroke" pathLength="1" d="M38 246 H100"/><path class="stroke" pathLength="1" d="M38 262 H140"/><path class="stroke" pathLength="1" d="M38 276 H118"/>
+                          <path class="stroke" pathLength="1" d="M194 246 H256"/><path class="stroke" pathLength="1" d="M194 262 H296"/><path class="stroke" pathLength="1" d="M194 276 H274"/>
+                          <path class="stroke" pathLength="1" d="M350 246 H412"/><path class="stroke" pathLength="1" d="M350 262 H452"/><path class="stroke" pathLength="1" d="M350 276 H430"/>
+                          <path class="stroke" pathLength="1" d="M24 314 H476"/></g></svg></div>
+                      <div class="s3-progress beat" data-b="1"><span class="s3-progress__label" data-i18n="trav_progress">avancement</span><span class="s3-progress__bar"><i class="s3-progress__fill"></i></span></div>
+                      <p class="s3-pin beat" data-b="3">
+                        <svg viewBox="0 0 40 30" focusable="false"><path class="stroke" pathLength="1" d="M36 18 C24 26 10 22 4 8"/><path class="stroke" pathLength="1" d="M3 15 L4 6 L12 8"/></svg>
+                        <span class="s3-pin__a" data-i18n="trav_review">à revoir ?</span><span class="s3-pin__b" data-i18n="trav_fixed">corrigé ✓</span>
+                      </p>
+                    </div>
+                  </div>
+                </li>
+                <li class="trav-step" data-trav-step>
+                  <div class="trav-step__text">
+                    <span class="trav-step__num" aria-hidden="true">4</span>
+                    <p class="trav-step__count" aria-hidden="true" data-i18n="trav_count_4">étape 4 sur 4</p>
+                    <h3 class="trav-step__title" data-i18n="step_ship">Livraison</h3>
+                    <p class="trav-step__desc" data-i18n="step_ship_p">Mise en ligne, passation, et un point pour que tu saches le faire vivre.</p>
+                  </div>
+                  <div class="trav-scene" aria-hidden="true">
+                    <div class="trav-scene__in">
+                      <div class="s3-browser"><svg class="s3-svg" viewBox="0 0 500 334" aria-hidden="true" focusable="false"><g>
+                          <rect class="fill-g" x="26" y="96" width="196" height="9" rx="3"/>
+                          <rect class="fill-g" x="270" y="84" width="196" height="122" rx="8"/>
+                          <rect class="fill-solid" x="32" y="172" width="90" height="26" rx="13"/></g><g>
+                          <path class="stroke" pathLength="1" d="M16 6 H484 Q494 6 494 16 V318 Q494 328 484 328 H16 Q6 328 6 318 V16 Q6 6 16 6 Z"/>
+                          <path class="stroke" pathLength="1" d="M6 36 H494"/>
+                          <circle class="ink" cx="22" cy="21" r="3.6"/><circle class="ink" cx="36" cy="21" r="3.6"/><circle class="ink" cx="50" cy="21" r="3.6"/>
+                          <path class="stroke thin" pathLength="1" d="M84 14 H244 Q250 14 250 20 V22 Q250 28 244 28 H84 Q78 28 78 22 V20 Q78 14 84 14 Z"/>
+                          <text class="url" x="94" y="25">ton-site.fr</text>
+                          <path class="stroke" pathLength="1" d="M26 50 H70 V62 H26 Z"/>
+                          <path class="stroke" pathLength="1" d="M330 56 H360"/><path class="stroke" pathLength="1" d="M376 56 H406"/><path class="stroke" pathLength="1" d="M422 56 H452"/>
+                          <path class="stroke" pathLength="1" d="M32 100 H214"/><path class="stroke" pathLength="1" d="M32 120 H170"/>
+                          <path class="stroke" pathLength="1" d="M32 142 H236"/><path class="stroke" pathLength="1" d="M32 154 H204"/>
+                          <path class="stroke" pathLength="1" d="M32 185 Q32 172 45 172 H109 Q122 172 122 185 Q122 198 109 198 H45 Q32 198 32 185 Z"/>
+                          <path class="stroke" pathLength="1" d="M270 92 Q270 84 278 84 H458 Q466 84 466 92 V198 Q466 206 458 206 H278 Q270 206 270 198 Z"/>
+                          <path class="stroke" pathLength="1" d="M282 196 L332 140 L364 176 L390 150 L454 196"/></g><g>
+                          <path class="stroke" pathLength="1" d="M32 226 H156 Q164 226 164 234 V290 Q164 298 156 298 H32 Q24 298 24 290 V234 Q24 226 32 226 Z"/>
+                          <path class="stroke" pathLength="1" d="M188 226 H312 Q320 226 320 234 V290 Q320 298 312 298 H188 Q180 298 180 290 V234 Q180 226 188 226 Z"/>
+                          <path class="stroke" pathLength="1" d="M344 226 H468 Q476 226 476 234 V290 Q476 298 468 298 H344 Q336 298 336 290 V234 Q336 226 344 226 Z"/>
+                          <path class="stroke" pathLength="1" d="M38 246 H100"/><path class="stroke" pathLength="1" d="M38 262 H140"/><path class="stroke" pathLength="1" d="M38 276 H118"/>
+                          <path class="stroke" pathLength="1" d="M194 246 H256"/><path class="stroke" pathLength="1" d="M194 262 H296"/><path class="stroke" pathLength="1" d="M194 276 H274"/>
+                          <path class="stroke" pathLength="1" d="M350 246 H412"/><path class="stroke" pathLength="1" d="M350 262 H452"/><path class="stroke" pathLength="1" d="M350 276 H430"/>
+                          <path class="stroke" pathLength="1" d="M24 314 H476"/></g></svg></div>
+                      <p class="s4-live beat" data-b="1"><span class="s4-live__dot"></span><span data-i18n="trav_live">en ligne</span></p>
+                      <ul class="s4-check">
+                        <li class="beat" data-b="2"><svg viewBox="0 0 20 20"><path class="stroke" pathLength="1" d="M3 11 L8 16 L17 4"/></svg><span data-i18n="trav_ship">Mise en ligne</span></li>
+                        <li class="beat" data-b="3"><svg viewBox="0 0 20 20"><path class="stroke" pathLength="1" d="M3 11 L8 16 L17 4"/></svg><span data-i18n="trav_hand">Passation</span></li>
+                        <li class="beat" data-b="4"><svg viewBox="0 0 20 20"><path class="stroke" pathLength="1" d="M3 11 L8 16 L17 4"/></svg><span data-i18n="trav_point">Point de prise en main</span></li>
+                      </ul>
+                      <p class="s4-note beat" data-b="4" data-i18n="trav_yours">à toi !</p>
+                    </div>
+                  </div>
+                </li>
+              </ol>
+              <p class="trav-hint" aria-hidden="true" data-trav-hint data-i18n="trav_hint">défile pour avancer dans le projet</p>
+            </div>
           </div>
-          <span class="work-steps__glow" aria-hidden="true"></span>
-          <ol class="work-steps">
-          <li>
-            <strong data-i18n="step_brief">Brief</strong>
-            <span data-i18n="step_brief_p">30 minutes pour cadrer l’objectif, le public et la contrainte.</span>
-          </li>
-          <li>
-            <strong data-i18n="step_prop">Proposition</strong>
-            <span data-i18n="step_prop_p">Périmètre, délais et devis — tu valides avant que j’écrive une ligne.</span>
-          </li>
-          <li>
-            <strong data-i18n="step_build" data-i18n-html>Conception &amp; build</strong>
-            <span data-i18n="step_build_p">Maquettes, pages, formulaires : tu vois avancer, tu corriges tôt.</span>
-          </li>
-          <li>
-            <strong data-i18n="step_ship">Livraison</strong>
-            <span data-i18n="step_ship_p">Mise en ligne, passation, et un point pour que tu saches le faire vivre.</span>
-          </li>
-        </ol>
         </div>
       </section>
 
-      <section id="pricing" class="section container reveal pricing-section">
-        <h2 data-i18n="pricing_h2">Tarifs</h2>
-        <p class="section-intro pricing-intro">
-          <span data-i18n="pricing_intro">Quatre formats, devis sous 48&nbsp;h. Consultation de 30 minutes offerte.</span>
-          <strong class="pricing-trust" data-i18n="pricing_trust">2 missions ouvertes ce trimestre.</strong>
-        </p>
-        <div class="pricing-split">
-          <article class="pricing-offer">
-            <p class="pricing-kicker" data-i18n="pricing_from">À partir de — sur devis</p>
-            <h3 class="pricing-panel__title" data-i18n="offer_vitrine_h">Site vitrine</h3>
-            <p data-i18n="price_vitrine_p">Plusieurs pages pour présenter l’activité et inspirer confiance.</p>
-            <ul class="pricing-services">
-              <li data-i18n="price_vitrine_1">Accueil, offre, à propos, contact</li>
-              <li data-i18n="price_vitrine_2">Parcours clair, performances et bases SEO</li>
-              <li data-i18n="price_vitrine_3">Formulaire, délais et passation</li>
-            </ul>
-          </article>
-          <article class="pricing-offer">
-            <p class="pricing-kicker" data-i18n="pricing_from">À partir de — sur devis</p>
-            <h3 class="pricing-panel__title" data-i18n="offer_landing_h">Landing page</h3>
-            <p data-i18n="price_landing_p">Une page unique pour convertir : message, preuve, appel à l’action.</p>
-            <ul class="pricing-services">
-              <li data-i18n="price_landing_1">Structure, textes d’interface et version mobile</li>
-              <li data-i18n="price_landing_2">Formulaire ou bouton vers WhatsApp / e-mail</li>
-              <li data-i18n="price_landing_3">Mise en ligne et recette ensemble</li>
-            </ul>
-          </article>
-          <article class="pricing-offer">
-            <p class="pricing-kicker" data-i18n="pricing_from">À partir de — sur devis</p>
-            <h3 class="pricing-panel__title" data-i18n="offer_app_h">Application mobile</h3>
-            <p data-i18n="price_app_p">Un outil sur téléphone, en C# / .NET, pensé pour un usage réel.</p>
-            <ul class="pricing-services">
-              <li data-i18n="price_app_1">Parcours mobile : accueil, génération, profil</li>
-              <li data-i18n="price_app_2">Export PDF / Word et logique métier</li>
-              <li data-i18n="price_app_3">Recette ensemble et passation</li>
-            </ul>
-          </article>
-          <article class="pricing-offer">
-            <p class="pricing-kicker" data-i18n="pricing_from">À partir de — sur devis</p>
-            <h3 class="pricing-panel__title" data-i18n="offer_ppt_h">Présentation PowerPoint</h3>
-            <p data-i18n="price_ppt_p">Un support à pitcher : pitch, cours ou rapport, prêt à présenter.</p>
-            <ul class="pricing-services">
-              <li data-i18n="price_ppt_1">Structure problème → offre → preuve → décision</li>
-              <li data-i18n="price_ppt_2">Fichier PowerPoint modifiable + version PDF</li>
-              <li data-i18n="price_ppt_3">Extrait en ligne pour voir le niveau</li>
-            </ul>
-            <p><a href="slides/" data-i18n="see_excerpt">Voir l’extrait</a></p>
-          </article>
+      <section
+        id="pricing"
+        class="section container reveal pricing-section cartes"
+        data-cartes
+        data-form-select="#contactProject"
+        data-form-focus="#contactSubject"
+        aria-labelledby="cartes-titre"
+      >
+        <div class="cartes-track" data-cartes-track>
+          <div class="cartes-stage" data-cartes-stage>
+            <header class="cartes-head">
+              <div class="cartes-head__text">
+                <h2 class="cartes-title" id="cartes-titre">
+                  <span class="cartes-title__text" data-i18n="pricing_h2">Offre et Devis</span>
+                  <svg class="cartes-swash" viewBox="0 0 120 14" aria-hidden="true" focusable="false">
+                    <path class="cartes-stroke" pathLength="1" d="M3 9 C25 3 45 12 68 6 S105 4 117 8"/>
+                  </svg>
+                </h2>
+                <p class="cartes-intro" data-i18n="offer_intro">Quatre formats, un même niveau d’exigence : un produit qui te fait paraître plus sérieux dès la première visite.</p>
+                <p class="cartes-consult">
+                  <a class="cartes-link" href="#contact" data-i18n="pricing_consult">Consultation de 30 minutes offerte</a>
+                </p>
+              </div>
+              <p class="cartes-stamp">
+                <span class="cartes-stamp__n">2</span>
+                <span class="cartes-stamp__t" data-i18n="pricing_stamp" data-i18n-html>missions ouvertes<br>ce trimestre</span>
+              </p>
+            </header>
+            <div class="cartes-area" data-cartes-area>
+              <div class="cartes-board" data-cartes-board>
+                <article class="cartes-card">
+                  <div class="cartes-card__inner">
+                    <div class="cartes-card__art">
+                      <svg class="cartes-v" viewBox="0 0 140 110" aria-hidden="true" focusable="false">
+                        <g class="cartes-v__g">
+                          <path class="cartes-v__marker" d="M23 16 L132 13 L134 99 L25 102 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M17 17 Q15 9 23 9 L120 8 Q128 8 127 16 L126 89 Q127 96 119 95 L22 96 Q15 96 16 88 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M16 27 L127 26"/>
+                          <circle class="cartes-v__dot" cx="26" cy="18" r="2.3"/>
+                          <circle class="cartes-v__dot" cx="34" cy="18" r="2.3"/>
+                          <circle class="cartes-v__dot" cx="42" cy="18" r="2.3"/>
+                          <path class="cartes-v__line" pathLength="1" d="M27 41 L66 40"/>
+                          <path class="cartes-v__line" pathLength="1" d="M27 52 L74 51"/>
+                          <path class="cartes-v__line" pathLength="1" d="M27 62 L68 63"/>
+                          <path class="cartes-v__line" pathLength="1" d="M27 72 L72 71"/>
+                          <path class="cartes-v__line" pathLength="1" d="M27 81 Q27 77 31 77 L52 77 Q56 77 56 81 Q56 86 52 86 L31 86 Q27 86 27 81"/>
+                          <path class="cartes-v__line" pathLength="1" d="M84 38 L116 37 L117 59 L83 60 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M86 57 L97 45 L104 52 L109 47 L114 57"/>
+                        </g>
+                      </svg>
+                      <svg class="cartes-card__arrow" viewBox="0 0 30 30" aria-hidden="true" focusable="false">
+                        <path class="cartes-stroke" pathLength="1" d="M8 26 C6 18 10 10 18 5"/>
+                        <path class="cartes-stroke" pathLength="1" d="M10 6 L19 4 L18 13"/>
+                      </svg>
+                      <span class="cartes-card__note" data-i18n="card_note_vitrine" aria-hidden="true">ta vitrine en ligne</span>
+                    </div>
+                    <div class="cartes-card__head">
+                      <p class="cartes-card__num" aria-hidden="true">n° 01</p>
+                      <h3 class="cartes-card__title"><span data-i18n="offer_vitrine_h">Site vitrine</span></h3>
+                      <p class="cartes-card__text" data-i18n="offer_vitrine_p">Pages claires, rapides et soignées pour présenter ton activité et inspirer confiance.</p>
+                    </div>
+                    <div class="cartes-card__more">
+                      <ul class="cartes-list">
+                        <li data-i18n="price_vitrine_1">Accueil, offre, à propos et contact</li>
+                        <li data-i18n="price_vitrine_2">Site rapide et bien référencé sur Google</li>
+                        <li data-i18n="price_vitrine_3">Formulaire de contact, mise en ligne et prise en main</li>
+                      </ul>
+                      <div class="cartes-actions">
+                        <a class="cartes-btn" href="#contact" data-cartes-option="opt_vitrine" data-i18n="pricing_quote" data-i18n-aria="quote_aria_vitrine" aria-label="Demander un devis : Site vitrine">Demander un devis</a>
+                        <span class="cartes-actions__note" data-i18n="pricing_note">devis sous 48 h</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                <article class="cartes-card">
+                  <div class="cartes-card__inner">
+                    <div class="cartes-card__art">
+                      <svg class="cartes-v" viewBox="0 0 140 110" aria-hidden="true" focusable="false">
+                        <g class="cartes-v__g">
+                          <path class="cartes-v__marker" d="M42 12 L108 10 L110 104 L44 106 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M36 12 Q35 6 41 6 L97 6 Q103 6 103 12 L102 98 Q103 104 97 104 L41 104 Q35 104 36 98 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M46 20 L86 19"/>
+                          <path class="cartes-v__line" pathLength="1" d="M46 29 L74 29"/>
+                          <path class="cartes-v__line" pathLength="1" d="M46 38 L92 38"/>
+                          <path class="cartes-v__line" pathLength="1" d="M46 45 L82 45.5"/>
+                          <path class="cartes-v__line" pathLength="1" d="M46 57 Q46 52 51 52 L87 52 Q92 52 92 57 Q92 62 87 62 L51 62 Q46 62 46 57 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M46 72 L58 72 L58 84 L46 84 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M64 72 L76 72 L76 84 L64 84 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M82 72 L94 72 L94 84 L82 84 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M46 94 L84 94"/>
+                          <path class="cartes-v__line" pathLength="1" d="M97 18 L97 46"/>
+                        </g>
+                      </svg>
+                      <svg class="cartes-card__arrow" viewBox="0 0 30 30" aria-hidden="true" focusable="false">
+                        <path class="cartes-stroke" pathLength="1" d="M8 26 C6 18 10 10 18 5"/>
+                        <path class="cartes-stroke" pathLength="1" d="M10 6 L19 4 L18 13"/>
+                      </svg>
+                      <span class="cartes-card__note" data-i18n="card_note_landing" aria-hidden="true">une page, un objectif</span>
+                    </div>
+                    <div class="cartes-card__head">
+                      <p class="cartes-card__num" aria-hidden="true">n° 02</p>
+                      <h3 class="cartes-card__title"><span data-i18n="offer_landing_h">Landing page</span></h3>
+                      <p class="cartes-card__text" data-i18n="offer_landing_p">Une page unique, focalisée conversion, avec un message net et un appel à l’action évident.</p>
+                    </div>
+                    <div class="cartes-card__more">
+                      <ul class="cartes-list">
+                        <li data-i18n="price_landing_1">Structure, textes d’interface et version mobile</li>
+                        <li data-i18n="price_landing_2">Formulaire ou bouton vers WhatsApp / e-mail</li>
+                        <li data-i18n="price_landing_3">Validation ensemble, puis mise en ligne</li>
+                      </ul>
+                      <div class="cartes-actions">
+                        <a class="cartes-btn" href="#contact" data-cartes-option="opt_landing" data-i18n="pricing_quote" data-i18n-aria="quote_aria_landing" aria-label="Demander un devis : Landing page">Demander un devis</a>
+                        <span class="cartes-actions__note" data-i18n="pricing_note">devis sous 48 h</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                <article class="cartes-card">
+                  <div class="cartes-card__inner">
+                    <div class="cartes-card__art">
+                      <svg class="cartes-v" viewBox="0 0 140 110" aria-hidden="true" focusable="false">
+                        <g class="cartes-v__g">
+                          <path class="cartes-v__marker" d="M50 12 L100 10 L101 104 L52 106 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M48 14 Q47 6 55 6 L79 6 Q87 6 87 14 L86 98 Q87 106 79 106 L55 106 Q47 106 48 98 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M60 13 L74 13"/>
+                          <path class="cartes-v__line" pathLength="1" d="M55 24 L80 24 L80 40 L55 40 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M55 47 L80 47 L80 63 L55 63 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M55 70 L80 70 L80 86 L55 86 Z"/>
+                          <circle class="cartes-v__dot" cx="67" cy="96" r="3"/>
+                        </g>
+                      </svg>
+                      <svg class="cartes-card__arrow" viewBox="0 0 30 30" aria-hidden="true" focusable="false">
+                        <path class="cartes-stroke" pathLength="1" d="M8 26 C6 18 10 10 18 5"/>
+                        <path class="cartes-stroke" pathLength="1" d="M10 6 L19 4 L18 13"/>
+                      </svg>
+                      <span class="cartes-card__note" data-i18n="card_note_app" aria-hidden="true">dans ta poche</span>
+                    </div>
+                    <div class="cartes-card__head">
+                      <p class="cartes-card__num" aria-hidden="true">n° 03</p>
+                      <h3 class="cartes-card__title"><span data-i18n="offer_app_h">Application mobile</span></h3>
+                      <p class="cartes-card__text" data-i18n="price_app_p">Un outil sur téléphone, en C# / .NET, pensé pour un usage réel.</p>
+                    </div>
+                    <div class="cartes-card__more">
+                      <ul class="cartes-list">
+                        <li data-i18n="price_app_1">Parcours mobile : accueil, génération, profil</li>
+                        <li data-i18n="price_app_2">Export PDF / Word et règles propres à ton activité</li>
+                        <li data-i18n="price_app_3">Validation ensemble et transmission du projet</li>
+                      </ul>
+                      <div class="cartes-actions">
+                        <a class="cartes-btn" href="#contact" data-cartes-option="opt_app" data-i18n="pricing_quote" data-i18n-aria="quote_aria_app" aria-label="Demander un devis : Application mobile">Demander un devis</a>
+                        <span class="cartes-actions__note" data-i18n="pricing_note">devis sous 48 h</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+                <article class="cartes-card">
+                  <div class="cartes-card__inner">
+                    <div class="cartes-card__art">
+                      <svg class="cartes-v" viewBox="0 0 140 110" aria-hidden="true" focusable="false">
+                        <g class="cartes-v__g">
+                          <path class="cartes-v__marker" d="M40 40 L128 37 L127 99 L42 100 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M14 38 L84 24 L90 62 L20 76 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M22 30 L98 28 L100 72 L24 74 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M36 40 Q35 34 41 34 L118 33 Q124 33 124 39 L123 88 Q124 94 118 94 L41 95 Q35 95 36 89 Z"/>
+                          <path class="cartes-v__line" pathLength="1" d="M46 46 L80 45"/>
+                          <path class="cartes-v__line" pathLength="1" d="M46 58 L76 58"/>
+                          <path class="cartes-v__line" pathLength="1" d="M46 67 L70 67"/>
+                          <path class="cartes-v__line" pathLength="1" d="M92 84 L92 70"/>
+                          <path class="cartes-v__line" pathLength="1" d="M102 84 L102 60"/>
+                          <path class="cartes-v__line" pathLength="1" d="M112 84 L112 52"/>
+                        </g>
+                      </svg>
+                      <svg class="cartes-card__arrow" viewBox="0 0 30 30" aria-hidden="true" focusable="false">
+                        <path class="cartes-stroke" pathLength="1" d="M8 26 C6 18 10 10 18 5"/>
+                        <path class="cartes-stroke" pathLength="1" d="M10 6 L19 4 L18 13"/>
+                      </svg>
+                      <span class="cartes-card__note" data-i18n="card_note_ppt" aria-hidden="true">prêt à pitcher</span>
+                    </div>
+                    <div class="cartes-card__head">
+                      <p class="cartes-card__num" aria-hidden="true">n° 04</p>
+                      <h3 class="cartes-card__title"><span data-i18n="offer_ppt_h">Présentation PowerPoint</span></h3>
+                      <p class="cartes-card__text" data-i18n="offer_ppt_p">Supports pro pour tout type de sujet : pitch, cours, rapport — clairs, visuels, prêts à présenter.</p>
+                    </div>
+                    <div class="cartes-card__more">
+                      <ul class="cartes-list">
+                        <li data-i18n="price_ppt_1">Structure problème → offre → preuve → décision</li>
+                        <li data-i18n="price_ppt_2">Fichier PowerPoint modifiable + version PDF</li>
+                        <li>
+                          <span data-i18n="price_ppt_3">Extrait en ligne pour juger du niveau</span>
+                          <a class="cartes-link" href="slides/" data-i18n="see_excerpt">Voir l’extrait</a>
+                        </li>
+                      </ul>
+                      <div class="cartes-actions">
+                        <a class="cartes-btn" href="#contact" data-cartes-option="opt_ppt" data-i18n="pricing_quote" data-i18n-aria="quote_aria_ppt" aria-label="Demander un devis : Présentation PowerPoint">Demander un devis</a>
+                        <span class="cartes-actions__note" data-i18n="pricing_note">devis sous 48 h</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <p class="cartes-hint" aria-hidden="true" data-cartes-hint data-i18n="cartes_hint">défile pour découvrir la suite</p>
+            </div>
+          </div>
         </div>
-        <p class="pricing-cta">
-          <a
-            href="https://wa.me/79965064486?text=Bonjour%20Marc-Onel%2C%20je%20voudrais%20r%C3%A9server%2030%20minutes%20pour%20parler%20d%E2%80%99un%20projet."
-            data-wa-book
-            class="btn"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-i18n="dock_book"
-          >Réserver 30 min</a>
-        </p>
       </section>
 
-      <section id="contact" class="section container reveal contact-section">
+      <section id="contact" class="contact-wrap reveal">
+        <div class="section container contact-section">
+        <div class="contact-stack">
+        <div class="contact-aside">
         <header class="contact-hero">
+          <div class="resa-chrono" data-resa-chrono style="--chrono-offset: 50.0;">
+            <svg class="resa-chrono__svg" viewBox="0 0 240 264" role="img" data-i18n-aria="chrono_aria" aria-label="Appel de 30 minutes">
+              <defs>
+                <linearGradient id="chrono-contact" gradientUnits="userSpaceOnUse" x1="120" y1="75" x2="120" y2="221">
+                  <stop offset="0" class="resa-chrono__stop-a" />
+                  <stop offset="1" class="resa-chrono__stop-b" />
+                </linearGradient>
+              </defs>
+              <circle class="resa-chrono__halo" cx="120" cy="148" r="104" aria-hidden="true" />
+              <rect class="resa-chrono__ink" x="99" y="10" width="42" height="26" rx="7" aria-hidden="true" />
+              <rect class="resa-chrono__ink" x="111" y="32" width="18" height="16" aria-hidden="true" />
+              <circle class="resa-chrono__ink" cx="120" cy="148" r="104" aria-hidden="true" />
+              <circle class="resa-chrono__face" cx="120" cy="148" r="90" aria-hidden="true" />
+              <path class="resa-chrono__arc" d="M120 75 A73 73 0 0 1 120 221 A73 73 0 0 1 120 75" pathLength="100" stroke="url(#chrono-contact)" aria-hidden="true" />
+              <g class="resa-chrono__ticks" aria-hidden="true">
+                <line x1="120.0" y1="86.0" x2="120.0" y2="68.0" />
+                <line x1="151.0" y1="94.31" x2="160.0" y2="78.72" />
+                <line x1="173.69" y1="117.0" x2="189.28" y2="108.0" />
+                <line x1="182.0" y1="148.0" x2="200.0" y2="148.0" />
+                <line x1="173.69" y1="179.0" x2="189.28" y2="188.0" />
+                <line x1="151.0" y1="201.69" x2="160.0" y2="217.28" />
+                <line x1="120.0" y1="210.0" x2="120.0" y2="228.0" />
+                <line x1="89.0" y1="201.69" x2="80.0" y2="217.28" />
+                <line x1="66.31" y1="179.0" x2="50.72" y2="188.0" />
+                <line x1="58.0" y1="148.0" x2="40.0" y2="148.0" />
+                <line x1="66.31" y1="117.0" x2="50.72" y2="108.0" />
+                <line x1="89.0" y1="94.31" x2="80.0" y2="78.72" />
+              </g>
+              <circle class="resa-chrono__center" cx="120" cy="148" r="54" aria-hidden="true" />
+              <text class="resa-chrono__num" x="120" y="155" text-anchor="middle" data-chrono-num data-target="30" aria-hidden="true">30</text>
+              <text class="resa-chrono__label" x="120" y="181" text-anchor="middle" data-i18n="chrono_label" aria-hidden="true">minutes</text>
+            </svg>
+          </div>
           <h2 class="contact-title">
             <span class="contact-title-primary" data-i18n="contact_h2">Réserver 30 minutes</span>
             <span class="contact-title-secondary" data-i18n="contact_sub" data-i18n-html
-              ><strong class="contact-wa">WhatsApp</strong> pour le créneau. Ou un message ici — réponse sous 24&nbsp;h, en français ou en anglais. Devis sous 48&nbsp;h après le brief.</span
+              ><strong class="contact-wa">WhatsApp</strong> pour le créneau, ou un message ici.<br />Réponse sous 24&nbsp;h · devis sous 48&nbsp;h.</span
             >
           </h2>
         </header>
@@ -772,21 +1186,23 @@
             href="https://wa.me/79965064486?text=Bonjour%20Marc-Onel%2C%20je%20voudrais%20r%C3%A9server%2030%20minutes%20pour%20parler%20d%E2%80%99un%20projet."
             target="_blank"
             rel="noopener noreferrer"
+            title="Réserver 30 min"
           >
             <span class="contact-link-card__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 16 16" width="18" height="18" focusable="false"><path fill="currentColor" d="M13.6 2.4A7.85 7.85 0 0 0 8 .1 7.9 7.9 0 0 0 .1 8c0 1.4.36 2.76 1.05 3.96L0 16l4.15-1.09A7.9 7.9 0 0 0 8 15.9 7.9 7.9 0 0 0 15.9 8 7.85 7.85 0 0 0 13.6 2.4M8 14.55a6.54 6.54 0 0 1-3.34-.91l-.24-.14-2.46.64.66-2.4-.16-.25A6.54 6.54 0 0 1 1.45 8 6.55 6.55 0 0 1 8 1.45 6.55 6.55 0 0 1 14.55 8 6.55 6.55 0 0 1 8 14.55m3.59-4.9c-.2-.1-1.17-.58-1.35-.64s-.31-.1-.44.1-.51.64-.62.77-.23.15-.43.05a5.3 5.3 0 0 1-1.56-.96 5.84 5.84 0 0 1-1.08-1.34c-.11-.2 0-.3.09-.4s.2-.23.3-.34.13-.2.2-.33a.37.37 0 0 0 0-.35c0-.1-.44-1.07-.61-1.46s-.32-.33-.44-.34h-.38a.73.73 0 0 0-.53.25 2.22 2.22 0 0 0-.7 1.65 3.86 3.86 0 0 0 .8 2.05 8.85 8.85 0 0 0 3.4 3 12.3 12.3 0 0 0 1.22.45 2.94 2.94 0 0 0 1.35.08 2.2 2.2 0 0 0 1.45-1.02 1.8 1.8 0 0 0 .12-1.02c-.05-.08-.18-.13-.38-.23"/></svg></span>
             <span class="contact-link-card__label">WhatsApp</span>
             <span class="contact-link-card__value" data-i18n="dock_book">Réserver 30 min</span>
           </a>
-          <a class="contact-link-card contact-link-card--mail" href="mailto:marconelvolcimus079@gmail.com">
+          <a class="contact-link-card contact-link-card--mail" href="mailto:marconelvolcimus079@gmail.com" title="marconelvolcimus079@gmail.com">
             <span class="contact-link-card__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 16 16" width="18" height="18" focusable="false"><path fill="currentColor" d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.026A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.025L8 9.586zm3.436-.586L16 11.801V4.697z"/></svg></span>
             <span class="contact-link-card__label">Email</span>
             <span class="contact-link-card__value">marconelvolcimus079@gmail.com</span>
           </a>
-          <a class="contact-link-card contact-link-card--phone" href="tel:+79965064486">
+          <a class="contact-link-card contact-link-card--phone" href="tel:+79965064486" title="+7996 506 44 86">
             <span class="contact-link-card__icon" aria-hidden="true"><svg class="icon" viewBox="0 0 16 16" width="18" height="18" focusable="false"><path fill="currentColor" d="M1.885.511a1.745 1.745 0 0 1 2.612.163L6.29 4.26c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l3.586 1.794c.84.42 1.068 1.45.548 2.179a17.4 17.4 0 0 1-3.257 3.489c-1.47 1.185-3.225.715-4.873-.226-1.544-.88-2.88-2.12-4.27-3.51S2.312 8.73 1.432 7.186c-.94-1.648-1.41-3.402-.226-4.873A17.4 17.4 0 0 1 1.885.51z"/></svg></span>
             <span class="contact-link-card__label" data-i18n="phone_label">Téléphone</span>
             <span class="contact-link-card__value">+7996 506 44 86</span>
           </a>
+        </div>
         </div>
         <form
           id="contactForm"
@@ -797,35 +1213,35 @@
         >
           <p class="contact-form-intro">
             <span class="contact-form-intro__lead" data-i18n="form_lead">Préfères écrire ?</span>
-            <span class="contact-form-intro__note" data-i18n="form_note">Envoie le brief ici — même délai : réponse sous 24&nbsp;h, en français ou en anglais.</span>
+            <span class="contact-form-intro__note" data-i18n="form_note">Envoie le brief ici — même délai, en français ou en anglais.</span>
           </p>
           <div class="contact-form-grid">
             <div class="form-field">
+              <input type="text" id="contactName" name="name" autocomplete="name" placeholder=" " required />
               <label for="contactName" data-i18n="label_name">Nom</label>
-              <input type="text" id="contactName" name="name" autocomplete="name" required />
             </div>
             <div class="form-field">
+              <input type="email" id="contactEmail" name="email" autocomplete="email" placeholder=" " required />
               <label for="contactEmail">Email</label>
-              <input type="email" id="contactEmail" name="email" autocomplete="email" required />
             </div>
             <div class="form-field">
-              <label for="contactProject" data-i18n="label_project">Type de projet</label>
               <select id="contactProject" name="project" required>
-                <option value="" selected disabled data-i18n="opt_choose">Choisir un format</option>
+                <option value="" selected disabled></option>
                 <option value="Site vitrine" data-i18n="opt_vitrine">Site vitrine</option>
                 <option value="Landing page" data-i18n="opt_landing">Landing page</option>
                 <option value="Application mobile" data-i18n="opt_app">Application mobile</option>
                 <option value="Présentation PowerPoint" data-i18n="opt_ppt">Présentation PowerPoint</option>
                 <option value="Autre" data-i18n="opt_other">Autre / à préciser</option>
               </select>
+              <label for="contactProject" data-i18n="label_project">Type de projet</label>
             </div>
             <div class="form-field">
+              <input type="text" id="contactSubject" name="subject" placeholder=" " required />
               <label for="contactSubject" data-i18n="label_subject">Sujet</label>
-              <input type="text" id="contactSubject" name="subject" required />
             </div>
             <div class="form-field form-field--full">
+              <textarea id="contactMessage" name="message" rows="3" placeholder=" " required></textarea>
               <label for="contactMessage" data-i18n="label_message">Message</label>
-              <textarea id="contactMessage" name="message" rows="5" required></textarea>
             </div>
           </div>
           <input type="hidden" name="_subject" id="contactFormSubject" value="Nouveau message portfolio" />
@@ -837,7 +1253,18 @@
             <button type="submit" class="btn" id="contactSubmit" data-i18n="form_send">Envoyer le message</button>
             <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
           </div>
+          <img
+            class="contact-form__portrait"
+            src="assets/portrait-cutout.png?v=6"
+            alt=""
+            width="200"
+            height="250"
+            decoding="async"
+            aria-hidden="true"
+          />
         </form>
+        </div>
+        </div>
       </section>
     </main>
 
@@ -869,7 +1296,7 @@
       </div>
     </dialog>
 
-    <script src="i18n.js?v=20260813-s2" defer></script>
-    <script src="script.js?v=20260813-s39" defer></script>
+    <script src="i18n.js?v=20260813-s16" defer></script>
+    <script src="script.js?v=20260813-s70" defer></script>
   </body>
 </html>

@@ -9,13 +9,11 @@
       content="Mentions légales et confidentialité du site de Marc-Onel Volcimus, développeur full stack freelance."
     />
     <link rel="canonical" href="https://marco-ops-code.github.io/mentions.html" />
-    <link rel="icon" href="assets/portrait.png?v=3" type="image/png" />
+    <link rel="icon" href="assets/portrait.jpg?v=5" type="image/jpeg" />
     <meta name="theme-color" content="#1d4ed8" />
     <script>
       try {
-        if (localStorage.getItem("theme") === "dark") {
-          document.documentElement.classList.add("theme-dark");
-        }
+        document.documentElement.classList.remove("theme-dark");
         if (localStorage.getItem("portfolio-lang") === "en") {
           document.documentElement.lang = "en";
         }
@@ -39,7 +37,7 @@
       <div class="container nav">
         <a href="index.html#home" class="logo">
           <img
-            src="assets/portrait.png?v=3"
+            src="assets/portrait.jpg?v=5"
             alt=""
             class="logo-avatar"
             width="38"

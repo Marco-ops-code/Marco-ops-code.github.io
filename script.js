@@ -6,7 +6,15 @@ const revealElements = document.querySelectorAll(".reveal");
 const themeToggle = document.getElementById("themeToggle");
 const reduceMotionGlobal = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const headerNav = document.querySelector(".header");
-const headerOffset = () => (headerNav ? headerNav.offsetHeight + 8 : 80);
+const headerOffset = () => {
+  if (!headerNav) {
+    return 16;
+  }
+  if (headerNav.classList.contains("header--hero") && window.innerWidth > 1024) {
+    return 16;
+  }
+  return headerNav.offsetHeight + 8;
+};
 
 function getScrollPosition() {
   return window.scrollY ?? 0;
@@ -31,6 +39,38 @@ const observer = new IntersectionObserver(
 
 revealElements.forEach((element) => observer.observe(element));
 
+function initAboutIn() {
+  const about = document.getElementById("about");
+  if (!about) {
+    return;
+  }
+
+  const play = () => {
+    requestAnimationFrame(() => {
+      about.classList.add("is-in");
+      about.classList.add("is-pillars-on");
+    });
+  };
+  if (reduceMotionGlobal || !("IntersectionObserver" in window)) {
+    about.classList.add("is-in");
+    about.classList.add("is-pillars-on");
+    return;
+  }
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      if (entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.25)) {
+        play();
+        io.disconnect();
+      }
+    },
+    { threshold: [0.25, 0.5] }
+  );
+  io.observe(about);
+}
+
+initAboutIn();
+
 const heroReveal = document.querySelector(".hero.reveal");
 if (heroReveal) {
   heroReveal.classList.add("visible");
@@ -40,7 +80,7 @@ function initAnchorScroll() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", (event) => {
       const hash = anchor.getAttribute("href");
-      if (!hash || hash === "#") {
+      if (!hash || hash === "#" || anchor.hasAttribute("data-tarifs-option") || anchor.hasAttribute("data-cartes-option")) {
         return;
       }
       const target = document.querySelector(hash);
@@ -453,6 +493,15 @@ function initWorkCabinet() {
       selectTab(next);
     });
   });
+
+  document.querySelectorAll(".hero-works__ring[data-tab]").forEach((ring) => {
+    ring.addEventListener("click", () => {
+      const tab = document.getElementById(ring.getAttribute("data-tab"));
+      if (tab) {
+        selectTab(tab);
+      }
+    });
+  });
 }
 
 function initShotLightbox() {
@@ -593,44 +642,6 @@ function initNavMenus() {
     return;
   }
   mobile.innerHTML = source.innerHTML;
-}
-
-function initPortraitGlint() {
-  const brand = document.querySelector("#home .hero-brand");
-  const glint = brand?.querySelector(".hero-brand__glint");
-  if (!brand || !glint) {
-    return;
-  }
-
-  const phone = window.matchMedia("(max-width: 760px)");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-  const update = (event) => {
-    if (!phone.matches || reduceMotion.matches) {
-      return;
-    }
-    const point = event.touches ? event.touches[0] : null;
-    if (!point) {
-      return;
-    }
-    const rect = brand.getBoundingClientRect();
-    const x = Math.min(Math.max(point.clientX - rect.left, 0), rect.width);
-    const y = Math.min(Math.max(point.clientY - rect.top, 0), rect.height);
-    glint.style.setProperty("--glint-x", `${(x / rect.width) * 100}%`);
-    glint.style.setProperty("--glint-y", `${(y / rect.height) * 100}%`);
-    const angle = Math.atan2(y - rect.height / 2, x - rect.width / 2) * (180 / Math.PI) + 90;
-    glint.style.setProperty("--glint-angle", `${angle}deg`);
-    brand.classList.add("is-gliding");
-  };
-
-  const end = () => {
-    brand.classList.remove("is-gliding");
-  };
-
-  brand.addEventListener("touchstart", update, { passive: true });
-  brand.addEventListener("touchmove", update, { passive: true });
-  brand.addEventListener("touchend", end);
-  brand.addEventListener("touchcancel", end);
 }
 
 function initHeaderScroll() {
@@ -791,243 +802,11 @@ initAnchorScroll();
 initHeaderScroll();
 initMobileNav();
 initLanguageSwitch();
-initPortraitGlint();
 initNavActiveSection();
 initProjectShots();
 initShotLightbox();
 initWorkCabinet();
 initContactForm();
-initProcessFlow();
-
-function initProcessFlow() {
-  const process = document.getElementById("process");
-  const stage = process?.querySelector(".work-steps-stage");
-  const steps = process?.querySelector(".work-steps");
-  const progress = process?.querySelector(".work-steps__progress");
-  const glow = process?.querySelector(".work-steps__glow");
-  if (!process || !stage || !steps || reduceMotionGlobal) {
-    return;
-  }
-
-  const items = Array.from(steps.querySelectorAll(":scope > li"));
-  const track = process.querySelector(".work-steps__track");
-  if (items.length < 2) {
-    return;
-  }
-
-  const isPhone = () => window.matchMedia("(max-width: 760px)").matches;
-  const hole = 18;
-  let loopTimer = 0;
-  let moveFrame = 0;
-  let started = false;
-  let running = false;
-
-  function easeInOut(t) {
-    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-  }
-
-  function circlePoint(item) {
-    const box = stage.getBoundingClientRect();
-    const rect = item.getBoundingClientRect();
-    return {
-      x: rect.left + 15 - box.left,
-      y: rect.top + 15 - box.top,
-    };
-  }
-
-  function railMask(points, first, last) {
-    const phone = isPhone();
-    const span = phone ? last.y - first.y : last.x - first.x;
-    if (span <= 0) {
-      return "";
-    }
-    return points
-      .map((point) => {
-        const t = phone ? (point.y - first.y) / span : (point.x - first.x) / span;
-        const at = phone
-          ? `50% ${(t * 100).toFixed(2)}%`
-          : `${(t * 100).toFixed(2)}% 50%`;
-        return `radial-gradient(circle ${hole}px at ${at}, transparent ${hole - 1}px, #000 ${hole}px)`;
-      })
-      .join(", ");
-  }
-
-  function layoutRail() {
-    const points = items.map(circlePoint);
-    const first = points[0];
-    const last = points[points.length - 1];
-    if (!track) {
-      return { first, last };
-    }
-    if (isPhone()) {
-      track.style.left = `${first.x}px`;
-      track.style.top = `${first.y}px`;
-      track.style.width = "2px";
-      track.style.height = `${Math.max(0, last.y - first.y)}px`;
-      track.style.right = "auto";
-    } else {
-      track.style.left = `${first.x}px`;
-      track.style.top = `${first.y}px`;
-      track.style.width = `${Math.max(0, last.x - first.x)}px`;
-      track.style.height = "2px";
-      track.style.right = "auto";
-    }
-    const mask = railMask(points, first, last);
-    track.style.maskImage = mask;
-    track.style.webkitMaskImage = mask;
-    track.style.maskComposite = "intersect";
-    track.style.webkitMaskComposite = "source-in";
-    return { first, last };
-  }
-
-  function overCircle(point) {
-    return items.some((item) => {
-      const center = circlePoint(item);
-      return Math.hypot(point.x - center.x, point.y - center.y) < hole;
-    });
-  }
-
-  function setMarker(point) {
-    if (glow && point) {
-      glow.style.left = `${point.x}px`;
-      glow.style.top = `${point.y}px`;
-      glow.style.opacity = overCircle(point) ? "0" : "1";
-    }
-    if (!progress || !point) {
-      return;
-    }
-    const first = circlePoint(items[0]);
-    if (isPhone()) {
-      progress.style.width = "100%";
-      progress.style.height = `${Math.max(0, point.y - first.y)}px`;
-      return;
-    }
-    progress.style.height = "100%";
-    progress.style.width = `${Math.max(0, point.x - first.x)}px`;
-  }
-
-  function fillUpTo(index) {
-    items.forEach((item, i) => {
-      item.classList.toggle("is-filled", i <= index);
-      item.classList.toggle("is-current", i === index);
-    });
-  }
-
-  function stop() {
-    running = false;
-    window.clearTimeout(loopTimer);
-    window.cancelAnimationFrame(moveFrame);
-    moveFrame = 0;
-  }
-
-  function animateBetween(fromIndex, toIndex, duration) {
-    return new Promise((resolve) => {
-      const startAt = performance.now();
-      function tick(now) {
-        if (!running) {
-          resolve();
-          return;
-        }
-        const p = easeInOut(Math.min(1, (now - startAt) / duration));
-        const from = circlePoint(items[fromIndex]);
-        const to = circlePoint(items[toIndex]);
-        setMarker({
-          x: from.x + (to.x - from.x) * p,
-          y: from.y + (to.y - from.y) * p,
-        });
-        if (p < 1) {
-          moveFrame = window.requestAnimationFrame(tick);
-          return;
-        }
-        resolve();
-      }
-      moveFrame = window.requestAnimationFrame(tick);
-    });
-  }
-
-  function wait(ms) {
-    return new Promise((resolve) => {
-      loopTimer = window.setTimeout(resolve, ms);
-    });
-  }
-
-  async function play() {
-    running = true;
-    process.classList.add("is-flowing");
-    items.forEach((item) => item.classList.remove("is-filled", "is-current"));
-    layoutRail();
-    setMarker(circlePoint(items[0]));
-    fillUpTo(0);
-    await wait(1100);
-    for (let i = 0; i < items.length - 1; i += 1) {
-      if (!running) {
-        return;
-      }
-      await animateBetween(i, i + 1, 2200);
-      if (!running) {
-        return;
-      }
-      setMarker(circlePoint(items[i + 1]));
-      fillUpTo(i + 1);
-      await wait(i === items.length - 2 ? 2200 : 1000);
-    }
-    if (running) {
-      loopTimer = window.setTimeout(() => {
-        if (running) {
-          play();
-        }
-      }, 800);
-    }
-  }
-
-  function freezePhone() {
-    stop();
-    process.classList.remove("is-flowing");
-    items.forEach((item) => {
-      item.classList.remove("is-filled", "is-current");
-    });
-    if (glow) {
-      glow.style.opacity = "0";
-    }
-    if (progress) {
-      progress.style.width = "0";
-      progress.style.height = "0";
-    }
-  }
-
-  function start() {
-    stop();
-    if (isPhone()) {
-      freezePhone();
-      return;
-    }
-    play();
-  }
-
-  const view = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !started) {
-          started = true;
-          start();
-        }
-      });
-    },
-    { threshold: 0.28 }
-  );
-  view.observe(process);
-
-  window.matchMedia("(max-width: 760px)").addEventListener("change", (event) => {
-    if (event.matches) {
-      freezePhone();
-      return;
-    }
-    if (started) {
-      start();
-    }
-  });
-}
-
 
 const sectionTitleFocusElements = document.querySelectorAll("main .section");
 if (sectionTitleFocusElements.length) {
@@ -1177,17 +956,583 @@ T4  Recette        3 j`,
 const skillsTypingController = initSkillsTyping();
 initSkillsWheel(skillsTypingController?.activateCard);
 
-const storedTheme = localStorage.getItem("theme");
-if (storedTheme === "dark") {
-  document.body.classList.add("dark");
-  document.documentElement.classList.add("theme-dark");
-}
-updateThemeToggleUi();
-
-themeToggle?.addEventListener("click", () => {
-  const isDark = document.body.classList.toggle("dark");
-  document.documentElement.classList.toggle("theme-dark", isDark);
-  localStorage.setItem("theme", isDark ? "dark" : "light");
+const THEME_TOGGLE_ENABLED = false;
+if (THEME_TOGGLE_ENABLED) {
+  const storedTheme = localStorage.getItem("theme");
+  if (storedTheme === "dark") {
+    document.body.classList.add("dark");
+    document.documentElement.classList.add("theme-dark");
+  }
   updateThemeToggleUi();
-});
+  themeToggle?.addEventListener("click", () => {
+    const isDark = document.body.classList.toggle("dark");
+    document.documentElement.classList.toggle("theme-dark", isDark);
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    updateThemeToggleUi();
+  });
+} else {
+  document.body.classList.remove("dark");
+  document.documentElement.classList.remove("theme-dark");
+}
 
+(() => {
+  const roots = document.querySelectorAll("[data-resa-chrono]");
+  if (!roots.length) {
+    return;
+  }
+
+  if (reduceMotionGlobal || !("IntersectionObserver" in window)) {
+    return;
+  }
+
+  const DURATION = 1600;
+  const easeOut = (t) => 1 - Math.pow(1 - t, 5);
+
+  function countUp(el, target) {
+    const start = performance.now();
+
+    function frame(now) {
+      const t = Math.min((now - start) / DURATION, 1);
+      el.textContent = String(Math.round(easeOut(t) * target));
+      if (t < 1) {
+        requestAnimationFrame(frame);
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  function play(root) {
+    const num = root.querySelector("[data-chrono-num]");
+    const target = parseInt(num?.dataset.target, 10) || 0;
+
+    void root.offsetWidth;
+    root.classList.remove("is-armed");
+    if (num) {
+      countUp(num, target);
+    }
+    window.setTimeout(() => root.classList.add("is-done"), DURATION);
+  }
+
+  roots.forEach((root) => {
+    root.classList.add("is-armed");
+    const num = root.querySelector("[data-chrono-num]");
+    if (num) {
+      num.textContent = "0";
+    }
+  });
+
+  const chronoObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+        chronoObserver.unobserve(entry.target);
+        play(entry.target);
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  roots.forEach((root) => chronoObserver.observe(root));
+})();
+
+(() => {
+  const root = document.querySelector("[data-cartes]");
+  if (!root) {
+    return;
+  }
+
+  const track = root.querySelector("[data-cartes-track]");
+  const stage = root.querySelector("[data-cartes-stage]");
+  const area = root.querySelector("[data-cartes-area]");
+  const board = root.querySelector("[data-cartes-board]");
+  const hint = root.querySelector("[data-cartes-hint]");
+  const cards = Array.from(root.querySelectorAll(".cartes-card"));
+  const count = cards.length;
+  const reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  function selectOption(select, wanted) {
+    const w = wanted.trim().toLowerCase();
+    const option = Array.from(select.options).find((optionEl) => {
+      const key = (optionEl.getAttribute("data-i18n") ?? "").trim().toLowerCase();
+      const value = optionEl.value.trim().toLowerCase();
+      const label = optionEl.textContent.trim().toLowerCase();
+      return key === w || value === w || label === w;
+    });
+    if (!option) {
+      return false;
+    }
+
+    select.value = option.value;
+    select.dispatchEvent(new Event("input", { bubbles: true }));
+    select.dispatchEvent(new Event("change", { bubbles: true }));
+    return true;
+  }
+
+  root.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-cartes-option]");
+    if (!button) {
+      return;
+    }
+
+    const href = button.getAttribute("href");
+    const target = href && href.startsWith("#") ? document.querySelector(href) : null;
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const select = root.dataset.formSelect ? document.querySelector(root.dataset.formSelect) : null;
+    if (select instanceof HTMLSelectElement) {
+      selectOption(select, button.dataset.cartesOption);
+    }
+
+    const top = target.getBoundingClientRect().top + window.scrollY - headerOffset();
+    window.scrollTo({ top, behavior: reduceQuery.matches ? "auto" : "smooth" });
+    history.pushState(null, "", href);
+
+    const next = root.dataset.formFocus ? document.querySelector(root.dataset.formFocus) : null;
+    if (next instanceof HTMLElement) {
+      next.focus({ preventScroll: true });
+    }
+  });
+
+  if (!track || !stage || !area || !board || count < 2) {
+    return;
+  }
+
+  const SCROLL_SCREENS = 4.6;
+  const PILE_SHARE = 0.7;
+  const ARRIVAL_START = 0.1;
+  const ARRIVAL_STEP = 0.18;
+  const ARRIVAL_DURATION = 0.12;
+  const HOLD_BEFORE_GRID = 0.1;
+  const FLIGHT_STAGGER = 0.045;
+  const FLIGHT_DURATION = 0.16;
+  const ENTRY_OFFSET = 0.9;
+  const DECK = [
+    { x: -22, y: 8, r: -2.2 },
+    { x: 16, y: -6, r: 1.6 },
+    { x: -10, y: 12, r: -1.1 },
+    { x: 0, y: 0, r: 0.4 },
+  ];
+
+  const lastArrivalEnd = ARRIVAL_START + (count - 2) * ARRIVAL_STEP + ARRIVAL_DURATION;
+  const flightStart = lastArrivalEnd + HOLD_BEFORE_GRID;
+  const total = flightStart + (count - 1) * FLIGHT_STAGGER + FLIGHT_DURATION + 0.025;
+
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+  const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const cssNumber = (name) => parseFloat(getComputedStyle(root).getPropertyValue(name)) || 0;
+
+  let pinned = false;
+  let forceGrid = false;
+  let ticking = false;
+  let geo = null;
+  let cachedTop = 0;
+
+  function shouldPin() {
+    return !reduceQuery.matches && window.innerWidth >= 1100 && window.innerHeight >= 700;
+  }
+
+  function computeGeometry() {
+    const W = cssNumber("--cartes-w");
+    const H = cssNumber("--cartes-h");
+    const gap = cssNumber("--cartes-gap");
+    const em = cssNumber("--cartes-em") || 16;
+    const cellW = (W - gap) / 2;
+    const cellH = (H - gap) / 2;
+    const k = (PILE_SHARE * W) / cellW;
+
+    geo = {
+      W,
+      H,
+      gap,
+      em,
+      k,
+      naturalW: cellW * k,
+      naturalH: cellH * k,
+      centers: cards.map((_, i) => ({
+        x: (i % 2) * (cellW + gap) + cellW / 2,
+        y: Math.floor(i / 2) * (cellH + gap) + cellH / 2,
+      })),
+    };
+  }
+
+  function applyCardBoxes() {
+    cards.forEach((card, i) => {
+      const c = geo.centers[i];
+      card.style.left = `${c.x - geo.naturalW / 2}px`;
+      card.style.top = `${c.y - geo.naturalH / 2}px`;
+      card.style.width = `${geo.naturalW}px`;
+      card.style.height = `${geo.naturalH}px`;
+      card.style.fontSize = `${geo.em * geo.k}px`;
+    });
+  }
+
+  function layout() {
+    const vh = window.innerHeight;
+    track.style.height = `${stage.offsetHeight + SCROLL_SCREENS * vh}px`;
+    const fit = Math.min(1, area.clientWidth / geo.W, (area.clientHeight - 28) / geo.H);
+    root.style.setProperty("--fit", fit.toFixed(4));
+    cachedTop = parseFloat(getComputedStyle(stage).top) || 0;
+  }
+
+  function reset() {
+    track.style.height = "";
+    root.style.removeProperty("--fit");
+    cards.forEach((card) => {
+      ["left", "top", "width", "height", "fontSize", "transform", "opacity", "pointerEvents"].forEach((prop) => {
+        card.style[prop] = "";
+      });
+      card.style.removeProperty("--dim");
+    });
+    if (hint) {
+      hint.style.opacity = "";
+    }
+  }
+
+  function arrival(i, t) {
+    if (i === 0) {
+      return 1;
+    }
+    const start = ARRIVAL_START + (i - 1) * ARRIVAL_STEP;
+    return clamp((t - start) / ARRIVAL_DURATION);
+  }
+
+  function flight(i, t) {
+    const start = flightStart + (count - 1 - i) * FLIGHT_STAGGER;
+    return clamp((t - start) / FLIGHT_DURATION);
+  }
+
+  function pose(i, t) {
+    const c = geo.centers[i];
+    const deck = DECK[i % DECK.length];
+    const pile = { x: geo.W / 2 - c.x + deck.x, y: geo.H / 2 - c.y + deck.y, r: deck.r, s: 1 };
+    const a = easeOut(arrival(i, t));
+    const arriving = {
+      x: pile.x,
+      y: pile.y + (1 - a) * geo.H * ENTRY_OFFSET,
+      r: pile.r + (1 - a) * 7,
+      s: pile.s * (0.94 + 0.06 * a),
+      o: clamp(a * 3),
+    };
+    const f = easeInOut(flight(i, t));
+    return {
+      x: lerp(arriving.x, 0, f),
+      y: lerp(arriving.y, 0, f),
+      r: lerp(arriving.r, 0, f),
+      s: lerp(arriving.s, 1 / geo.k, f),
+      o: arriving.o,
+      arrived: arrival(i, t),
+      f,
+    };
+  }
+
+  function progress() {
+    if (forceGrid) {
+      return { p: 1, top: 0 };
+    }
+    const rect = track.getBoundingClientRect();
+    const scrollable = Math.max(rect.height - stage.offsetHeight, 1);
+    return {
+      p: clamp((cachedTop - rect.top) / scrollable),
+      top: rect.top,
+    };
+  }
+
+  function update() {
+    ticking = false;
+    if (!pinned || !geo) {
+      return;
+    }
+
+    const measured = progress();
+    const vh = window.innerHeight;
+    const p = measured.p;
+    const t = p * total;
+    const trackTop = measured.top;
+    const poses = cards.map((_, i) => pose(i, t));
+    const topIndex = poses.reduce((acc, q, i) => (q.arrived > 0.5 ? i : acc), 0);
+    const anyFlight = poses.some((q) => q.f > 0);
+
+    cards.forEach((card, i) => {
+      const q = poses[i];
+      card.style.transform = `translate3d(${q.x.toFixed(2)}px,${q.y.toFixed(2)}px,0) rotate(${q.r.toFixed(3)}deg) scale(${q.s.toFixed(4)})`;
+      card.style.opacity = q.o.toFixed(3);
+
+      let covered = 0;
+      for (let j = i + 1; j < count; j += 1) {
+        covered += poses[j].arrived;
+      }
+      card.style.setProperty("--dim", (0.07 * covered * (1 - q.f)).toFixed(3));
+
+      const interactive = q.f > 0.85 || (!anyFlight && i === topIndex);
+      card.style.pointerEvents = interactive ? "" : "none";
+
+      const ready = i === 0 ? trackTop < vh * 0.7 : q.arrived > 0.3;
+      if (ready || forceGrid) {
+        card.classList.add("is-drawn");
+      }
+    });
+
+    if (hint) {
+      hint.style.opacity = (1 - clamp(p / 0.03)).toFixed(3);
+    }
+  }
+
+  function requestUpdate() {
+    if (ticking) {
+      return;
+    }
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }
+
+  function sync() {
+    root.style.setProperty("--cartes-top", `${headerOffset()}px`);
+    const want = shouldPin();
+
+    if (want !== pinned) {
+      pinned = want;
+      root.classList.toggle("is-pinned", pinned);
+      if (!pinned) {
+        reset();
+      }
+    }
+
+    if (pinned) {
+      computeGeometry();
+      applyCardBoxes();
+      layout();
+      update();
+    }
+  }
+
+  root.addEventListener("focusin", (event) => {
+    if (!pinned || !event.target.matches(":focus-visible")) {
+      return;
+    }
+    forceGrid = true;
+    update();
+  });
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", () => {
+    sync();
+  });
+  window.addEventListener("load", sync);
+  if (reduceQuery.addEventListener) {
+    reduceQuery.addEventListener("change", sync);
+  }
+
+  sync();
+})();
+
+(() => {
+  const root = document.querySelector("[data-trav]");
+  if (!root) {
+    return;
+  }
+
+  const track = root.querySelector("[data-trav-track]");
+  const stage = root.querySelector("[data-trav-stage]");
+  const line = root.querySelector(".trav-rail__line");
+  const fill = root.querySelector("[data-trav-fill]");
+  const knob = root.querySelector("[data-trav-knob]");
+  const hint = root.querySelector("[data-trav-hint]");
+  const steps = Array.from(root.querySelectorAll("[data-trav-step]"));
+  const nodes = Array.from(root.querySelectorAll("[data-trav-go]"));
+  const scenes = steps.map((step) => step.querySelector(".trav-scene"));
+  const ctaLinks = steps.map((step) => Array.from(step.querySelectorAll("a")));
+  const count = steps.length;
+  if (!track || !stage || !line || count < 2) {
+    return;
+  }
+
+  const reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const SCROLL_PER_STEP = 1.4;
+  const BEATS = [0.04, 0.28, 0.52, 0.76];
+  const JUMP_AT = 0.3;
+  const HOLD = 0.84;
+  const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+  const smoothstep = (t) => t * t * (3 - 2 * t);
+
+  let pinned = false;
+  let ticking = false;
+
+  function shouldPin() {
+    return !reduceQuery.matches && window.innerWidth >= 1000 && window.innerHeight >= 700;
+  }
+
+  function layout() {
+    track.style.height = `${stage.offsetHeight + SCROLL_PER_STEP * count * window.innerHeight}px`;
+  }
+
+  function stageTop() {
+    return parseFloat(getComputedStyle(stage).top) || 0;
+  }
+
+  function progress() {
+    const rect = track.getBoundingClientRect();
+    const scrollable = Math.max(rect.height - stage.offsetHeight, 1);
+    return clamp((stageTop() - rect.top) / scrollable);
+  }
+
+  function nodeStops() {
+    const lineRect = line.getBoundingClientRect();
+    const span = Math.max(lineRect.width, 1);
+    return nodes.map((node) => {
+      const box = node.getBoundingClientRect();
+      return clamp((box.left + box.width / 2 - lineRect.left) / span);
+    });
+  }
+
+  function railFraction(p, stops) {
+    const raw = p * count;
+    const index = Math.min(count - 1, Math.floor(raw));
+    const local = raw - index;
+    const here = stops[index];
+    if (index >= count - 1) {
+      return here;
+    }
+    if (local <= HOLD) {
+      return here;
+    }
+    const t = smoothstep((local - HOLD) / (1 - HOLD));
+    return here + (stops[index + 1] - here) * t;
+  }
+
+  function update() {
+    ticking = false;
+    if (!pinned) {
+      return;
+    }
+
+    const travRect = track.getBoundingClientRect();
+    if (travRect.bottom < -48 || travRect.top > window.innerHeight + 48) {
+      return;
+    }
+
+    const p = progress();
+    const active = Math.min(count - 1, Math.floor(p * count));
+    const local = p >= 1 ? 1 : p * count - active;
+    const stops = nodeStops();
+    const fraction = railFraction(p, stops);
+    const traveling = local > HOLD && active < count - 1;
+
+    fill.style.width = `${(fraction * 100).toFixed(2)}%`;
+    knob.style.left = `${(fraction * 100).toFixed(2)}%`;
+    knob.classList.toggle("is-traveling", traveling);
+
+    nodes.forEach((node, index) => {
+      node.classList.toggle("is-done", fraction >= stops[index] - 0.01);
+      node.classList.toggle("is-current", index === active);
+      if (index === active) {
+        node.setAttribute("aria-current", "step");
+      } else {
+        node.removeAttribute("aria-current");
+      }
+    });
+
+    steps.forEach((step, index) => {
+      step.classList.toggle("is-active", index === active);
+      step.classList.toggle("is-before", index < active);
+      ctaLinks[index].forEach((link) => {
+        link.setAttribute("tabindex", index === active ? "0" : "-1");
+      });
+    });
+
+    scenes.forEach((scene, index) => {
+      if (!scene) {
+        return;
+      }
+      let reached = 0;
+      if (index < active) {
+        reached = BEATS.length;
+      } else if (index === active) {
+        reached = BEATS.filter((beat) => local >= beat).length;
+      }
+      BEATS.forEach((_, beat) => {
+        scene.classList.toggle(`b${beat + 1}`, beat < reached);
+      });
+    });
+
+    if (hint) {
+      hint.style.opacity = (1 - clamp(p / 0.03)).toFixed(3);
+    }
+  }
+
+  function requestUpdate() {
+    if (ticking) {
+      return;
+    }
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }
+
+  function reset() {
+    track.style.height = "";
+    fill.style.width = "";
+    knob.style.left = "";
+    knob.classList.remove("is-traveling");
+    if (hint) {
+      hint.style.opacity = "";
+    }
+    steps.forEach((step) => step.classList.remove("is-active", "is-before"));
+    scenes.forEach((scene) => scene && scene.classList.remove("b1", "b2", "b3", "b4"));
+    ctaLinks.forEach((links) => {
+      links.forEach((link) => link.removeAttribute("tabindex"));
+    });
+    nodes.forEach((node) => {
+      node.classList.remove("is-done", "is-current");
+      node.removeAttribute("aria-current");
+    });
+  }
+
+  function sync() {
+    root.style.setProperty("--trav-top", `${headerOffset()}px`);
+    const want = shouldPin();
+
+    if (want !== pinned) {
+      pinned = want;
+      root.classList.toggle("is-pinned", pinned);
+      if (!pinned) {
+        reset();
+      }
+    }
+
+    if (pinned) {
+      layout();
+      update();
+    }
+  }
+
+  nodes.forEach((node) => {
+    node.addEventListener("click", () => {
+      if (!pinned) {
+        return;
+      }
+      const index = parseInt(node.dataset.travGo, 10);
+      const rect = track.getBoundingClientRect();
+      const scrollable = rect.height - stage.offsetHeight;
+      const targetP = (index + JUMP_AT) / count;
+      const y = window.scrollY + rect.top - stageTop() + targetP * scrollable;
+      window.scrollTo({ top: y, behavior: reduceQuery.matches ? "auto" : "smooth" });
+    });
+  });
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", sync);
+  window.addEventListener("load", sync);
+  if (reduceQuery.addEventListener) {
+    reduceQuery.addEventListener("change", sync);
+  }
+
+  sync();
+})();
