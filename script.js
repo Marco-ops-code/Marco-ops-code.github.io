@@ -10,7 +10,7 @@ const headerOffset = () => {
   if (!headerNav) {
     return 16;
   }
-  if (headerNav.classList.contains("header--hero") && window.innerWidth > 1024) {
+  if (headerNav.classList.contains("header--hero")) {
     return 16;
   }
   return headerNav.offsetHeight + 8;
