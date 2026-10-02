@@ -9,13 +9,14 @@
       content="Mentions légales et confidentialité du site de Marc-Onel Volcimus, développeur full stack freelance."
     />
     <link rel="canonical" href="https://marco-ops-code.github.io/mentions.html" />
-    <link rel="icon" href="assets/portrait.jpg?v=5" type="image/jpeg" />
+    <link rel="icon" href="assets/mark-avatar.jpg?v=1" type="image/jpeg" />
     <meta name="theme-color" content="#1d4ed8" />
     <script>
       try {
         document.documentElement.classList.remove("theme-dark");
-        if (localStorage.getItem("portfolio-lang") === "en") {
-          document.documentElement.lang = "en";
+        const savedLang = localStorage.getItem("portfolio-lang");
+        if (savedLang === "en" || savedLang === "es") {
+          document.documentElement.lang = savedLang;
         }
       } catch (error) {
         /* storage blocked */
@@ -27,7 +28,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=20260813-s67" />
+    <link rel="stylesheet" href="style.css?v=20260813-s157" />
   </head>
   <body data-page="legal">
     <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
@@ -37,7 +38,7 @@
       <div class="container nav">
         <a href="index.html#home" class="logo">
           <img
-            src="assets/portrait.jpg?v=5"
+            src="assets/mark-avatar.jpg?v=1"
             alt=""
             class="logo-avatar"
             width="38"
@@ -55,6 +56,7 @@
           <div class="nav-lang" role="group" data-i18n-aria="nav_lang" aria-label="Langue">
             <button type="button" class="nav-lang__btn is-active" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
             <button type="button" class="nav-lang__btn" data-lang="en" lang="en" aria-pressed="false">EN</button>
+            <button type="button" class="nav-lang__btn" data-lang="es" lang="es" aria-pressed="false">ES</button>
           </div>
         </div>
       </div>
@@ -73,14 +75,14 @@
           personne physique. Il n’est pas rattaché à une société commerciale déclarée sur cette page.
         </p>
         <p data-i18n="legal_editor_p2">
-          Travail à distance, réponses en français ou en anglais. Le contact se fait par e-mail, téléphone ou WhatsApp
-          — le fuseau horaire n’est pas un obstacle.
+          Les formats proposés sont le site vitrine, la landing page, l’application mobile et la présentation PowerPoint.
+          Le travail se fait à distance, en français, en anglais ou en espagnol, par e-mail, téléphone ou WhatsApp.
         </p>
 
         <h2 data-i18n="nav_contact">Contact</h2>
         <ul>
-          <li>E-mail : <a href="mailto:marconelvolcimus079@gmail.com">marconelvolcimus079@gmail.com</a></li>
-          <li>Téléphone : <a href="tel:+79965064486">+7 996 506 44 86</a></li>
+          <li><span data-i18n="legal_mail_l">E-mail</span> : <a href="mailto:marconelvolcimus079@gmail.com">marconelvolcimus079@gmail.com</a></li>
+          <li><span data-i18n="legal_phone_l">Téléphone</span> : <a href="tel:+79965064486">+7 996 506 44 86</a></li>
           <li>WhatsApp : <a href="https://wa.me/79965064486" target="_blank" rel="noopener noreferrer">wa.me/79965064486</a></li>
         </ul>
 
@@ -89,17 +91,20 @@
           Le site est hébergé par <strong>GitHub Pages</strong>, un service de GitHub, Inc.,
           88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.
           Site : <a href="https://pages.github.com" target="_blank" rel="noopener noreferrer">pages.github.com</a>.
+          Un nom de domaine personnel pourra pointer vers ce même hébergement : l’éditeur et l’hébergeur restent ceux indiqués ici.
         </p>
 
         <h2 id="confidentialite" data-i18n="legal_privacy">Données personnelles</h2>
         <p data-i18n="legal_privacy_p" data-i18n-html>
           Le formulaire de contact est transmis via <strong>Formspree</strong> (Whistlin’ See Dan, LLC)
-          afin que le message arrive à l’éditeur. Les champs envoyés sont le nom, l’e-mail, le sujet
-          et le message. Ils servent uniquement à répondre à la demande. Ils ne sont pas revendus.
+          afin que le message arrive à l’éditeur. Les champs envoyés sont le nom, l’e-mail, le type de projet,
+          le sujet et le message. Ils servent uniquement à répondre à la demande et à préparer un devis.
+          Ils ne sont pas revendus. Aucun paiement n’est encaissé sur le site.
         </p>
         <p data-i18n="legal_privacy_p2" data-i18n-html>
-          WhatsApp, l’e-mail et le téléphone relèvent des services que tu utilises déjà pour écrire.
+          WhatsApp, l’e-mail et le téléphone relèvent des services déjà utilisés pour écrire.
           Les polices du site sont chargées depuis <strong>Google Fonts</strong>.
+          Aucun outil de mesure d’audience n’est installé.
         </p>
         <p data-i18n="legal_privacy_p3" data-i18n-html>
           Pour une question ou une suppression, écrire à
@@ -108,14 +113,15 @@
 
         <h2 data-i18n="legal_storage">Stockage local</h2>
         <p data-i18n="legal_storage_p" data-i18n-html>
-          Le choix du thème clair ou sombre, et de la langue, est enregistré dans le navigateur (<code>localStorage</code>).
+          Seul le choix de langue (français, anglais ou espagnol) est enregistré dans le navigateur
+          (<code>localStorage</code>, clé <code>portfolio-lang</code>).
           Aucun cookie publicitaire n’est déposé.
         </p>
 
         <h2 data-i18n="legal_ip">Propriété intellectuelle</h2>
         <p data-i18n="legal_ip_p">
-          Les textes, visuels et codes présentés restent la propriété de leurs auteurs.
-          Les extraits de travaux clients sont montrés à titre de démonstration.
+          Les textes, photographies et le code de ce site appartiennent à Marc-Onel Volcimus, sauf mention contraire.
+          Les extraits de travaux sont montrés à titre de démonstration.
         </p>
 
         <p class="legal-back"><a href="index.html" data-i18n="legal_back">Retour au portfolio</a></p>
@@ -127,7 +133,7 @@
         <p>© 2026 Marc-Onel Volcimus</p>
       </div>
     </footer>
-    <script src="i18n.js?v=20260813-s2" defer></script>
-    <script src="script.js?v=20260813-s38" defer></script>
+    <script src="i18n.js?v=20260813-s20" defer></script>
+    <script src="script.js?v=20260813-s72" defer></script>
   </body>
 </html>

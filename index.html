@@ -10,8 +10,8 @@
     />
     <meta name="author" content="Marc-Onel Volcimus" />
     <link rel="canonical" href="https://marco-ops-code.github.io/" />
-    <link rel="icon" href="assets/portrait.jpg?v=5" type="image/jpeg" />
-    <link rel="apple-touch-icon" href="assets/portrait.jpg?v=5" />
+    <link rel="icon" href="assets/mark-avatar.jpg?v=1" type="image/jpeg" />
+    <link rel="apple-touch-icon" href="assets/mark-avatar.jpg?v=1" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:title" content="Marc-Onel Volcimus — Développeur full stack" />
@@ -25,10 +25,10 @@
     />
     <meta
       property="og:image"
-      content="https://marco-ops-code.github.io/assets/portrait.jpg?v=5"
+      content="https://marco-ops-code.github.io/assets/mark-avatar.jpg?v=1"
     />
-    <meta property="og:image:width" content="768" />
-    <meta property="og:image:height" content="1024" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Marc-Onel Volcimus — Développeur full stack" />
     <meta
@@ -37,14 +37,15 @@
     />
     <meta
       name="twitter:image"
-      content="https://marco-ops-code.github.io/assets/portrait.jpg?v=5"
+      content="https://marco-ops-code.github.io/assets/mark-avatar.jpg?v=1"
     />
     <meta name="theme-color" content="#1d4ed8" />
     <script>
       try {
         document.documentElement.classList.remove("theme-dark");
-        if (localStorage.getItem("portfolio-lang") === "en") {
-          document.documentElement.lang = "en";
+        const savedLang = localStorage.getItem("portfolio-lang");
+        if (savedLang === "en" || savedLang === "es") {
+          document.documentElement.lang = savedLang;
         }
       } catch (error) {
         /* storage blocked */
@@ -56,7 +57,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=20260813-s154" />
+    <link rel="stylesheet" href="style.css?v=20260813-s157" />
   </head>
   <body data-page="home">
     <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
@@ -68,7 +69,7 @@
       <div class="container nav">
         <a href="#home" class="logo">
           <img
-            src="assets/portrait.jpg?v=5"
+            src="assets/mark-avatar.jpg?v=1"
             alt=""
             class="logo-avatar"
             width="38"
@@ -117,6 +118,7 @@
           <div class="nav-lang" role="group" data-i18n-aria="nav_lang" aria-label="Langue">
             <button type="button" class="nav-lang__btn is-active" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
             <button type="button" class="nav-lang__btn" data-lang="en" lang="en" aria-pressed="false">EN</button>
+            <button type="button" class="nav-lang__btn" data-lang="es" lang="es" aria-pressed="false">ES</button>
           </div>
           <button
             class="nav-theme-btn"
@@ -301,7 +303,7 @@
             <p data-i18n="about_p">
               Je suis Marc-Onel Volcimus, développeur full stack. J’aide les indépendants et les TPE
               à envoyer un support sans s’expliquer : site vitrine, landing page, application mobile
-              ou présentation PowerPoint. Je travaille à distance, en français et en anglais : WhatsApp et e-mail
+              ou présentation PowerPoint. Je travaille à distance, en français, en anglais ou en espagnol : WhatsApp et e-mail
               suffisent, le fuseau n’est pas un obstacle.
             </p>
           </header>
@@ -328,7 +330,7 @@
               </li>
               <li class="about-pillar" style="--h: 84%; --tint: 64%">
                 <strong data-i18n="fact_delay">Délai</strong>
-                <span class="about-pillar__detail" data-i18n="fact_delay_v">Réponse sous 24&nbsp;h, en français ou en anglais</span>
+                <span class="about-pillar__detail" data-i18n="fact_delay_v">Réponse sous 24&nbsp;h, en français, en anglais ou en espagnol</span>
               </li>
               <li class="about-pillar" style="--h: 100%; --tint: 78%">
                 <strong data-i18n="fact_place">Lieu</strong>
@@ -1213,15 +1215,15 @@
         >
           <p class="contact-form-intro">
             <span class="contact-form-intro__lead" data-i18n="form_lead">Préfères écrire ?</span>
-            <span class="contact-form-intro__note" data-i18n="form_note">Envoie le brief ici — même délai, en français ou en anglais.</span>
+            <span class="contact-form-intro__note" data-i18n="form_note">Envoie le brief ici — même délai, en français, en anglais ou en espagnol.</span>
           </p>
           <div class="contact-form-grid">
             <div class="form-field">
-              <input type="text" id="contactName" name="name" autocomplete="name" placeholder=" " required />
+              <input type="text" id="contactName" name="name" autocomplete="name" placeholder=" " required maxlength="80" />
               <label for="contactName" data-i18n="label_name">Nom</label>
             </div>
             <div class="form-field">
-              <input type="email" id="contactEmail" name="email" autocomplete="email" placeholder=" " required />
+              <input type="email" id="contactEmail" name="email" autocomplete="email" placeholder=" " required maxlength="120" />
               <label for="contactEmail">Email</label>
             </div>
             <div class="form-field">
@@ -1236,11 +1238,11 @@
               <label for="contactProject" data-i18n="label_project">Type de projet</label>
             </div>
             <div class="form-field">
-              <input type="text" id="contactSubject" name="subject" placeholder=" " required />
+              <input type="text" id="contactSubject" name="subject" placeholder=" " required maxlength="140" />
               <label for="contactSubject" data-i18n="label_subject">Sujet</label>
             </div>
             <div class="form-field form-field--full">
-              <textarea id="contactMessage" name="message" rows="3" placeholder=" " required></textarea>
+              <textarea id="contactMessage" name="message" rows="3" placeholder=" " required maxlength="2000"></textarea>
               <label for="contactMessage" data-i18n="label_message">Message</label>
             </div>
           </div>
@@ -1296,7 +1298,7 @@
       </div>
     </dialog>
 
-    <script src="i18n.js?v=20260813-s16" defer></script>
-    <script src="script.js?v=20260813-s71" defer></script>
+    <script src="i18n.js?v=20260813-s20" defer></script>
+    <script src="script.js?v=20260813-s72" defer></script>
   </body>
 </html>

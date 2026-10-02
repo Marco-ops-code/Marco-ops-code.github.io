@@ -612,18 +612,11 @@ function initContactForm() {
         statusEl.textContent = t("form_ok");
         statusEl.dataset.state = "success";
       } else {
-        const apiError =
-          typeof payload.error === "string"
-            ? payload.error
-            : Array.isArray(payload.errors) && payload.errors[0]?.message
-              ? payload.errors[0].message
-              : "Erreur lors de l'envoi.";
-
         const isFormNotFound =
           response.status === 404 ||
           payload.errors?.some((entry) => entry.code === "FORM_NOT_FOUND");
 
-        statusEl.textContent = isFormNotFound ? t("form_missing") : apiError;
+        statusEl.textContent = isFormNotFound ? t("form_missing") : t("form_err");
         statusEl.dataset.state = "error";
       }
     } catch {
