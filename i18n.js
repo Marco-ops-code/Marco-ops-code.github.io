@@ -310,6 +310,40 @@ const I18N_EN = {
   missing_p: "The page was moved, or the link is incomplete.",
   missing_home: "Back to the home page",
   missing_contact: "Contact",
+  rights: "All rights reserved.",
+  privacy_link: "Privacy policy",
+  terms_link: "Terms of service",
+  privacy_title: "Privacy policy — Marc-Onel Volcimus",
+  privacy_h1: "Privacy policy",
+  privacy_intro: "This page describes the data processed when you write through this site.",
+  privacy_who_h: "Who is responsible",
+  privacy_who_p:
+    "Marc-Onel Volcimus, freelance full stack developer, as a natural person. For a question or a deletion request, write to <a href=\"mailto:marconelvolcimus079@gmail.com\">marconelvolcimus079@gmail.com</a>.",
+  privacy_data_h: "Data collected",
+  privacy_why_h: "Why",
+  privacy_why_p:
+    "Messages are used to answer the request and prepare a quote. They are not used for advertising, they are not sold, and no payment is collected on the site.",
+  privacy_who_gets_h: "Who receives them",
+  privacy_who_gets_p:
+    "The contact form goes through <strong>Formspree</strong> (Whistlin’ See Dan, LLC) so the message reaches the publisher. WhatsApp, email and phone are the services already used to write. Site fonts are loaded from <strong>Google Fonts</strong>. No audience-measurement tool is installed.",
+  privacy_keep_h: "How long",
+  privacy_keep_p:
+    "Messages are kept for as long as needed to reply and follow the quote. A deletion request is sent by email to the address above.",
+  terms_title: "Terms of service — Marc-Onel Volcimus",
+  terms_h1: "Terms of service",
+  terms_intro: "These terms cover use of the site and the moment a project actually starts.",
+  terms_site_h: "The site",
+  terms_site_p:
+    "The site presents the services of Marc-Onel Volcimus: showcase site, landing page, mobile app and PowerPoint presentation. Browsing it does not create a contract.",
+  terms_mission_h: "A project",
+  terms_mission_p:
+    "A project starts only after a quote is accepted in writing, by email or WhatsApp. The form and the 30-minute booking are there to frame the request. No payment is collected on the site.",
+  terms_use_h: "Use of the form",
+  terms_use_p:
+    "The form is for a real project. Automated messages, or messages unrelated to a request, are not processed.",
+  terms_links_h: "Outside links",
+  terms_links_p:
+    "Links to GitHub, WhatsApp, client sites and Google Fonts leave this site. Their own terms apply there.",
 };
 
 const I18N_ES = {
@@ -600,6 +634,40 @@ const I18N_ES = {
   missing_p: "La página se ha movido, o el enlace está incompleto.",
   missing_home: "Volver al inicio",
   missing_contact: "Contacto",
+  rights: "Todos los derechos reservados.",
+  privacy_link: "Política de privacidad",
+  terms_link: "Términos de servicio",
+  privacy_title: "Política de privacidad — Marc-Onel Volcimus",
+  privacy_h1: "Política de privacidad",
+  privacy_intro: "Esta página describe los datos tratados cuando escribes a través de este sitio.",
+  privacy_who_h: "Responsable",
+  privacy_who_p:
+    "Marc-Onel Volcimus, desarrollador full stack freelance, como persona física. Para una pregunta o una solicitud de supresión, escribe a <a href=\"mailto:marconelvolcimus079@gmail.com\">marconelvolcimus079@gmail.com</a>.",
+  privacy_data_h: "Datos recogidos",
+  privacy_why_h: "Para qué",
+  privacy_why_p:
+    "Los mensajes sirven para responder a la solicitud y preparar un presupuesto. No se usan para publicidad, no se venden y no se cobra ningún pago en el sitio.",
+  privacy_who_gets_h: "Quién los recibe",
+  privacy_who_gets_p:
+    "El formulario de contacto pasa por <strong>Formspree</strong> (Whistlin’ See Dan, LLC) para que el mensaje llegue al editor. WhatsApp, el correo y el teléfono son los servicios que ya usas para escribir. Las fuentes del sitio se cargan desde <strong>Google Fonts</strong>. No hay ninguna herramienta de medición de audiencia.",
+  privacy_keep_h: "Durante cuánto tiempo",
+  privacy_keep_p:
+    "Los mensajes se conservan el tiempo necesario para responder y seguir el presupuesto. Una solicitud de supresión se envía por correo a la dirección de arriba.",
+  terms_title: "Términos de servicio — Marc-Onel Volcimus",
+  terms_h1: "Términos de servicio",
+  terms_intro: "Estos términos cubren el uso del sitio y el momento en que un proyecto empieza de verdad.",
+  terms_site_h: "El sitio",
+  terms_site_p:
+    "El sitio presenta los servicios de Marc-Onel Volcimus: sitio web, landing page, aplicación móvil y presentación PowerPoint. Visitarlo no crea un contrato.",
+  terms_mission_h: "Un proyecto",
+  terms_mission_p:
+    "Un proyecto empieza solo después de que un presupuesto se acepta por escrito, por correo o WhatsApp. El formulario y la reserva de 30 minutos sirven para encuadrar la solicitud. No se cobra ningún pago en el sitio.",
+  terms_use_h: "Uso del formulario",
+  terms_use_p:
+    "El formulario es para un proyecto real. Los mensajes automáticos, o sin relación con una solicitud, no se tratan.",
+  terms_links_h: "Enlaces externos",
+  terms_links_p:
+    "Los enlaces a GitHub, WhatsApp, sitios de clientes y Google Fonts salen de este sitio. Allí se aplican sus propias condiciones.",
 };
 
 const I18N_CATALOGS = { en: I18N_EN, es: I18N_ES };
@@ -650,12 +718,13 @@ function applyLanguage(lang) {
   if (!document.documentElement.hasAttribute("data-title-src")) {
     document.documentElement.setAttribute("data-title-src", document.title);
   }
-  const titleKey =
-    document.body?.dataset.page === "legal"
-      ? "legal_title"
-      : document.body?.dataset.page === "missing"
-        ? "missing_title"
-        : "page_title";
+  const pageTitles = {
+    legal: "legal_title",
+    missing: "missing_title",
+    privacy: "privacy_title",
+    terms: "terms_title",
+  };
+  const titleKey = pageTitles[document.body?.dataset.page] || "page_title";
   const dict = activeCatalog();
   document.title =
     dict && dict[titleKey] ? dict[titleKey] : document.documentElement.getAttribute("data-title-src");

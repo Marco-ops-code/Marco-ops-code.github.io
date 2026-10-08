@@ -1196,7 +1196,7 @@ body.dark .hero-wrap::after {
   box-sizing: border-box;
   width: 100%;
   max-width: none;
-  height: 100svh;
+  height: auto;
   min-height: 100svh;
   margin: 0;
   display: flex;
@@ -1222,10 +1222,10 @@ body.dark #contact.contact-wrap .section.container.contact-section {
   box-sizing: border-box;
   width: min(1320px, 96%);
   max-width: min(1320px, 96%);
-  height: 100%;
+  height: auto;
   min-height: 100svh;
   margin: 0 auto;
-  padding: 32px 40px 28px;
+  padding: 32px 40px 36px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1411,12 +1411,13 @@ body.dark .contact-wrap .contact-wa {
 
 .contact-wrap .contact-links-grid {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: start;
   width: auto;
   max-width: none;
   margin: 0;
-  gap: 22px;
+  gap: 18px 22px;
 }
 
 .contact-wrap .contact-link-card,
@@ -1459,9 +1460,73 @@ body.dark .contact-wrap .contact-link-card--phone {
 .contact-wrap .contact-link-card__icon .icon,
 .contact-wrap .contact-link-card--whatsapp .contact-link-card__icon .icon,
 .contact-wrap .contact-link-card--mail .contact-link-card__icon .icon,
-.contact-wrap .contact-link-card--phone .contact-link-card__icon .icon {
-  width: 20px;
-  height: 20px;
+.contact-wrap .contact-link-card--phone .contact-link-card__icon .icon,
+.contact-wrap .contact-link-card--github .contact-link-card__icon .icon,
+.contact-wrap .contact-link-card--linkedin .contact-link-card__icon .icon,
+.contact-wrap .contact-link-card--instagram .contact-link-card__icon .icon,
+.contact-wrap .contact-link-card--facebook .contact-link-card__icon .icon,
+.contact-wrap .contact-link-card--tiktok .contact-link-card__icon .icon {
+  width: 22px;
+  height: 22px;
+}
+
+.contact-wrap .contact-link-card--github .contact-link-card__icon {
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  background: linear-gradient(165deg, #3d444d 0%, #24292f 58%, #0d1117 100%);
+  box-shadow: 0 8px 18px rgba(13, 17, 23, 0.28);
+}
+
+.contact-wrap .contact-link-card--github .contact-link-card__label {
+  color: #24292f;
+}
+
+.contact-wrap .contact-link-card--linkedin .contact-link-card__icon {
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  background: linear-gradient(165deg, #4d9fe8 0%, #0a66c2 58%, #004182 100%);
+  box-shadow: 0 8px 18px rgba(10, 102, 194, 0.32);
+}
+
+.contact-wrap .contact-link-card--linkedin .contact-link-card__label {
+  color: #0a66c2;
+}
+
+.contact-wrap .contact-link-card--instagram .contact-link-card__icon,
+.contact-wrap .contact-link-card--facebook .contact-link-card__icon,
+.contact-wrap .contact-link-card--tiktok .contact-link-card__icon {
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+}
+
+.contact-wrap .contact-link-card--instagram .contact-link-card__icon {
+  background: radial-gradient(circle at 30% 110%, #feda75 0%, #fa7e1e 28%, #d62976 58%, #962fbf 82%, #4f5bd5 100%);
+  box-shadow: 0 8px 18px rgba(214, 41, 118, 0.32);
+}
+
+.contact-wrap .contact-link-card--instagram .contact-link-card__label {
+  color: #c13584;
+}
+
+.contact-wrap .contact-link-card--facebook .contact-link-card__icon {
+  background: linear-gradient(165deg, #4c9af0 0%, #1877f2 58%, #0c5ec7 100%);
+  box-shadow: 0 8px 18px rgba(24, 119, 242, 0.32);
+}
+
+.contact-wrap .contact-link-card--facebook .contact-link-card__label {
+  color: #1877f2;
+}
+
+.contact-wrap .contact-link-card--tiktok .contact-link-card__icon {
+  background: linear-gradient(165deg, #3a3a3a 0%, #111111 58%, #000000 100%);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+}
+
+.contact-wrap .contact-link-card--tiktok .contact-link-card__label {
+  color: #111111;
 }
 
 .contact-wrap .contact-link-card__label,
@@ -7391,4 +7456,10 @@ body.dark .form-field textarea {
   justify-content: center;
   gap: 12px;
   margin-top: 28px;
+}
+
+@media (max-width: 480px) {
+  .contact-wrap .contact-links-grid {
+    gap: 12px 10px;
+  }
 }
