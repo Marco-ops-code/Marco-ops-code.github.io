@@ -1529,3 +1529,152 @@ if (THEME_TOGGLE_ENABLED) {
 
   sync();
 })();
+
+/* ───────── Compétences : roue v2 ───────── */
+function initSkillsWheelV2() {
+  const section = document.getElementById("skills");
+  const wheel = document.getElementById("swWheel");
+  const detail = document.getElementById("swDetail");
+  const filters = section ? section.querySelector(".sw-filters") : null;
+  const items = section ? Array.from(section.querySelectorAll(".sw-data > li")) : [];
+  if (!wheel || !detail || !filters || !items.length) {
+    return;
+  }
+
+  const FAMILIES = {
+    front: ["skills_f_front", "Front-end"],
+    back: ["skills_f_back", "Back & données"],
+    design: ["skills_f_design", "Design"],
+    mgmt: ["skills_f_mgmt", "Gestion"],
+  };
+  const tr = (key, fallback) => (typeof t === "function" ? t(key) : fallback);
+  const text = (li, sel) => (li.querySelector(sel)?.textContent ?? "").trim();
+  const el = (tag, className, content) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (content != null) node.textContent = content;
+    return node;
+  };
+
+  const total = items.length;
+  let current = 0;
+  let rotation = 0;
+  let family = "all";
+
+  const nodes = items.map((li, index) => {
+    const node = el("button", "sw-node");
+    node.type = "button";
+    node.dataset.fam = li.dataset.fam;
+    node.style.setProperty("--sw-a", `${(index * 360) / total}deg`);
+    node.setAttribute("aria-controls", "swDetail");
+    const img = document.createElement("img");
+    img.src = li.dataset.logo;
+    img.alt = "";
+    img.width = 40;
+    img.height = 40;
+    img.decoding = "async";
+    node.appendChild(img);
+    node.addEventListener("click", () => select(index));
+    wheel.appendChild(node);
+    return node;
+  });
+
+  const pool = () => items.map((_, i) => i).filter((i) => family === "all" || items[i].dataset.fam === family);
+
+  function renderDetail() {
+    const li = items[current];
+    const fam = li.dataset.fam;
+    const list = pool();
+    const used = (li.dataset.used || "").split("|").filter(Boolean);
+
+    detail.dataset.fam = fam;
+    wheel.dataset.fam = fam;
+    detail.replaceChildren();
+
+    const head = el("div", "sw-detail__head");
+    const logo = el("span", "sw-detail__logo");
+    const logoImg = document.createElement("img");
+    logoImg.src = li.dataset.logo;
+    logoImg.alt = "";
+    logo.appendChild(logoImg);
+    const titles = el("div");
+    titles.append(el("p", "sw-detail__fam", tr(FAMILIES[fam][0], FAMILIES[fam][1])), el("h3", null, text(li, "h3")));
+    head.append(logo, titles);
+    detail.append(head, el("p", "sw-detail__text", text(li, "p")));
+
+    if (used.length) {
+      const row = el("p", "sw-detail__used");
+      row.appendChild(el("span", null, tr("skills_used", "Utilisé sur")));
+      used.forEach((name) => {
+        const link = el("a", null, name);
+        link.href = "#projects";
+        row.appendChild(link);
+      });
+      detail.appendChild(row);
+    }
+
+    const nav = el("div", "sw-detail__nav");
+    const prev = el("button", null, `← ${tr("skills_prev", "Précédent")}`);
+    const next = el("button", null, `${tr("skills_next", "Suivant")} →`);
+    prev.type = next.type = "button";
+    prev.addEventListener("click", () => step(-1));
+    next.addEventListener("click", () => step(1));
+    nav.append(prev, el("span", "sw-detail__count", `${list.indexOf(current) + 1} / ${list.length}`), next);
+    detail.appendChild(nav);
+  }
+
+  function syncNodes() {
+    nodes.forEach((node, i) => {
+      node.setAttribute("aria-label", text(items[i], "h3"));
+      node.setAttribute("aria-current", String(i === current));
+      node.tabIndex = i === current ? 0 : -1;
+      node.disabled = family !== "all" && items[i].dataset.fam !== family;
+    });
+  }
+
+  function select(index, focus) {
+    current = index;
+    const delta = ((((-((index * 360) / total) - rotation + 180) % 360) + 360) % 360) - 180;
+    rotation += delta;
+    wheel.style.setProperty("--sw-r", `${rotation}deg`);
+    syncNodes();
+    renderDetail();
+    if (focus) nodes[index].focus();
+  }
+
+  function step(dir, focus) {
+    const list = pool();
+    const pos = Math.max(0, list.indexOf(current));
+    select(list[(pos + dir + list.length) % list.length], focus);
+  }
+
+  filters.addEventListener("click", (event) => {
+    const chip = event.target.closest("[data-sw-filter]");
+    if (!chip) return;
+    family = chip.dataset.swFilter;
+    filters.querySelectorAll("[data-sw-filter]").forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+    const list = pool();
+    select(list.includes(current) ? current : list[0]);
+  });
+
+  wheel.addEventListener("keydown", (event) => {
+    const keys = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+    if (event.key in keys) {
+      event.preventDefault();
+      step(keys[event.key], true);
+    } else if (event.key === "Home" || event.key === "End") {
+      event.preventDefault();
+      const list = pool();
+      select(event.key === "Home" ? list[0] : list[list.length - 1], true);
+    }
+  });
+
+  window.addEventListener("portfolio:lang", () => {
+    syncNodes();
+    renderDetail();
+  });
+
+  select(0);
+}
+
+initSkillsWheelV2();
