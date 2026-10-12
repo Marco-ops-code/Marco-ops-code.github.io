@@ -1847,3 +1847,230 @@ function initWorkUpgrade() {
 }
 
 initWorkUpgrade();
+
+function initFormFlight() {
+  const form = document.getElementById("contactForm");
+  const btn = document.getElementById("contactSubmit");
+  const photo = form ? form.querySelector(".contact-form__portrait") : null;
+  const lead = form ? form.querySelector(".contact-form-intro__lead") : null;
+  if (!form || !btn || !photo || !lead) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const plane = document.createElement("span");
+  plane.className = "form-plane";
+  plane.setAttribute("aria-hidden", "true");
+  plane.innerHTML =
+    '<svg viewBox="0 0 64 64" width="30" height="30" focusable="false" aria-hidden="true"><path fill="#ffffff" stroke="#4a3b5c" stroke-width="1.6" stroke-linejoin="round" d="M4 33 L60 12 L36 52 L29 35 Z"/><path fill="#e7dcec" d="M29 35 L60 12 L36 52 Z"/><path fill="none" stroke="#b7a8c4" stroke-width="1.4" d="M29 35 L60 12"/></svg>';
+  const smokes = [0, 1, 2, 3, 4].map(() => {
+    const dot = document.createElement("span");
+    dot.className = "form-smoke";
+    dot.setAttribute("aria-hidden", "true");
+    form.appendChild(dot);
+    return dot;
+  });
+  form.appendChild(plane);
+
+  let anim = null;
+  let raf = 0;
+  let timer = 0;
+  let running = false;
+  let pathPts = [];
+  const FLIGHT = 10400;
+
+  const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+
+  function box(el) {
+    const fr = form.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    return {
+      cx: r.left - fr.left + r.width / 2,
+      cy: r.top - fr.top + r.height / 2,
+      top: r.top - fr.top,
+      right: r.right - fr.left,
+      bottom: r.bottom - fr.top,
+    };
+  }
+
+  function anchors() {
+    const W = form.clientWidth;
+    const H = form.clientHeight;
+    const L = box(lead);
+    const P = box(photo);
+    const B = box(btn);
+    const fields = [...form.querySelectorAll(".form-field")].map(box);
+    const m = 18;
+    const above = clamp(P.top - 34, m, H - m);
+    const spot = (i) => fields[Math.min(i, Math.max(0, fields.length - 1))] || { cx: W * 0.5, cy: H * 0.45 };
+    const c = (n) => ({ x: clamp(n.x, m, W - m), y: clamp(n.y, m, H - m) });
+    return [
+      c({ x: L.cx + 48, y: L.cy }),
+      c({ x: W * 0.42, y: m }),
+      c({ x: W - m, y: m + 10 }),
+      c({ x: spot(0).cx, y: spot(0).cy }),
+      c({ x: W - m, y: spot(1).cy }),
+      c({ x: spot(1).cx, y: spot(1).cy }),
+      c({ x: m, y: spot(2).cy }),
+      c({ x: spot(2).cx, y: spot(2).cy }),
+      c({ x: W - m, y: Math.min(spot(3).cy, above) }),
+      c({ x: spot(4).cx, y: spot(4).cy }),
+      c({ x: m, y: above }),
+      c({ x: P.cx, y: above }),
+      c({ x: P.right + 28, y: P.top + 8 }),
+      c({ x: W * 0.62, y: above - 28 }),
+      c({ x: m + 10, y: spot(0).cy }),
+      c({ x: W - m, y: above }),
+      { x: B.cx, y: B.cy },
+    ];
+  }
+
+  function spline(points) {
+    const pts = [points[0], ...points, points[points.length - 1]];
+    const out = [];
+    const samples = 7;
+    for (let i = 1; i < pts.length - 2; i += 1) {
+      const p0 = pts[i - 1];
+      const p1 = pts[i];
+      const p2 = pts[i + 1];
+      const p3 = pts[i + 2];
+      for (let s = 0; s < samples; s += 1) {
+        const u = s / samples;
+        const u2 = u * u;
+        const u3 = u2 * u;
+        out.push({
+          x: 0.5 * (2 * p1.x + (-p0.x + p2.x) * u + (2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * u2 + (-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * u3),
+          y: 0.5 * (2 * p1.y + (-p0.y + p2.y) * u + (2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * u2 + (-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * u3),
+        });
+      }
+    }
+    out.push(points[points.length - 1]);
+    const W = form.clientWidth;
+    const H = form.clientHeight;
+    const m = 18;
+    return out.map((p) => ({
+      x: clamp(p.x, m, W - m),
+      y: clamp(p.y, m, H - m),
+    }));
+  }
+
+  function frames() {
+    const smooth = spline(anchors());
+    const last = smooth.length - 1;
+    const built = smooth.map((p, i) => {
+      const a = smooth[Math.max(0, i - 1)];
+      const b = smooth[Math.min(last, i + 1)];
+      const ang = (Math.atan2(b.y - a.y, b.x - a.x) * 180) / Math.PI;
+      const t = i / last;
+      return {
+        transform: "translate(" + (p.x - 15) + "px, " + (p.y - 15) + "px) rotate(" + ang + "deg) scale(1)",
+        opacity: 1,
+        offset: t * 0.8,
+      };
+    });
+    const end = built[built.length - 1];
+    const parked = end.transform.replace("scale(1)", "scale(0.72)");
+    built.push({ transform: end.transform, opacity: 1, offset: 0.86 });
+    built.push({ transform: parked, opacity: 1, offset: 0.92 });
+    built.push({ transform: parked, opacity: 0, offset: 0.97 });
+    built.push({ transform: parked, opacity: 0, offset: 1 });
+    return { built, smooth };
+  }
+
+  function placeSmoke(time) {
+    if (!pathPts.length) return;
+    const u = Math.min(1, time / FLIGHT / 0.8);
+    const idx = u * (pathPts.length - 1);
+    smokes.forEach((dot, i) => {
+      const back = idx - (i + 1) * 2.4;
+      if (back < 1 || time > FLIGHT * 0.78) {
+        dot.style.opacity = "0";
+        return;
+      }
+      const i0 = Math.floor(back);
+      const i1 = Math.min(pathPts.length - 1, i0 + 1);
+      const f = back - i0;
+      const p0 = pathPts[i0];
+      const p1 = pathPts[i1];
+      const x = p0.x + (p1.x - p0.x) * f;
+      const y = p0.y + (p1.y - p0.y) * f;
+      dot.style.opacity = String(0.5 * (1 - i / smokes.length));
+      dot.style.transform = "translate(" + (x - 8) + "px, " + (y - 8) + "px) scale(" + (1.2 - i * 0.14) + ")";
+    });
+  }
+
+  function stop() {
+    running = false;
+    if (anim) {
+      anim.cancel();
+      anim = null;
+    }
+    cancelAnimationFrame(raf);
+    clearTimeout(timer);
+    btn.classList.remove("is-wave");
+    plane.classList.remove("is-landing");
+    smokes.forEach((dot) => {
+      dot.style.opacity = "0";
+    });
+  }
+
+  function pulse() {
+    btn.classList.remove("is-wave");
+    void btn.offsetWidth;
+    btn.classList.add("is-wave");
+  }
+
+  function fly() {
+    if (!running || form.clientWidth < 40) return;
+    if (anim) anim.cancel();
+    btn.classList.remove("is-wave");
+    plane.classList.remove("is-landing");
+    let waved = false;
+    const flight = frames();
+    pathPts = flight.smooth;
+    anim = plane.animate(flight.built, { duration: FLIGHT, easing: "linear", fill: "forwards" });
+    const watch = () => {
+      if (!running || !anim) return;
+      placeSmoke(anim.currentTime || 0);
+      if (!plane.classList.contains("is-landing") && anim.currentTime >= FLIGHT * 0.72) {
+        plane.classList.add("is-landing");
+      }
+      if (!waved && anim.currentTime >= FLIGHT * 0.84) {
+        waved = true;
+        pulse();
+      }
+      if (anim.playState === "finished") {
+        timer = setTimeout(fly, 420);
+        return;
+      }
+      raf = requestAnimationFrame(watch);
+    };
+    raf = requestAnimationFrame(watch);
+  }
+
+  function restart() {
+    stop();
+    running = true;
+    fly();
+  }
+
+  const seen = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      if (!running) restart();
+    } else {
+      stop();
+    }
+  }, { threshold: 0.3 });
+  seen.observe(form);
+
+  let resizeWait = 0;
+  new ResizeObserver(() => {
+    if (!running) return;
+    clearTimeout(resizeWait);
+    resizeWait = setTimeout(restart, 160);
+  }).observe(form);
+
+  window.addEventListener("portfolio:lang", () => {
+    if (running) restart();
+  });
+}
+
+initFormFlight();

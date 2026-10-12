@@ -8141,3 +8141,82 @@ html[lang="ru"] .trav {
     margin-top: 0;
   }
 }
+
+.contact-wrap .contact-form-grid,
+.contact-wrap .contact-form-intro {
+  position: relative;
+  z-index: 4;
+}
+
+.contact-wrap .contact-form > .form-plane,
+.contact-wrap .contact-form > .form-smoke {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.contact-wrap .contact-form > .form-plane {
+  width: 30px;
+  height: 30px;
+  opacity: 0;
+  filter: drop-shadow(0 2px 3px rgba(58, 45, 79, 0.28));
+}
+
+.contact-wrap .contact-form > .form-plane.is-landing {
+  z-index: 6;
+}
+
+.contact-wrap .contact-form > .form-smoke {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  opacity: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(214, 202, 221, 0.45) 48%, transparent 74%);
+  filter: blur(0.6px);
+}
+
+.contact-wrap #contactSubmit {
+  position: relative;
+}
+
+.contact-wrap #contactSubmit::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.contact-wrap #contactSubmit.is-wave::before {
+  animation: sendWave 1s ease-out;
+}
+
+@keyframes sendWave {
+  0% {
+    opacity: 1;
+    box-shadow:
+      inset 0 0 12px rgba(255, 255, 255, 0.72),
+      0 0 0 0 rgba(255, 255, 255, 0.7),
+      0 0 0 0 rgba(214, 202, 221, 0.55);
+  }
+  100% {
+    opacity: 0;
+    box-shadow:
+      inset 0 0 0 rgba(255, 255, 255, 0),
+      0 0 0 16px rgba(255, 255, 255, 0),
+      0 0 0 28px rgba(214, 202, 221, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-wrap .contact-form > .form-plane,
+  .contact-wrap .contact-form > .form-smoke,
+  .contact-wrap #contactSubmit.is-wave::before {
+    display: none;
+    animation: none;
+  }
+}
