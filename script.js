@@ -1875,7 +1875,7 @@ function initFormFlight() {
   let timer = 0;
   let running = false;
   let pathPts = [];
-  const FLIGHT = 10400;
+  const FLIGHT = 20000;
 
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
@@ -1898,27 +1898,19 @@ function initFormFlight() {
     const P = box(photo);
     const B = box(btn);
     const fields = [...form.querySelectorAll(".form-field")].map(box);
-    const m = 18;
-    const above = clamp(P.top - 34, m, H - m);
+    const m = 28;
+    const above = clamp(P.top - 36, m, H - m);
     const spot = (i) => fields[Math.min(i, Math.max(0, fields.length - 1))] || { cx: W * 0.5, cy: H * 0.45 };
     const c = (n) => ({ x: clamp(n.x, m, W - m), y: clamp(n.y, m, H - m) });
     return [
-      c({ x: L.cx + 48, y: L.cy }),
-      c({ x: W * 0.42, y: m }),
-      c({ x: W - m, y: m + 10 }),
-      c({ x: spot(0).cx, y: spot(0).cy }),
-      c({ x: W - m, y: spot(1).cy }),
+      c({ x: L.cx + 28, y: L.cy }),
+      c({ x: W * 0.7, y: L.cy + 6 }),
       c({ x: spot(1).cx, y: spot(1).cy }),
-      c({ x: m, y: spot(2).cy }),
-      c({ x: spot(2).cx, y: spot(2).cy }),
-      c({ x: W - m, y: Math.min(spot(3).cy, above) }),
+      c({ x: W * 0.62, y: spot(3).cy }),
       c({ x: spot(4).cx, y: spot(4).cy }),
-      c({ x: m, y: above }),
+      c({ x: W * 0.3, y: above }),
       c({ x: P.cx, y: above }),
-      c({ x: P.right + 28, y: P.top + 8 }),
-      c({ x: W * 0.62, y: above - 28 }),
-      c({ x: m + 10, y: spot(0).cy }),
-      c({ x: W - m, y: above }),
+      c({ x: (P.right + B.cx) / 2, y: (above + B.cy) / 2 }),
       { x: B.cx, y: B.cy },
     ];
   }
@@ -1926,7 +1918,7 @@ function initFormFlight() {
   function spline(points) {
     const pts = [points[0], ...points, points[points.length - 1]];
     const out = [];
-    const samples = 7;
+    const samples = 12;
     for (let i = 1; i < pts.length - 2; i += 1) {
       const p0 = pts[i - 1];
       const p1 = pts[i];
@@ -1955,13 +1947,19 @@ function initFormFlight() {
   function frames() {
     const smooth = spline(anchors());
     const last = smooth.length - 1;
+    let head = 0;
     const built = smooth.map((p, i) => {
-      const a = smooth[Math.max(0, i - 1)];
-      const b = smooth[Math.min(last, i + 1)];
-      const ang = (Math.atan2(b.y - a.y, b.x - a.x) * 180) / Math.PI;
+      const a = smooth[Math.max(0, i - 2)];
+      const b = smooth[Math.min(last, i + 2)];
+      let ang = (Math.atan2(b.y - a.y, b.x - a.x) * 180) / Math.PI;
+      if (i === 0) head = ang;
+      let delta = ang - head;
+      while (delta > 180) delta -= 360;
+      while (delta < -180) delta += 360;
+      head += delta * 0.28;
       const t = i / last;
       return {
-        transform: "translate(" + (p.x - 15) + "px, " + (p.y - 15) + "px) rotate(" + ang + "deg) scale(1)",
+        transform: "translate(" + (p.x - 15) + "px, " + (p.y - 15) + "px) rotate(" + head + "deg) scale(1)",
         opacity: 1,
         offset: t * 0.8,
       };
@@ -1980,7 +1978,7 @@ function initFormFlight() {
     const u = Math.min(1, time / FLIGHT / 0.8);
     const idx = u * (pathPts.length - 1);
     smokes.forEach((dot, i) => {
-      const back = idx - (i + 1) * 2.4;
+      const back = idx - (i + 1) * 5;
       if (back < 1 || time > FLIGHT * 0.78) {
         dot.style.opacity = "0";
         return;
@@ -2038,7 +2036,7 @@ function initFormFlight() {
         pulse();
       }
       if (anim.playState === "finished") {
-        timer = setTimeout(fly, 420);
+        timer = setTimeout(fly, 1800);
         return;
       }
       raf = requestAnimationFrame(watch);
