@@ -1678,3 +1678,172 @@ function initSkillsWheelV2() {
 }
 
 initSkillsWheelV2();
+
+/* ───────── Travaux : améliorations (préfixe wk-) ───────── */
+function initWorkUpgrade() {
+  const root = document.querySelector("#projects .work-cabinet");
+  const drawer = root ? root.querySelector(".work-cabinet__drawer") : null;
+  const tabs = root ? Array.from(root.querySelectorAll('[role="tab"]')) : [];
+  if (!drawer || !tabs.length || root.dataset.wkReady === "1") {
+    return;
+  }
+  root.dataset.wkReady = "1";
+
+  const STACK = {
+    "work-panel-lk": ["React", "Vite"],
+    "work-panel-angela": ["PHP"],
+    "work-panel-task": ["C#", ".NET"],
+    "work-panel-multi": ["C#", ".NET 10"],
+    "work-panel-ppt": ["PowerPoint"],
+  };
+
+  const tr = (key, fallback) => (typeof t === "function" ? t(key) : fallback);
+  const panelOf = (tab) => document.getElementById(tab.getAttribute("aria-controls"));
+  const nameOf = (tab) => (tab.querySelector(".work-cabinet__name")?.textContent ?? "").trim();
+  const make = (tag, className, content) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (content != null) node.textContent = content;
+    return node;
+  };
+
+  tabs.forEach((tab) => {
+    const panel = panelOf(tab);
+    const stack = panel ? STACK[panel.id] : null;
+    const copy = panel ? panel.querySelector(".work-panel__copy") : null;
+    if (!stack || !copy || copy.querySelector(".wk-stack")) {
+      return;
+    }
+    const desc = Array.from(copy.children).find((c) => c.tagName === "P" && !c.classList.contains("project-kicker"));
+    const list = make("ul", "wk-stack");
+    stack.forEach((name) => list.appendChild(make("li", null, name)));
+    (desc || copy.querySelector("h3")).after(list);
+  });
+
+  const statusOf = (panel) => {
+    if (!panel) return null;
+    if (panel.querySelector("[data-live]") || panel.querySelector('.project-actions a[href^="slides"]')) return "live";
+    if (panel.querySelector(".project-repo")) return "code";
+    return null;
+  };
+  const statuses = tabs.map((tab) => {
+    const state = statusOf(panelOf(tab));
+    const meta = tab.querySelector(".work-cabinet__meta");
+    if (!state || !meta) return null;
+    const badge = make("span", "wk-status");
+    badge.dataset.state = state;
+    meta.appendChild(badge);
+    return badge;
+  });
+
+  function structurePoints() {
+    root.querySelectorAll(".project-points").forEach((ul) => {
+      ul.classList.add("wk-points");
+      const items = Array.from(ul.children);
+      items.forEach((li, i) => {
+        li.classList.toggle("wk-result", i === items.length - 1 && items.length > 1);
+        if (li.children.length) return;
+        const text = li.textContent;
+        const cut = text.indexOf(":");
+        if (cut < 1 || cut > 14) return;
+        let end = cut + 1;
+        while (end < text.length && /\s/.test(text[end])) end += 1;
+        const label = text.slice(0, cut).trimEnd();
+        li.textContent = "";
+        li.append(
+          make("strong", "wk-label", label),
+          make("span", "wk-colon", text.slice(label.length, end)),
+          make("span", "wk-body", text.slice(end))
+        );
+      });
+    });
+  }
+
+  const currentIndex = () => Math.max(0, tabs.findIndex((tab) => tab.getAttribute("aria-selected") === "true"));
+  const go = (dir) => tabs[(currentIndex() + dir + tabs.length) % tabs.length].click();
+  const chevron = (dir) =>
+    `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="${
+      dir < 0 ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7"
+    }"/></svg>`;
+  const navButton = (dir) => {
+    const btn = make("button", `wk-pager__btn wk-pager__btn--${dir < 0 ? "prev" : "next"}`);
+    btn.type = "button";
+    const icon = make("span", "wk-pager__icon");
+    icon.innerHTML = chevron(dir);
+    const label = make("small");
+    const name = make("strong");
+    const text = make("span", "wk-pager__text");
+    text.append(label, name);
+    if (dir < 0) btn.append(icon, text);
+    else btn.append(text, icon);
+    btn.addEventListener("click", () => go(dir));
+    return { btn, label, name };
+  };
+
+  const pager = make("nav", "wk-pager");
+  const prev = navButton(-1);
+  const next = navButton(1);
+  const mid = make("div", "wk-pager__mid");
+  const bar = make("span", "wk-pager__bar");
+  bar.setAttribute("aria-hidden", "true");
+  const segments = tabs.map(() => bar.appendChild(make("i")));
+  const count = make("span", "wk-pager__count");
+  count.setAttribute("aria-live", "polite");
+  mid.append(bar, count);
+  pager.append(prev.btn, mid, next.btn);
+  drawer.appendChild(pager);
+
+  function refresh() {
+    const i = currentIndex();
+    const before = tabs[(i - 1 + tabs.length) % tabs.length];
+    const after = tabs[(i + 1) % tabs.length];
+    pager.setAttribute("aria-label", tr("work_pager", "Navigation entre les projets"));
+    [[prev, tr("work_prev", "Précédent"), before], [next, tr("work_next", "Suivant"), after]].forEach(([part, word, tab]) => {
+      part.label.textContent = word;
+      part.name.textContent = nameOf(tab);
+      part.btn.setAttribute("aria-label", `${word}: ${nameOf(tab)}`);
+    });
+    segments.forEach((seg, k) => seg.classList.toggle("is-on", k === i));
+    count.textContent = `${i + 1} / ${tabs.length}`;
+    statuses.forEach((badge) => {
+      if (badge) {
+        badge.textContent = tr(badge.dataset.state === "live" ? "work_status_live" : "work_status_code", "");
+      }
+    });
+  }
+
+  const observer = new MutationObserver(refresh);
+  tabs.forEach((tab) => observer.observe(tab, { attributes: true, attributeFilter: ["aria-selected"] }));
+
+  let startX = 0;
+  let startY = 0;
+  drawer.addEventListener(
+    "touchstart",
+    (event) => {
+      startX = event.changedTouches[0].clientX;
+      startY = event.changedTouches[0].clientY;
+    },
+    { passive: true }
+  );
+  drawer.addEventListener(
+    "touchend",
+    (event) => {
+      const dx = event.changedTouches[0].clientX - startX;
+      const dy = event.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) {
+        go(dx < 0 ? 1 : -1);
+      }
+    },
+    { passive: true }
+  );
+
+  window.addEventListener("portfolio:lang", () => {
+    structurePoints();
+    refresh();
+  });
+
+  structurePoints();
+  refresh();
+}
+
+initWorkUpgrade();

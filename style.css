@@ -7795,3 +7795,285 @@ body.dark .form-field textarea {
     transition: none;
   }
 }
+
+/* ───────── Travaux : améliorations (préfixe wk-) ───────── */
+.work-panel:not([hidden]) {
+  animation: wkPanelIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes wkPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* État sur chaque onglet : En ligne / Sur GitHub */
+.wk-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.wk-status::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--section-color, var(--c-indigo));
+}
+
+.wk-status[data-state="live"]::before {
+  background: var(--c-green);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-green) 22%, transparent);
+}
+
+/* Puces de stack */
+.wk-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.wk-stack li {
+  padding: 3px 11px;
+  border: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 32%, var(--border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--section-color, var(--c-indigo)) 8%, var(--card));
+  color: var(--text);
+  font: 600 0.82rem/1.4 "Source Sans 3", "Segoe UI", Arial, sans-serif;
+}
+
+/* Contexte / Rôle / Résultat */
+.project-points.wk-points {
+  display: block;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text);
+}
+
+.wk-points li {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: 12px;
+  padding: 11px 0;
+  border-top: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 14%, var(--border));
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.wk-points .wk-label {
+  padding-top: 1px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.wk-points .wk-colon {
+  display: none;
+}
+
+.wk-points li.wk-result {
+  grid-template-columns: calc(7rem - 17px) minmax(0, 1fr);
+  margin-top: 8px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 28%, var(--border));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--section-color, var(--c-indigo)) 8%, var(--card));
+}
+
+.wk-points li.wk-result .wk-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 0;
+  color: var(--section-color, var(--c-indigo));
+}
+
+.wk-points li.wk-result .wk-label::before {
+  content: "";
+  flex: none;
+  width: 1.05em;
+  height: 1.05em;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.wk-points li.wk-result .wk-body {
+  font-weight: 600;
+}
+
+@media (max-width: 520px) {
+  .wk-points li,
+  .wk-points li.wk-result {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+}
+
+/* Navigation entre les projets */
+.wk-pager {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 18%, var(--border));
+}
+
+.wk-pager__btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 6px 12px 6px 6px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.22s ease;
+}
+
+.wk-pager__btn--next {
+  justify-self: end;
+  padding: 6px 6px 6px 12px;
+}
+
+.wk-pager__btn:hover {
+  background: color-mix(in srgb, var(--section-color, var(--c-indigo)) 8%, transparent);
+}
+
+.wk-pager__btn:focus-visible {
+  outline: 2px solid var(--section-color, var(--c-indigo));
+  outline-offset: 2px;
+}
+
+.wk-pager__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid color-mix(in srgb, var(--section-color, var(--c-indigo)) 30%, var(--border));
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--section-color, var(--c-indigo));
+  transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+}
+
+.wk-pager__btn:hover .wk-pager__icon {
+  border-color: var(--section-color, var(--c-indigo));
+  background: var(--section-color, var(--c-indigo));
+  color: #ffffff;
+}
+
+.wk-pager__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.wk-pager__text {
+  display: grid;
+  min-width: 0;
+  gap: 1px;
+  line-height: 1.25;
+  justify-items: start;
+  text-align: left;
+}
+
+.wk-pager__btn--next .wk-pager__text {
+  justify-items: end;
+  text-align: right;
+}
+
+.wk-pager__text small {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.wk-pager__text strong {
+  max-width: 100%;
+  overflow: hidden;
+  font-family: "Quantico", Arial, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wk-pager__mid {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+}
+
+.wk-pager__bar {
+  display: flex;
+  gap: 5px;
+}
+
+.wk-pager__bar i {
+  width: 18px;
+  height: 4px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--section-color, var(--c-indigo)) 18%, var(--border));
+  transition: width 0.25s ease, background 0.25s ease;
+}
+
+.wk-pager__bar i.is-on {
+  width: 30px;
+  background: var(--section-color, var(--c-indigo));
+}
+
+.wk-pager__count {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 640px) {
+  .wk-pager {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .wk-pager__text {
+    display: none;
+  }
+
+  .wk-pager__btn,
+  .wk-pager__btn--next {
+    padding: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-panel:not([hidden]) {
+    animation: none;
+  }
+
+  .wk-pager__bar i,
+  .wk-pager__icon,
+  .wk-pager__btn {
+    transition: none;
+  }
+}
