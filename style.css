@@ -8078,6 +8078,30 @@ body.dark .form-field textarea {
   }
 }
 
+html[lang="ru"] h1,
+html[lang="ru"] h2 {
+  font-family: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+}
+
+html[lang="ru"] .hero-flourish__note {
+  font-family: "Marck Script", "Caveat", cursive;
+  font-weight: 400;
+  font-size: 0.92rem;
+  letter-spacing: 0;
+  line-height: 1;
+  top: -8px;
+}
+
+html[lang="ru"] .cartes {
+  --cartes-font-display: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+  --cartes-font-hand: "Marck Script", "Caveat", cursive;
+}
+
+html[lang="ru"] .trav {
+  --trav-font-display: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+  --trav-font-hand: "Marck Script", "Caveat", cursive;
+}
+
 /* ───────── À propos (mobile) : photo fondue dans les cartes ───────── */
 @media (max-width: 760px) {
   .about-board__stage {

@@ -15,7 +15,7 @@
       try {
         document.documentElement.classList.remove("theme-dark");
         const savedLang = localStorage.getItem("portfolio-lang");
-        if (savedLang === "en" || savedLang === "es") {
+        if (savedLang === "en" || savedLang === "es" || savedLang === "ru") {
           document.documentElement.lang = savedLang;
         }
       } catch (error) {
@@ -28,7 +28,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=20260813-s157" />
+    <link rel="stylesheet" href="style.css?v=20260813-s170" />
   </head>
   <body data-page="legal">
     <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
@@ -57,6 +57,7 @@
             <button type="button" class="nav-lang__btn is-active" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
             <button type="button" class="nav-lang__btn" data-lang="en" lang="en" aria-pressed="false">EN</button>
             <button type="button" class="nav-lang__btn" data-lang="es" lang="es" aria-pressed="false">ES</button>
+            <button type="button" class="nav-lang__btn" data-lang="ru" lang="ru" aria-pressed="false">RU</button>
           </div>
         </div>
       </div>
@@ -113,7 +114,7 @@
 
         <h2 data-i18n="legal_storage">Stockage local</h2>
         <p data-i18n="legal_storage_p" data-i18n-html>
-          Seul le choix de langue (français, anglais ou espagnol) est enregistré dans le navigateur
+          Seul le choix de langue (français, anglais, espagnol ou russe) est enregistré dans le navigateur
           (<code>localStorage</code>, clé <code>portfolio-lang</code>).
           Aucun cookie publicitaire n’est déposé.
         </p>
@@ -138,7 +139,7 @@
         </p>
       </div>
     </footer>
-    <script src="i18n.js?v=20260813-s21" defer></script>
+    <script src="i18n.js?v=20260813-s24" defer></script>
     <script src="script.js?v=20260813-s72" defer></script>
   </body>
 </html>

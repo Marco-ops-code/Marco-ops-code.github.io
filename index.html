@@ -44,7 +44,7 @@
       try {
         document.documentElement.classList.remove("theme-dark");
         const savedLang = localStorage.getItem("portfolio-lang");
-        if (savedLang === "en" || savedLang === "es") {
+        if (savedLang === "en" || savedLang === "es" || savedLang === "ru") {
           document.documentElement.lang = savedLang;
         }
       } catch (error) {
@@ -55,9 +55,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Marck+Script&family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=20260813-s169" />
+    <link rel="stylesheet" href="style.css?v=20260813-s171" />
   </head>
   <body data-page="home">
     <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
@@ -119,6 +119,7 @@
             <button type="button" class="nav-lang__btn is-active" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
             <button type="button" class="nav-lang__btn" data-lang="en" lang="en" aria-pressed="false">EN</button>
             <button type="button" class="nav-lang__btn" data-lang="es" lang="es" aria-pressed="false">ES</button>
+            <button type="button" class="nav-lang__btn" data-lang="ru" lang="ru" aria-pressed="false">RU</button>
           </div>
           <button
             class="nav-theme-btn"
@@ -1202,7 +1203,7 @@
       </div>
     </dialog>
 
-    <script src="i18n.js?v=20260813-s23" defer></script>
+    <script src="i18n.js?v=20260813-s24" defer></script>
     <script src="script.js?v=20260813-s74" defer></script>
   </body>
 </html>
