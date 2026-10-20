@@ -39,38 +39,6 @@ const observer = new IntersectionObserver(
 
 revealElements.forEach((element) => observer.observe(element));
 
-function initAboutIn() {
-  const about = document.getElementById("about");
-  if (!about) {
-    return;
-  }
-
-  const play = () => {
-    requestAnimationFrame(() => {
-      about.classList.add("is-in");
-      about.classList.add("is-pillars-on");
-    });
-  };
-  if (reduceMotionGlobal || !("IntersectionObserver" in window)) {
-    about.classList.add("is-in");
-    about.classList.add("is-pillars-on");
-    return;
-  }
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      if (entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.25)) {
-        play();
-        io.disconnect();
-      }
-    },
-    { threshold: [0.25, 0.5] }
-  );
-  io.observe(about);
-}
-
-initAboutIn();
-
 const heroReveal = document.querySelector(".hero.reveal");
 if (heroReveal) {
   heroReveal.classList.add("visible");

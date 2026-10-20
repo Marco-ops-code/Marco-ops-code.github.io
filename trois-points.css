@@ -1,0 +1,74 @@
+.trois-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trois-points li {
+  display: flex;
+  flex: 1 1 9.5rem;
+  gap: 10px;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  background: rgba(8, 14, 28, 0.42);
+}
+
+.trois-points svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: #9fd4ff;
+}
+
+.trois-points strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.trois-points span {
+  display: block;
+  margin-top: 2px;
+  color: rgba(247, 244, 251, 0.78);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.trois-points.is-ready li {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.trois-points.is-on li {
+  animation: h2-point 0.55s ease forwards;
+}
+
+.trois-points.is-on li:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.trois-points.is-on li:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+@keyframes h2-point {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trois-points.is-ready li,
+  .trois-points.is-on li {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}

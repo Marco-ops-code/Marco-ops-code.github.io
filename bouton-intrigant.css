@@ -1,0 +1,55 @@
+.header.header--hero {
+  z-index: 4;
+}
+
+.nav-pc {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.nav-pc:focus-visible {
+  outline: 2px solid #d6cadd;
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.nav-pc__icon {
+  display: block;
+  overflow: visible;
+  animation: nav-pc-blink 1.8s steps(1, end) infinite;
+}
+
+.nav-pc__screen {
+  fill: currentColor;
+  stroke: none;
+}
+
+@keyframes nav-pc-blink {
+  0%,
+  42%,
+  100% {
+    opacity: 1;
+  }
+  46%,
+  54% {
+    opacity: 0.15;
+  }
+  62%,
+  70% {
+    opacity: 0.15;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-pc__icon {
+    animation: none;
+  }
+}

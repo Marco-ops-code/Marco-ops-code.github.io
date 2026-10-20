@@ -58,6 +58,10 @@
       href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Marck+Script&family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
     />
     <link rel="stylesheet" href="style.css?v=20260813-s173" />
+    <link rel="stylesheet" href="bouton-intrigant.css?v=20260813-s3" />
+    <link rel="stylesheet" href="trois-points.css?v=20260813-s1" />
+    <link rel="stylesheet" href="ecran2.css?v=20260813-s12" />
+    <link rel="stylesheet" href="apropos.css?v=20260813-s5" />
   </head>
   <body data-page="home">
     <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
@@ -115,6 +119,14 @@
           </ul>
         </nav>
         <div class="nav-toolbar">
+          <button type="button" class="nav-pc" id="openHero2" aria-expanded="false" aria-controls="ecran2" data-i18n-aria="h2_btn_go" aria-label="Découvrir ce que je construis">
+            <svg class="nav-pc__icon" viewBox="0 0 72 52" width="40" height="30" aria-hidden="true" focusable="false">
+              <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M14 9c14-2.2 28-1.4 42 2.4 1.2 8.6.4 16.2-1.6 23.2-14 2.4-28 1.6-40.6-2.2C12.2 25.2 12.8 17 14 9z" />
+              <path class="nav-pc__screen" d="M20 15.2c9.4-1 18.6-.6 28.2 1.4-.6 6.2-.2 11.4-.8 15.6-8.8 1.2-17.6.8-25.8-1.2-.4-5.2-.8-10.4-1.6-15.8z" />
+              <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M8 37.5c10 2.6 22 4.4 34 3.6 10-.6 18-2.2 24-5.2" />
+              <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M22 38.2c2.4 3.6 8 5.4 14.2 5.2 6.4-.2 12-2.2 15.4-5.4" />
+            </svg>
+          </button>
           <div class="nav-lang" role="group" data-i18n-aria="nav_lang" aria-label="Langue">
             <button type="button" class="nav-lang__btn is-active" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
             <button type="button" class="nav-lang__btn" data-lang="en" lang="en" aria-pressed="false">EN</button>
@@ -284,71 +296,165 @@
             </div>
           </div>
         </section>
+        <div class="ecran2" id="ecran2" hidden aria-hidden="true">
+            <div class="ecran2__panel">
+              <p class="ecran2__safer" aria-hidden="true">Make<br />it safer.</p>
+              <p class="ecran2__wait" aria-live="off">Retour à la première page dans 15 s</p>
+              <div class="ecran2__stage">
+                <div class="ecran2__copy">
+                  <p class="ecran2__kicker" data-i18n="h2_kicker">Ingénierie logicielle &amp; cybersécurité</p>
+                  <h2 id="ecran2Title" data-i18n="h2_title" data-i18n-html>Construire<br /><em>un avenir digital</em><br />plus sûr.</h2>
+                  <p class="ecran2__lead" data-i18n="h2_lead">
+                    Je conçois des solutions modernes, sécurisées et performantes pour aider les entreprises à se développer dans un monde numérique en constante évolution.
+                  </p>
+                  <ul class="trois-points">
+                    <li>
+                      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                        <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M8 8 4 12l4 4M16 8l4 4-4 4M13 6l-2 12" />
+                      </svg>
+                      <strong data-i18n="h2_point_web">Développement Web &amp; Mobile</strong>
+                    </li>
+                    <li>
+                      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                        <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M12 3 5 6v6c0 4.2 2.8 7.2 7 9 4.2-1.8 7-4.8 7-9V6l-7-3Z" />
+                        <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="m9 12 2 2 4-4" />
+                      </svg>
+                      <strong data-i18n="h2_point_sec">Cybersécurité &amp; SOC</strong>
+                    </li>
+                    <li>
+                      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                        <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 5a3 3 0 0 0-3 3c0 1.2.4 1.6 1.2 2.2.5.4.8.8.8 1.3V13M12 16.5h.01M8.2 8.2A3.8 3.8 0 0 1 12 5a3.8 3.8 0 0 1 3.8 3.2c.8.3 1.7 1 1.7 2.1 0 1-.6 1.8-1.5 2.2" />
+                      </svg>
+                      <strong data-i18n="h2_point_ia">IA &amp; Data</strong>
+                    </li>
+                  </ul>
+                  <div class="ecran2__actions">
+                    <a class="ecran2__go" href="#projects" data-h2-close>
+                      <span data-i18n="h2_work">Voir mon travail</span>
+                      <span aria-hidden="true">→</span>
+                    </a>
+                    <a class="ecran2__mail" href="#contact" data-h2-close data-i18n="h2_contact">Me contacter</a>
+                  </div>
+                </div>
+                <article class="ecran2__card">
+                  <h3 data-i18n="h2_card_t">Mon parcours</h3>
+                  <ul>
+                    <li>
+                      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+                        <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M3 9.5 12 5l9 4.5L12 14 3 9.5Z" />
+                        <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M7 11.5v4.2c1.6 1.4 3.2 2 5 2s3.4-.6 5-2v-4.2" />
+                      </svg>
+                      <p>
+                        <strong data-i18n="h2_edu_t">Licence — Informatique appliquée</strong>
+                        <span data-i18n="h2_edu_d">Université de Volgograd · 2022 — 2026</span>
+                      </p>
+                    </li>
+                    <li>
+                      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+                        <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M12 3 5 6v6c0 4.2 2.8 7.2 7 9 4.2-1.8 7-4.8 7-9V6l-7-3Z" />
+                      </svg>
+                      <p>
+                        <strong data-i18n="h2_edu2_t">Cybersécurité &amp; développement</strong>
+                        <span data-i18n="h2_edu2_d">Mise à niveau continue</span>
+                      </p>
+                    </li>
+                  </ul>
+                  <p class="ecran2__sign" data-i18n="h2_sign">Toujours en évolution…</p>
+                </article>
+              </div>
+              <div class="ecran2__bar">
+                <p class="ecran2__ticker" aria-hidden="true">CODE <span>/</span> SECURE <span>/</span> BUILD <span>/</span> GROW</p>
+              </div>
+            </div>
+          </div>
       </div>
 
-      <section id="about" class="section container reveal">
-        <article class="about-board">
-          <div class="about-board__bars" aria-hidden="true">
-            <span class="about-tube">
-              <i class="about-tube__liquid about-tube__liquid--a"></i>
-            </span>
-            <span class="about-tube">
-              <i class="about-tube__liquid about-tube__liquid--b"></i>
-            </span>
-            <span class="about-tube">
-              <i class="about-tube__liquid about-tube__liquid--c"></i>
-            </span>
-          </div>
-          <header class="about-board__head">
-            <h2 data-i18n="about_h2">À propos</h2>
-            <p data-i18n="about_p">
-              Je suis Marc-Onel Volcimus, développeur full stack. J’aide les indépendants et les TPE
-              à envoyer un support sans s’expliquer : site vitrine, landing page, application mobile
-              ou présentation PowerPoint. Je travaille à distance, en français, en anglais ou en espagnol : WhatsApp et e-mail
-              suffisent, le fuseau n’est pas un obstacle.
-            </p>
-          </header>
-          <div class="about-board__stage">
-            <div class="about-portrait">
-              <img
-                class="about-portrait__img"
-                src="assets/about-portrait.png?v=5"
-                alt="Portrait de Marc-Onel Volcimus"
-                data-i18n-alt="portrait_alt"
-                width="643"
-                height="871"
-                decoding="async"
-              />
+      <section id="about" class="section container apropos" data-apropos aria-labelledby="apropos-titre">
+        <div class="apropos-panel">
+          <span class="apropos-glow apropos-glow--a" aria-hidden="true"></span>
+          <span class="apropos-glow apropos-glow--b" aria-hidden="true"></span>
+
+          <div class="apropos-top">
+            <div class="apropos-portrait" data-apropos-in="photo">
+              <span class="apropos-portrait__ring" aria-hidden="true"></span>
+              <div class="apropos-portrait__frame">
+                <img
+                  class="apropos-portrait__img"
+                  src="assets/about-portrait.png?v=5"
+                  alt="Portrait de Marc-Onel Volcimus"
+                  data-i18n-alt="portrait_alt"
+                  width="643"
+                  height="871"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <p class="apropos-portrait__badge" data-apropos-in="badge">
+                <span class="apropos-portrait__dot" aria-hidden="true"></span>
+                <span data-i18n="about_badge">Disponible pour un nouveau projet</span>
+              </p>
             </div>
-            <ul class="about-pillars" data-i18n-aria="facts" aria-label="Faits clés">
-              <li class="about-pillar" style="--h: 58%; --tint: 38%">
-                <strong data-i18n="fact_clients">Clients</strong>
-                <span class="about-pillar__detail" data-i18n="fact_clients_v">Indépendants et TPE qui veulent une vitrine crédible</span>
-              </li>
-              <li class="about-pillar" style="--h: 70%; --tint: 50%">
-                <strong data-i18n="fact_stack">Full stack</strong>
-                <span class="about-pillar__detail">HTML, CSS, JavaScript, PHP, MySQL, C# / .NET, Python</span>
-              </li>
-              <li class="about-pillar" style="--h: 84%; --tint: 64%">
-                <strong data-i18n="fact_delay">Délai</strong>
-                <span class="about-pillar__detail" data-i18n="fact_delay_v">Réponse sous 24&nbsp;h, en français, en anglais ou en espagnol</span>
-              </li>
-              <li class="about-pillar" style="--h: 100%; --tint: 78%">
-                <strong data-i18n="fact_place">Lieu</strong>
-                <span class="about-pillar__detail" data-i18n="fact_place_v">À distance — e-mail, téléphone ou WhatsApp</span>
-              </li>
-            </ul>
+
+            <div class="apropos-head">
+              <p class="apropos-kicker" data-apropos-in="kicker" data-i18n="about_kicker">Développeur full-stack</p>
+              <h2 class="apropos-title" id="apropos-titre" data-apropos-in="title" data-i18n="about_h2">À propos</h2>
+              <p class="apropos-intro" data-apropos-in="intro" data-i18n="about_p">J’aide les indépendants et les TPE à avoir un support sans s’expliquer : site vitrine, landing page, application mobile ou présentation PowerPoint. Je travaille à distance, en français et en anglais — WhatsApp et e-mail suffisent, le fuseau n’est pas un obstacle.</p>
+              <blockquote class="apropos-quote" data-apropos-in="quote">
+                <svg viewBox="0 0 32 24" aria-hidden="true" class="apropos-quote__mark"><path d="M0 24V14.2C0 6.3 4.7 1.1 12.6 0l1.3 3.9C8.8 5.3 6.4 8.3 6.1 12H13v12H0Zm18 0V14.2C18 6.3 22.7 1.1 30.6 0l1.3 3.9C26.8 5.3 24.4 8.3 24.1 12H31v12H18Z"/></svg>
+                <p data-i18n="about_quote">Un bon outil se voit à ce qu’on oublie qu’il existe.</p>
+              </blockquote>
+            </div>
           </div>
-        </article>
-        <div class="office-suite">
-          <p class="office-suite__label">Microsoft</p>
-          <ul>
-            <li>Word</li>
-            <li>Excel</li>
-            <li>PowerPoint</li>
-            <li>Project</li>
-            <li>Access</li>
-            <li>Publisher</li>
+
+          <div class="apropos-bars">
+            <div class="apropos-bar" data-apropos-in="bar" style="--h: 0.58; --i: 0;">
+              <div class="apropos-bar__body">
+                <span class="apropos-bar__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M3 20c.6-3.4 3-5.5 6-5.5s5.4 2.1 6 5.5"/><path d="M16.5 7a2.5 2.5 0 1 1 0 5"/><path d="M15.5 14.3c2.4.4 4 2.3 4.5 5.2"/></svg>
+                </span>
+                <p class="apropos-bar__title" data-i18n="fact_clients">Clients</p>
+                <p class="apropos-bar__text" data-i18n="fact_clients_v">Indépendants et TPE qui veulent une vitrine crédible</p>
+              </div>
+            </div>
+            <div class="apropos-bar" data-apropos-in="bar" style="--h: 0.74; --i: 1;">
+              <div class="apropos-bar__body">
+                <span class="apropos-bar__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="M3 13l9 5 9-5"/></svg>
+                </span>
+                <p class="apropos-bar__title" data-i18n="fact_stack">Full stack</p>
+                <p class="apropos-bar__text">HTML, CSS, JavaScript, PHP, MySQL, C# / .NET, Python</p>
+              </div>
+            </div>
+            <div class="apropos-bar" data-apropos-in="bar" style="--h: 0.9; --i: 2;">
+              <div class="apropos-bar__body">
+                <span class="apropos-bar__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+                </span>
+                <p class="apropos-bar__title" data-i18n="fact_delay">Délai</p>
+                <p class="apropos-bar__text" data-i18n="fact_delay_v">Réponse sous 24 h, en français ou en anglais</p>
+              </div>
+            </div>
+            <div class="apropos-bar" data-apropos-in="bar" style="--h: 1; --i: 3;">
+              <div class="apropos-bar__body">
+                <span class="apropos-bar__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+                </span>
+                <p class="apropos-bar__title" data-i18n="fact_place">Lieu</p>
+                <p class="apropos-bar__text" data-i18n="fact_place_v">À distance — e-mail, téléphone ou WhatsApp</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="apropos-ms">
+          <p class="apropos-ms__title">Microsoft</p>
+          <ul class="apropos-ms__list">
+            <li data-apropos-in="pill" style="--i: 0;"><span class="apropos-ms__token" aria-hidden="true">W</span>Word</li>
+            <li data-apropos-in="pill" style="--i: 1;"><span class="apropos-ms__token" aria-hidden="true">E</span>Excel</li>
+            <li data-apropos-in="pill" style="--i: 2;"><span class="apropos-ms__token" aria-hidden="true">P</span>PowerPoint</li>
+            <li data-apropos-in="pill" style="--i: 3;"><span class="apropos-ms__token" aria-hidden="true">P</span>Project</li>
+            <li data-apropos-in="pill" style="--i: 4;"><span class="apropos-ms__token" aria-hidden="true">A</span>Access</li>
+            <li data-apropos-in="pill" style="--i: 5;"><span class="apropos-ms__token" aria-hidden="true">P</span>Publisher</li>
           </ul>
         </div>
       </section>
@@ -1203,7 +1309,10 @@
       </div>
     </dialog>
 
-    <script src="i18n.js?v=20260813-s24" defer></script>
-    <script src="script.js?v=20260813-s79" defer></script>
+    <script src="i18n.js?v=20260813-s30" defer></script>
+    <script src="trois-points.js?v=20260813-s1" defer></script>
+    <script src="hero2.js?v=20260813-s7" defer></script>
+    <script src="apropos.js?v=20260813-s1" defer></script>
+    <script src="script.js?v=20260813-s80" defer></script>
   </body>
 </html>
