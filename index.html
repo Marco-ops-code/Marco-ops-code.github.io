@@ -507,7 +507,7 @@
             <h3 data-i18n="skill_mysql_h">MySQL base de données</h3>
             <p data-i18n="skill_mysql_p">Conception de schémas, requêtes SQL optimisées et gestion fiable des données applicatives.</p>
           </li>
-          <li data-fam="back" data-logo="assets/skills/csharp-original.svg" data-used="Task Engine|MultiTask">
+          <li data-fam="back" data-logo="assets/skills/csharp-original.svg" data-used="Task Engine|MultiTask|MiniSOC">
             <h3>C#</h3>
             <p data-i18n="skill_cs_p">Applications orientées objet, performances et écosystème .NET pour du backend robuste.</p>
           </li>
@@ -583,6 +583,15 @@
               <span class="work-cabinet__meta">
                 <span class="work-cabinet__kicker">PowerPoint</span>
                 <span class="work-cabinet__name" data-i18n="ppt_name">Extrait TPE</span>
+              </span>
+            </button>
+            <button type="button" class="work-cabinet__tab" role="tab" id="work-tab-minisoc" aria-selected="false" aria-controls="work-panel-minisoc" tabindex="-1">
+              <span class="work-cabinet__shot">
+                <img src="assets/projects/minisoc.png" alt="" width="1024" height="768" loading="lazy" decoding="async" />
+              </span>
+              <span class="work-cabinet__meta">
+                <span class="work-cabinet__kicker">SOC</span>
+                <span class="work-cabinet__name">MiniSOC</span>
               </span>
             </button>
           </div>
@@ -703,6 +712,26 @@
                 <div class="project-actions">
                   <a href="slides/" data-i18n="see_slides">Voir les slides</a>
                   <a href="#contact" data-i18n="similar_ppt">Une présentation similaire&nbsp;?</a>
+                </div>
+              </div>
+            </article>
+            <article class="work-panel" id="work-panel-minisoc" role="tabpanel" aria-labelledby="work-tab-minisoc" hidden>
+              <div class="work-panel__media">
+                <a href="assets/projects/minisoc.png" class="project-shot" data-i18n-aria="zoom_minisoc" aria-label="Agrandir la capture de MiniSOC">
+                  <img src="assets/projects/minisoc.png" alt="Écran d’investigation MiniSOC : alerte AUTH-003 pour alice, bob et carol depuis 192.0.2.40, avec les preuves" data-i18n-alt="alt_minisoc" width="1024" height="768" loading="lazy" decoding="async" />
+                </a>
+              </div>
+              <div class="work-panel__copy">
+                <p class="project-kicker" data-i18n="kicker_minisoc">Cybersécurité · C# / .NET · Journaux synthétiques</p>
+                <h3>MiniSOC</h3>
+                <p data-i18n="minisoc_p">Mini-centre de supervision. Il importe un journal synthétique, signale des corrélations, et laisse l’analyste conclure. AUTH-003 réunit trois comptes sur une même adresse, dans une fenêtre de cinq minutes.</p>
+                <ul class="project-points">
+                  <li data-i18n="minisoc_li1">Contexte : s’entraîner à l’investigation sans journal réel, sans mot de passe et sans donnée personnelle</li>
+                  <li data-i18n="minisoc_li2">Rôle : règles explicites, preuves, chronologie, verdict par alerte, enregistrement SQLite</li>
+                  <li data-i18n="minisoc_li3">Résultat : l’alerte constate l’adresse partagée. Elle ne dit pas qu’il y a une intrusion, ni qu’un compte est compromis</li>
+                </ul>
+                <div class="project-actions">
+                  <a class="project-repo" id="repoMiniSoc" href="https://github.com/Marco-ops-code/MiniSOC.NET" target="_blank" rel="noopener noreferrer" data-i18n="github_code">Code GitHub</a>
                 </div>
               </div>
             </article>
