@@ -57,7 +57,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Marck+Script&family=Quantico:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
     />
-    <link rel="stylesheet" href="style.css?v=20260813-s173" />
+    <link rel="stylesheet" href="style.css?v=20260813-s174" />
     <link rel="stylesheet" href="bouton-intrigant.css?v=20260813-s3" />
     <link rel="stylesheet" href="trois-points.css?v=20260813-s1" />
     <link rel="stylesheet" href="ecran2.css?v=20260813-s12" />
@@ -233,6 +233,12 @@
                 <h1 data-i18n="hero_h1">Un support qui parle tout seul.</h1>
                 <p class="hero-lead" data-i18n="hero_lead">
                   Indépendants et TPE · site, landing, appli, PowerPoint · devis sous 48&nbsp;h.
+                </p>
+                <p class="sec-term" data-sec-term>
+                  <span class="sec-term__dot" aria-hidden="true"></span>
+                  <span class="sec-term__prompt" aria-hidden="true">$</span>
+                  <span data-i18n="sec_term">dev → sécurité · en formation</span>
+                  <span class="sec-caret" aria-hidden="true"></span>
                 </p>
                 <div class="hero-works" data-i18n-aria="hero_works" aria-label="Travaux">
                   <a class="hero-works__ring" href="#projects" data-tab="work-tab-lk" title="LK Studio">
@@ -443,6 +449,17 @@
                 <p class="apropos-bar__text" data-i18n="fact_place_v">À distance — e-mail, téléphone ou WhatsApp</p>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="sec-trm" role="group" data-i18n-aria="sec_t_aria" aria-label="Parcours en ligne de commande">
+          <div class="sec-trm__bar" aria-hidden="true"><span></span><span></span><span></span><b>marc-onel@portfolio: ~</b></div>
+          <div class="sec-trm__body">
+            <p><span class="sec-g">$</span> cat parcours.txt</p>
+            <p><span class="sec-d"># dev</span> <span data-i18n="sec_t_dev">C# · .NET · React · PHP · MySQL</span></p>
+            <p><span class="sec-d"># sec</span> <span data-i18n="sec_t_sec">OWASP · Linux · réseau — en formation</span></p>
+            <p><span class="sec-d"># next</span> <span data-i18n="sec_t_next">objectif : Security+ / eJPT</span></p>
+            <p><span class="sec-g">$</span> <span class="sec-caret" aria-hidden="true"></span></p>
           </div>
         </div>
 
@@ -924,6 +941,23 @@
         </div>
       </section>
 
+      <section id="security" class="section container reveal sec-section" aria-labelledby="sec-title">
+        <article class="sec-board">
+          <p class="sec-eyebrow" aria-hidden="true">// security.checklist</p>
+          <h2 id="sec-title" data-i18n="sec_h2">La sécurité dès le premier commit</h2>
+          <p class="sec-lead" data-i18n="sec_p">Chaque livraison passe par la même liste de contrôle, même pour un simple site vitrine.</p>
+          <ul class="sec-list">
+            <li><span data-i18n="sec_c1">Entrées validées côté serveur</span></li>
+            <li><span data-i18n="sec_c2">Secrets hors du code (.env)</span></li>
+            <li><span data-i18n="sec_c3">HTTPS et en-têtes de sécurité</span></li>
+            <li><span data-i18n="sec_c4">Dépendances auditées (npm audit)</span></li>
+            <li><span data-i18n="sec_c5">Moindre privilège pour chaque accès</span></li>
+            <li><span data-i18n="sec_c6">Sauvegardes et journalisation</span></li>
+          </ul>
+          <p class="sec-out" aria-hidden="true"><span class="sec-g">$</span> checklist --livraison <span class="sec-d">→</span> 6/6</p>
+        </article>
+      </section>
+
       <section
         id="pricing"
         class="section container reveal pricing-section cartes"
@@ -1262,6 +1296,10 @@
             <span class="contact-form-intro__lead" data-i18n="form_lead">Préfères écrire ?</span>
             <span class="contact-form-intro__note" data-i18n="form_note">Envoie le brief ici — même délai, en français, en anglais ou en espagnol.</span>
           </p>
+          <p class="sec-lock">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+            <span data-i18n="sec_lock">Canal chiffré (HTTPS) · ton message n’est jamais revendu</span>
+          </p>
           <div class="contact-form-grid">
             <div class="form-field">
               <input type="text" id="contactName" name="name" autocomplete="name" placeholder=" " required maxlength="80" />
@@ -1338,7 +1376,7 @@
       </div>
     </dialog>
 
-    <script src="i18n.js?v=20260813-s30" defer></script>
+    <script src="i18n.js?v=20260813-s31" defer></script>
     <script src="trois-points.js?v=20260813-s1" defer></script>
     <script src="hero2.js?v=20260813-s7" defer></script>
     <script src="apropos.js?v=20260813-s1" defer></script>
